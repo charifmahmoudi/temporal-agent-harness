@@ -7,6 +7,7 @@ from __future__ import annotations
 import inspect
 
 import pytest
+from pydantic import BaseModel
 from temporalio.exceptions import ApplicationError
 
 from temporal_agent_harness.harness import agent
@@ -82,7 +83,7 @@ def test_injected_params_are_accepted_and_hidden_from_the_interface():
     # "store" is a clean signal the parameter was scrubbed.
     tool = agent.code_mode_tool([read_page], name="run_x", injections={"store": "S"})
     assert tool.__name__ == "run_x"
-    stub = render_type_check_stubs([read_page])
+    stub = render_type_check_stubs([read_page]).source
     assert "async def read_page(page_url: str) -> str: ..." in stub
     assert "store" not in stub
 
@@ -113,6 +114,123 @@ def test_distinct_names_allow_multiple_code_mode_tools_over_overlapping_sets():
     assert a.__name__ == "run_a"
     assert b.__name__ == "run_b"
     assert a is not b
+
+
+# ---------------------------------------------------------------- type-checking without running
+
+
+def test_the_tool_carries_the_stubs_code_mode_type_check_reads():
+    tool = agent.code_mode_tool([beta], name="run_code")
+    assert tool.__code_mode_stubs__ == render_type_check_stubs([beta])
+
+
+def test_code_mode_type_check_rejects_a_tool_code_mode_did_not_make():
+    import asyncio
+
+    with pytest.raises(TypeError, match="not a tool returned by code_mode_tool"):
+        asyncio.run(agent.code_mode_type_check(beta, "x = 1"))
+
+
+def test_type_check_reports_errors_by_line_and_runs_nothing():
+    pytest.importorskip("pydantic_monty")
+    from temporal_agent_harness.harness.code_mode import monty_stepper
+
+    stubs = render_type_check_stubs([beta])
+    clean = "import asyncio\nasync def main():\n    return await beta(1)\nasyncio.run(main())\n"
+    assert monty_stepper.type_check(clean, stubs) is None
+
+    # A clean script with a side effect is still only checked: nothing prints.
+    noisy = clean.replace("    return", "    print('ran')\n    return")
+    assert monty_stepper.type_check(noisy, stubs) is None
+
+    report = monty_stepper.type_check(clean.replace("beta(1)", 'beta("one")'), stubs)
+    assert report is not None and report.startswith("MontyTypingError")
+    assert "main.py:3" in report
+
+
+class Box(BaseModel):
+    size: int
+
+
+@agent.tool_defn()
+async def pack(box: Box) -> Box:
+    """Pack a box."""
+    ...
+
+
+_PACK = "import asyncio\n{head}async def main():\n{body}    return await pack({{'size': 1}})\nasyncio.run(main())\n"
+
+
+def test_the_stubs_name_the_typed_dicts_they_define():
+    stubs = render_type_check_stubs([pack])
+    assert stubs.type_names == ["Box"]
+    assert "class Box(TypedDict):" in stubs.source
+    assert render_type_check_stubs([beta]).type_names == []
+
+
+def test_calling_a_stub_type_builds_a_dict_inside_the_sandbox():
+    """The stubs' TypedDicts are not defined at run time; the stepper answers a call to one
+    with a dict, as CPython does, before and after a resume, and never surfaces it as a host
+    call."""
+    pytest.importorskip("pydantic_monty")
+    from temporal_agent_harness.harness.code_mode import monty_stepper
+    from temporal_agent_harness.harness.code_mode.batch_models import (
+        CallResult,
+        ResumeBatchInput,
+    )
+
+    script = (
+        "import asyncio\n"
+        "async def main():\n"
+        "    first = await pack(Box(size=1))\n"
+        "    again = Box({'size': first['size'] + 1})\n"
+        "    return [again, await pack(again)]\n"
+        "asyncio.run(main())\n"
+    )
+    stubs = render_type_check_stubs([pack])
+    step = monty_stepper.start_batch(script, stubs)
+    assert not step.done, step.error
+    assert [(c.function_name, c.args) for c in step.pending] == [("pack", [{"size": 1}])]
+
+    step = monty_stepper.resume_batch(
+        ResumeBatchInput(
+            snapshot=step.snapshot,
+            results=[CallResult(call_id=step.pending[0].call_id, return_value={"size": 5})],
+            type_names=stubs.type_names,
+        )
+    )
+    assert not step.done, step.error
+    assert [(c.function_name, c.args) for c in step.pending] == [("pack", [{"size": 6}])]
+
+
+def test_bad_arguments_to_a_stub_type_are_a_script_error():
+    pytest.importorskip("pydantic_monty")
+    from temporal_agent_harness.harness.code_mode import monty_stepper
+    from temporal_agent_harness.harness.code_mode.batch_models import TypeCheckStubs
+
+    # A stub loose enough to pass the call, so the sandbox, not the type checker, sees it.
+    loose = TypeCheckStubs(
+        source="from typing import Any\ndef Box(*args: Any) -> Any: ...\n", type_names=["Box"]
+    )
+    step = monty_stepper.start_batch("Box(1)\n", loose)
+    assert step.done and step.error and "TypeError" in step.error
+
+
+@pytest.mark.parametrize(
+    ("head", "body"),
+    [
+        ("from asyncio import gather\nimport json\n", ""),
+        ("", "    b: Box = {'size': 2}\n"),
+        ("def size(b: Box) -> int:\n    return b['size']\n", ""),
+        ("", "    b = Box(size=1)\n"),
+    ],
+)
+def test_type_check_allows_what_runs(head, body):
+    pytest.importorskip("pydantic_monty")
+    from temporal_agent_harness.harness.code_mode import monty_stepper
+
+    script = _PACK.format(head=head, body=body)
+    assert monty_stepper.type_check(script, render_type_check_stubs([pack])) is None
 
 
 # ---------------------------------------------------------------- activities module typing
@@ -153,7 +271,7 @@ def test_the_activities_module_imports_without_the_code_mode_extra():
     sys.modules["pydantic_monty"] = None  # type: ignore[assignment]
     try:
         activities = importlib.import_module(module)
-        assert len(activities.CODE_MODE_ACTIVITIES) == 2
+        assert len(activities.CODE_MODE_ACTIVITIES) == 3
         with pytest.raises(ApplicationError) as caught:
             activities._require_code_mode_extra()
         assert caught.value.type == activities.CODE_MODE_MISSING_EXTRA_ERROR

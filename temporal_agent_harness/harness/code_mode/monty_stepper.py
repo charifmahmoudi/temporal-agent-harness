@@ -38,10 +38,19 @@ workflow. A purely sequential script (``await`` one call at a time) just produce
 batches; a synchronous (non-awaited) script is not supported — host functions are async by
 contract.
 
+=== Calling a stub type ===
+
+The ``TypedDict``\\ s in the stubs exist only for the type checker, so the sandbox does not
+define them. A script that calls one as a value (``StepSpec(name=..., prompt=...)``) passes the
+type check, and at run time the sandbox surfaces the call like a host-function call.
+:func:`_drive_to_batch` answers it inside the activity with the ``dict`` the arguments build,
+which is what calling a ``TypedDict`` returns in CPython. The workflow never sees these calls.
+
 No ``from __future__ import annotations`` — matching :mod:`.batch_models` and the rest of the
 agent's Temporal-facing modules, whose annotations must stay runtime-resolvable.
 """
 
+from collections.abc import Collection
 from typing import Any
 
 import pydantic_monty as monty
@@ -52,16 +61,20 @@ from .batch_models import (
     CodeBatchStep,
     PendingCall,
     ResumeBatchInput,
+    TypeCheckStubs,
 )
 
 
-def _drive_to_batch(snap: Any, stdout: monty.CollectString) -> CodeBatchStep:
+def _drive_to_batch(
+    snap: Any, stdout: monty.CollectString, type_names: Collection[str]
+) -> CodeBatchStep:
     """Run Monty forward, deferring each external call as a future, until it awaits a batch.
 
-    Loops: a FunctionSnapshot (an ``async`` host call) is recorded and resumed with
-    ``{"future": ...}`` so execution continues; a FutureSnapshot means the script is now
-    awaiting — return its ``pending_call_ids`` (resolved to the recorded calls) for the
-    workflow to run; MontyComplete means done. Any ``snapshot.resume`` may raise a
+    Loops: a FunctionSnapshot calling one of ``type_names`` (a stub ``TypedDict``) is answered
+    with a dict, as in this module's docstring; any other FunctionSnapshot (an ``async`` host
+    call) is recorded and resumed with ``{"future": ...}`` so execution continues; a
+    FutureSnapshot means the script is now awaiting — return its ``pending_call_ids`` (resolved
+    to the recorded calls) for the workflow to run; MontyComplete means done. Any ``snapshot.resume`` may raise a
     MontyError if the script errors mid-run — the callers translate that to ``error``."""
     seen: dict[int, PendingCall] = {}
     while True:
@@ -69,6 +82,14 @@ def _drive_to_batch(snap: Any, stdout: monty.CollectString) -> CodeBatchStep:
             return CodeBatchStep(
                 done=True, stdout=stdout.output, output_json=snap.output_json()
             )
+        if isinstance(snap, monty.FunctionSnapshot) and snap.function_name in type_names:
+            try:
+                value = dict(*snap.args, **snap.kwargs)
+            except (TypeError, ValueError) as e:
+                snap = snap.resume({"exception": e})
+            else:
+                snap = snap.resume({"return_value": value})
+            continue
         if isinstance(snap, monty.FunctionSnapshot):
             seen[snap.call_id] = PendingCall(
                 call_id=snap.call_id,
@@ -106,27 +127,27 @@ def _drive_to_batch(snap: Any, stdout: monty.CollectString) -> CodeBatchStep:
         )
 
 
-def start_batch(script: str, type_check_stubs: str | None = None) -> CodeBatchStep:
+def start_batch(script: str, stubs: TypeCheckStubs | None = None) -> CodeBatchStep:
     """Compile + start ``script`` (async driver), running to the first awaited batch or done.
 
-    Type-checks against ``type_check_stubs`` when provided (Code Mode always passes the
-    auto-generated host-function stubs). See this module's async-driver section for the
-    defer-future / FutureSnapshot protocol. The body of
-    :func:`.activities.code_start_batch`."""
+    Type-checks against ``stubs`` when provided (Code Mode always passes the auto-generated
+    host-function stubs), and answers the script's calls to their ``TypedDict``\\ s (see this
+    module's docstring). See this module's async-driver section for the defer-future /
+    FutureSnapshot protocol. The body of :func:`.activities.code_start_batch`."""
     activity.logger.info(
         "code_start_batch: compiling + starting (script_len=%d, type_check=%s)",
         len(script),
-        type_check_stubs is not None,
+        stubs is not None,
     )
     stdout = monty.CollectString()
     try:
         instance = monty.Monty(
             script,
-            type_check=type_check_stubs is not None,
-            type_check_stubs=type_check_stubs,
+            type_check=stubs is not None,
+            type_check_stubs=stubs.source if stubs is not None else None,
         )
         snap = instance.start(print_callback=stdout)
-        step = _drive_to_batch(snap, stdout)
+        step = _drive_to_batch(snap, stdout, stubs.type_names if stubs is not None else ())
     except monty.MontyError as e:
         activity.logger.warning("code_start_batch: %s: %s", type(e).__name__, e)
         return CodeBatchStep(
@@ -161,7 +182,7 @@ def resume_batch(input: ResumeBatchInput) -> CodeBatchStep:
     }
     try:
         resumed = snap.resume(results_map)
-        step = _drive_to_batch(resumed, stdout)
+        step = _drive_to_batch(resumed, stdout, input.type_names)
     except monty.MontyError as e:
         activity.logger.warning("code_resume_batch: %s: %s", type(e).__name__, e)
         return CodeBatchStep(
@@ -174,3 +195,17 @@ def resume_batch(input: ResumeBatchInput) -> CodeBatchStep:
         else f"awaiting {[c.function_name for c in step.pending]}",
     )
     return step
+
+
+def type_check(script: str, stubs: TypeCheckStubs) -> str | None:
+    """Check ``script`` against ``stubs`` exactly as :func:`start_batch` does, without
+    running it.
+
+    Returns the checker's syntax or type errors, each with its line, or ``None`` when the script
+    is clean. Monty checks when the script is compiled, and nothing runs until ``start``, which
+    this never calls. The body of :func:`.activities.code_type_check`."""
+    try:
+        monty.Monty(script, type_check=True, type_check_stubs=stubs.source)
+    except monty.MontyError as e:
+        return f"{type(e).__name__}: {e}"
+    return None

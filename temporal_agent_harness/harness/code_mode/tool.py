@@ -26,6 +26,7 @@ from temporalio import workflow
 with workflow.unsafe.imports_passed_through():
     from temporal_agent_harness.harness.agent_workflow import _current_runner, tool_defn
 
+    from .batch_models import CODE_TYPE_CHECK_ACTIVITY
     from .driver import CodeModeDriver
     from .stubs import render_host_interface, render_type_check_stubs, resolve_hints
 
@@ -42,7 +43,9 @@ calls the host functions listed below — using variables, loops, conditionals, 
 arithmetic to combine many calls in one go — instead of calling tools one at a time.
 
 The sandbox has no filesystem, no network, and no imports except `asyncio` and the host \
-functions below. The host functions are ASYNC — you MUST `await` them — so structure every \
+functions below. The host functions and the types below are ALREADY IN SCOPE — never import them \
+(there is no module to import them from). Calling a `TypedDict` type builds a plain dict, as in \
+Python. The host functions are ASYNC — you MUST `await` them — so structure every \
 script like this:
 
     import asyncio
@@ -171,7 +174,7 @@ def code_mode_tool(
     """
     tools_by_name = _validate_tools(tools)
     # Generated once at construction; raises now (not at script time) if a type is unrenderable.
-    type_check_stubs = render_type_check_stubs(tools)
+    stubs = render_type_check_stubs(tools)
     host_interface = render_host_interface(tools)
     coercers = _build_coercers(tools)
     docstring = _CONTRACT.format(interface=host_interface)
@@ -183,7 +186,7 @@ def code_mode_tool(
             tools_by_name,
             coercers,
             injections=injection_values,
-            type_check_stubs=type_check_stubs,
+            stubs=stubs,
             step_timeout=step_timeout,
         )
         return await driver.run_script(script)
@@ -200,6 +203,34 @@ def code_mode_tool(
         return_annotation=str,
     )
     _run_code.__annotations__ = {"script": str, "return": str}
-    return tool_defn(
+    tool = tool_defn(
         inherently_safe=inherently_safe, auto_approval_criteria=auto_approval_criteria
     )(_run_code)
+    # Read back by code_mode_type_check, so a script can be checked against these exact stubs.
+    tool.__code_mode_stubs__ = stubs  # type: ignore[attr-defined]
+    tool.__code_mode_step_timeout__ = step_timeout  # type: ignore[attr-defined]
+    return tool
+
+
+async def code_mode_type_check(code_tool: Callable[..., Awaitable[str]], script: str) -> str | None:
+    """Type-check ``script`` against ``code_tool``'s host functions, without running it.
+
+    ``code_tool`` is a tool :func:`code_mode_tool` returned. The script gets the same checks
+    that tool gives it before every run — syntax, unknown host functions, wrong argument shapes
+    and result keys that don't exist — and the script itself never executes, so no host call is
+    made. Returns the checker's report, each error with its line, or ``None`` when the script is
+    clean. Call it from workflow code: it runs the check as one short activity.
+
+    Use it to let an author (typically a model writing scripts for a user to run later) confirm a
+    script will start before handing it over.
+    """
+    stubs = getattr(code_tool, "__code_mode_stubs__", None)
+    if stubs is None:
+        raise TypeError(f"{code_tool!r} is not a tool returned by code_mode_tool")
+    report: str = await workflow.execute_activity(
+        CODE_TYPE_CHECK_ACTIVITY,
+        args=[script, stubs],
+        result_type=str,
+        start_to_close_timeout=code_tool.__code_mode_step_timeout__,  # type: ignore[attr-defined]
+    )
+    return report or None
