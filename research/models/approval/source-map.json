@@ -1,0 +1,16 @@
+{
+  "baseline": "049e01c9d726ef68bff7be857c735723b9801512",
+  "ast_sha256": {
+    "_cancel_and_settle": "87657c66f27c37bd004a7010d5c28951481c0e8e40b08f7d7f40bde10a31695f",
+    "_apply_approval_policy": "592ea6c45320cefeb4812a2a118d647d49b2b91268481146e774edc6ea46dbb9",
+    "_WorkflowStatus.register_pending_approval": "fcb20af1c97abccf3d1dff393ceef3d5ddd64bd6a2ea77ec8ac89c44ba821b5b",
+    "_WorkflowStatus.is_approval_resolved": "b62c4b0ea9a61859dc1acd2a5cc45131c27141179b095b0038a727002e594c18",
+    "_WorkflowStatus.resolve_approval": "9a4d9784102f86592209ac1be2cf1df1c705f6e9dcdec6ad3fe74f957357817f",
+    "_WorkflowStatus.finalize_approval": "6e745df991580fa113b328c7e304bed67b60b56a52657200bc1102183e2dc351",
+    "AgentWorkflowRunner._validate_tool_approval": "f478028bc9c1a242d0a4cb6d4a1b5fa03ade58b805df1b9bb52ea5b30d6cdd7d",
+    "AgentWorkflowRunner._handle_tool_approval": "4344b42271538acdfee44354e87a056004223010515751875e5ba667b72db1cd",
+    "AgentWorkflowRunner._run_auto_mode_evaluator": "c703dd22f80a0654de37c3fb4dac90e5cf5f466e639670a95227b7394091499d",
+    "AgentWorkflowRunner._resolve_and_publish": "57b8ef2d84eb112fab680e37bd6cbb0b06460a4df2360bd868adedd552d56c15",
+    "AgentWorkflowRunner._handle_close": "4481c6a76f024e0e9987550169364b09998ca497f08ee000790e707d758e53bc"
+  }
+}

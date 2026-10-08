@@ -1,0 +1,56 @@
+name: Approval verification
+
+on:
+  pull_request:
+  push:
+    branches: [main, research/approval-verification]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: approval-verification-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  model:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Check source correspondence has not drifted
+        run: python research/scripts/check_source.py
+      - name: Download pinned TLA+ tools
+        run: curl --fail --location --retry 3 https://github.com/tlaplus/tlaplus/releases/download/v1.8.0/tla2tools.jar -o "$RUNNER_TEMP/tla2tools.jar"
+      - name: Check safety, liveness, and synthetic faults
+        run: python research/scripts/check_model.py --jar "$RUNNER_TEMP/tla2tools.jar"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: approval-model-results
+          path: research/results/latest/
+  implementation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          version: '0.12.23'
+          python-version: '3.12'
+      - name: Run approval integration and boundary experiments
+        run: uv run --frozen pytest tests/harness/test_tool_approvals.py tests/research/test_approval_boundary.py -q --junitxml=research/results/implementation.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: approval-implementation-results
+          path: research/results/implementation.xml

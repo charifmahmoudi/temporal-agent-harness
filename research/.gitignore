@@ -1,0 +1,4 @@
+results/
+models/approval/states/
+models/approval/*_TTrace*
+__pycache__/
