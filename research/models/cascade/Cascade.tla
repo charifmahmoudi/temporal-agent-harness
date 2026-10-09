@@ -4,8 +4,9 @@ CONSTANTS a, b, ToolOf, CallOrder, LeakScope, OverwriteSettled, ReverseCause
 VARIABLES allowed, history, causes, scopeViolation
 cascadeVars == <<vars, allowed, history, causes, scopeViolation>>
 OrderedCalls == <<a, b>>
+ReversedCalls == <<b, a>>
 SameTool == [c \in Calls |-> "shared"]
-DifferentTools == [c \in Calls |-> IF c = CallOrder[1] THEN "shared" ELSE "other"]
+DifferentTools == [c \in Calls |-> IF c = a THEN "shared" ELSE "other"]
 Tools == {ToolOf[c] : c \in Calls}
 CascadeInit == Init /\ allowed = {} /\ history = <<>>
                /\ causes = {} /\ scopeViolation = FALSE

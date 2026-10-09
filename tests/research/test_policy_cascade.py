@@ -34,12 +34,12 @@ async def other_probe() -> str:
 
 
 class CascadeObserver(AgentWorkflowRunner):
-    def snapshot(self, label):
+    def snapshot(self, label, action=None):
         entries = [self._status.approval_entry(c) for c in ('a', 'b')]
         if not all(entries):
             return  # The model begins after both calls are registered.
         actual_allowed = self.approval_policy.auto_approve_tools
-        self.observations.append({'label': label, 'state': {
+        self.observations.append({'label': label, 'action': action, 'state': {
             'status': {e.tool_id: e.status.value for e in entries},
             'closed': self._closed,
             'allowed': [symbol for name, symbol in [('shared_probe', 'shared'), ('other_probe', 'other')]
@@ -65,12 +65,13 @@ class CascadeObserver(AgentWorkflowRunner):
             result = await super()._handle_tool_approval(decision)
         finally:
             self.operator_active = False
-        self.snapshot('human_and_optional_cascade')
+        self.snapshot('human_and_optional_cascade', {'kind': 'remember' if decision.approved and decision.remember else 'human',
+                                                   'call': decision.tool_id, 'approved': decision.approved})
         return result
 
     def _handle_close(self):
         super()._handle_close()
-        self.snapshot('close')
+        self.snapshot('close', {'kind': 'close'})
 
 
 @agent.defn
@@ -82,6 +83,7 @@ class CascadeAgent:
         self.started = set()
         self.cancelled = set()
         self.scenario = ''
+        self.registration_order = ['a', 'b']
         self._runner = CascadeObserver(
             config, stream=WorkflowStream(), approval_policy_default=ToolApprovalPolicy.auto_mode(),
             auto_approval_criteria_default=AutoApprovalCriteria(
@@ -104,12 +106,20 @@ class CascadeAgent:
             if self.scenario == 'tighten_after_release':
                 await workflow.wait_condition(lambda: self.cleanup)
             raise
-        return AutoApprovalDecision(AutoApprovalVerdict.DENY, reason='controlled evaluator denial')
+        verdict = {'evaluator_approve_first': 'approve', 'evaluator_escalate_first': 'escalate',
+                   'evaluator_error_first': 'error'}.get(self.scenario, 'deny')
+        # No await separates this marker from returning/raising. Completion is
+        # recorded explicitly so the checker cannot invent evaluator verdicts.
+        self._runner.snapshot('evaluator_return', {'kind': 'complete', 'call': call, 'verdict': verdict})
+        if verdict == 'error':
+            raise RuntimeError('controlled evaluator failure')
+        return AutoApprovalDecision(AutoApprovalVerdict(verdict), reason='controlled evaluator result')
 
     @agent.accepts
     async def act(self, message: TextMessage) -> TextReply:
         """Start two gated calls with controlled evaluation and cleanup barriers."""
-        self.scenario = message.text
+        self.scenario, order = message.text.split(':')
+        self.registration_order = list(order)
         async def invoke(call, tool):
             try:
                 await self._runner.run_tool(call, tool)
@@ -117,7 +127,8 @@ class CascadeAgent:
             except ToolApprovalDenied:
                 self._runner.outcomes[call] = 'rejected'
             self._runner.snapshot('caller_finished')
-        await asyncio.gather(invoke('a', shared_probe), invoke('b', other_probe if self.scenario == 'different_tool' else shared_probe))
+        tools = {'a': shared_probe, 'b': other_probe if self.scenario == 'different_tool' else shared_probe}
+        await asyncio.gather(*(invoke(call, tools[call]) for call in self.registration_order))
         return TextReply(text='finished')
 
     @workflow.signal
@@ -139,7 +150,7 @@ class CascadeAgent:
             self._runner.set_approval_policy(policy)
         finally:
             self._runner.operator_active = False
-        self._runner.snapshot('policy_replaced')
+        self._runner.snapshot('policy_replaced', {'kind': 'policy', 'allowed': ['shared'] if allow else []})
 
     @workflow.update
     async def close_and_remember(self, close_first: bool):
@@ -181,22 +192,34 @@ async def until(handle, predicate):
 
 
 SCENARIOS = ['remember_first', 'evaluator_deny_first', 'human_deny_first', 'denied_remember',
-             'policy_relax', 'tighten_after_release', 'different_tool', 'close_first', 'remember_then_close']
+             'policy_relax', 'tighten_after_release', 'different_tool', 'close_first', 'remember_then_close',
+             'evaluator_approve_first', 'evaluator_escalate_first', 'evaluator_error_first']
 
 
+@pytest.mark.parametrize('order', ['ab', 'ba'])
 @pytest.mark.parametrize('scenario', SCENARIOS)
-async def test_policy_cascade_trace(cascade_environment, scenario):
+async def test_policy_cascade_trace(cascade_environment, scenario, order):
     client, queue = cascade_environment
     h = await client.start_workflow(CascadeAgent.run, AgentConfig(), id=f'cascade-{uuid.uuid4()}', task_queue=queue)
-    await h.execute_update('send_agent_message', AgentMessage(type='act', payload={'text': scenario}))
+    await h.execute_update('send_agent_message', AgentMessage(type='act', payload={'text': f'{scenario}:{order}'}))
     start = await until(h, lambda e: e['started'] == ['a', 'b'])
     registration = [e['tool_id'] for e in start['events'] if e['type'] == 'tool_approval_requested']
-    assert registration == ['a', 'b']  # Model's fixed registration order is evidenced.
+    assert registration == list(order)  # Evidence determines the model's registration order.
 
     async def decide(call, approved=True, remember=False):
         await h.execute_update('tool_approval', ToolApprovalDecision(tool_id=call, approved=approved, remember=remember))
 
-    if scenario == 'evaluator_deny_first':
+    if scenario in {'evaluator_approve_first', 'evaluator_escalate_first', 'evaluator_error_first'}:
+        await h.signal(CascadeAgent.release_denial)
+        if scenario == 'evaluator_approve_first':
+            await until(h, lambda e: e['outcomes'].get('a') == 'dispatched')
+        else:
+            terminal = 'auto_approval_evaluation_error' if scenario == 'evaluator_error_first' else 'auto_approval_evaluation_ended'
+            e = await until(h, lambda e: any(x['type'] == terminal and x.get('tool_id') == 'a' for x in e['events']))
+            assert not e['outcomes']  # Error/escalation must not release a call.
+            assert e['observations'][-1]['state']['status']['a'] == 'pending'
+        await decide('b', remember=True)
+    elif scenario == 'evaluator_deny_first':
         await h.signal(CascadeAgent.release_denial)
         await until(h, lambda e: e['outcomes'].get('a') == 'rejected')
         await decide('b', remember=True)
@@ -239,13 +262,15 @@ async def test_policy_cascade_trace(cascade_environment, scenario):
     assert evidence['outcomes'] == expected
     resolved = [e['tool_id'] for e in evidence['events'] if e['type'] == 'tool_approval_resolved']
     assert len(resolved) == len(set(resolved)) == 2
+    if scenario in {'policy_relax', 'tighten_after_release'}:
+        assert resolved == list(order)  # Synchronous siblings follow registration order.
     if scenario in {'remember_first', 'close_first', 'remember_then_close'}:
         assert resolved == ['b', 'a']  # Cause precedes cascade despite registration order.
     output = Path('research/results/cascade-traces')
     output.mkdir(parents=True, exist_ok=True)
-    evidence.update(schema=1, scenario=scenario, different_tools=scenario == 'different_tool', workflow_id=h.id,
+    evidence.update(schema=2, scenario=scenario, registration_order=list(order), different_tools=scenario == 'different_tool', workflow_id=h.id,
                     implementation_sha256=hashlib.sha256(Path('temporal_agent_harness/harness/agent_workflow.py').read_bytes()).hexdigest())
-    (output / f'{scenario}.json').write_text(json.dumps(evidence, indent=2) + '\n')
+    (output / f'{scenario}_{order}.json').write_text(json.dumps(evidence, indent=2) + '\n')
     if scenario not in {'close_first', 'remember_then_close'}:
         await h.signal('close')
     await h.result()

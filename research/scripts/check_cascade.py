@@ -21,12 +21,16 @@ def main():
     tmp.mkdir(exist_ok=True)
     shutil.copy(ROOT / 'research/models/approval/Approval.tla', out / 'Approval.tla')
     shutil.copy(source / 'Cascade.tla', out / 'Cascade.tla')
-    checks = [('SameTool', None), ('DifferentTools', None), ('Liveness', None),
+    checks = [('SameTool', None), ('DifferentTools', None), ('Liveness', None), ('SameToolReverse', None), ('DifferentToolsReverse', None),
               ('LeakScope', 'ScopePreserved'), ('OverwriteSettled', 'SingleResolution'),
               ('ReverseCause', 'CauseBeforeCascade')]
     results = []
     for name, violation in checks:
-        shutil.copy(source / f'{name}.cfg', out / f'{name}.cfg')
+        template = name.removesuffix('Reverse')
+        config = (source / f'{template}.cfg').read_text()
+        if name.endswith('Reverse'):
+            config = config.replace('CallOrder <- OrderedCalls', 'CallOrder <- ReversedCalls')
+        (out / f'{name}.cfg').write_text(config)
         run = subprocess.run(['java', f'-Djava.io.tmpdir={tmp}', '-XX:+UseParallelGC', '-cp', str(jar),
                               'tlc2.TLC', '-workers', '1', '-seed', '1', '-config', f'{name}.cfg', 'Cascade.tla'],
                              cwd=out, capture_output=True, text=True, timeout=120)
