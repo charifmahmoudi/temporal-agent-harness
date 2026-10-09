@@ -12,7 +12,7 @@ conference recommendation. Evidence and unresolved obligations are tracked toget
 | Weakness | Concrete work | Research-review judgment | Upstream-contributor judgment | Remaining obligation |
 | --- | --- | --- | --- | --- |
 | Permissive correspondence | Both schema-2 checkers record operator inputs and evaluator results. Only Consume, Cancelled, and Finalize can be hidden. Negative controls reject invented policy, wrong input, and wrong cause. | Material improvement: witnesses cannot manufacture missing external decisions. Still bounded partial-observation conformance, not a refinement theorem. | Useful guard against model/observer drift; raw events remain auditable. | Prove or independently review observation completeness and atomicity. Earlier schema-1 evidence is retained as historical evidence only. |
-| Narrow schedule coverage | Twelve coupled scenarios run under both registration orders. Added evaluator approval, escalation, and error before remembered approval. Safety configurations exercise both orders. | Named coverage is stronger than increasing a test count without new behaviors. No exhaustive Temporal scheduler coverage or arbitrary-call proof. | Regressions cover order-sensitive publications and fail-safe paths using barriers rather than timing races. | Three-call cascades, mode/criteria changes, replay, and arbitrary policy layers remain open. |
+| Narrow schedule coverage | Coupled scenarios exercise both registration orders; later studies add retained replay and controlled activity-backed worker replacement. | Named coverage is stronger than a test count. No exhaustive Temporal scheduler coverage or arbitrary-call proof. | Regressions and upgrade cases use explicit barriers and server history. | Three-call cascades, mode/criteria changes, general replay/routing coverage, and arbitrary policy layers remain open. |
 | No consequential finding | Challenge the malformed-input assumption; reproduce an unchecked superseded-result read; supply a minimal guard, standalone regressions, real Temporal experiment, and isolated reintroduction. | A concrete discrepancy supports usefulness. It was found by inspection/targeted execution, not model-checker discovery. Its prevalence and severity are unmeasured. | Small patch protects accepted outcomes and closes the evaluation bracket for buggy custom evaluators. | Actual upstream review and acceptance; no deployment incident claimed. |
 | Weak detector evaluation | Isolated Python mutations test denial remembering, scope leakage, publication reversal, and malformed superseded results. Baseline must pass; imports are provenance-checked; setup errors do not count as detection. | Shows sensitivity to four selected edits, not general mutation adequacy, false-positive rates, or superiority over ordinary tests. | Demonstrates that regression tests fail for their intended faults. Isolated copies preserve the working package. | Larger independently designed fault corpus and detector ablations if making evaluation claims. |
 | Unclear novelty | Primary-source comparison covers trace validation, runtime enforcement, SMT authorization, approval reuse, and agent temporal monitoring. Reading scope is explicit. | Broad novelty claims are ruled out. Candidate contribution is a precise implementation case study and lessons about assumptions and cancellation. | Avoids imposing research claims on a practical bug fix. | Complete screened-paper reading and assess submission genre only after the evidence is mature. |
@@ -33,6 +33,26 @@ conference recommendation. Evidence and unresolved obligations are tracked toget
 
 ## Decision after this iteration
 
+The strongest current evidence is the [activity-backed study](evaluation/activity-results.md).
+Both baseline caller scenarios schedule an activity and write the test ledger after
+cancellation. C prevents fresh dispatch but produces explicit command nondeterminism
+when reconstructing those old histories. V handles the declared B → V cases, including
+live nonsticky replacement, while preserving the old effect. All 375 harness
+regressions pass under V. The full matrix also records incompatible C → V histories.
+
+**Current committee judgment:** a consequential, reproducible deployment constraint
+connects the implementation defect with durable execution. The remedy uses established
+Temporal patching; this is not evidence of a novel versioning method or superiority of
+formal verification. The case is stronger, but independent scrutiny and external
+validity remain unfulfilled.
+
+**Current contributor judgment:** review both the cancellation fix and its history
+cohort before rollout. A fix that passes fresh tests can still prevent progress on
+old histories. V demonstrates a bounded alternative, not permission for arbitrary
+mixed-version operation or retroactive cancellation. Neither packet has been submitted.
+
+The following paragraphs retain the narrower preceding milestones and their limits.
+
 The [offline upgrade experiment](evaluation/upgrade-results.md) now addresses one
 previously open evidence question. All 64 history/version cells pass SDK replay,
 while four cells change the application projection. Same-version controls and paired
@@ -43,8 +63,8 @@ two execution environments, not an independent external reproduction.
 **Committee judgment:** a concrete witness that command compatibility is weaker than
 the measured application agreement, with controls and frozen histories. The probe is
 workflow-local, so this must not be inflated into an external-effect or Temporal defect.
-Novelty relative to semantic regression testing remains unestablished. An activity-backed
-experiment and independent review are still needed for a broader claim.
+Novelty relative to semantic regression testing remains unestablished. The activity-backed
+extension above addresses one experimental gap; independent review remains open.
 
 **Contributor judgment:** the patch's intended change in cancellation behavior deserves
 explicit rollout review even when replay is green. The isolated correction is still

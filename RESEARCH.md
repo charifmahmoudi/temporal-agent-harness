@@ -1,15 +1,23 @@
-# Verifying tool-approval races in Temporal Agent Harness
+# Verifying approval, cancellation, and upgrades in Temporal Agent Harness
 
 ## Research question
 
-**Does an accepted tool decision remain stable, and does its waiting invocation
-respect cancellation, when approval, evaluator completion, and cleanup overlap?**
+**Do approval and cancellation guarantees survive asynchronous cleanup, and can a
+correction preserve the durable histories of already-running agents?**
 
 Temporal Agent Harness runs agents as durable workflows. Before a gated tool runs,
 a human or automatic evaluator may approve or deny it. Several operations can compete
 for that decision. An approval may also change policy and release other waiting calls.
 Correctness therefore concerns both the accepted outcome and the order of subsequent
-cleanup, publication, and dispatch.
+cleanup, publication, dispatch, and replay after a code change.
+
+The strongest measured finding is a concrete upgrade constraint: the baseline can
+schedule an activity after caller cancellation; the direct correction prevents new
+dispatch but cannot replay that old activity-bearing history. A versioned correction
+preserves baseline replay and protects the tested new cancellation path. It does not
+undo the historical effect or support every migration direction. Start with the
+[activity-backed finding](research/evaluation/activity-results.md) for the evidence,
+compatibility matrix, and deployment limits.
 
 This case study defines that contract in TLA+, checks finite models, and tests their
 correspondence with controlled executions of the Python implementation. The models
@@ -113,7 +121,14 @@ The experiment and observer-free controls passed locally and in
 [GitHub Actions](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/37933221643),
 which reproduced every categorical outcome. Both evidence archives are retained.
 
-## Scientific scope and next experiment
+The [activity-backed extension](research/evaluation/activity-results.md) then tests
+durable commands and an actual test-ledger effect. It retains 12 fresh executions,
+36 replay cells, and eight live nonsticky worker replacements. The versioned source
+also passes all 375 existing harness regressions. Unlike the workflow-local probe,
+the direct correction encounters explicit command nondeterminism when old activity
+history must be replayed. These are distinct probes and results, not a contradiction.
+
+## Scientific scope and next evidence
 
 The evidence supports bounded model properties, controlled trace conformance, and
 selected regression sensitivity. It does not establish arbitrary-call correctness,
@@ -140,7 +155,7 @@ The next evidence milestones are concrete:
 | --- | --- | --- |
 | 1 | Independent review and reproduction of the cancellation case | A reviewer challenges the cancellation contract, atomic boundaries, and retained counterexamples; another environment reproduces the categorical outcomes. |
 | 2 | Maintainer assessment of both minimal patches | Confirm intended behavior and practical usefulness. Record actual feedback separately from scientific validation. Submission remains pending. |
-| 3 | Extend upgrade evidence to an activity-backed probe | Offline command/application comparisons now reproduce in CI. Test activity commands and in-flight upgrade before stronger rollout claims. Independent reproduction remains open. |
+| 3 | Review the supported migration cohorts and routing assumptions | The activity-backed cases pass for B → V, but not all C → V or rollback histories. Assess production routing, retry policy, and additional history cohorts before deployment claims. |
 
 Broader modeling follows evidence of a missing obligation, rather than a target test
 count. A paper should center the reproduced discrepancies and contract lessons; any
@@ -155,6 +170,7 @@ claim of a new verification method requires further evidence against the closest
 5. [Comparative protocol](research/evaluation/protocol.md) → [Results](research/evaluation/results-v1.md) → [Assessment](research/evaluation/assessment.md): inspect measured added value.
 6. [Cleanup model](research/models/cancellation/README.md) → [Cancellation results](research/evaluation/cancellation-results.md) → [Minimal patch](research/upstream/caller-cancellation.md): inspect the new lifecycle finding and its remedy.
 7. [Upgrade protocol](research/evaluation/upgrade-protocol.md) → [Replay results](research/evaluation/upgrade-results.md): distinguish command compatibility from application agreement under changed code.
+8. [Activity protocol](research/evaluation/activity-protocol.md) → [Activity and live-upgrade results](research/evaluation/activity-results.md): inspect the durable-command mismatch, versioned remedy, and migration limits.
 
 [Maintenance policy and decision gates](research/maintenance.md) define how future
 changes update the scientific artifact. An [independent-review packet](research/evaluation/review-packet.md)

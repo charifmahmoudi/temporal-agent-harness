@@ -40,11 +40,22 @@ must be reported honestly.
 
 ## Review-committee assessment
 
+The activity-backed upgrade study uses the existing Temporal Python SDK
+[`workflow.patched` mechanism](https://github.com/temporalio/sdk-python/blob/main/temporalio/workflow/_context.py).
+Its documented branch-selection behavior is established platform functionality;
+the experiment runs the locked 1.32.0 implementation. We claim neither a new
+versioning method nor a new observation that workflow code changes can be
+nondeterministic. The case-specific evidence is the cancellation-triggered command
+omission, its reproduction during live replacement, and the measured limits of the
+proposed remedy across B/C/V history cohorts. The possible contribution is an
+evidence-backed lifecycle lesson, subject to comparison with established upgrade
+and semantic-regression work.
+
 A submission claiming a new trace-validation method, the first formal agent guardrail,
 or whole-system verification should be rejected on the current evidence. A focused
 experience report could become credible if it explains the assumption challenge,
 retains before/after evidence, quantifies maintenance effort and detection costs, and
-establishes transferable lessons. One small defect and a bounded case study do not
+establishes transferable lessons. Concrete defects and a bounded case study do not
 alone establish a strong research-track paper.
 
 ## Remaining literature work

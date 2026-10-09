@@ -113,3 +113,13 @@ is checked), then run `uv run --frozen python research/scripts/compare_verificat
 --jar tla2tools.jar`. Its [workflow](../.github/workflows/comparison.yml) retains the
 complete measurement artifacts. `python research/scripts/check_documentation.py`
 checks local links, figure reproducibility, and the generated comparison report.
+
+## Activity-backed upgrade evidence
+
+The [v4 report](evaluation/activity-results.md) is generated from a retained archive
+of 12 fresh histories, 36 cross-version replay outcomes, eight live replacement cases,
+and 375 harness regressions against the isolated versioned correction. It distinguishes
+scheduled activity commands from ledger effects and reports all incompatible migration
+directions. Run `python research/scripts/render_activity.py --check` to validate its
+raw evidence and the generated report. Follow the [activity workflow](../.github/workflows/activity-upgrade.yml)
+for live reproduction with the SDK test server. Prior v1–v3 evidence remains unchanged.

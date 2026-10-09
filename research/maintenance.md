@@ -35,6 +35,7 @@ regenerated from `research/figures/generate.py` when semantics change.
 | Comparative measurement | See current evaluation report | Valid baseline and all planned arms reported, including errors |
 | Cancellation lifecycle study | Complete for the declared one-call experiment; isolated correction prepared | Six expected TLC checks, both 23-test variants, retained histories and replay outcomes |
 | Cross-version replay | Complete for the declared offline probe: local and CI outcomes agree | 64 cells plus paired observer-free controls; separate local and CI archives retained and checked |
+| Activity-backed upgrade | Complete for the declared one-activity and nonsticky replacement experiment | 12 fresh executions, 36 replay cells, eight live cases, and 375 versioned harness regressions; raw histories and ledger checked |
 | Independent abstraction review | Outstanding | External review addressing correspondence and atomicity |
 | External reproduction | Outstanding | Independent environment and retained categorical results |
 | Upstream feedback | Prepared, not submitted | Explicitly authorized submission and recorded maintainer response |
@@ -48,3 +49,9 @@ The upgrade report is generated from a retained local evidence archive. Document
 CI checks its hashes, cell inventory, control results, and application comparisons.
 Keep local measurement distinct from a CI run; do not update the recorded execution
 commit to a later documentation-only commit.
+
+The activity report is independently generated from its retained CI archive. Its
+check validates exact case inventories, replay classifications, raw server-event
+counts, ledger records, patch-marker identity, source hashes, and regression JUnit.
+New migration cohorts or retry/routing assumptions require a new protocol; do not
+extend the B → V result to untested histories or overwrite the measured C → V failures.

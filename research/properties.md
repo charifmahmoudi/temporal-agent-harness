@@ -44,6 +44,39 @@ The dispatch row suppresses lifecycle intermediates. The ordering row illustrate
 publications inside the atomic Remember action; its interior is not a separate model
 state. Thus the diagram explains the obligation without altering the model's atomicity.
 
+## Empirical obligations at the activity and upgrade boundary
+
+These obligations are checked by the [activity-backed experiment](evaluation/activity-results.md).
+They are **not additional TLA+ invariants** or a claimed refinement of Cleanup.
+For invocation i, D(i) means cancellation delivered during evaluator cleanup and
+S(i) means a scheduled activity command. R(h,v) means SDK command-compatible replay
+of a retained history h under implementation variant v.
+
+| Obligation | Formal statement / observation | Evidence and limit |
+| --- | --- | --- |
+| E1: prevent new activity scheduling | $D(i)\Rightarrow\neg S(i)$ on the corrected new path | B violates it in both caller scenarios; C/V satisfy it in the selected fresh and pre-cancellation replacement cases. Approval remains accepted. |
+| E2: preserve baseline command history | $\forall h\in H_B:R(h,V)$ for the four retained baseline histories | V passes; C fails the two baseline caller histories. This is finite history compatibility, not universal replay correctness. |
+| E3: no repeated probe effect during tested recovery | Ledger count after terminal cleanup equals count before replacement | Holds in the eight live cases. A preexisting ledger write remains; no rollback or general exactly-once guarantee is established. |
+
+E1 applies to new execution at the versioned branch. It is not retrospectively asserted
+of baseline commands reconstructed during replay. This distinction is necessary to
+state E1 and E2 consistently. The full matrix shows that baseline-compatible V is
+not compatible with every unmarked history produced by the direct correction C.
+
+```mermaid
+flowchart TD
+    A["Accepted approval"] --> C["Caller cancellation during cleanup"]
+    C --> B["Baseline: activity command and ledger effect"]
+    C --> V["Corrected new path: no activity command"]
+    B --> D["Direct correction replay: missing command"]
+    B --> H["Versioned replay: preserve historical command"]
+    H --> E["Existing effect retained; no new write observed"]
+```
+
+**Activity-boundary obligations.** P1 decision stability can hold on every branch
+while E1 fails on the baseline path. E2 preserves recorded behavior; it does not
+retroactively repair the earlier E1 violation.
+
 ## Progress assumptions
 
 Approval's fair specification adds, for every call,

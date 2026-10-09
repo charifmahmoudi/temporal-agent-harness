@@ -68,6 +68,15 @@ earlier malformed-result guard; source hashes are retained in the results snapsh
 
 ## Scope and review request
 
+**Rollout caveat established by the [activity-backed study](../evaluation/activity-results.md):**
+the direct correction cannot replay the two retained baseline caller histories that
+already scheduled an activity. Live nonsticky replacement records explicit workflow-task
+nondeterminism. The [versioned study diff](caller-cancellation-versioned.patch) preserves
+the tested baseline histories and protects the tested new path; it does not accept every
+history produced by the unversioned correction. It targets the research baseline,
+is supplied for review, and is not a universal migration recommendation. All 375
+existing harness regressions pass against that isolated versioned source.
+
 The subsequent [upgrade experiment](../evaluation/upgrade-results.md) found successful
 command replay for all retained histories under both variants, but changed application
 outcomes in the two caller-cancellation scenarios in each direction. This is expected

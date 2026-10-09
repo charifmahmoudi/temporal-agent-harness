@@ -1,5 +1,8 @@
 # Cancellation and recovery: measured findings
 
+This report retains the v2 experiment. The later [activity-backed upgrade study](activity-results.md)
+adds durable-command and live replacement evidence; it does not broaden the v2 model's scope.
+
 [Case study](../../RESEARCH.md) · [Protocol v2](cancellation-protocol.md) · [Model](../models/cancellation/README.md) · [Upstream packet](../upstream/caller-cancellation.md)
 
 ## Finding and significance

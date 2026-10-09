@@ -141,7 +141,9 @@ or a new implementation defect. The change is the intended correction of the kno
 caller-cancellation defect. The result qualifies the evidence needed to assess a
 deployment: same-version replay, or even successful cross-version command replay,
 cannot substitute for explicitly checking the application obligations of interest.
-An activity-backed tool may produce a different command outcome; it was not tested.
+An activity-backed tool was not tested in this v3 experiment. The subsequent
+[v4 activity study](activity-results.md) tests that boundary and live replacement;
+its explicit command mismatches do not contradict this workflow-local result.
 
 For maintainers, review cancellation semantics and the rollout contract separately
 from replay success. This offline experiment does not authorize or validate deploying
@@ -187,8 +189,8 @@ the retained evidence and generated report. No test server is required for repla
 
 ## Remaining decision gates
 
-1. Test an activity-backed probe and in-flight upgrade under a separately declared
-   protocol; assess any required versioning strategy against actual commands.
+1. Review the subsequent [activity-backed experiment](activity-results.md), which
+   addresses the activity and nonsticky replacement gap under its separate protocol.
 2. Obtain independent scrutiny of the projection and cancellation contract, and
    maintainer feedback on the isolated correction.
 
