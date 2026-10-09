@@ -132,7 +132,13 @@ class CascadeAgent:
     async def replace_policy(self, allow: bool):
         # Preserve auto mode so this experiment isolates name-based eligibility.
         policy = ToolApprovalPolicy.auto_mode(pre_approved_tools=['shared_probe'] if allow else [])
-        self._runner.set_approval_policy(policy)
+        # Policy replacement resolves eligible siblings synchronously. Record its
+        # stable boundary, while _pub retains every intermediate raw event.
+        self._runner.operator_active = True
+        try:
+            self._runner.set_approval_policy(policy)
+        finally:
+            self._runner.operator_active = False
         self._runner.snapshot('policy_replaced')
 
     @workflow.update

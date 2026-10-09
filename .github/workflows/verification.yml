@@ -29,7 +29,7 @@ jobs:
       - name: Check source correspondence has not drifted
         run: python research/scripts/check_source.py
       - name: Download pinned TLA+ tools
-        run: curl --fail --location --retry 3 https://github.com/tlaplus/tlaplus/releases/download/v1.8.0/tla2tools.jar -o "$RUNNER_TEMP/tla2tools.jar"
+        run: curl --fail --location --retry 3 --retry-all-errors --connect-timeout 20 --max-time 120 https://github.com/tlaplus/tlaplus/releases/download/v1.8.0/tla2tools.jar -o "$RUNNER_TEMP/tla2tools.jar"
       - name: Check safety, liveness, and synthetic faults
         run: python research/scripts/check_model.py --jar "$RUNNER_TEMP/tla2tools.jar"
       - name: Check policy cascades, conditional progress, and synthetic faults
@@ -58,7 +58,7 @@ jobs:
           distribution: temurin
           java-version: '17'
       - name: Download pinned TLA+ tools for trace correspondence
-        run: curl --fail --location --retry 3 https://github.com/tlaplus/tlaplus/releases/download/v1.8.0/tla2tools.jar -o "$RUNNER_TEMP/tla2tools.jar"
+        run: curl --fail --location --retry 3 --retry-all-errors --connect-timeout 20 --max-time 120 https://github.com/tlaplus/tlaplus/releases/download/v1.8.0/tla2tools.jar -o "$RUNNER_TEMP/tla2tools.jar"
       - name: Check observed traces against TLA+ and reject invalid traces
         run: uv run --frozen python research/scripts/check_traces.py --jar "$RUNNER_TEMP/tla2tools.jar"
       - name: Check coupled policy traces and reject invalid traces
