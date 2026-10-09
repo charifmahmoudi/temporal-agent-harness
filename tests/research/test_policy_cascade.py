@@ -57,7 +57,9 @@ class CascadeObserver(AgentWorkflowRunner):
         if not self.operator_active:
             self.snapshot('evaluation_resolution')
 
-    async def _handle_tool_approval(self, decision):
+    async def _handle_tool_approval(self, decision: ToolApprovalDecision):
+        # Preserve the registered handler's annotation: Temporal uses it to decode
+        # update payloads before calling this observation-only wrapper.
         self.operator_active = True
         try:
             result = await super()._handle_tool_approval(decision)
