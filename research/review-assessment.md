@@ -33,6 +33,22 @@ conference recommendation. Evidence and unresolved obligations are tracked toget
 
 ## Decision after this iteration
 
+The [offline upgrade experiment](evaluation/upgrade-results.md) now addresses one
+previously open evidence question. All 64 history/version cells pass SDK replay,
+while four cells change the application projection. Same-version controls and paired
+observer-free replays pass. These are local measurements; CI publication was blocked.
+
+**Committee judgment:** a concrete witness that command compatibility is weaker than
+the measured application agreement, with controls and frozen histories. The probe is
+workflow-local, so this must not be inflated into an external-effect or Temporal defect.
+Novelty relative to semantic regression testing remains unestablished. An activity-backed
+experiment and independent review are still needed for a broader claim.
+
+**Contributor judgment:** the patch's intended change in cancellation behavior deserves
+explicit rollout review even when replay is green. The isolated correction is still
+useful, but these completed-history replays do not validate an in-flight deployment or
+determine whether versioning is required for activity-backed integrations.
+
 The subsequent [cancellation study](evaluation/cancellation-results.md) strengthens
 the case study with a second reproduced defect and a missing lifecycle obligation:
 stable approval is insufficient to guarantee cancellation-respecting invocation.

@@ -104,6 +104,14 @@ history replays per variant. The [standalone upstream packet](research/upstream/
 contains a minimal patch and regressions; it has not been submitted or applied to
 production source on this branch.
 
+A subsequent [cross-version replay experiment](research/evaluation/upgrade-results.md)
+replayed all 32 retained histories under both source variants. All 64 cells passed
+command replay, but four reconstructed a different caller outcome and tool-start
+count. Same-version controls matched. This demonstrates an application-observation
+gap for the workflow-local probe, not a Temporal defect or external-effect failure.
+The experiment and observer-free controls passed locally; its prepared CI workflow
+has not run because publishing was blocked by automatic approval review.
+
 ## Scientific scope and next experiment
 
 The evidence supports bounded model properties, controlled trace conformance, and
@@ -131,7 +139,7 @@ The next evidence milestones are concrete:
 | --- | --- | --- |
 | 1 | Independent review and reproduction of the cancellation case | A reviewer challenges the cancellation contract, atomic boundaries, and retained counterexamples; another environment reproduces the categorical outcomes. |
 | 2 | Maintainer assessment of both minimal patches | Confirm intended behavior and practical usefulness. Record actual feedback separately from scientific validation. Submission remains pending. |
-| 3 | A separately declared upgrade/recovery experiment | Test baseline histories against changed code and distinguish command compatibility from preserved application outcomes. Current same-version replay evidence cannot answer this question. |
+| 3 | Publish and independently reproduce the offline upgrade experiment | Local evidence separates command compatibility from application outcomes; run the prepared CI workflow and assess an activity-backed probe before stronger rollout claims. |
 
 Broader modeling follows evidence of a missing obligation, rather than a target test
 count. A paper should center the reproduced discrepancies and contract lessons; any
@@ -145,6 +153,7 @@ claim of a new verification method requires further evidence against the closest
 4. [Related work](research/related-work.md) → [Critical assessment](research/review-assessment.md): evaluate novelty and unresolved claims.
 5. [Comparative protocol](research/evaluation/protocol.md) → [Results](research/evaluation/results-v1.md) → [Assessment](research/evaluation/assessment.md): inspect measured added value.
 6. [Cleanup model](research/models/cancellation/README.md) → [Cancellation results](research/evaluation/cancellation-results.md) → [Minimal patch](research/upstream/caller-cancellation.md): inspect the new lifecycle finding and its remedy.
+7. [Upgrade protocol](research/evaluation/upgrade-protocol.md) → [Replay results](research/evaluation/upgrade-results.md): distinguish command compatibility from application agreement under changed code.
 
 [Maintenance policy and decision gates](research/maintenance.md) define how future
 changes update the scientific artifact. An [independent-review packet](research/evaluation/review-packet.md)

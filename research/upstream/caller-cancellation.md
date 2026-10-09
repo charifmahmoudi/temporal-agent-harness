@@ -68,6 +68,14 @@ earlier malformed-result guard; source hashes are retained in the results snapsh
 
 ## Scope and review request
 
+The subsequent [upgrade experiment](../evaluation/upgrade-results.md) found successful
+command replay for all retained histories under both variants, but changed application
+outcomes in the two caller-cancellation scenarios in each direction. This is expected
+behavioral correction for a workflow-local probe; it is not evidence of external-effect
+rollback or a validated live rollout. Review deployment/versioning separately for
+activity-backed tools and in-flight workflows. The new experiment passed locally;
+its prepared GitHub workflow has not yet run.
+
 This is inspection-led discovery with targeted implementation evidence. TLA+ makes
 the missing invocation obligation explicit; it did not discover the initial defect.
 There is no measured production incidence, external-effect rollback, arbitrary-child

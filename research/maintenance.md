@@ -34,6 +34,7 @@ regenerated from `research/figures/generate.py` when semantics change.
 | Comparison protocol | Frozen before execution | Versioned corpus and scoring rules |
 | Comparative measurement | See current evaluation report | Valid baseline and all planned arms reported, including errors |
 | Cancellation lifecycle study | Complete for the declared one-call experiment; isolated correction prepared | Six expected TLC checks, both 23-test variants, retained histories and replay outcomes |
+| Cross-version replay | Locally complete: 64 cells plus paired observer-free controls; CI publication blocked | Publish prepared workflow, reproduce categorical outcomes, retain CI provenance separately |
 | Independent abstraction review | Outstanding | External review addressing correspondence and atomicity |
 | External reproduction | Outstanding | Independent environment and retained categorical results |
 | Upstream feedback | Prepared, not submitted | Explicitly authorized submission and recorded maintainer response |
@@ -42,3 +43,8 @@ regenerated from `research/figures/generate.py` when semantics change.
 
 Future effort logs should record task, date, contributor, elapsed effort, and artifact
 or issue link. Historical modeling effort was not recorded and must not be invented.
+
+The upgrade report is generated from a retained local evidence archive. Documentation
+CI checks its hashes, cell inventory, control results, and application comparisons.
+Keep local measurement distinct from a CI run; do not update the recorded execution
+commit to a later documentation-only commit.
