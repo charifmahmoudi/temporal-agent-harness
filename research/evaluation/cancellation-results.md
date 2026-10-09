@@ -35,6 +35,8 @@ All four caller executions retain approved status. Each variant passed
 Temporal executions; **16 completed histories per variant**
 replayed without command-compatibility failure. Baseline tests characterize the defect;
 their passing does not mean the cancellation contract holds.
+All **375 harness regressions** also passed against
+the isolated correction.
 
 Separately, the standalone patch was checked against the original upstream revision:
 three cancellation assertions fail and four controls pass before correction; all seven
@@ -64,12 +66,15 @@ violates CleanupProgress (exit 13) when cleanup cannot finish. All other checks 
 zero. Named diagnostics are required; setup errors are not credited as findings.
 The one-call corrected projection preserves the original safety obligations and the
 new cancellation invariant. It is not a universal Python refinement proof.
+The refined model remembers whether Consume superseded a running evaluator.
+ReadyTaskNotBlocked and PendingCleanupPhase consistency checks ensure that a task
+already completed cannot supply a spurious infinite cleanup wait.
 
 ## Provenance and retained evidence
 
 The protocol was published at `ad36441bf60b6a6f51a01bf456fc49366e70aea5` before the Temporal
-experiments. Final evidence is from [run 37892391930](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/37892391930) at
-`3d5bed47d32af5a6c5193bb6857cfa785dc59a4a`. The [machine-readable snapshot](cancellation-results.json)
+experiments. Final evidence is from [run 37893542636](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/37893542636) at
+`b6ac72603630578103d78c3de1a915612cd17363`. The [machine-readable snapshot](cancellation-results.json)
 contains source/model/tool hashes, history hashes, artifact IDs, and observed outcomes.
 The exact [implementation archive](cancellation-evidence/implementation.zip) and
 [model archive](cancellation-evidence/model.zip) are committed so CI artifact expiry
@@ -89,6 +94,10 @@ model runner. Their [protocol amendments](cancellation-protocol.md) explain the 
 nonsticky procedure. They establish neither recovery correctness nor a recovery defect.
 Run 37892043434 passed with a helper-only correction, but review exposed a missing
 evaluation terminal. The final patch and assertions close that audit gap.
+The earlier model's BlockedProgress witness could also block an already-completed task;
+review led to an explicit running-cleanup distinction. The intermediate evidence is
+retained at commit `1568168ec051a249e6d947e68b81c8655f4a0d37` and identified
+in the snapshot. Only the refined model supports this report's progress interpretation.
 
 The result is a reproducible implementation defect and a useful separation of decision
 safety, invocation cancellation, audit completeness, and cleanup-dependent progress.

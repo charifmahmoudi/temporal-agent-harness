@@ -35,10 +35,27 @@ def render():
     with ZipFile(DIRECTORY / result["artifacts"]["model"]["file"]) as archive:
         if json.loads(archive.read("summary.json")) != result["model"]:
             raise ValueError("Model summary differs from retained raw evidence")
+        assert hashlib.sha256(archive.read("Cleanup.tla")).hexdigest() == result["model"]["model_sha256"]
+        assert hashlib.sha256(archive.read("Approval.tla")).hexdigest() == result["model"]["base_model_sha256"]
+        for row in result["model"]["results"]:
+            assert row["passed"]
+            log = archive.read(row["configuration"] + ".log").decode()
+            if row["returncode"] == 12:
+                assert "Invariant CallerCancellationRespected is violated" in log
+            elif row["returncode"] == 13:
+                assert "Temporal property CleanupProgress was violated." in log
+                assert "cleanupPending = TRUE" in log
+            else:
+                assert row["returncode"] == 0
+                assert "Model checking completed. No error has been found." in log
     with ZipFile(DIRECTORY / result["artifacts"]["implementation"]["file"]) as archive:
         provenance = json.loads(archive.read("cancellation-corrected/provenance.json"))
         if provenance != result["source_hashes"]:
             raise ValueError("Source provenance differs from raw evidence")
+        harness_cases = list(ET.fromstring(archive.read("cancellation-corrected/harness-results.xml")).iter("testcase"))
+        assert len(harness_cases) == result["harness_regressions_passed"]
+        assert not any(c.find(tag) is not None for c in harness_cases
+                       for tag in ("failure", "error", "skipped"))
         for variant, prefix, xml in (
             ("baseline", "cancellation/baseline/", "cancellation-baseline.xml"),
             ("corrected", "cancellation-corrected/research/results/cancellation/corrected/",
@@ -108,6 +125,8 @@ All four caller executions retain approved status. Each variant passed
 Temporal executions; **{baseline['history_replays']} completed histories per variant**
 replayed without command-compatibility failure. Baseline tests characterize the defect;
 their passing does not mean the cancellation contract holds.
+All **{result['harness_regressions_passed']} harness regressions** also passed against
+the isolated correction.
 
 Separately, the standalone patch was checked against the original upstream revision:
 three cancellation assertions fail and four controls pass before correction; all seven
@@ -132,6 +151,9 @@ violates CleanupProgress (exit 13) when cleanup cannot finish. All other checks 
 zero. Named diagnostics are required; setup errors are not credited as findings.
 The one-call corrected projection preserves the original safety obligations and the
 new cancellation invariant. It is not a universal Python refinement proof.
+The refined model remembers whether Consume superseded a running evaluator.
+ReadyTaskNotBlocked and PendingCleanupPhase consistency checks ensure that a task
+already completed cannot supply a spurious infinite cleanup wait.
 
 ## Provenance and retained evidence
 
@@ -157,6 +179,10 @@ model runner. Their [protocol amendments](cancellation-protocol.md) explain the 
 nonsticky procedure. They establish neither recovery correctness nor a recovery defect.
 Run 37892043434 passed with a helper-only correction, but review exposed a missing
 evaluation terminal. The final patch and assertions close that audit gap.
+The earlier model's BlockedProgress witness could also block an already-completed task;
+review led to an explicit running-cleanup distinction. The intermediate evidence is
+retained at commit `{result['intermediate_evidence']['retained_at_commit']}` and identified
+in the snapshot. Only the refined model supports this report's progress interpretation.
 
 The result is a reproducible implementation defect and a useful separation of decision
 safety, invocation cancellation, audit completeness, and cleanup-dependent progress.

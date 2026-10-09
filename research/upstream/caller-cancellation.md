@@ -60,9 +60,10 @@ git apply caller-cancellation.patch
 uv run --frozen pytest tests/harness/test_cancel_and_settle.py -q
 ```
 
-Separately, [final study run 37892391930](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/37892391930)
+Separately, [final study run 37893542636](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/37893542636)
 passed 23 baseline and 23 isolated-correction tests, sixteen completed-history replays
-per variant, and six expected TLC results. Its corrected source also includes the
+per variant, six expected TLC results, and all 375 harness regressions against the isolated
+correction. Its corrected source also includes the
 earlier malformed-result guard; source hashes are retained in the results snapshot.
 
 ## Scope and review request

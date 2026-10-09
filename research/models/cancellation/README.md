@@ -42,6 +42,25 @@ CancelCaller records `cancelled` and enters `aborted`. It does not revoke status
 The action abstracts both child responses exercised concretely: re-raising the
 second cancellation and suppressing it with a returned verdict.
 
+```mermaid
+stateDiagram-v2
+    direction TB
+    Evaluating --> Cleanup: Settlement with running task
+    Evaluating --> Gate: Consume completed task
+    Cleanup --> Gate: Cleanup finishes
+    Cleanup --> Gate: Caller cancellation swallowed
+    Cleanup --> Aborted: Caller cancellation propagates
+    Gate --> Dispatched: Approved decision
+    Gate --> Rejected: Denial or unresolved closure
+```
+
+**Figure 7.** Caller-phase projection. Permission status is a separate variable.
+For an already-done superseded task, the diagram collapses Consume and the immediately
+enabled FinishCleanup into one edge; the executable model keeps both actions.
+Aborted is an invocation outcome, not revocation of approval. Gate finalization waits
+for settlement or closure. The two cancellation edges select baseline or corrected
+behavior rather than competing nondeterministic policies in a single configuration.
+
 ## Obligations and witnesses
 
 Existing decision stability, single resolution, approved dispatch, and denied

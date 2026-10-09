@@ -98,7 +98,8 @@ A second inspection-led finding reproduces **tool execution after caller cancell
 during evaluator cleanup**. Decision safety still holds, exposing a missing invocation
 obligation. An isolated correction prevents dispatch and closes the evaluation audit
 record. The [cancellation study](research/evaluation/cancellation-results.md) retains
-six expected TLC results, 23 tests per implementation variant, and sixteen completed
+six expected TLC results, 23 tests per implementation variant, 375 harness regressions
+against the isolated correction, and sixteen completed
 history replays per variant. The [standalone upstream packet](research/upstream/caller-cancellation.md)
 contains a minimal patch and regressions; it has not been submitted or applied to
 production source on this branch.
@@ -123,6 +124,18 @@ cleanup-dependent progress limitation. It supports a focused implementation case
 it does not reverse the comparison's negative result. Independent abstraction review,
 external reproduction, and broader policy/recovery coverage remain necessary; superior
 detection and conference novelty are not established.
+
+The next evidence milestones are concrete:
+
+| Priority | Work | Why it matters / completion criterion |
+| --- | --- | --- |
+| 1 | Independent review and reproduction of the cancellation case | A reviewer challenges the cancellation contract, atomic boundaries, and retained counterexamples; another environment reproduces the categorical outcomes. |
+| 2 | Maintainer assessment of both minimal patches | Confirm intended behavior and practical usefulness. Record actual feedback separately from scientific validation. Submission remains pending. |
+| 3 | A separately declared upgrade/recovery experiment | Test baseline histories against changed code and distinguish command compatibility from preserved application outcomes. Current same-version replay evidence cannot answer this question. |
+
+Broader modeling follows evidence of a missing obligation, rather than a target test
+count. A paper should center the reproduced discrepancies and contract lessons; any
+claim of a new verification method requires further evidence against the closest work.
 
 ## Reading path
 
