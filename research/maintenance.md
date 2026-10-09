@@ -34,7 +34,7 @@ regenerated from `research/figures/generate.py` when semantics change.
 | Comparison protocol | Frozen before execution | Versioned corpus and scoring rules |
 | Comparative measurement | See current evaluation report | Valid baseline and all planned arms reported, including errors |
 | Cancellation lifecycle study | Complete for the declared one-call experiment; isolated correction prepared | Six expected TLC checks, both 23-test variants, retained histories and replay outcomes |
-| Cross-version replay | Locally complete: 64 cells plus paired observer-free controls; CI publication blocked | Publish prepared workflow, reproduce categorical outcomes, retain CI provenance separately |
+| Cross-version replay | Complete for the declared offline probe: local and CI outcomes agree | 64 cells plus paired observer-free controls; separate local and CI archives retained and checked |
 | Independent abstraction review | Outstanding | External review addressing correspondence and atomicity |
 | External reproduction | Outstanding | Independent environment and retained categorical results |
 | Upstream feedback | Prepared, not submitted | Explicitly authorized submission and recorded maintainer response |

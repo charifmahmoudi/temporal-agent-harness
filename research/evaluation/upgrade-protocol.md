@@ -73,3 +73,13 @@ pair. This checks one possible instrumentation explanation; it does not prove fu
 observer noninterference. Also freeze workflow and dependency-lock hashes and test
 timeout/error classification separately. Report 64 matrix cells and 128 replay
 executions, rather than counting the ablation as additional independent histories.
+
+## Publication and CI record
+
+Explicit user approval resolved the initial publication block. The connected GitHub
+app published the exact local file trees; its server-side commits have different IDs,
+so the local execution ID remains the provenance of the original measurement.
+Run 37933127656 failed workflow YAML parsing before any experiment executed. A block
+scalar fixed the quoted command, without changing the replay runner or scoring.
+Run 37933221643 then reproduced all categorical outcomes. These operational steps
+do not amend the frozen inputs, scientific hypotheses, or scoring rules.

@@ -36,7 +36,9 @@ conference recommendation. Evidence and unresolved obligations are tracked toget
 The [offline upgrade experiment](evaluation/upgrade-results.md) now addresses one
 previously open evidence question. All 64 history/version cells pass SDK replay,
 while four cells change the application projection. Same-version controls and paired
-observer-free replays pass. These are local measurements; CI publication was blocked.
+observer-free replays pass. GitHub Actions reproduced all categorical outcomes;
+local and CI evidence remain separately identified. This is reproducibility across
+two execution environments, not an independent external reproduction.
 
 **Committee judgment:** a concrete witness that command compatibility is weaker than
 the measured application agreement, with controls and frozen histories. The probe is

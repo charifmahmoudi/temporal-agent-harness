@@ -86,10 +86,21 @@ limitations or semantic regression testing are novel.
 ## Evidence and reproduction
 
 The measured local execution used commit `f4a4285ac14d474121b5204760e69b476e6e742d` on 2026-10-09,
-Python 3.12.14 and Temporal SDK 1.32.0. **No GitHub Actions result is claimed for
-this experiment.** Publishing the prepared workflow was blocked by automatic approval
-review. The frozen protocol predates the pilot; its observer-control amendment
-records what changed before the retained final measurement.
+Python 3.12.14 and Temporal SDK 1.32.0. The frozen protocol predates the pilot;
+its observer-control amendment records what changed before the retained measurement.
+
+**[GitHub Actions run 37933221643](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/37933221643) reproduced every categorical
+outcome** at head revision `ec155143903b75633ac9f82e1cf6f9f788804e83`,
+using Python 3.12.3 and Temporal SDK 1.32.0. The separate [CI evidence archive](upgrade-ci.zip)
+and [provenance record](upgrade-ci.json) retain all 64 cells and 128 replay executions.
+The report checker verifies their history/source hashes and original/reconstructed
+projections against the local measurement; runtime values are allowed to differ.
+The connected GitHub app published identical local trees with different commit IDs;
+the original local execution commit remains unchanged in the local evidence.
+
+Initial publication required explicit user approval. The first workflow run failed
+YAML parsing before execution; correcting a quoted command enabled the successful
+run above. Neither interruption is scored as a replay result or scientific finding.
 
 The compressed JSON retains every original and reconstructed projection, terminal
 observation, error classification, runtime, history digest, and source/tooling hash.
@@ -113,10 +124,9 @@ the retained evidence and generated report. No test server is required for repla
 
 ## Remaining decision gates
 
-1. Run the prepared experiment in GitHub Actions and retain that separate provenance.
-2. Test an activity-backed probe and in-flight upgrade under a separately declared
+1. Test an activity-backed probe and in-flight upgrade under a separately declared
    protocol; assess any required versioning strategy against actual commands.
-3. Obtain independent scrutiny of the projection and cancellation contract, and
+2. Obtain independent scrutiny of the projection and cancellation contract, and
    maintainer feedback on the isolated correction.
 
 These results do not establish exhaustive history coverage, crash recovery,

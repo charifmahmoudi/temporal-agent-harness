@@ -73,8 +73,8 @@ command replay for all retained histories under both variants, but changed appli
 outcomes in the two caller-cancellation scenarios in each direction. This is expected
 behavioral correction for a workflow-local probe; it is not evidence of external-effect
 rollback or a validated live rollout. Review deployment/versioning separately for
-activity-backed tools and in-flight workflows. The new experiment passed locally;
-its prepared GitHub workflow has not yet run.
+activity-backed tools and in-flight workflows. The new experiment passed locally
+and in GitHub Actions with identical categorical outcomes and retained evidence.
 
 This is inspection-led discovery with targeted implementation evidence. TLA+ makes
 the missing invocation obligation explicit; it did not discover the initial defect.

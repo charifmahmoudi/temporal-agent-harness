@@ -5,6 +5,7 @@ import gzip
 import hashlib
 import json
 from pathlib import Path
+import zipfile
 
 from replay_upgrade import ARCHIVE_SHA, LOCK_SHA, WORKFLOW, WORKFLOW_SHA, comparison, projection
 
@@ -48,6 +49,23 @@ def render():
     mismatches = [r for r in rows if r['application'] == 'mismatch']
     assert len(mismatches) == 4
     assert {r['scenario'] for r in mismatches} == {'caller-second_raise', 'caller-second_return'}
+    ci = json.loads((ROOT / 'research/evaluation/upgrade-ci.json').read_text())
+    archive = ROOT / 'research/evaluation' / ci['archive']
+    assert hashlib.sha256(archive.read_bytes()).hexdigest() == ci['archive_sha256']
+    comparison_keys = ('origin', 'target', 'scenario', 'history_sha256', 'expected',
+                       'actual', 'command', 'application', 'unobserved_command')
+    with zipfile.ZipFile(archive) as zipped:
+        for local in evidence['variants']:
+            measured = json.loads(zipped.read(local['variant'] + '.json'))
+            for key in ('archive_sha256', 'workflow_sha256', 'runner_sha256',
+                        'source_sha256', 'lock_sha256'):
+                assert measured[key] == local[key]
+            assert measured['negative_control_rejected']
+            assert all(r['error'] is None and r['unobserved_error'] is None for r in measured['rows'])
+            for row in measured['rows']:
+                assert row['actual'] == projection(row['observations'][-1])
+            assert [{k: r[k] for k in comparison_keys} for r in measured['rows']] == [
+                {k: r[k] for k in comparison_keys} for r in local['rows']]
     commit = evidence['execution']['commit']
     return r'''# Upgrade replay: command agreement is weaker than application agreement
 
@@ -133,10 +151,19 @@ limitations or semantic regression testing are novel.
 
 ## Evidence and reproduction
 
-''' + f'The measured local execution used commit `{commit}` on 2026-10-09,\n' + r'''Python 3.12.14 and Temporal SDK 1.32.0. **No GitHub Actions result is claimed for
-this experiment.** Publishing the prepared workflow was blocked by automatic approval
-review. The frozen protocol predates the pilot; its observer-control amendment
-records what changed before the retained final measurement.
+''' + f'The measured local execution used commit `{commit}` on 2026-10-09,\n' + r'''Python 3.12.14 and Temporal SDK 1.32.0. The frozen protocol predates the pilot;
+its observer-control amendment records what changed before the retained measurement.
+
+''' + f"**[GitHub Actions run {ci['run_id']}]({ci['run_url']}) reproduced every categorical\n" + f"outcome** at head revision `{ci['head_sha']}`,\n" + r'''using Python 3.12.3 and Temporal SDK 1.32.0. The separate [CI evidence archive](upgrade-ci.zip)
+and [provenance record](upgrade-ci.json) retain all 64 cells and 128 replay executions.
+The report checker verifies their history/source hashes and original/reconstructed
+projections against the local measurement; runtime values are allowed to differ.
+The connected GitHub app published identical local trees with different commit IDs;
+the original local execution commit remains unchanged in the local evidence.
+
+Initial publication required explicit user approval. The first workflow run failed
+YAML parsing before execution; correcting a quoted command enabled the successful
+run above. Neither interruption is scored as a replay result or scientific finding.
 
 The compressed JSON retains every original and reconstructed projection, terminal
 observation, error classification, runtime, history digest, and source/tooling hash.
@@ -160,10 +187,9 @@ the retained evidence and generated report. No test server is required for repla
 
 ## Remaining decision gates
 
-1. Run the prepared experiment in GitHub Actions and retain that separate provenance.
-2. Test an activity-backed probe and in-flight upgrade under a separately declared
+1. Test an activity-backed probe and in-flight upgrade under a separately declared
    protocol; assess any required versioning strategy against actual commands.
-3. Obtain independent scrutiny of the projection and cancellation contract, and
+2. Obtain independent scrutiny of the projection and cancellation contract, and
    maintainer feedback on the isolated correction.
 
 These results do not establish exhaustive history coverage, crash recovery,

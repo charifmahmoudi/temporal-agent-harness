@@ -109,8 +109,9 @@ replayed all 32 retained histories under both source variants. All 64 cells pass
 command replay, but four reconstructed a different caller outcome and tool-start
 count. Same-version controls matched. This demonstrates an application-observation
 gap for the workflow-local probe, not a Temporal defect or external-effect failure.
-The experiment and observer-free controls passed locally; its prepared CI workflow
-has not run because publishing was blocked by automatic approval review.
+The experiment and observer-free controls passed locally and in
+[GitHub Actions](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/37933221643),
+which reproduced every categorical outcome. Both evidence archives are retained.
 
 ## Scientific scope and next experiment
 
@@ -139,7 +140,7 @@ The next evidence milestones are concrete:
 | --- | --- | --- |
 | 1 | Independent review and reproduction of the cancellation case | A reviewer challenges the cancellation contract, atomic boundaries, and retained counterexamples; another environment reproduces the categorical outcomes. |
 | 2 | Maintainer assessment of both minimal patches | Confirm intended behavior and practical usefulness. Record actual feedback separately from scientific validation. Submission remains pending. |
-| 3 | Publish and independently reproduce the offline upgrade experiment | Local evidence separates command compatibility from application outcomes; run the prepared CI workflow and assess an activity-backed probe before stronger rollout claims. |
+| 3 | Extend upgrade evidence to an activity-backed probe | Offline command/application comparisons now reproduce in CI. Test activity commands and in-flight upgrade before stronger rollout claims. Independent reproduction remains open. |
 
 Broader modeling follows evidence of a missing obligation, rather than a target test
 count. A paper should center the reproduced discrepancies and contract lessons; any
