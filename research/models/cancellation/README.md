@@ -19,17 +19,20 @@ state graph; concrete evidence and actual counterexamples are reported separatel
 
 The base vector $v$ retains Approval's seven fields. The extension uses
 
-$$u=\langle v,callerCancelled,outcome\rangle.$$
+$$u=\langle v,callerCancelled,outcome,cleanupPending\rangle.$$
 
 `callerCancelled` is initially false. `outcome` is initially `none`, then may become
 `dispatched`, `rejected`, or `cancelled`. Base phase gains `aborted` for a cancelled
 invocation. The supported configuration has exactly one call.
+`cleanupPending` records whether the superseded evaluator was still running when
+Consume executed. An already-completed task cannot introduce an unbounded cleanup
+wait: FinishCleanup stays enabled for it even if CleanupCanFinish is FALSE.
 
 | Action | State change | Concrete boundary / assumption |
 | --- | --- | --- |
 | Environment | Human decision, evaluator completion, or Close; extension fields unchanged | Existing Approval input actions |
-| ConsumeStep | Base Consume | Runner observes accepted settlement or closure |
-| FinishCleanup | Base Cancelled when CleanupCanFinish is true | Evaluator cleanup terminates |
+| ConsumeStep | Base Consume; record whether its task was running | Runner observes accepted settlement or closure |
+| FinishCleanup | Base Cancelled when cleanup can finish or no running cleanup was awaited | Evaluator cleanup terminates |
 | CancelCaller | Mark caller cancellation; stop child; enter gate or aborted | Cancellation reaches waiting caller and child response ends that await |
 | FinalizeStep | Base Finalize and corresponding caller outcome | Invocation passes gate or is denied |
 
@@ -49,13 +52,13 @@ $$\Box(callerCancelled\Rightarrow outcome\ne dispatched).$$
 
 `CallerCancellationRespected` is the above invariant. The current configuration can
 violate it; the corrected projection must preserve it. Cancellation only enters this
-model while cleanup is awaited, before dispatch, so the invariant does not assert
+model while running cleanup is awaited, before dispatch, so the invariant does not assert
 rollback of an effect that already happened.
 
 $$((\exists c\in C:status[c]\ne pending)\lor closed)\leadsto(outcome\ne none).$$
 
 `CleanupProgress` is conditional on weak fairness of ConsumeStep, FinishCleanup,
-and FinalizeStep. If `CleanupCanFinish = FALSE`, FinishCleanup is disabled; fairness
+and FinalizeStep. If `CleanupCanFinish = FALSE` and running cleanup is pending, FinishCleanup is disabled; fairness
 cannot force a disabled action. A behavior can therefore retain an accepted decision
 while cleanup waits forever. This explains the earlier fairness assumption instead
 of assuming that every evaluator must terminate.
@@ -74,6 +77,9 @@ of assuming that every evaluator must terminate.
 The [runner](../../scripts/check_cancellation_model.py) generates these configurations
 and requires the named invariant or temporal failure, rather than crediting tool
 errors. It pins TLA+ tools v1.8.0 and retains configurations and logs.
+Every configuration also checks ReadyTaskNotBlocked (a completed task leaves
+FinishCleanup enabled) and PendingCleanupPhase (pending cleanup is in the cancellation
+phase). These consistency obligations prevent a spurious blocked-completed-task witness.
 
 ## Limits
 

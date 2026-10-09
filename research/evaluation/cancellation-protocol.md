@@ -102,3 +102,15 @@ now also closes the superseded bracket on live caller cancellation before raisin
 offline workflow eviction is guarded from publication. Both caller tests now require
 exactly one superseded terminal. The helper-only correction is intermediate evidence,
 not the final proposed patch. This amendment strengthens audit-completeness validation.
+
+## Model-fidelity amendment
+
+After run 37893301777, review of the raw BlockedProgress counterexample found that
+the inherited Consume action could place an already-completed evaluator in a
+cancellation phase that CleanupCanFinish=FALSE disabled indefinitely. Awaiting a
+done task cannot create that concrete wait. Cleanup now records whether Consume
+actually superseded a running evaluator; completed tasks retain an enabled finish
+action. Every configuration checks ReadyTaskNotBlocked and PendingCleanupPhase.
+The previous model evidence is retained as intermediate evidence; only the refined
+model is used for the final cleanup-progress interpretation. The concrete caller
+reproductions and proposed Python correction are unchanged.

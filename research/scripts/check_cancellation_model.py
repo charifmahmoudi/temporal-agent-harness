@@ -30,9 +30,13 @@ def main():
     results=[]
     for name,finish,swallow,invariant,progress in configs:
         spec='CleanupFairSpec' if progress else 'CleanupSpec'
-        checks='PROPERTIES CleanupProgress' if progress else 'INVARIANTS CleanupTypeOK DecisionStable SingleResolution AuthorizedDispatch DeniedNeverDispatches'
+        checks='INVARIANTS CleanupTypeOK ReadyTaskNotBlocked PendingCleanupPhase'
+        if not progress:
+            checks+=' DecisionStable SingleResolution AuthorizedDispatch DeniedNeverDispatches'
         if invariant or name=='CorrectedCancellation':
             checks+=' CallerCancellationRespected'
+        if progress:
+            checks+='\nPROPERTIES CleanupProgress'
         config=f'SPECIFICATION {spec}\nCONSTANTS Calls = {{c1}}\n AllowOverwrite = FALSE\n BypassGate = FALSE\n CleanupCanFinish = {str(finish).upper()}\n SwallowCallerCancel = {str(swallow).upper()}\n{checks}\nCHECK_DEADLOCK FALSE\n'
         (output/(name+'.cfg')).write_text(config)
         start=time.monotonic()
