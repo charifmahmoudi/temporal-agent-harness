@@ -1,5 +1,7 @@
 # Cleanup: settlement, progress, and caller cancellation
 
+Start with the [one-call walkthrough](../../walkthrough.md) for the source-to-model example and evidence boundaries.
+
 [Case study](../../../RESEARCH.md) · [Protocol v2](../../evaluation/cancellation-protocol.md) · [Measured results](../../evaluation/cancellation-results.md) · [Specification](Cleanup.tla)
 
 ## Purpose

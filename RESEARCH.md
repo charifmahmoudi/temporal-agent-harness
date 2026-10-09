@@ -1,28 +1,39 @@
 # Verifying approval, cancellation, and upgrades in Temporal Agent Harness
 
-## Research question
+## Start here
 
-**Do approval and cancellation guarantees survive asynchronous cleanup, and can a
-correction preserve the durable histories of already-running agents?**
+**An approved tool invocation can still need to stop. A correction that stops new
+invocations can still be incompatible with an old workflow's durable history.**
 
-Temporal Agent Harness runs agents as durable workflows. Before a gated tool runs,
-a human or automatic evaluator may approve or deny it. Several operations can compete
-for that decision. An approval may also change policy and release other waiting calls.
-Correctness therefore concerns both the accepted outcome and the order of subsequent
-cleanup, publication, dispatch, and replay after a code change.
+This case study follows those two problems in Temporal Agent Harness. A human
+approves a call while its evaluator is running. The harness cancels the evaluator
+and waits for cleanup. If the caller is cancelled during that wait, the baseline
+can swallow cancellation and continue to the tool. Approval remains intact; the
+invocation contract fails. When the tool is a real activity, directly fixing this
+behavior can conflict with commands already recorded by the old code.
 
-The strongest measured finding is a concrete upgrade constraint: the baseline can
-schedule an activity after caller cancellation; the direct correction prevents new
-dispatch but cannot replay that old activity-bearing history. A versioned correction
-preserves baseline replay and protects the tested new cancellation path. It does not
-undo the historical effect or support every migration direction. Start with the
-[activity-backed finding](research/evaluation/activity-results.md) for the evidence,
-compatibility matrix, and deployment limits.
+Read the [one-call walkthrough](research/walkthrough.md) first. It connects the
+source functions, an actual five-state model counterexample, the properties it
+preserves and violates, and the implementation and upgrade evidence. The
+[storyline and claim ledger](research/storyline.md) explains the central argument,
+its evidence boundaries, and the remaining review work.
 
-This case study defines that contract in TLA+, checks finite models, and tests their
-correspondence with controlled executions of the Python implementation. The models
-are manually derived from code. The original baseline is
-`049e01c9d726ef68bff7be857c735723b9801512`; its MIT license is retained.
+| Question | What answers it here |
+| --- | --- |
+| Was the call permitted? | Approval/Cascade models and decision-safety checks |
+| Should this invocation still execute after caller cancellation? | Cleanup model, concrete cancellation tests, and fresh activity runs |
+| Can replacement code replay already-recorded work? | Activity-history replay and controlled worker-replacement experiments; this is outside the TLA+ models |
+
+The models are manually derived from Python; their finite checks are not a proof of
+implementation refinement. The strongest measured result is the specific history
+constraint and bounded versioned remedy in the [activity report](research/evaluation/activity-results.md).
+The defects were inspection-led, not discovered by TLC. Formal-method superiority
+and publication novelty remain unestablished.
+
+The original baseline is `049e01c9d726ef68bff7be857c735723b9801512`; its MIT license
+is retained. The malformed-result guard is applied on this research branch. The
+caller-cancellation corrections remain isolated experiment patches. Nothing has
+been merged or submitted to the original upstream.
 
 ## System and abstraction
 
@@ -162,6 +173,9 @@ count. A paper should center the reproduced discrepancies and contract lessons; 
 claim of a new verification method requires further evidence against the closest work.
 
 ## Reading path
+
+Begin with the [walkthrough](research/walkthrough.md) and [storyline](research/storyline.md).
+The following references supply the details behind that example.
 
 1. [Approval model](research/models/approval/README.md) → [Cascade model](research/models/cascade/README.md): understand the state machines.
 2. [Properties](research/properties.md): inspect the mathematical obligations and counterexamples.

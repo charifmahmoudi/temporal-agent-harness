@@ -1,5 +1,7 @@
 # Property catalogue
 
+Start with the [one-call walkthrough](walkthrough.md) for the source-to-model example and evidence boundaries.
+
 [Case study](../RESEARCH.md) · [Approval](models/approval/README.md) · [Cascade](models/cascade/README.md)
 
 ## Notation and interpretation

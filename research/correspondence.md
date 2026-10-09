@@ -1,5 +1,7 @@
 # From Python execution to model behavior
 
+Start with the [one-call walkthrough](walkthrough.md) for the source-to-model example and evidence boundaries.
+
 [Case study](../RESEARCH.md) · [Models](models/approval/README.md) · [Evidence](evidence.md)
 
 ## Correspondence question

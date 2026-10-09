@@ -1,5 +1,7 @@
 # Independent review and reproduction packet
 
+Start with the [one-call walkthrough](../walkthrough.md) for the source-to-model example and evidence boundaries.
+
 [Case study](../../RESEARCH.md) · [Protocol](protocol.md) · [Corpus](corpus.json)
 
 ## Status and requested expertise
