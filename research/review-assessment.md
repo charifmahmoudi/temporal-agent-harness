@@ -33,6 +33,16 @@ conference recommendation. Evidence and unresolved obligations are tracked toget
 
 ## Decision after this iteration
 
+The subsequent [cancellation study](evaluation/cancellation-results.md) strengthens
+the case study with a second reproduced defect and a missing lifecycle obligation:
+stable approval is insufficient to guarantee cancellation-respecting invocation.
+Both child responses reproduce baseline dispatch; an isolated correction prevents it
+and closes exactly one evaluation terminal. Six finite model checks and 32 history
+replays support the declared experiment. This remains inspection-led discovery and
+selected correspondence evidence. A nonsticky graceful replacement is not general
+crash recovery, and a passing corrected model is not Python refinement. The
+[minimal upstream packet](upstream/caller-cancellation.md) is prepared, not accepted.
+
 The first frozen comparison is complete. It improves measurement transparency and
 identifies collector weaknesses, but does not close the added-value or novelty gate.
 The next comparison needs a versioned protocol amendment, early observation retention,

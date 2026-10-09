@@ -9,6 +9,8 @@ has occurred**. A useful reviewer has TLA+ and asynchronous Python experience, a
 was not involved in building these models or tests. Maintainer feedback is a separate
 practical assessment. The upstream defect packet is [already prepared](../upstream/superseded-result.md)
 but has not been submitted.
+The [caller-cancellation packet](../upstream/caller-cancellation.md) and
+[retained cancellation study](cancellation-results.md) are also ready for review.
 
 ## Review questions
 
@@ -18,6 +20,7 @@ but has not been submitted.
 | Are atomic boundaries defensible? | Remember/Update handlers and event instrumentation | Check suspending awaits and intermediate publication visibility |
 | Does the checker invent behavior? | Schema-2 recorded actions, Hidden relation, and negative controls | Attempt a trace that passes despite an impossible recorded input |
 | Is progress overstated? | Fairness clauses and delayed cancellation scenario | Challenge cleanup fairness; distinguish gate permission from external effects |
+| Is cancellation modeled faithfully? | Cleanup model, handler cancellation reproducer, and isolated patch | Challenge the caller-versus-child distinction, outstanding-request policy, and audit-terminal publication on SDK eviction |
 | Is the comparison fair? | Frozen corpus, collector AST transformation, suite hashes | Verify selection bias disclosure, scoring, and unsupported-case treatment |
 | Is the contribution distinct? | Closest trace-validation papers and measured comparison | State the narrowest defensible contribution and missing evidence |
 
@@ -36,6 +39,12 @@ clone is needed. Compare categorical outcomes, hashes, and trace counts. Wall ti
 will vary by machine and are not exact reproducibility targets. Retain the complete
 `research/results/comparison/` directory, including failed or inconclusive arms.
 Do not amend a frozen fault to make its expected result appear.
+
+For the lifecycle study, reproduce [.github/workflows/cancellation.yml](../../.github/workflows/cancellation.yml)
+and verify the committed raw archives with `python research/scripts/render_cancellation.py --check`.
+The baseline caller tests characterize the defect; the standalone upstream regressions
+instead fail on the original source and pass after correction. Challenge both variants,
+the nonsticky replacement limitation, and the claim that only tested histories replay.
 
 ## Review record
 

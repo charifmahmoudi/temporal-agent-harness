@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
   pull_request:
     paths:
+      - 'temporal_agent_harness/**'
+      - 'pyproject.toml'
+      - 'uv.lock'
       - 'tests/cancellation/**'
       - 'research/models/cancellation/**'
       - 'research/scripts/check_cancellation_model.py'
@@ -53,6 +56,9 @@ jobs:
         env:
           CANCELLATION_VARIANT: corrected
         run: PYTHONPATH="$PWD" "$GITHUB_WORKSPACE/.venv/bin/python" run.py tests/cancellation/ -q --junitxml=results.xml
+      - name: Run all harness regressions against the isolated correction
+        working-directory: research/results/cancellation-corrected
+        run: PYTHONPATH="$PWD" "$GITHUB_WORKSPACE/.venv/bin/python" run.py tests/harness/ -q --junitxml=harness-results.xml
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -61,6 +67,7 @@ jobs:
             research/results/cancellation-baseline.xml
             research/results/cancellation/
             research/results/cancellation-corrected/results.xml
+            research/results/cancellation-corrected/harness-results.xml
             research/results/cancellation-corrected/provenance.json
             research/results/cancellation-corrected/proposed.patch
             research/results/cancellation-corrected/research/results/cancellation/

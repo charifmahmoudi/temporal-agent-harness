@@ -24,6 +24,15 @@ reported 889 passing tests. These totals are not schedule-coverage percentages.
 
 ## Model configuration inventory
 
+The later [cancellation lifecycle study](evaluation/cancellation-results.md) adds a
+separate six-configuration Cleanup model, 23 tests per baseline/corrected variant, and
+sixteen completed-history replays per variant. [Its frozen snapshot](evaluation/cancellation-results.json)
+and committed raw archives retain exact revision, source hashes, and before/after
+outcomes. [Run 37892391930](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/37892391930)
+passed the final isolated correction; the corresponding full repository matrix also
+passed on Python 3.11–3.14 in [run 37892391969](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/37892391969).
+These separate experiments do not alter the original counts or frozen v1 scores.
+
 The subsequent [comparative evaluation](evaluation/results-v1.md) is a separate
 experiment with a frozen six-fault corpus and explicit inconclusive/out-of-scope
 outcomes. Its numbers must not be substituted for the targeted sensitivity results

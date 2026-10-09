@@ -1,0 +1,168 @@
+{
+  "schema": 1,
+  "protocol_commit": "ad36441bf60b6a6f51a01bf456fc49366e70aea5",
+  "execution_commit": "3d5bed47d32af5a6c5193bb6857cfa785dc59a4a",
+  "run_id": 37892391930,
+  "run_url": "https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/37892391930",
+  "artifacts": {
+    "implementation": {
+      "id": 11598599335,
+      "file": "cancellation-evidence/implementation.zip",
+      "sha256": "1110662316f140ebdc184793f7998d96d9a7d32651a883f35c06c965dffabe5f"
+    },
+    "model": {
+      "id": 11598821006,
+      "file": "cancellation-evidence/model.zip",
+      "sha256": "152b81bc4cca56e8db506618b60bab0667576dfb6646ee21ca5c36c979665123"
+    }
+  },
+  "source_hashes": {
+    "baseline_sha256": "1375ca7040fd8c1044f839ce244c30351212bc75fb4ecb90ecf394693635ce38",
+    "corrected_sha256": "eb887d8c3b996c91f0171c72b1beda3505c13c60f612b979fe238a37b2dddc9d"
+  },
+  "model": {
+    "model_sha256": "3761ece4cc277dd1583c1bf89453b3d3cb785c17ee447f7b632ca5ba0ee8c4f8",
+    "base_model_sha256": "6f2abc363e9dd7e7d491061c9caf1d8f451da160b61e792d6b079ea8898b8e82",
+    "jar_sha256": "7beec0f04818732a62fa193731711a99aa4f11279499b2360a7d156c519ea78d",
+    "results": [
+      {
+        "configuration": "CurrentSafety",
+        "cleanup_can_finish": true,
+        "swallow_caller_cancel": true,
+        "returncode": 0,
+        "passed": true,
+        "seconds": 1.0412312630000002
+      },
+      {
+        "configuration": "CurrentCancellation",
+        "cleanup_can_finish": true,
+        "swallow_caller_cancel": true,
+        "returncode": 12,
+        "passed": true,
+        "seconds": 0.7513076909999938
+      },
+      {
+        "configuration": "CorrectedCancellation",
+        "cleanup_can_finish": true,
+        "swallow_caller_cancel": false,
+        "returncode": 0,
+        "passed": true,
+        "seconds": 0.7301878450000032
+      },
+      {
+        "configuration": "CurrentProgress",
+        "cleanup_can_finish": true,
+        "swallow_caller_cancel": true,
+        "returncode": 0,
+        "passed": true,
+        "seconds": 0.7381566029999931
+      },
+      {
+        "configuration": "BlockedProgress",
+        "cleanup_can_finish": false,
+        "swallow_caller_cancel": true,
+        "returncode": 13,
+        "passed": true,
+        "seconds": 0.7268759900000106
+      },
+      {
+        "configuration": "CorrectedProgress",
+        "cleanup_can_finish": true,
+        "swallow_caller_cancel": false,
+        "returncode": 0,
+        "passed": true,
+        "seconds": 0.7337263820000004
+      }
+    ]
+  },
+  "variants": {
+    "baseline": {
+      "tests_passed": 23,
+      "history_replays": 16,
+      "caller": {
+        "second_raise": {
+          "status": "approved",
+          "outcome": "dispatched",
+          "tool_started": true,
+          "evaluation_terminals": 1
+        },
+        "second_return": {
+          "status": "approved",
+          "outcome": "dispatched",
+          "tool_started": true,
+          "evaluation_terminals": 1
+        }
+      },
+      "restart_matches_before": true,
+      "workflow_cancel_status": "CANCELED",
+      "history_sha256": {
+        "approve-propagate.history.json": "c0c814ebcaac8f1b6fb671b72e498a425df80fce83ada2878314851904436ca2",
+        "approve-raise.history.json": "f32169a5fe19131725afff360aac193dc295750a065dd057e74f352578196c10",
+        "approve-return.history.json": "0219bb9f65c9769c542d8d307221b043e7101872fa28ab02271b472cffc24a54",
+        "caller-second_raise.history.json": "7ea4a635ebe3045aea06f26b383b280d068758c4b3614aecb549d58daa200b8d",
+        "caller-second_return.history.json": "8136100a9d7e404d9b91f41653e6d5123a8a7e2e49d09e47eae00f6d8c4bef47",
+        "close-propagate.history.json": "30f88375eea7e028cb544b46b18d701c00ac50ce180fd5b6b52482a8ad351b70",
+        "close-raise.history.json": "25aad6941f84a12253b3fccfcde8eeaf6c78507ce0d84c23d93291a28e90b812",
+        "close-return.history.json": "a42feee836e6f17e8be4824b2789cb0d5152a6295251c66668187811885ed757",
+        "delayed-approve.history.json": "6cd21e9228c3c41ca2cbdb1e00062147bd6ccce6f955e754c11046fb189cb4d3",
+        "delayed-close.history.json": "8b32e386a99da8690049b2c31d55811746ed04adf755e97c207592b39d9a1681",
+        "delayed-deny.history.json": "68aedc9632f6edb4460e896a86794f65258d21a9ecd3bacec1b260dd0d9b2516",
+        "deny-propagate.history.json": "e93cb512382ee3e6009e34ce42913ee89839fdc2fdf012c0bfff2c3994baf926",
+        "deny-raise.history.json": "5e8b10d2210786e3b2ce923cb157999da1cd1902f1ac90524afee7be7cd2a077",
+        "deny-return.history.json": "da5ba10a6255f138501d98f9b3cd771bebdadcf697537faeecb983a8f81c4a5e",
+        "restart.history.json": "22a3cda933484f33412075c7224e752c2bcc502c22d1fa3d5b1431fb4f354429",
+        "workflow-cancel.history.json": "cba42f4ef03f541bfd0dc78bb3544f026ffe0bd27304d056dc5cd474751c4078"
+      }
+    },
+    "corrected": {
+      "tests_passed": 23,
+      "history_replays": 16,
+      "caller": {
+        "second_raise": {
+          "status": "approved",
+          "outcome": "cancelled",
+          "tool_started": false,
+          "evaluation_terminals": 1
+        },
+        "second_return": {
+          "status": "approved",
+          "outcome": "cancelled",
+          "tool_started": false,
+          "evaluation_terminals": 1
+        }
+      },
+      "restart_matches_before": true,
+      "workflow_cancel_status": "CANCELED",
+      "history_sha256": {
+        "approve-propagate.history.json": "4ae1913dbfe72edfdc600f37b76d2d0cec993cfdf670906d7cabef04891061b3",
+        "approve-raise.history.json": "5987fbbe0d3912f68a24fb3028a879fbbeed4d931005325b6bf9ee7303b70caf",
+        "approve-return.history.json": "ec724c9c1c64f49e4b098de6f2698042bba6947290a2a05578f1fdbadd1cc094",
+        "caller-second_raise.history.json": "22b5580875ad8bf18555019297482f81ef280d584562e9a24883f7a3348adaec",
+        "caller-second_return.history.json": "82f966cf8e40361691dbc186896a9619056e48fa5da97ee89a869dde9f7f603b",
+        "close-propagate.history.json": "53ab7be8090a13f20854509df2f9aa084b8f24dae122581d22dddcaa937eb108",
+        "close-raise.history.json": "3fc0547eb46f8cc8004f9cb58d4644a931509b2278dbd0b4691d990413e79ce3",
+        "close-return.history.json": "7aa81ade37e96b26ed646a1daa63a89c427b6e68254ad59709cf955e3093ba21",
+        "delayed-approve.history.json": "75194bd98e2dc244762ab471a0d6176c6f23296f48671c7680d4e86f34ecd8f8",
+        "delayed-close.history.json": "da3741acf14b90c209226d767084ee3f0bfbe018afeb18105a6cb478e704ea44",
+        "delayed-deny.history.json": "587b1224304e447971c194305f634ee3bfebd86b2ed5b7af07bae581199b0d54",
+        "deny-propagate.history.json": "c1d9560763a5c0f8da2d0e85f60ad0ba1e221e16641dcacff485fdfbcc12c779",
+        "deny-raise.history.json": "257227c6746ffc37438de6f4aa6aa90307bb2b688ec520fb87f8af766c9bdb8f",
+        "deny-return.history.json": "55aa6b8d0a19200c8af03968bc404c6681d4ae25781d38a379d77ff0f1618471",
+        "restart.history.json": "20f400e58105b2ea6548f08fe79b0d9aa9110fe910060964ab17d9e3b44eed2d",
+        "workflow-cancel.history.json": "93e64c3b72bb25c1a280da32b7c26afdf0e7f8d63dce06cf4cf4e2a4fb60700b"
+      }
+    }
+  },
+  "upstream_packet": {
+    "baseline_commit": "049e01c9d726ef68bff7be857c735723b9801512",
+    "patch_sha256": "9cdaf4f8a4f8e9142b2b5f88d249ed8d3d4a48fdd9201ee6e0aad463b22dc6b7",
+    "regression_sha256": "7e345d9f62c79af319b0c3709d0a1b684904dd62794cce48c2a738f09aba1acf",
+    "original_source_sha256": "867cec1e4443ea1982f81e96f86c77f4de0ba5eea1fe185b09f3fa28b6ebc505",
+    "corrected_source_sha256": "6aca640e5446b7c31d9cbb6e25f34f4b3fd2b4d96a23ae9fa7d2536e4fbd2713",
+    "original_failures": 3,
+    "original_passes": 4,
+    "corrected_passes": 7,
+    "original_junit_sha256": "ed8e57baa508bb3a0c7f53f67cd99a794c1d7a550020a93cb391086b2a6bfce9",
+    "corrected_junit_sha256": "9163c7f574360695d98dc62813bfb92ca7dc4a9b3c30f98106527f7c26763050"
+  }
+}

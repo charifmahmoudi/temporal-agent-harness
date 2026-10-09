@@ -39,6 +39,7 @@ def main():
     if snapshot['source_sha256'] != corpus['baseline_source_sha256']:
         raise SystemExit('Evidence baseline hash mismatch')
     subprocess.run([sys.executable, str(ROOT/'research/scripts/render_comparison.py'), '--check'], check=True)
+    subprocess.run([sys.executable, str(ROOT/'research/scripts/render_cancellation.py'), '--check'], check=True)
     print(f'{count} relative documentation links resolve; figure outputs are reproducible.')
 
 

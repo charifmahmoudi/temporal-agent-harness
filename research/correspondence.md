@@ -61,3 +61,23 @@ progress. It excludes replay, arbitrary call count, authentication, and external
 The [malformed-result finding](upstream/superseded-result.md) challenged an earlier input
 assumption. Its fix preserves the valid-input model transitions; its separate regressions
 do not turn trace validation into a refinement proof.
+
+## Cancellation extension correspondence
+
+The [Cleanup study](evaluation/cancellation-results.md) adds a manually reviewed
+projection; it does not extend schema-2 trace acceptance to caller cancellation.
+`CancelCaller` represents cancellation reaching the handler waiting in
+`_cancel_and_settle`, followed by termination of the child's second-cancellation
+response. The baseline catches that response and proceeds to finalization. The
+isolated correction preserves approved status but records a cancelled invocation.
+
+The reproducer's custom signal calls `cancel()` on its recorded handler task. Queries
+retain the cancellation request, second child response, accepted decision, caller
+outcome, and raw events; assertions inspect a concrete tool-start event and exactly
+one evaluation terminal. The observer delegates synchronous publication without
+adding an await. No universal observer-equivalence argument is claimed.
+
+Graceful worker replacement uses `max_cached_workflows=0`, compares recovered state,
+and releases the waiting cleanup. Sixteen completed histories per variant are replayed
+with their corresponding code and converter. This tests command compatibility for
+those histories; there is no crash, sticky-routing, or cross-version replay claim.

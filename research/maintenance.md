@@ -21,7 +21,8 @@ inconclusive result with detection, or infer implementation proof from passing T
 Prior results remain tied to their original revisions.
 
 The documentation check validates relative links and regenerates the committed
-comparison report from its evidence snapshot. It cannot validate scientific truth;
+comparison and cancellation reports from their evidence snapshots, including retained
+cancellation archive hashes and raw outcomes. It cannot validate scientific truth;
 formula fidelity and interpretation still require review. Editable SVG figures are
 regenerated from `research/figures/generate.py` when semantics change.
 
@@ -32,6 +33,7 @@ regenerated from `research/figures/generate.py` when semantics change.
 | Stable case-study baseline | Complete: `7aa516d13dde8a3f9f4c2d893b34e3e5d6fb9e80` | Source and suite hashes retained in corpus |
 | Comparison protocol | Frozen before execution | Versioned corpus and scoring rules |
 | Comparative measurement | See current evaluation report | Valid baseline and all planned arms reported, including errors |
+| Cancellation lifecycle study | Complete for the declared one-call experiment; isolated correction prepared | Six expected TLC checks, both 23-test variants, retained histories and replay outcomes |
 | Independent abstraction review | Outstanding | External review addressing correspondence and atomicity |
 | External reproduction | Outstanding | Independent environment and retained categorical results |
 | Upstream feedback | Prepared, not submitted | Explicitly authorized submission and recorded maintainer response |

@@ -24,10 +24,18 @@ The operator names below exactly match the executable TLA+ specifications.
 | P5 `ResolutionProgress` | $\forall c\in C:(s_c\ne pending\lor closed)\leadsto(p_c\in\{dispatched,rejected\})$ | A decided/closed call eventually finishes under fairness. Unbounded cancellation cleanup can prevent progress in the implementation. |
 | P6 `ScopePreserved` | $\Box\neg scopeViolation$ | No policy action releases an ineligible sibling. This is a history monitor; approved does not imply currently allow-listed after restriction. |
 | P7 `CauseBeforeCascade` | $\Box(\forall(c,d)\in K:\exists i,j\in1..Len(h):i<j\land h_i=c\land h_j=d)$ | A remembered decision publishes before the sibling it releases. Violation: remember b publishes a before b. |
+| P8 `CallerCancellationRespected` | $\Box(callerCancelled\Rightarrow outcome\ne dispatched)$ | In Cleanup's one-call extension, cancellation received during cleanup prevents dispatch. Violation: status remains approved, but a cancelled caller continues to tool execution. |
+| P9 `CleanupProgress` | $((\exists c\in C:s_c\ne pending)\lor closed)\leadsto(outcome\ne none)$ | Invocation eventually completes only with cleanup termination and scheduling assumptions. Unlike P5, cancelled is an explicit terminal outcome. |
 
 `TypeOK` checks variable domains in Approval. `CascadeTypeOK` additionally checks
 allow-list, history, cause-pair, and monitor domains. Type checks are consistency
 obligations, rather than application authorization guarantees.
+
+P8 and P9 belong to the [Cleanup extension](models/cancellation/README.md), rather than
+the original Approval/Cascade trace checkers. The [measured finding](evaluation/cancellation-results.md)
+demonstrates why P1–P4 do not imply P8. Figure 6 in the extension contrasts their
+concrete caller outcomes. Exactly one superseded evaluation terminal is also checked
+by the implementation experiment; that audit obligation is not encoded in Cleanup.
 
 ![Valid and faulty property traces](figures/properties.svg)
 
@@ -46,6 +54,12 @@ $$WF_v(Consume(c))\land WF_v(Cancelled(c))\land WF_v(Finalize(c)).$$
 Cascade applies the corresponding fairness clauses to its inherited BaseStep actions.
 Fairness of Cancelled expresses eventual cleanup; the model does not prove that an
 arbitrary custom evaluator terminates its cancellation handler.
+
+Cleanup makes this assumption explicit through `CleanupCanFinish`. With FALSE,
+FinishCleanup is disabled: weak fairness cannot make it terminate, and TLC produces
+an infinite stuttering counterexample to P9. The controlled Temporal executions retain
+finite blocked prefixes and subsequently release cleanup; they do not demonstrate
+infinite runtime nontermination.
 
 ```mermaid
 flowchart TD

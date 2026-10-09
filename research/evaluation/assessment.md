@@ -45,6 +45,12 @@ No false-positive rate is estimated from one fixed baseline.
 
 ## Next experiment, with a new protocol
 
+The subsequent [cancellation investigation](cancellation-results.md) is complete as a
+separate lifecycle study. It reproduces caller cancellation being swallowed during
+cleanup and validates an isolated correction. Its protocol, model, and results do not
+amend v1's fault corpus or scores. The collector and scoring improvements below remain
+future work for a second **comparative** experiment.
+
 Preserve v1. A v2 protocol should capture partial observations before a later stimulus
 can fail, record update failure as an explicit observed outcome, and test both
 registration orders even if the first aborts. Before scoring faults, prove with

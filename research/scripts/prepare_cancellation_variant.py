@@ -73,7 +73,7 @@ def main():
     if out.exists():
         shutil.rmtree(out)
     out.mkdir(parents=True)
-    for folder in ('temporal_agent_harness','tests'):
+    for folder in ('temporal_agent_harness','tests','examples'):
         shutil.copytree(ROOT/folder,out/folder,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
     shutil.copy(ROOT/'pyproject.toml',out/'pyproject.toml')
     original=(ROOT/SOURCE).read_text()

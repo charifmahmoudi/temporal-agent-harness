@@ -1,6 +1,6 @@
 # Cleanup: settlement, progress, and caller cancellation
 
-[Case study](../../../RESEARCH.md) · [Protocol v2](../../evaluation/cancellation-protocol.md) · [Specification](Cleanup.tla)
+[Case study](../../../RESEARCH.md) · [Protocol v2](../../evaluation/cancellation-protocol.md) · [Measured results](../../evaluation/cancellation-results.md) · [Specification](Cleanup.tla)
 
 ## Purpose
 
