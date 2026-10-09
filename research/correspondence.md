@@ -66,8 +66,10 @@ do not turn trace validation into a refinement proof.
 
 ## Cancellation extension correspondence
 
-The [Cleanup study](evaluation/cancellation-results.md) adds a manually reviewed
-projection; it does not extend schema-2 trace acceptance to caller cancellation.
+The original [Cleanup study](evaluation/cancellation-results.md) used a manually
+reviewed projection. The [follow-up checker](scripts/check_cleanup_traces.py) now
+checks four retained caller-cancellation runs against executable Cleanup transitions.
+This is a dedicated checker, separate from the original schema-2 implementation.
 `CancelCaller` represents cancellation reaching the handler waiting in
 `_cancel_and_settle`, followed by termination of the child's second-cancellation
 response. The baseline catches that response and proceeds to finalization. The
@@ -83,3 +85,28 @@ Graceful worker replacement uses `max_cached_workflows=0`, compares recovered st
 and releases the waiting cleanup. Sixteen completed histories per variant are replayed
 with their corresponding code and converter. This tests command compatibility for
 those histories; there is no crash, sticky-routing, or cross-version replay claim.
+
+
+### Input binding and hidden steps
+
+`project` validates ordered raw lifecycle events and the before/after query boundary.
+It binds Human to the recorded resolution event, observes pending cleanup before the
+cancellation request, binds CancelCaller to the request and completing child response,
+and observes the recorded final status/outcome. Only ConsumeStep, FinishCleanup, and
+FinalizeStep are hidden. It cannot invent Human, Close, Complete, or CancelCaller.
+The before snapshot's phase/pending mapping relies on the delayed evaluator probe;
+it is an explicit projection assumption, not extraction of Python task internals.
+
+Four traces match; four wrong-model checks and four altered input/state sequences
+are rejected by TLC. Three malformed records are rejected before TLC. See the
+[retained results](evaluation/model-bridges.md). These are retrospective conformance
+checks, not an independent reproduction or a universal implementation theorem.
+
+### Durable-history boundary
+
+The separate [History model](models/history/README.md) binds recorded activity
+commands, patch markers, ledger counts, and replay outcomes for 36 cells to its
+terminal states. It uses simplified command and marker rules, not the full SDK state
+machine. It does not compose formally with Cleanup, model live worker replacement,
+or prove preservation of arbitrary external effects. Its assumptions and expected
+counterexamples are explicit and checked separately.

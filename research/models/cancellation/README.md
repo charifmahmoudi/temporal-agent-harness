@@ -110,3 +110,14 @@ CancelCaller assumes the child's second-cancellation response completes; a child
 that suppresses every cancellation indefinitely remains outside that action's
 progress guarantee. Temporal experiments and replay are separate correspondence
 evidence, not a universal refinement proof.
+
+
+## Mechanical correspondence follow-up
+
+The [dedicated trace checker](../../scripts/check_cleanup_traces.py) now binds four
+retained implementation runs to this executable module. Recorded approval and caller
+cancellation cannot be hidden; only internal consumption, cleanup completion, and
+finalization may occur between observations. Wrong-model and malformed-record controls
+are rejected. See [results and limits](../../evaluation/model-bridges.md).
+The separate [History model](../history/README.md) covers a reduced durable-command
+boundary; no formal composition with Cleanup is claimed.

@@ -22,7 +22,7 @@ its evidence boundaries, and the remaining review work.
 | --- | --- |
 | Was the call permitted? | Approval/Cascade models and decision-safety checks |
 | Should this invocation still execute after caller cancellation? | Cleanup model, concrete cancellation tests, and fresh activity runs |
-| Can replacement code replay already-recorded work? | Activity-history replay and controlled worker-replacement experiments; this is outside the TLA+ models |
+| Can replacement code replay already-recorded work? | A bounded History model checked against retained replay cells; live worker-replacement experiments remain separate |
 
 The models are manually derived from Python; their finite checks are not a proof of
 implementation refinement. The strongest measured result is the specific history
@@ -85,6 +85,7 @@ liveness constrains infinite behaviors under stated scheduling assumptions.
 | Approval | Per-call decision, evaluator, and caller phase; shared closure flag. Checks human/evaluator/closure competition. | [State variables and transitions](research/models/approval/README.md) |
 | Cascade | Extends Approval with tool eligibility and resolution history. Checks remembered approvals, policy replacement, and publication order. | [Extension and atomic actions](research/models/cascade/README.md) |
 | Cleanup | One-call extension separating accepted permission, cleanup termination, and caller cancellation. | [State, obligations, and counterexamples](research/models/cancellation/README.md) |
+| History | Separate boundary model of fresh commands, patch markers, effects, and replay. | [Assumptions and finite checks](research/models/history/README.md) |
 
 ## Method and evidence
 
@@ -138,6 +139,12 @@ durable commands and an actual test-ledger effect. It retains 12 fresh execution
 also passes all 375 existing harness regressions. Unlike the workflow-local probe,
 the direct correction encounters explicit command nondeterminism when old activity
 history must be replayed. These are distinct probes and results, not a contradiction.
+
+The [model-connection follow-up](research/evaluation/model-bridges.md) checks four
+retained cancellation traces directly against Cleanup, rejects eight model controls
+and three malformed records, and adds a separate History model. Twelve expected TLC
+results include agreement with all 36 retained replay cells. These are retrospective
+checks over existing evidence, not new independent reproduction or a refinement proof.
 
 ## Scientific scope and next evidence
 

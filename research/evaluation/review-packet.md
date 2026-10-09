@@ -65,3 +65,14 @@ commands, observed differences, abstraction concerns, and unresolved objections.
 An issue/PR review may hold that record. Do not mark a publication gate complete
 without a linked independent record. A maintainer response must be reported in its
 own terms; acceptance of a patch does not validate the whole abstraction or novelty.
+
+
+## Model-connection follow-up
+
+The [retained follow-up results](../evaluation/model-bridges.md) add four executable Cleanup trace
+checks, rejection controls, and a separate [History boundary model](../models/history/README.md).
+The History properties distinguish fresh cancellation respect from preserving
+baseline or unmarked-correction histories. The model agrees with 36 retained replay
+cells, retrospectively. Independent review should challenge the projection rules,
+marker abstraction, and omitted schedules; these checks do not establish refinement,
+prospective predictive value, or novelty.

@@ -122,13 +122,16 @@ history. These are different checks, with different conclusions.
 | --- | --- | --- |
 | Six expected Cleanup TLC results | The selected abstract baseline violates cancellation respect; the corrected configuration preserves it; progress depends on cleanup | Universal Python correctness |
 | [Cancellation study](evaluation/cancellation-results.md), 23 tests per variant | The concrete baseline can swallow caller cancellation; the isolated correction handles both child responses in the tested schedules | Every possible runtime schedule |
-| Original recorded-input trace checks | Selected Approval/Cascade traces admit legal model executions | A mechanical match of this Cleanup witness to the activity study |
+| Recorded-input trace checks | Selected Approval/Cascade traces, plus four retained cancellation runs checked against Cleanup, admit legal model executions | All schedules, observer equivalence, or a proof composing Cleanup with activity history |
 | [Activity study](evaluation/activity-results.md), fresh runs | Cancellation can precede a real activity schedule and a test-ledger write in baseline; corrected variants prevent both in the tested new paths | Exactly-once effects or rollback in arbitrary external services |
 
-The source-to-state explanation above is a **manual explanatory alignment**.
-Cleanup is not covered by the original schema-2 trace checker. The defect was found
-through inspection and targeted execution; TLC did not discover it in the source.
-Its contribution here is to make the missing obligation and assumptions explicit.
+The source-to-state explanation above is manual, but now has a
+[mechanical check for four retained cancellation runs](evaluation/model-bridges.md).
+A dedicated checker binds recorded approval, pending cleanup, caller cancellation,
+and final outcome to executable Cleanup transitions. It rejects wrong-model and
+invalid-input controls. This is separate from the original schema-2 checker and does
+not prove universal correspondence. The defect was found through inspection and
+targeted execution; TLC did not discover it in the source.
 
 A green CI run includes expected failures: the baseline model must produce the named
 invariant violation, while the corrected model must pass. Baseline characterization
@@ -161,9 +164,11 @@ V is not universally migration-safe: some histories produced by unmarked C are
 incompatible with V, and rollback safety is not established. See the complete
 [compatibility matrix and limits](evaluation/activity-results.md).
 
-No TLA+ model here describes Temporal history or version markers. The upgrade result
-is empirical and uses standard Temporal patching; it is not a new patching technique
-or evidence of a Temporal defect.
+A new [History boundary model](models/history/README.md) now makes the command and
+marker rules explicit and agrees with all 36 retained replay cells. It is separate
+from Cleanup and was built after the results were known. It does not model the whole
+Temporal protocol or live worker routing. The remedy uses standard Temporal patching;
+it is not a new patching technique or evidence of a Temporal defect.
 
 ## 6. What has been achieved, and what remains
 

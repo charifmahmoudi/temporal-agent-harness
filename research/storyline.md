@@ -94,3 +94,14 @@ remain unresolved. The next review should challenge three concrete links:
 
 The [review packet](evaluation/review-packet.md) requests this evidence. No external
 review, maintainer acceptance, production deployment, or conference novelty is claimed.
+
+
+## Model-connection follow-up
+
+The [retained follow-up results](evaluation/model-bridges.md) add four executable Cleanup trace
+checks, rejection controls, and a separate [History boundary model](models/history/README.md).
+The History properties distinguish fresh cancellation respect from preserving
+baseline or unmarked-correction histories. The model agrees with 36 retained replay
+cells, retrospectively. Independent review should challenge the projection rules,
+marker abstraction, and omitted schedules; these checks do not establish refinement,
+prospective predictive value, or novelty.

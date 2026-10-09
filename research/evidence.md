@@ -123,3 +123,14 @@ scheduled activity commands from ledger effects and reports all incompatible mig
 directions. Run `python research/scripts/render_activity.py --check` to validate its
 raw evidence and the generated report. Follow the [activity workflow](../.github/workflows/activity-upgrade.yml)
 for live reproduction with the SDK test server. Prior v1–v3 evidence remains unchanged.
+
+
+## Model-connection follow-up
+
+The [retained follow-up results](evaluation/model-bridges.md) add four executable Cleanup trace
+checks, rejection controls, and a separate [History boundary model](models/history/README.md).
+The History properties distinguish fresh cancellation respect from preserving
+baseline or unmarked-correction histories. The model agrees with 36 retained replay
+cells, retrospectively. Independent review should challenge the projection rules,
+marker abstraction, and omitted schedules; these checks do not establish refinement,
+prospective predictive value, or novelty.

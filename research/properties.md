@@ -123,3 +123,14 @@ make the verification job pass; an unrelated parser error or timeout does not co
 Implementation mutations and invalid-trace controls are separate experiments,
 described in [Evidence](evidence.md). Passing any of these checks remains a bounded
 result rather than a proof of the Python implementation.
+
+
+## Model-connection follow-up
+
+The [retained follow-up results](evaluation/model-bridges.md) add four executable Cleanup trace
+checks, rejection controls, and a separate [History boundary model](models/history/README.md).
+The History properties distinguish fresh cancellation respect from preserving
+baseline or unmarked-correction histories. The model agrees with 36 retained replay
+cells, retrospectively. Independent review should challenge the projection rules,
+marker abstraction, and omitted schedules; these checks do not establish refinement,
+prospective predictive value, or novelty.
