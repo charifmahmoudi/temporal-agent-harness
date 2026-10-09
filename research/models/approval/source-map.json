@@ -12,9 +12,16 @@
     "AgentWorkflowRunner._validate_tool_approval": "f478028bc9c1a242d0a4cb6d4a1b5fa03ade58b805df1b9bb52ea5b30d6cdd7d",
     "AgentWorkflowRunner._handle_tool_approval": "4344b42271538acdfee44354e87a056004223010515751875e5ba667b72db1cd",
     "AgentWorkflowRunner._policy_auto_approves": "9cd2ecf66d2bdac9829b3c4821adc82ce2eeb29eff484295fd0c72227d4cf8fa",
-    "AgentWorkflowRunner._run_auto_mode_evaluator": "c703dd22f80a0654de37c3fb4dac90e5cf5f466e639670a95227b7394091499d",
+    "AgentWorkflowRunner._run_auto_mode_evaluator": "4c372035572bb3b63817329d4fc90fd08e2a4a2c8b505bb2500d2f7721199442",
     "AgentWorkflowRunner._apply_policy_update": "4d1241445106d14d84eb0d1ca5ec9299492657cbcaa2443981f8a208c8d279f3",
     "AgentWorkflowRunner._resolve_and_publish": "57b8ef2d84eb112fab680e37bd6cbb0b06460a4df2360bd868adedd552d56c15",
     "AgentWorkflowRunner._handle_close": "4481c6a76f024e0e9987550169364b09998ca497f08ee000790e707d758e53bc"
-  }
+  },
+  "review_notes": [
+    {
+      "function": "AgentWorkflowRunner._run_auto_mode_evaluator",
+      "change": "Validate superseded evaluator result before reading verdict metadata",
+      "model_impact": "Valid-verdict transitions unchanged. Malformed superseded results now preserve settlement, covered by separate Python and Temporal regressions; no refinement theorem claimed."
+    }
+  ]
 }

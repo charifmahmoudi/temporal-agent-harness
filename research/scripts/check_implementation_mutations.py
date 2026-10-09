@@ -25,7 +25,7 @@ MUTATIONS = [
 ]
 
 
-def experiment(name, source, selector, should_fail):
+def experiment(name, source, selector, should_fail, count=2):
     out = ROOT / 'research/results/implementation-mutations' / name
     if out.exists():
         shutil.rmtree(out)  # Only reproducible generated data in this named directory.
@@ -49,7 +49,7 @@ def experiment(name, source, selector, should_fail):
         raise RuntimeError(f'{name}: no JUnit evidence; see {out}')
     suites = ET.parse(out / 'results.xml').getroot().findall('.//testsuite')
     counts = {key: sum(int(s.get(key, 0)) for s in suites) for key in ('tests', 'failures', 'errors', 'skipped')}
-    valid = counts['tests'] == (6 if name == 'baseline' else 2) and counts['errors'] == counts['skipped'] == 0
+    valid = counts['tests'] == count and counts['errors'] == counts['skipped'] == 0
     detected = run.returncode == 1 and counts['failures'] > 0
     ok = valid and (detected if should_fail else run.returncode == 0 and counts['failures'] == 0)
     if not ok:
@@ -61,11 +61,16 @@ def experiment(name, source, selector, should_fail):
 
 def main():
     original = (ROOT / SOURCE).read_text()
-    results = [experiment('baseline', original, 'denied_remember or different_tool or policy_relax', False)]
+    results = [experiment('baseline', original, 'denied_remember or different_tool or policy_relax or malformed_superseded', False, count=7)]
     for name, before, after, selector in MUTATIONS:
         if original.count(before) != 1:
             raise SystemExit(f'{name}: mutation anchor drifted; review the experiment')
         results.append(experiment(name, original.replace(before, after), selector, True))
+    before = 'if isinstance(reached_decision, AutoApprovalDecision):\n                    reached = reached_decision.verdict'
+    if original.count(before) != 1:
+        raise SystemExit('Superseded-result mutation anchor drifted')
+    results.append(experiment('unvalidated_superseded', original.replace(before, 'reached = reached_decision.verdict'),
+                              'malformed_superseded', True, count=1))
     summary = ROOT / 'research/results/implementation-mutations/summary.json'
     summary.write_text(json.dumps({'baseline_sha256': hashlib.sha256(original.encode()).hexdigest(),
                                    'results': results}, indent=2) + '\n')

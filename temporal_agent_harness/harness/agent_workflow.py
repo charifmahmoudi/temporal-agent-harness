@@ -2565,7 +2565,12 @@ class AgentWorkflowRunner:
             # through is exactly what an audit is looking for.
             reached: AutoApprovalVerdict | None = None
             if task.done() and not task.cancelled() and task.exception() is None:
-                reached = task.result().verdict
+                # A malformed plugin result must not abort this already-settled gate.
+                # The ordinary path below validates its type; apply the same boundary
+                # before reading audit metadata on the superseded path.
+                reached_decision = task.result()
+                if isinstance(reached_decision, AutoApprovalDecision):
+                    reached = reached_decision.verdict
             await _cancel_and_settle(task)
             close(
                 AutoApprovalEvaluationSuperseded(

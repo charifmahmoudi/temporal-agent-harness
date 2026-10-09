@@ -99,6 +99,13 @@ class CascadeAgent:
         call = agent.AgentToolContext.for_current_tool_id().tool_id
         self.started.add(call)
         self._runner.snapshot('both_registered_evaluators_running')
+        if self.scenario == 'invalid_superseded':
+            # Force accepted settlement and malformed completion to be observable
+            # together. This controls the internal branch, not network request order.
+            decision = ToolApprovalDecision(tool_id=call, approved=True)
+            self._runner._validate_tool_approval(decision)
+            await self._runner._handle_tool_approval(decision)
+            return None
         try:
             await workflow.wait_condition(lambda: self.release and call == 'a')
         except asyncio.CancelledError:
@@ -126,6 +133,11 @@ class CascadeAgent:
                 self._runner.outcomes[call] = 'dispatched'
             except ToolApprovalDenied:
                 self._runner.outcomes[call] = 'rejected'
+            except AttributeError:
+                if self.scenario != 'invalid_superseded':
+                    raise
+                # Preserve the failure as evidence instead of waiting for a timeout.
+                self._runner.outcomes[call] = 'failed'
             self._runner.snapshot('caller_finished')
         tools = {'a': shared_probe, 'b': other_probe if self.scenario == 'different_tool' else shared_probe}
         await asyncio.gather(*(invoke(call, tools[call]) for call in self.registration_order))
@@ -273,4 +285,21 @@ async def test_policy_cascade_trace(cascade_environment, scenario, order):
     (output / f'{scenario}_{order}.json').write_text(json.dumps(evidence, indent=2) + '\n')
     if scenario not in {'close_first', 'remember_then_close'}:
         await h.signal('close')
+    await h.result()
+
+
+async def test_malformed_superseded_result_real_temporal(cascade_environment):
+    """A completed malformed evaluator cannot abort a gate already approved."""
+    client, queue = cascade_environment
+    h = await client.start_workflow(CascadeAgent.run, AgentConfig(), id=f'malformed-{uuid.uuid4()}', task_queue=queue)
+    await h.execute_update('send_agent_message', AgentMessage(type='act', payload={'text': 'invalid_superseded:ab'}))
+    evidence = await until(h, lambda e: len(e['outcomes']) == 2)
+    output = Path('research/results/malformed-evaluator')
+    output.mkdir(parents=True, exist_ok=True)
+    (output / 'temporal.json').write_text(json.dumps(evidence, indent=2) + '\n')
+    assert evidence['outcomes'] == {'a': 'dispatched', 'b': 'dispatched'}
+    terminals = [e for e in evidence['events'] if e['type'].startswith('auto_approval_evaluation_') and e['type'] != 'auto_approval_evaluation_started']
+    assert len(terminals) == 2
+    assert all(e['type'] == 'auto_approval_evaluation_superseded' and e['verdict'] is None for e in terminals)
+    await h.signal('close')
     await h.result()

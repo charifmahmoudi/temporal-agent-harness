@@ -52,7 +52,7 @@ jobs:
           version: '0.12.23'
           python-version: '3.12'
       - name: Run approval integration and boundary experiments
-        run: uv run --frozen pytest tests/harness/test_tool_approvals.py tests/research/ -q --junitxml=research/results/implementation.xml
+        run: uv run --frozen pytest tests/harness/test_tool_approvals.py tests/harness/test_auto_mode_superseded_result.py tests/research/ -q --junitxml=research/results/implementation.xml
       - name: Check regression sensitivity to isolated implementation faults
         run: uv run --frozen python research/scripts/check_implementation_mutations.py
       - uses: actions/setup-java@v4
@@ -74,6 +74,7 @@ jobs:
             research/results/traces/
             research/results/conformance/
             research/results/cascade-traces/
+            research/results/malformed-evaluator/
             research/results/cascade-conformance/
             research/results/implementation-mutations/*/pytest.log
             research/results/implementation-mutations/*/results.xml
