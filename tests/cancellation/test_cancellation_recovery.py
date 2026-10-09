@@ -232,6 +232,7 @@ async def test_caller_cancellation_during_cleanup(environment,mode):
         assert after['status']=='approved'
         assert after['outcome']==('cancelled' if VARIANT=='corrected' else 'dispatched')
         assert any(e['type']=='tool_start' for e in after['events']) is (VARIANT=='baseline')
+        assert len([e for e in after['events'] if e['type']=='auto_approval_evaluation_superseded'])==1
         await handle.signal('close')
         await finish_and_replay(handle,'caller-'+mode)
 

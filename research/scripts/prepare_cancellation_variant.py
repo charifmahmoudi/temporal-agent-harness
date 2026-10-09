@@ -26,12 +26,40 @@ AFTER='''    caller = asyncio.current_task()
     if caller is not None and caller.cancelling():
         raise asyncio.CancelledError
 '''
+BEFORE_EVALUATOR='''            await _cancel_and_settle(task)
+            close(
+                AutoApprovalEvaluationSuperseded(
+                    tool_id=tool_id,
+                    tool_name=ctx.tool_name,
+                    evaluation_id=evaluation_id,
+                    evaluator=evaluator,
+                    verdict=reached,
+                )
+            )
+'''
+AFTER_EVALUATOR='''            terminal = AutoApprovalEvaluationSuperseded(
+                tool_id=tool_id,
+                tool_name=ctx.tool_name,
+                evaluation_id=evaluation_id,
+                evaluator=evaluator,
+                verdict=reached,
+            )
+            try:
+                await _cancel_and_settle(task)
+            except asyncio.CancelledError:
+                # A live caller cancellation closes this already-settled bracket.
+                # Offline eviction must not publish on a destroyed workflow loop.
+                if workflow.in_workflow():
+                    close(terminal)
+                raise
+            close(terminal)
+'''
 
 
 def corrected(source):
-    if source.count(BEFORE)!=1:
+    if source.count(BEFORE)!=1 or source.count(BEFORE_EVALUATOR)!=1:
         raise ValueError('Cleanup helper anchor drifted; review the proposed correction')
-    return source.replace(BEFORE,AFTER)
+    return source.replace(BEFORE,AFTER).replace(BEFORE_EVALUATOR,AFTER_EVALUATOR)
 
 
 def main():
@@ -52,7 +80,7 @@ def main():
     fixed=corrected(original)
     (out/SOURCE).write_text(fixed)
     diff=''.join(difflib.unified_diff(original.splitlines(keepends=True),fixed.splitlines(keepends=True),
-                                     fromfile='a/'+str(SOURCE),tofile='b/'+str(SOURCE)))
+                                     fromfile='a/'+str(SOURCE),tofile='b/'+str(SOURCE),n=1))
     (out/'proposed.patch').write_text(diff)
     (out/'provenance.json').write_text(json.dumps({'baseline_sha256':hashlib.sha256(original.encode()).hexdigest(),
                                                  'corrected_sha256':hashlib.sha256(fixed.encode()).hexdigest()},indent=2)+'\n')

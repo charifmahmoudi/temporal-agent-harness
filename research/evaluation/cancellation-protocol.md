@@ -94,3 +94,11 @@ disables workflow caching (`max_cached_workflows=0`) on both workers, avoiding s
 query routing in the test server. Its claim is limited to replacement with nonsticky
 execution. Production sticky routing, process crashes, and server failures remain
 untested. The preceding incomplete attempts remain linked in the final report.
+
+Run 37892043434 passed 23 baseline and 23 helper-only corrected tests, the six model
+checks, and 16 history replays per variant. Review of its raw events showed that
+the corrected caller path lacked an evaluation terminal. The proposed correction
+now also closes the superseded bracket on live caller cancellation before raising;
+offline workflow eviction is guarded from publication. Both caller tests now require
+exactly one superseded terminal. The helper-only correction is intermediate evidence,
+not the final proposed patch. This amendment strengthens audit-completeness validation.
