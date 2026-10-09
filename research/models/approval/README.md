@@ -36,8 +36,9 @@ can invalidate assumptions without triggering this guard.
   interleavings, not policy cascades or arbitrary numbers of calls.
 - All entries begin registered, with auto mode running and no policy exemption.
 - Valid, immutable inputs; no UUID collisions; trusted human-update path; valid
-  evaluator decision objects. Malformed return values in the superseded branch are
-  outside scope. No policy updates, remember cascade, or argument reconstruction.
+  evaluator decision objects on the ordinary verdict transitions. Malformed ordinary
+  results are abstracted as error; malformed superseded results are covered by separate
+  implementation regressions and a robustness fix, not a refinement proof. No policy updates, remember cascade, or argument reconstruction.
 - Validator and non-yielding handler are treated as one atomic accepted update.
 - Cancellation has an explicit cancelling phase. Progress assumes eventual cleanup;
   cancellation-resistant evaluators can invalidate progress conclusions.

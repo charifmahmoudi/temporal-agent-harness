@@ -8,7 +8,8 @@ Baseline: `049e01c9d726ef68bff7be857c735723b9801512` (MIT; original copyright re
 
 The initial specification is manually derived from code, not automatically extracted.
 It checks finite one- and two-call configurations and conditional progress. There is
-no confirmed implementation defect and no claim of whole-system verification.
+no claim of whole-system verification. A subsequent assumption audit identified
+a malformed superseded-result defect; its fix and regressions are documented below.
 Synthetic faults are included to check that the verification detects overwritten
 decisions and dispatch without approval; they do not describe original-code defects.
 
@@ -42,8 +43,9 @@ from their exact-commit CI evidence and the limits of those results.
 ## Immediate next milestone
 
 The objective is an auditable case study of approval stability under competing
-resolutions and changing tool-name policy. The next milestone is independent review
-of the abstraction and scenario coverage, followed by broader controlled schedules.
+resolutions and changing tool-name policy. The expanded suite covers both registration orders and additional evaluator outcomes.
+The next milestone is independent review of the abstraction and the focused upstream
+fix, followed by broader policy/replay studies.
 
 Before enlarging the model, review each transition against its mapped implementation
 function and inspect the raw-event evidence for atomicity assumptions. Then add
@@ -56,3 +58,18 @@ A scientific contribution still requires comparison with related work and eviden
 that the resulting contract or failure modes matter beyond this harness. Publishable
 claims must identify what is new, the practical consequence, and threats to validity;
 CI success alone cannot establish those claims.
+
+
+## Current evidence and critical review
+
+The [weakness ledger](research/review-assessment.md) records both research-review and
+upstream-contributor judgments, with unresolved obligations kept explicit. The
+[related-work comparison](research/related-work.md) rules out broad novelty claims.
+The [upstream contribution packet](research/upstream/superseded-result.md) contains a
+small production fix and standalone regressions for malformed superseded evaluator
+output. It has been prepared for review, not submitted to the original team.
+
+The schema-2 coupled checker binds actions to recorded inputs and permits only three
+internal gate actions to remain hidden. This closes one source of permissiveness;
+it does not establish Python refinement. Generality beyond the harness and the
+validity of an eventual conference submission remain open research questions.

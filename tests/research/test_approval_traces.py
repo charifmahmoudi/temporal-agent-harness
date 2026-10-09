@@ -25,10 +25,10 @@ async def harmless_probe() -> str:
 
 
 class ObservedRunner(AgentWorkflowRunner):
-    def observe(self, label, **projection):
+    def observe(self, label, action=None, **projection):
         entry = self._status.approval_entry("call")
         if entry is not None:
-            self.observations.append({"label": label, "state": {
+            self.observations.append({"label": label, "action": action, "state": {
                 "status": entry.status.value, "closed": self._closed, **projection}})
 
     def _pub(self, *args, **kwargs):
@@ -38,13 +38,24 @@ class ObservedRunner(AgentWorkflowRunner):
         if event.type == "auto_approval_evaluation_started":
             self.observe("evaluation_started", evaluator="running", phase="evaluating")
         elif event.type == "tool_approval_resolved":
-            self.observe("approval_resolved")
+            decision = self.observed_human
+            action = {'kind': 'human', 'approved': decision.approved} if decision else None
+            self.observe("approval_resolved", action=action)
         elif event.type == "tool_start":
             self.observe("tool_start", phase="dispatched")
 
+    async def _handle_tool_approval(self, decision: ToolApprovalDecision):
+        # Resolution publication is synchronous in this non-remember experiment.
+        # Attach the accepted input at that boundary, without another observation.
+        self.observed_human = decision
+        try:
+            return await super()._handle_tool_approval(decision)
+        finally:
+            self.observed_human = None
+
     def _handle_close(self):
         super()._handle_close()
-        self.observe("close")
+        self.observe("close", action={"kind": "close"})
 
     async def _run_auto_mode_evaluator(self, *args, **kwargs):
         result = await super()._run_auto_mode_evaluator(*args, **kwargs)
@@ -70,6 +81,7 @@ class TraceAgent:
             auto_mode_evaluator=self.evaluate)
         self._runner.observations = []
         self._runner.raw_events = []
+        self._runner.observed_human = None
 
     async def evaluate(self, ctx):
         try:
@@ -81,7 +93,8 @@ class TraceAgent:
                 await workflow.wait_condition(lambda: self.cleanup_release)
             raise
         verdict = AutoApprovalVerdict.DENY if self.mode == "deny" else AutoApprovalVerdict.APPROVE
-        self._runner.observe("evaluator_completed", evaluator="done", verdict=verdict.value)
+        self._runner.observe("evaluator_completed", action={"kind": "complete", "verdict": verdict.value},
+                             evaluator="done", verdict=verdict.value)
         return AutoApprovalDecision(verdict)
 
     @agent.accepts
@@ -168,7 +181,7 @@ async def test_temporal_trace(temporal_probe, scenario):
     assert last["status"] == ("denied" if denied else "approved")
     output = Path("research/results/traces")
     output.mkdir(parents=True, exist_ok=True)
-    evidence.update(schema=1, scenario=scenario, workflow_id=h.id,
+    evidence.update(schema=2, scenario=scenario, workflow_id=h.id,
                     implementation_sha256=hashlib.sha256(Path("temporal_agent_harness/harness/agent_workflow.py").read_bytes()).hexdigest())
     (output / f"{scenario}.json").write_text(json.dumps(evidence, indent=2) + "\n")
     if scenario != "close":

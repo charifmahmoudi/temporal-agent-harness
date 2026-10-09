@@ -24,7 +24,8 @@ argument-specific grant. All experiment tools are harmless.
 - `allowed` is the live set of eligible tool names; inherently-safe flags are false,
   skip-all is off, and the auto-mode switch stays enabled.
 - `ToolOf` maps calls to either the same name or two different names.
-- `CallOrder` is the observed registration sequence, fixed to a then b.
+- `CallOrder` is the evidenced registration sequence: both a-then-b and b-then-a
+  are exercised. Tool identity remains fixed to the call when order changes.
 - `Remember` combines the accepted human decision and synchronous cascade into one
   action. `Update` combines policy replacement and synchronous cascade.
 - `BaseStep` wraps the original `Next`, accumulating resolution history without
@@ -58,7 +59,7 @@ These model faults are not confirmed defects in production code.
 
 ## Real Temporal validation
 
-`test_policy_cascade.py` records nine scenarios:
+`test_policy_cascade.py` records twelve scenarios under both registration orders:
 
 1. Remember before the sibling evaluator denies.
 2. Evaluator denial before remember.
@@ -69,8 +70,11 @@ These model faults are not confirmed defects in production code.
 7. Remember for one tool while a different tool remains pending.
 8. Close flag set immediately before accepted remember in one handler.
 9. Accepted remember immediately before close in one handler.
+10. Evaluator approval before remembered approval.
+11. Evaluator escalation before remembered approval.
+12. Evaluator failure before remembered approval.
 
-The last two exercise concrete synchronous orderings of internal operations. They
+Scenarios 8 and 9 exercise concrete synchronous orderings of internal operations. They
 are not a claim that separate network requests can reliably be scheduled between
 closure and finalization, or that the session admits arbitrary work after close.
 
@@ -80,11 +84,18 @@ not halfway through the synchronous cascade. Raw events retain intermediate
 publications and the tests independently assert resolution uniqueness and causal
 order. Observers introduce no new awaits in the production policy paths.
 
-The checker extends the actual Cascade specification with an observation cursor.
-It searches for a legal model execution matching every snapshot in order. Hidden
-steps are allowed; this is partial-observation existential consistency, not a proof
-of exact action correspondence. Corrupted denial/dispatch and overwritten-denial
-traces must be rejected. Missing, stale, or incomplete scenario evidence fails CI.
+The schema-2 checker extends Cascade with an observation cursor. Accepted human,
+remembered, policy, close, and evaluator-completion inputs are recorded explicitly.
+Each such cursor step executes that exact model action and checks its successor
+projection. Only Consume, Cancelled, and Finalize may be hidden. The checker cannot
+invent another human response, policy replacement, closure, or evaluator verdict.
+This is bounded action-constrained conformance of partial states, not a refinement
+proof. Five invalid controls test denied dispatch, overwritten denial, unrecorded
+policy, wrong initiating cause, and wrong decision input. Missing, stale, incomplete,
+or unsupported scenario evidence fails CI. Clean old trace output before regeneration.
+
+The single-call checker now uses the same recorded-input restriction. Earlier
+schema-1 evidence used broader hidden steps and is distinguished in the history.
 
 ## Reproduce and artifacts
 
@@ -101,7 +112,20 @@ and JUnit results. Read the exact CI commit for empirical results.
 
 ## Limits
 
-Two calls, fixed registration order, abstract tool-name eligibility, valid immutable
+Two calls, both registration orders, abstract tool-name eligibility, valid immutable
 inputs and verdicts, trusted operator updates. No operator authentication, policy
 criteria edits, auto-mode toggling, arbitrary policy layers, arbitrary call count,
 external effects, replay equivalence proof, or implementation refinement theorem.
+
+
+## Implementation sensitivity and robustness finding
+
+`check_implementation_mutations.py` runs isolated copies of the Python implementation.
+Its baseline must pass; four selected faults must produce regression failures without
+setup errors. Import provenance is asserted before pytest starts. These experiments
+measure selected fault sensitivity, not general detector accuracy.
+
+The separate malformed-superseded-result Temporal regression does not export a Cascade
+trace: it deliberately violates the earlier valid-result input assumption. See the
+[minimal finding and patch](../../upstream/superseded-result.md),
+[critical assessment](../../review-assessment.md), and [related work](../../related-work.md).

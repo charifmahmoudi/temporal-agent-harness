@@ -1,7 +1,8 @@
 # Policy-cascade interpretation and evidence requirements
 
 This report states testable interpretations of the pinned implementation. It does
-not claim a new defect or that finite model checks prove the whole harness correct.
+not claim that finite model checks prove the whole harness correct. A separate
+[malformed-result finding](upstream/superseded-result.md) concerns gate robustness.
 
 ## Questions
 
@@ -53,3 +54,34 @@ restriction affects eligibility rather than revoking accepted decisions. Closure
 finalization and cancellation cleanup are separate stages. Users requiring revocable
 permissions need a different explicit contract and mechanism. This case study does
 not prescribe one or claim the current contract is a security bug.
+
+
+## Strengthening iteration: exact-commit evidence
+
+[CI run 37885395663](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/37885395663)
+passed model and implementation jobs for `128af56bc2b904aa4929b604824fb8d397ff6c62`:
+
+- 82 selected implementation tests passed, including 24 coupled traces under both
+  registration orders, twelve standalone malformed-result cases, and a separate
+  real Temporal malformed-superseded-result regression.
+- Thirteen model configurations produced the expected result, including both
+  registration orders for same-tool and different-tool safety checks.
+- All 24 coupled traces matched their recorded inputs under schema 2; all five
+  coupled invalid controls were rejected. The seven initial traces and their two
+  controls also passed under the earlier partial-observation criterion.
+- The isolated seven-test baseline passed. All four actual Python mutations were
+  detected: denial remembering, scope leakage, and reversed publication each
+  produced two assertion failures; removing superseded-result validation produced
+  one real Temporal regression failure. No collection/setup errors were counted.
+
+The standalone patch also applied cleanly to the pinned original baseline, where its
+twelve regression cases passed after application. The new defect is a robustness
+failure under malformed plugin output and competing settlement, not evidence that
+normal policy restriction revokes approval or that the gate permits denied actions.
+The [assessment](review-assessment.md) distinguishes improvements from still-open
+refinement, external-validity, and publication obligations.
+
+
+Both checkers subsequently received the same recorded-input restriction. The current
+single-call negative suite adds approval without a recorded decision. Its exact-commit
+validation is reported separately from the schema-1 historical evidence above.

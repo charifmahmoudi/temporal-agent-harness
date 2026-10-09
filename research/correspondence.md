@@ -60,19 +60,20 @@ Additional fields come from observation sites:
 | ToolApprovalDenied caught by caller | phase=rejected |
 | Resolution, close, runner return | No inferred phase/evaluator state |
 
-The checker generates a module extending the actual Approval specification. A cursor
-advances when the current model state matches the next partial observation. Hidden
-Next transitions and repeated matching states are allowed between observations. TLC
-searches for cursor completion; an expected TraceNotMatched counterexample supplies
+The schema-2 checker generates a module extending the actual Approval specification.
+Recorded human, closure, and completion inputs execute their matching action at the
+cursor step; that successor must match the observation. Hidden Consume, Cancelled,
+and Finalize transitions are allowed between observations. No hidden human response,
+closure, or evaluator completion is allowed. TLC searches for cursor completion; an expected TraceNotMatched counterexample supplies
 a witness model execution. The generated module and witness log are artifacts.
 
-This allows unobserved model actions. It establishes existence of a consistent model
+This allows unobserved internal model actions. It establishes existence of a consistent model
 execution, not exact action-by-action correspondence or completeness of recording.
 Unexpectedly permissive abstractions can accept traces; additional fields and
 negative controls reduce, but do not eliminate, that risk.
 
-Two fabricated traces must be rejected after completed exploration: dispatch while
- denied, and approved reverting to pending. Missing scenarios, stale implementation
+Three fabricated traces must be rejected after completed exploration: dispatch while
+ denied, approved reverting to pending, and approval with no recorded input. Missing scenarios, stale implementation
 hashes, missing terminal observations, unsupported fields, parse/tool failures, and
 timeouts fail CI. Synthetic traces are not implementation findings.
 
@@ -95,3 +96,18 @@ uv run --frozen python research/scripts/check_traces.py --jar /path/to/tla2tools
 CI uploads traces, generated checker modules/configurations, witness/rejection logs,
 summary, and test results. Read CI evidence for the exact commit being evaluated;
 local collection or boundary-test success is not real-server evidence.
+
+
+## Subsequent fidelity audit
+
+Both schema-2 checkers now prohibit hidden human, close, and evaluator-completion
+inputs; the coupled checker also prohibits hidden remembered and policy inputs. See
+[Cascade](models/cascade/README.md). Earlier schema-1 runs used broader hidden Next
+transitions and must not be described as satisfying the stronger criterion.
+
+Challenging the valid-result assumption exposed a malformed superseded-result defect
+in `_run_auto_mode_evaluator`. A type guard preserves settled outcomes and terminal
+publication; valid-verdict model transitions are unchanged. The source-map manifest
+records that review. The [finding](upstream/superseded-result.md) includes standalone
+regressions, a real Temporal branch experiment, and isolated reintroduction evidence.
+This finding originated in inspection and targeted execution, not a TLC counterexample.
