@@ -37,3 +37,11 @@ For a research committee, the appropriate posture is an evidence-backed case stu
 under development. For an upstream maintainer, it is a narrowly scoped robustness fix
 with useful regressions. The latter can be valuable even if the eventual paper does
 not meet a major conference's novelty threshold.
+
+
+The evidence gates above passed in [verification run 37885725766](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/37885725766):
+82 selected tests, thirteen expected model results, 31 action-constrained witnesses,
+eight invalid-trace rejections, and four detected implementation faults. This closes
+the reproducibility gates for that commit, not the independent-review or generality
+obligations. The focused patch was checked on a clean baseline and its twelve tests
+passed after application. See [exact-commit results](findings-policy.md).

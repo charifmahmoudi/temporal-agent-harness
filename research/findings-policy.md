@@ -85,3 +85,13 @@ refinement, external-validity, and publication obligations.
 Both checkers subsequently received the same recorded-input restriction. The current
 single-call negative suite adds approval without a recorded decision. Its exact-commit
 validation is reported separately from the schema-1 historical evidence above.
+
+
+[CI run 37885725766](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/37885725766)
+passed both jobs for `d3c3f9b3c6c45cd2a6d8afbda4f6dcc2f75c0f1d`. All 31 recorded
+traces now use schema-2 recorded-input constraints, and all eight invalid controls
+were rejected. The 82 selected tests, thirteen model configurations, and four
+implementation-mutation experiments also passed. Separately, the complete repository
+suite passed on Python 3.11, 3.12, 3.13, and 3.14 for the preceding fixed revision
+([matrix run](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/37885395560));
+the Python 3.12 job reported 889 passing tests.

@@ -112,7 +112,7 @@ def main():
     results.append(check(jar, bad, "negative_reverted_decision", False))
     results.append(check(jar, [{'action': None, 'state': {'status': 'approved', 'closed': False}}],
                          'negative_unrecorded_approval', False))
-    out = ROOT / 'research/results/conformance/summary.json' 
+    out = ROOT / 'research/results/conformance/summary.json'
     out.write_text(json.dumps({"schema": 2, "hidden_actions": ["Consume", "Cancelled", "Finalize"], "model_sha256": hashlib.sha256((ROOT / 'research/models/approval/Approval.tla').read_bytes()).hexdigest(),
                                "results": results}, indent=2) + '\n')
     print(json.dumps(results, indent=2))
