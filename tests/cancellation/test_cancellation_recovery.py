@@ -130,9 +130,9 @@ async def environment():
         await env.shutdown()
 
 
-def worker(client, queue):
+def worker(client, queue, *, cache=1000):
     return Worker(client, task_queue=queue, workflows=[CleanupAgent],
-                  workflow_runner=UnsandboxedWorkflowRunner())
+                  workflow_runner=UnsandboxedWorkflowRunner(), max_cached_workflows=cache)
 
 
 async def until(handle, predicate):
@@ -238,13 +238,16 @@ async def test_caller_cancellation_during_cleanup(environment,mode):
 
 async def test_worker_restart_during_cleanup(environment):
     client,queue=environment
-    async with worker(client,queue):
+    # Disable sticky execution for this test-server recovery experiment: an idle
+    # query otherwise remains routed to the retired worker. This is an explicit
+    # experimental bound, not a claim about sticky production worker replacement.
+    async with worker(client,queue,cache=0):
         handle=await start(client,queue,'delayed')
         await settle(handle,'approve')
         before=await until(handle,lambda e:e['cleanup_entered'])
         retain('restart-before',before)
     # A new Worker has a fresh workflow cache and must reconstruct the waiting state.
-    async with worker(client,queue):
+    async with worker(client,queue,cache=0):
         # A query alone can target the retired worker's sticky queue. An explicit
         # no-state-change signal schedules a workflow task and permits fallback.
         await handle.signal(CleanupAgent.checkpoint)

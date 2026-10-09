@@ -86,3 +86,11 @@ is recorded as `matches_before`, not assumed. Stable approval and final outcome 
 still asserted, and the complete history is replayed. This changes H4's measurement
 procedure, not its interpretation: a false equality result must be reported as a
 reconstruction discrepancy, not as preservation of the waiting cleanup state.
+
+The third attempt (37891860332) still failed its first recovered query with an RPC
+deadline, before any recovered state was available. This is **not evidence of a
+state-reconstruction discrepancy**. The replacement experiment now explicitly
+disables workflow caching (`max_cached_workflows=0`) on both workers, avoiding sticky
+query routing in the test server. Its claim is limited to replacement with nonsticky
+execution. Production sticky routing, process crashes, and server failures remain
+untested. The preceding incomplete attempts remain linked in the final report.
