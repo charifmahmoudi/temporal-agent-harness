@@ -106,6 +106,11 @@ class CleanupAgent:
         self.caller_cancel_requested = True
         self.caller.cancel()
 
+    @workflow.signal
+    def checkpoint(self):
+        """Schedule a workflow task after worker replacement without changing state."""
+        pass
+
     @workflow.query
     def evidence(self):
         entry = self._runner._status.approval_entry('call')
@@ -240,6 +245,9 @@ async def test_worker_restart_during_cleanup(environment):
         retain('restart-before',before)
     # A new Worker has a fresh workflow cache and must reconstruct the waiting state.
     async with worker(client,queue):
+        # A query alone can target the retired worker's sticky queue. An explicit
+        # no-state-change signal schedules a workflow task and permits fallback.
+        await handle.signal(CleanupAgent.checkpoint)
         recovered=await until(handle,lambda e:e['cleanup_entered'])
         retain('restart-recovered',recovered)
         assert recovered==before

@@ -60,3 +60,36 @@ async def test_caller_cancellation_is_distinct_from_child_cancellation(second):
         assert await parent_task=='continued'
         assert not parent_task.cancelled()
         assert parent_task.cancelling()==1
+
+
+async def test_pending_caller_cancellation_before_helper_entry():
+    started=asyncio.Event()
+    async def child():
+        started.set()
+        await asyncio.Event().wait()
+    async def parent():
+        task=asyncio.create_task(child())
+        await started.wait()
+        asyncio.current_task().cancel()
+        await _cancel_and_settle(task)
+        return 'continued'
+    parent_task=asyncio.create_task(parent())
+    if CORRECTED:
+        with pytest.raises(asyncio.CancelledError):
+            await parent_task
+    else:
+        assert await parent_task=='continued'
+
+
+async def test_explicitly_cleared_caller_cancellation_allows_child_cleanup():
+    async def parent():
+        current=asyncio.current_task()
+        current.cancel()
+        try:
+            await asyncio.sleep(0)
+        except asyncio.CancelledError:
+            current.uncancel()  # Explicit opt-in to suppress this caller request.
+        task=asyncio.create_task(asyncio.sleep(0))
+        await _cancel_and_settle(task)
+        return current.cancelling()
+    assert await asyncio.create_task(parent())==0

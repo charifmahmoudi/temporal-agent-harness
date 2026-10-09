@@ -65,3 +65,15 @@ contract limitation rather than an implementation bug. Supported SDK cancellatio
 semantics permit cleanup and suppression; the relevant primary reference is the
 [Temporal Python SDK cancellation documentation](https://github.com/temporalio/sdk-python/blob/main/README.md#asyncio-cancellation).
 Independent review is still required for abstraction, atomicity, and generality.
+
+## Operational amendment after first CI attempt
+
+Run 37891291257 reproduced the caller-cancellation behavior and passed the other
+Temporal controls, but its idle post-replacement query timed out. The restart
+procedure now sends a no-state-change checkpoint signal before querying, so a new
+workflow task is scheduled rather than depending on idle sticky-query routing.
+The desired recovered state and scoring are unchanged. The first model attempt
+also had a runner diagnostic mismatch: TLC emitted the named singular
+`Temporal property CleanupProgress was violated.` rather than the plural string.
+The runner now requires that exact named diagnostic and exit 13. The first attempt
+remains retained as an incomplete run; it is not presented as a successful study.

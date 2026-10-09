@@ -103,3 +103,26 @@ def cascade(t, b, a):
 figure('gate', 690, 'Figure 1. Approval model', 'Decision status and caller phase are separate. Cancellation cleanup precedes finalization.', gate)
 figure('properties', 710, 'Figure 2. Three safety properties as traces', 'Valid traces preserve decisions, require approval, and publish the initiating cause first.', properties)
 figure('cascade', 650, 'Figure 3. Policy-cascade semantics', 'Remember approves eligible pending calls; restriction preserves accepted decisions; different tools remain isolated.', cascade)
+
+
+def cancellation(t, b, a):
+    t(32, 80, 'Accepted approval remains stable; cancellation changes the invocation outcome.', 18, MUTED)
+    for y, label, last, color in [(135, 'CURRENT HELPER', 'dispatched', RED),
+                                  (360, 'PROPOSED CORRECTION', 'cancelled', GREEN)]:
+        t(32, y, label, 18, color, 'bold')
+        names = ['accepted approval', 'cleanup waiting', 'caller cancellation', last]
+        for i, name in enumerate(names):
+            x=35+i*275
+            lines=[name, 'status: approved']
+            if i==3:
+                lines.append('tool starts' if last=='dispatched' else 'no tool start')
+            b(x,y+25,235,110,lines,color if i==3 else BLUE)
+            if i<3:
+                a(x+235,y+80,x+275,y+80)
+    t(35, 310, 'Decision stability alone does not imply caller-cancellation respect.', 19, weight='bold')
+    t(35, 580, 'Cancellation arrives before dispatch, while the caller awaits evaluator cleanup.', 17, MUTED)
+    t(35, 612, 'These are explanatory projections, not complete model-checker state graphs.', 17, MUTED)
+
+
+figure('cancellation', 650, 'Figure 6. Caller cancellation during cleanup',
+       'Current cleanup may swallow caller cancellation and dispatch; proposed correction preserves approval but cancels the invocation.', cancellation)

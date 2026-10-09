@@ -43,7 +43,7 @@ def main():
         if invariant:
             ok=run.returncode==12 and f'Invariant {invariant} is violated' in log
         elif progress=='fail':
-            ok=run.returncode==13 and 'Temporal properties were violated' in log
+            ok=run.returncode==13 and 'Temporal property CleanupProgress was violated.' in log
         else:
             ok=run.returncode==0 and 'Model checking completed. No error has been found.' in log
         results.append({'configuration':name,'cleanup_can_finish':finish,'swallow_caller_cancel':swallow,
