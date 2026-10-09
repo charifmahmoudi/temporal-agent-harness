@@ -32,9 +32,16 @@ def experiment(name, source, selector, should_fail):
     out.mkdir(parents=True)
     for package in ('temporal_agent_harness', 'tests'):
         shutil.copytree(ROOT / package, out / package, ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
+    # Preserve pytest's asyncio mode and import-path settings in the isolated run.
+    shutil.copy(ROOT / 'pyproject.toml', out / 'pyproject.toml')
     (out / SOURCE).write_text(source)
     env = dict(os.environ, PYTHONPATH=str(out), PYTHONDONTWRITEBYTECODE='1')
-    run = subprocess.run([sys.executable, '-m', 'pytest', 'tests/research/test_policy_cascade.py',
+    # Editable installs and ancestor pytest configuration can accidentally route
+    # imports back to the checkout. Verify provenance before any mutant is scored.
+    bootstrap = ("from pathlib import Path; import temporal_agent_harness.harness.agent_workflow as impl; "
+                 "assert Path(impl.__file__).resolve() == Path('temporal_agent_harness/harness/agent_workflow.py').resolve(), impl.__file__; "
+                 "import pytest, sys; sys.exit(pytest.main(sys.argv[1:]))")
+    run = subprocess.run([sys.executable, '-c', bootstrap, 'tests/research/test_policy_cascade.py',
                           '-q', '-k', selector, '--junitxml=results.xml'],
                          cwd=out, env=env, capture_output=True, text=True, timeout=180)
     (out / 'pytest.log').write_text(run.stdout + run.stderr)
