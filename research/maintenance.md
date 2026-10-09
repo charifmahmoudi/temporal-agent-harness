@@ -69,3 +69,11 @@ The [novelty review](evaluation/novelty-review.md) rejects claims of a new traci
 versioning method. [Second-case execution](evaluation/prospective-case.md) is deferred
 until a qualifying candidate and pre-execution predictions are recorded. A hand-built
 repeat of documented SDK behavior does not meet that gate.
+
+
+The comparison and workflow-local upgrade reproduction jobs explicitly use subject
+`ccb74997404f6b9fd9f5654ac5a441337581d673`; their current-scoring jobs use the PR revision.
+This separation was introduced after the F02 docstring clarification tripped their
+full-source byte guards. The guards and frozen protocols remain intact. Current-code
+verification is provided by the other model, trace, harness, cancellation, and activity
+jobs. Report the subject commit for a reproduction, not merely the triggering PR head.

@@ -18,11 +18,26 @@ permissions:
   contents: read
 
 jobs:
+  current-scoring:
+    name: Current revision scoring controls
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          version: '0.12.23'
+          python-version: '3.12'
+      - name: Check current experiment scoring
+        run: uv run --frozen pytest tests/evaluation/test_upgrade_projection.py -q
   replay:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Historical reproduction: preserve exact source and protocol bytes.
+          ref: ccb74997404f6b9fd9f5654ac5a441337581d673
       - uses: astral-sh/setup-uv@v5
         with:
           version: '0.12.23'

@@ -49,3 +49,18 @@ Confirm whether the three responses address your concerns, or add a follow-up us
 the same F ID. R02, R04–R07, R09–R10, and R12–R14 remain not reviewed in the original
 review record. R03/R08/R11 remain scoped findings, not full acceptance of those areas.
 The issue stays open until you explicitly confirm closure.
+
+
+## CI follow-up: preserve the historical subject
+
+The docstring-only edit correctly tripped byte-level source guards in the historical
+[comparison run](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/37987851266)
+and [cross-version replay run](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/37987851174).
+Those failures are retained as provenance failures, not model or runtime findings.
+
+The two workflow reproduction jobs now explicitly check out frozen subject
+`ccb74997404f6b9fd9f5654ac5a441337581d673`, including its protocol and scripts.
+Separate scoring-control jobs check out the current PR revision. Source hash guards,
+frozen corpora, and recorded evidence remain unchanged. Current model/trace, harness,
+cancellation, and activity jobs continue to run the current revision. A historical
+reproduction pass must not be reported as testing current implementation bytes.
