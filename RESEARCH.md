@@ -101,9 +101,14 @@ or semantic correctness of evaluator judgments.
 
 Trace validation and formal agent enforcement have substantial precedents; the
 [related-work comparison](research/related-work.md) defines the contribution boundary.
-The next experiment compares existing tests, expanded tests, model checks, and trace
-checks on a predefined fault corpus to measure the formal layer's added value.
-Independent abstraction review and broader policy/replay coverage remain necessary.
+The [first comparative experiment](research/evaluation/results-v1.md) is now complete.
+On six selected Python faults, existing tests detected two, expanded tests detected
+five under a conservative assertion-only rule, and trace checks rejected three.
+Two trace collectors were inconclusive and one fault was outside model scope.
+There were **no trace-only detections beyond both test arms**. The
+[assessment](research/evaluation/assessment.md) explains this result and the required
+next experiment. Independent abstraction review and broader policy/replay coverage
+remain necessary; superior detection and conference novelty are not established.
 
 ## Reading path
 
@@ -111,3 +116,8 @@ Independent abstraction review and broader policy/replay coverage remain necessa
 2. [Properties](research/properties.md): inspect the mathematical obligations and counterexamples.
 3. [Code correspondence](research/correspondence.md) → [Evidence](research/evidence.md): assess fidelity and reproduce results.
 4. [Related work](research/related-work.md) → [Critical assessment](research/review-assessment.md): evaluate novelty and unresolved claims.
+5. [Comparative protocol](research/evaluation/protocol.md) → [Results](research/evaluation/results-v1.md) → [Assessment](research/evaluation/assessment.md): inspect measured added value.
+
+[Maintenance policy and decision gates](research/maintenance.md) define how future
+changes update the scientific artifact. An [independent-review packet](research/evaluation/review-packet.md)
+is ready; no external review is claimed.

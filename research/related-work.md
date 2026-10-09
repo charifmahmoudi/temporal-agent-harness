@@ -11,7 +11,7 @@ what the sources study; contrasts with this repository are our assessment.
 | Source and reading scope | Relevant contribution | Consequence for our claims |
 | --- | --- | --- |
 | [Howard et al., Smart Casual Verification of CCF, NSDI 2025](https://www.usenix.org/system/files/nsdi25-howard.pdf), trace collection/validation, results, and lessons sections | Combines TLA+ model checking with event-constrained implementation traces and reports protocol defects. Discusses aligning atomicity and partial state. | Our trace-checking approach is an application of an established method. Action-bound observations and actionable discrepancies are essential; a small model alone offers little novelty. |
-| [Cirstea et al., Validating Traces of Distributed Programs Against TLA+ Specifications, SEFM 2024](https://doi.org/10.1007/978-3-031-77382-2_8), abstract/metadata plus [author presentation](https://www.uni-muenster.de/IFIP-WG22/Web/meeting/Aachen25/merz-slides.pdf); full paper not retrieved | Describes instrumentation and trace validation with partially recorded specification variables. | Partial observation is not new. The author presentation also explains action constraints and atomicity alignment. Full-paper comparison remains required before claiming a methodological distinction. |
+| [Cirstea et al., Validating Traces of Distributed Programs Against TLA+ Specifications, SEFM 2024](https://doi.org/10.1007/978-3-031-77382-2_8); [extended author version v2](https://arxiv.org/html/2404.16075v2), sections 3–6 reviewed | Partial-state and action-parameter constrained trace validation; atomicity alignment and comparative instrumentation experiments. | Both partial observation and action binding are established. Our checker applies this approach to a narrow agent approval contract; it is not a new validation method. |
 | [Lamport, An Introduction to TLA+](https://lamport.azurewebsites.net/pubs/simple.pdf), implementation/refinement section | Explains refinement mappings between specifications. | A witness for one finite trace cannot support a universal implementation-refinement claim. We retain that distinction. |
 | [Newcombe et al., How AWS Uses Formal Methods, CACM 2015](https://www.amazon.science/publications/how-amazon-web-services-uses-formal-methods), publication screening | Industrial precedent for using formal models to reason about distributed designs. | Applying TLA+ to an existing codebase is established practice, rather than sufficient research novelty. |
 
@@ -49,7 +49,16 @@ alone establish a strong research-track paper.
 
 ## Remaining literature work
 
-Retrieve and compare the full Cirstea paper and FAVA; follow references from the closest
+The extended Cirstea version has now been inspected beyond metadata. Section 4 defines
+compatibility as a nonempty intersection of specification behaviors and behaviors
+consistent with the partial trace, rather than refinement. It also discusses inverted
+invariant checking, action composition, incomplete-log false acceptance, and an
+instrumentation-precision experiment. These directly overlap with our method and its
+limitations. Our assessment is that action-constrained agent traces alone do not
+establish methodological novelty.
+
+Retrieve and compare the full FAVA paper (direct arXiv HTML/PDF retrieval failed on
+2026-10-09; its row remains abstract screening); follow references from the closest
 papers; inspect comparable framework implementations before asserting prevalence.
 A second implementation or parameterized proof would answer different generality
 questions. Neither is completed here. There is no exhaustive search, publication

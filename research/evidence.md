@@ -24,6 +24,12 @@ reported 889 passing tests. These totals are not schedule-coverage percentages.
 
 ## Model configuration inventory
 
+The subsequent [comparative evaluation](evaluation/results-v1.md) is a separate
+experiment with a frozen six-fault corpus and explicit inconclusive/out-of-scope
+outcomes. Its numbers must not be substituted for the targeted sensitivity results
+above. [Protocol](evaluation/protocol.md) and [assessment](evaluation/assessment.md)
+explain the comparison and its limitations.
+
 | Model | Normal safety | Conditional progress | Synthetic faults |
 | --- | --- | --- | --- |
 | Approval | Safety; TwoCalls | Liveness | Overwrite; Bypass |
@@ -92,3 +98,9 @@ Temporal experiments require the SDK's time-skipping test server. Tool failures,
 missing evidence, stale hashes, unsupported fields, and timeouts fail verification.
 The [workflow](../.github/workflows/verification.yml) is the executable reproduction
 reference; figure sources are regenerated with `python research/figures/generate.py`.
+
+For the comparative experiment, use a full git checkout (original upstream history
+is checked), then run `uv run --frozen python research/scripts/compare_verification.py
+--jar tla2tools.jar`. Its [workflow](../.github/workflows/comparison.yml) retains the
+complete measurement artifacts. `python research/scripts/check_documentation.py`
+checks local links, figure reproducibility, and the generated comparison report.

@@ -7,6 +7,7 @@ on:
       - 'research/scripts/compare_verification.py'
       - 'research/evaluation/corpus.json'
       - '.github/workflows/comparison.yml'
+      - 'tests/evaluation/**'
 
 permissions:
   contents: read

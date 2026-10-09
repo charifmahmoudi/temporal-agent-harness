@@ -1,5 +1,10 @@
 # Critical assessment and weakness ledger
 
+Current comparative evidence is in the [six-fault assessment](evaluation/assessment.md).
+It shows no trace-only detections, two incomplete collectors, and a conservative
+scoring limitation. The ledger below also retains the earlier targeted experiments;
+those sensitivity results are not comparative superiority results.
+
 This is the author's adversarial self-assessment using research-review and upstream
 contributor criteria. It is not independent peer review, maintainer acceptance, or a
 conference recommendation. Evidence and unresolved obligations are tracked together.
@@ -27,6 +32,11 @@ conference recommendation. Evidence and unresolved obligations are tracked toget
    sending, acceptance, or evidence of customer impact.
 
 ## Decision after this iteration
+
+The first frozen comparison is complete. It improves measurement transparency and
+identifies collector weaknesses, but does not close the added-value or novelty gate.
+The next comparison needs a versioned protocol amendment, early observation retention,
+and independently selected faults. See the [current decision gates](maintenance.md).
 
 The engineering artifact can be strengthened and the concrete fix made reviewable in
 this iteration. A universal Python-to-TLA+ refinement proof, independent review, and
