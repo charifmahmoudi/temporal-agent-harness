@@ -1,113 +1,63 @@
-# Approval implementation correspondence
+# From Python execution to model behavior
 
-## Question and evidence standard
+[Case study](../RESEARCH.md) · [Models](models/approval/README.md) · [Evidence](evidence.md)
 
-Can a legal execution of the bounded Approval TLA+ specification explain each
-ordered sequence of observations recorded from controlled Temporal executions?
-This is existential conformance of partial observations. It is not a refinement
-proof, exhaustive scheduler exploration, or verification of all Python behavior.
+## Correspondence question
 
-## Atomicity audit
+For a recorded execution, is there a model behavior consistent with its **actual
+inputs and ordered partial-state observations**? Both schema-2 checkers answer this
+bounded existential question. They do not prove that every Python execution refines
+the specification.
 
-| Concrete boundary | Model treatment | Evidence / limitation |
+## Concrete boundaries
+
+| Implementation boundary | Abstract action | Atomicity rationale / limitation |
 | --- | --- | --- |
-| Accepted human update | Human | Validator and handler have no suspending await for remember=False; update validation/scheduling is a Temporal assumption, not proven here |
-| Evaluator task returns | Complete | Probe records immediately before return with no intervening await; task completion is separate from runner consuming result |
-| Wait for done or settlement | Consume enabled condition | Real workflow.wait_condition used; completion alone does not override existing settlement |
-| Ordinary evaluator result | Consume | Awaiting an already completed task does not suspend; event publication and application contain no await on valid return path |
-| Superseded evaluator | Consume -> cancelling -> Cancelled | `_cancel_and_settle` awaits actual task unwinding; explicit cleanup barrier tests that the caller stays blocked |
-| Close signal | Close | Synchronous flag change; previously accepted approvals survive |
-| Gate finalization / dispatch | Finalize | Finalizer is synchronous; inline tool_start follows approval return without a suspending await |
+| Register entry and start evaluator | Init | Modeling begins after registration; startup is excluded. |
+| Accepted human handler | Human / Remember | Decision publication and synchronous cascade have no suspending await on the studied path. |
+| Evaluator returns or raises | Complete | A probe records immediately before completion without an intervening await. |
+| Runner applies result or observes settlement | Consume | Task completion and result consumption are distinct; settled-first branch wins. |
+| Cancelled evaluator unwinds | Cancelled | Actual cleanup can suspend; delayed cleanup is exercised. |
+| Close handler | Close | Synchronous closure flag change. |
+| Finalize entry and permit inline dispatch | Finalize | Finalization is synchronous; this abstracts permission, not external-effect commitment. |
+| Install policy and release pending calls | Update | Synchronous replacement and iteration; raw events retain publication order. |
 
-The observer subclass delegates to original methods. Observation append and snapshot
-operations are synchronous. No production method is edited and no Temporal wait or
-scheduler is monkeypatched. Instrumentation can affect performance; equivalence of
-all instrumented and uninstrumented executions is not proven.
+`first`, `resolutions`, `causes`, and `scopeViolation` are model observers. They are
+not claimed to be concrete implementation fields. The
+[source-map manifest](models/approval/source-map.json) fingerprints 15 mapped methods.
+An unchanged hash does not prove correspondence or guard against every relevant change
+elsewhere. Updating a mapped method requires a recorded mapping-impact review.
 
-## Controlled scenarios
+## Projection and trace specification
 
-Seven independent executions use an inline harmless tool and a real Temporal
- time-skipping test server:
+Snapshots read concrete status and closure; coupled snapshots also read policy and
+resolution-event history. Caller completion supplies dispatched/rejected observations.
+Inputs record accepted human decisions, policy values, closure, and evaluator results.
+Unknown lifecycle fields remain unconstrained rather than inferred.
 
-- Human approval while the evaluator is blocked.
-- Human denial while the evaluator is blocked.
-- Evaluator approval with no human response.
-- Evaluator denial with no human response.
-- Closure with a pending evaluator.
-- Human approval followed by cancellation with delayed cleanup. A query confirms no
-  tool_start and no caller completion until cleanup is released.
-- Evaluator release and human approval enabled in a single update handler. This tests
-  one concrete controlled order; it does not force evaluator completion before human
-  resolution, and is not evidence for all possible simultaneous-ready schedules.
+For observation $O_i$ with recorded action $A_i$, the checker advances its cursor using
 
-The query for evaluation_started is a barrier: the evaluator is waiting on a release
-condition initially false. Client polling is used only to detect barrier/outcome
-arrival, not to establish race order by elapsed time. Thirty-second deadlines fail
-stalled experiments. Workflow IDs, raw lifecycle events, projections, and implementation
-hashes are saved. The evaluator's own return/cancellation markers supplement events.
+$$cursor=i\land A_i\land O_i(v')\land cursor'=i+1.$$
 
-## Projection and checker
+A snapshot without an input uses a stuttering action. Between observations, only
+Consume, Cancelled, and Finalize may execute as hidden steps. The checker cannot invent
+a human decision, policy change, closure, or evaluator completion to repair a trace.
+Coupled validation also binds remembered decisions and the evidenced registration order.
 
-Every projection reads actual approval-entry status and the runner close flag.
-Additional fields come from observation sites:
+TLC searches for cursor completion by checking the invariant `cursor < trace length`.
+Its named violation supplies a successful witness. Completed exploration without that
+violation rejects the trace. This inverted success criterion is deliberate; unrelated
+errors do not count as witnesses or rejections.
 
-| Site | Additional abstract observation |
-| --- | --- |
-| Evaluation started | evaluator=running, phase=evaluating |
-| Evaluator returns | evaluator=done, verdict=approve/deny |
-| Cancellation received | evaluator=cancelling, phase=cancelling |
-| Tool start / successful caller finish | phase=dispatched |
-| ToolApprovalDenied caught by caller | phase=rejected |
-| Resolution, close, runner return | No inferred phase/evaluator state |
+## What the evidence cannot establish
 
-The schema-2 checker generates a module extending the actual Approval specification.
-Recorded human, closure, and completion inputs execute their matching action at the
-cursor step; that successor must match the observation. Hidden Consume, Cancelled,
-and Finalize transitions are allowed between observations. No hidden human response,
-closure, or evaluator completion is allowed. TLC searches for cursor completion; an expected TraceNotMatched counterexample supplies
-a witness model execution. The generated module and witness log are artifacts.
+Observers delegate to original methods and add no suspending awaits in production
+paths. Instrumentation equivalence is nevertheless unproven. Synchronous model actions
+hide intermediate publications, while raw events preserve them for separate assertions.
+Partial snapshots and hidden internal actions leave multiple possible model witnesses.
 
-This allows unobserved internal model actions. It establishes existence of a consistent model
-execution, not exact action-by-action correspondence or completeness of recording.
-Unexpectedly permissive abstractions can accept traces; additional fields and
-negative controls reduce, but do not eliminate, that risk.
-
-Three fabricated traces must be rejected after completed exploration: dispatch while
- denied, approved reverting to pending, and approval with no recorded input. Missing scenarios, stale implementation
-hashes, missing terminal observations, unsupported fields, parse/tool failures, and
-timeouts fail CI. Synthetic traces are not implementation findings.
-
-## Cancellation and progress
-
-The original model collapsed cancellation into immediate completion. This revision
-exposes cancelling explicitly. Weak fairness of Cancelled encodes eventual cleanup;
-without it the model permits indefinite blockage after an accepted human decision.
-The delayed-cleanup experiment demonstrates this dependency for a finite delay,
-not termination for arbitrary evaluators. A cancellation-resistant evaluator remains
-outside the claimed progress guarantee.
-
-## Reproduce
-
-```bash
-uv run --frozen pytest tests/research/test_approval_traces.py -q
-uv run --frozen python research/scripts/check_traces.py --jar /path/to/tla2tools.jar
-```
-
-CI uploads traces, generated checker modules/configurations, witness/rejection logs,
-summary, and test results. Read CI evidence for the exact commit being evaluated;
-local collection or boundary-test success is not real-server evidence.
-
-
-## Subsequent fidelity audit
-
-Both schema-2 checkers now prohibit hidden human, close, and evaluator-completion
-inputs; the coupled checker also prohibits hidden remembered and policy inputs. See
-[Cascade](models/cascade/README.md). Earlier schema-1 runs used broader hidden Next
-transitions and must not be described as satisfying the stronger criterion.
-
-Challenging the valid-result assumption exposed a malformed superseded-result defect
-in `_run_auto_mode_evaluator`. A type guard preserves settled outcomes and terminal
-publication; valid-verdict model transitions are unchanged. The source-map manifest
-records that review. The [finding](upstream/superseded-result.md) includes standalone
-regressions, a real Temporal branch experiment, and isolated reintroduction evidence.
-This finding originated in inspection and targeted execution, not a TLC counterexample.
+The abstraction assumes valid identities, trusted inputs, and eventual cleanup for
+progress. It excludes replay, arbitrary call count, authentication, and external effects.
+The [malformed-result finding](upstream/superseded-result.md) challenged an earlier input
+assumption. Its fix preserves the valid-input model transitions; its separate regressions
+do not turn trace validation into a refinement proof.

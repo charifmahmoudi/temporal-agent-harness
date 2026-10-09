@@ -1,85 +1,77 @@
-# Approval race model
+# Approval: decision stability and gate completion
 
-## Contract
+[Case study](../../../RESEARCH.md) · [Properties](../../properties.md) · [Executable specification](Approval.tla)
 
-For already registered gated calls, the first accepted resolution stands. A call
-dispatches only after an approving outcome. Denial prevents dispatch. Closure denies
-an unresolved gate during finalization; it does not revoke an earlier approval.
-The validator does not reject a human decision solely because the session is closing:
-an approval accepted after the close flag but before finalization can still stand.
-This is modeled behavior, not an assertion that closure forbids further dispatch.
+## Purpose
 
-An evaluator task finishing is distinct from its verdict being applied. When both
-completion and another resolution are observable, the settled branch supersedes
-the evaluator. On the ordinary evaluator path, returning and applying its verdict
-have no intervening suspension and are modeled together.
+Approval models already-registered gated calls. Human decisions, automatic evaluation,
+and closure compete to settle each call. Decision settlement is separate from caller
+completion: superseded evaluator cleanup must finish before gate finalization.
 
-## Mapping to agent_workflow.py
+![Approval state dimensions](../../figures/gate.svg)
 
-| Model | Implementation |
-| --- | --- |
-| Init | `_WorkflowStatus.register_pending_approval` and evaluator startup in `_apply_approval_policy` |
-| Human | `_validate_tool_approval` then the synchronous body of `_handle_tool_approval` (remember=False) |
-| Complete | Evaluator task returns approve, deny, escalate, or raises |
-| Consume | `_run_auto_mode_evaluator` settled-first branch; ordinary verdict application in `_apply_approval_policy` |
-| Close | `_handle_close` sets `_closed` |
-| Finalize | Gate wait, `_WorkflowStatus.finalize_approval`, and dispatch permission / `ToolApprovalDenied` |
+**Figure 1.** This projection omits evaluator/verdict detail and observer variables.
+It shows the normal model; synthetic fault transitions are excluded.
 
-`first` and `resolutions` are observer variables, not implementation fields. The
-source-map manifest fingerprints executable AST of 15 relevant functions. Drift
-forces a review; unchanged hashes do not prove correspondence, and changes elsewhere
-can invalidate assumptions without triggering this guard.
+## State
 
-## Bounds and assumptions
+Let $C=\mathrm{Calls}$ be a finite set of calls. A state is
 
-- Safety: one call, plus two independent calls. The two-call configuration checks
-  interleavings, not policy cascades or arbitrary numbers of calls.
-- All entries begin registered, with auto mode running and no policy exemption.
-- Valid, immutable inputs; no UUID collisions; trusted human-update path; valid
-  evaluator decision objects on the ordinary verdict transitions. Malformed ordinary
-  results are abstracted as error; malformed superseded results are covered by separate
-  implementation regressions and a robustness fix, not a refinement proof. No policy updates, remember cascade, or argument reconstruction.
-- Validator and non-yielding handler are treated as one atomic accepted update.
-- Cancellation has an explicit cancelling phase. Progress assumes eventual cleanup;
-  cancellation-resistant evaluators can invalidate progress conclusions.
-- `dispatched` means permission to dispatch, not a committed external effect.
-- Progress assumes weak fairness of Consume, Cancelled, and Finalize. It does not assert that
-  humans answer or that a hung evaluator finishes without closure/resolution.
-- Terminal deadlocks are permitted (`CHECK_DEADLOCK FALSE`); explicit temporal
-  properties check progress. No state-space constraints prune reachable states.
-- Cancellation completion is nondeterministic. No refinement or overapproximation
-  theorem connecting this abstraction to every concrete behavior is established.
+$$v=\langle status,evaluator,verdict,phase,closed,first,resolutions\rangle.$$
 
-## Reproduction
+| Variable | Domain | Interpretation |
+| --- | --- | --- |
+| `status[c]` | pending, approved, denied | Current permission decision |
+| `evaluator[c]` | running, done, cancelling, stopped, consumed | Abstract evaluator lifecycle |
+| `verdict[c]` | none, approve, deny, escalate, error | Recorded evaluator result |
+| `phase[c]` | evaluating, cancelling, gate, dispatched, rejected | Caller progress |
+| `closed` | Boolean | Shared session closure flag |
+| `first[c]` | none, approved, denied | Observer: first accepted decision |
+| `resolutions[c]` | 0, 1, 2 | Observer: resolution count; 2 accommodates fault controls |
 
-Java 17, Python 3.12, TLA+ tools v1.8.0 (asset checksum enforced by the runner).
+Initially every call is pending/evaluating, its evaluator is running, no verdict or
+first decision exists, resolution counts are zero, and the session is open.
 
-```bash
-curl -fL https://github.com/tlaplus/tlaplus/releases/download/v1.8.0/tla2tools.jar -o /tmp/tla2tools.jar
-python research/scripts/check_source.py
-python research/scripts/check_model.py --jar /tmp/tla2tools.jar
-uv run --frozen pytest tests/harness/test_tool_approvals.py tests/research/test_approval_boundary.py -q
-```
+## Transition relation
 
-TLC performs parsing/semantic checking before exploration. The runner requires
-completed successful checks for Safety, TwoCalls, and Liveness, and exit code 12
-with the named invariant violation for each synthetic fault. Tool failures and
-timeouts fail the workflow. Results include logs, commit, model/JAR hashes, and Java
-version under `research/results/latest`; CI uploads them.
+A prime denotes the successor value. For example, a normal human resolution is
 
-Boundary experiments run the actual validator, decision handler, evaluator-resolution
-method, closure method, and finalizer with a controlled scheduling shim. They are not
-a Temporal emulator or a refinement proof. Real Temporal traces and their separate model checker are
-documented in [the correspondence report](../../correspondence.md). The existing integration
-suite supplies separate evidence under the actual Temporal test environment.
+$$
+status[c]=pending \;\land\; status'[c]=d \;\land\;
+first'[c]=d \;\land\; resolutions'[c]=resolutions[c]+1,
+$$
 
-## Claims and limits
+where $d\in\{approved,denied\}$; other calls and lifecycle fields stay unchanged.
+The complete assignments are in `Human(c,d)` in the executable specification.
 
-Passing TLC means these properties hold in the finite abstraction: TypeOK,
-DecisionStable, SingleResolution, AuthorizedDispatch, DeniedNeverDispatches; with
-fairness, ResolutionProgress. Synthetic Overwrite violates SingleResolution and
-Bypass violates AuthorizedDispatch. No parameterized proof, automatic extraction,
-exhaustive trace conformance, or implementation-verification theorem is claimed.
+| Action | Enabled when | Effect |
+| --- | --- | --- |
+| `Human(c,d)` | Call is pending | Accept and record the human decision. |
+| `Complete(c,v)` | Evaluator is running | Record task completion and its verdict; leave status unchanged. |
+| `Consume(c)` | Caller is evaluating; result is done, call settled, or session closed | If settled/closed, preserve the decision and enter cancellation. Otherwise apply approve/deny, or leave escalation/error pending; enter gate. |
+| `Cancelled(c)` | Caller is cancelling | Complete cleanup and enter gate. |
+| `Finalize(c)` | Caller is at gate and settled or closed | Deny a still-pending closed call; finish as dispatched or rejected. |
+| `Close` | Session is open | Set the closure flag; do not directly change decisions. |
 
-Policy cascades are studied separately in [Cascade](../cascade/README.md), which
-extends this module without duplicating its gate transitions.
+`Next` is the disjunction of these actions. Normal configurations disable `Bypass`
+and overwritten human resolutions. Those isolated fault switches test detector
+sensitivity and do not describe normal implementation behavior.
+
+## Safety and progress
+
+The [property catalogue](../../properties.md) defines the five state invariants and
+`ResolutionProgress`. `FairSpec` additionally assumes, for every call, weak fairness
+of Consume, Cancelled, and Finalize. A continuously enabled action must eventually
+execute. This represents eventual runner scheduling and evaluator cleanup; it does
+not require a human response or a hung evaluator to return without another decision.
+
+## Bounds and correspondence
+
+Safety is checked for one call and two independent calls; progress is checked for one.
+These configurations do not establish a parameterized theorem. Calls begin registered;
+policy bypass, argument reconstruction, authentication, and external effects are outside
+this model. Ordinary malformed results are abstracted as error. The malformed
+superseded-result fix has separate implementation regressions.
+
+[Code correspondence](../../correspondence.md) explains the concrete boundaries.
+[Evidence and reproduction](../../evidence.md) lists configurations and commands.

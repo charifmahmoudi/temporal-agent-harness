@@ -1,75 +1,113 @@
-# Tool-approval verification case study
+# Verifying tool-approval races in Temporal Agent Harness
 
-This fork studies whether Temporal Agent Harness implements a coherent approval
-contract when human decisions, automatic evaluations, and closure overlap.
-Baseline: `049e01c9d726ef68bff7be857c735723b9801512` (MIT; original copyright retained).
+## Research question
 
-## Initial result and status
+**Does an accepted tool decision remain stable when human responses, evaluator
+completion, policy changes, and closure overlap?**
 
-The initial specification is manually derived from code, not automatically extracted.
-It checks finite one- and two-call configurations and conditional progress. There is
-no claim of whole-system verification. A subsequent assumption audit identified
-a malformed superseded-result defect; its fix and regressions are documented below.
-Synthetic faults are included to check that the verification detects overwritten
-decisions and dispatch without approval; they do not describe original-code defects.
+Temporal Agent Harness runs agents as durable workflows. Before a gated tool runs,
+a human or automatic evaluator may approve or deny it. Several operations can compete
+for that decision. An approval may also change policy and release other waiting calls.
+Correctness therefore concerns both the accepted outcome and the order of subsequent
+cleanup, publication, and dispatch.
 
-See [implementation correspondence](research/correspondence.md),
-[model contract and mapping](research/models/approval/README.md) and the
-[verification workflow](.github/workflows/verification.yml).
+This case study defines that contract in TLA+, checks finite models, and tests their
+correspondence with controlled executions of the Python implementation. The models
+are manually derived from code. The original baseline is
+`049e01c9d726ef68bff7be857c735723b9801512`; its MIT license is retained.
 
-## Strategy and next experiments
+## System and abstraction
 
-1. Establish a small auditable code-to-model mapping and reproducible CI checks.
-2. Validate scheduling assumptions against real Temporal executions; retain the
-   existing integration tests alongside controlled method-boundary experiments.
-3. Review the implemented policy-change and approve-and-remember extension, its
-   projection boundaries, and retained evidence. Inspect upstream history for
-   evidence of actual engineering needs.
-4. If extraction is pursued, define a restricted Python subset and fail on unsupported
-   semantics. The AST drift guard in this contribution is not an extractor.
-5. Evaluate findings against full-text related work before making publication claims.
+![Approval status and caller phase](research/figures/gate.svg)
 
-Research value will depend on consequential findings, faithful correspondence, and
-transferable lessons. A passing model alone is not sufficient for a conference paper.
-Argument-specific approval scope, identity/authentication of operators, external side effects, retries,
-Temporal internals, event ordering, callbacks, and policy revocation are not verified
-by the initial model.
+**Figure 1.** Decision status and caller phase are distinct. Approval settles the
+permission decision; it does not complete evaluator cancellation. Closure sets a
+flag; an unresolved call becomes denied when gate finalization executes.
 
-The [coupled policy extension](research/models/cascade/README.md) adds tool-name
-eligibility, remembered approvals, synchronous cascades, and restrictive updates.
-Its [interpretation report](research/findings-policy.md) separates intended findings
-from their exact-commit CI evidence and the limits of those results.
+The model begins with registered, gated calls and running evaluators. It abstracts
+LLM reasoning into a nondeterministic verdict. `dispatched` means permission to
+execute the tool, rather than a committed external effect. Trusted operator inputs
+and stable call identities are assumptions.
 
-## Immediate next milestone
+## Contract and properties
 
-The objective is an auditable case study of approval stability under competing
-resolutions and changing tool-name policy. The expanded suite covers both registration orders and additional evaluator outcomes.
-The next milestone is independent review of the abstraction and the focused upstream
-fix, followed by broader policy/replay studies.
+The contract preserves the **first accepted resolution**. A restrictive policy update
+changes eligibility without revoking accepted approvals. An unresolved gate closes
+as denied; an approval accepted before finalization can still stand after closure.
 
-Before enlarging the model, review each transition against its mapped implementation
-function and inspect the raw-event evidence for atomicity assumptions. Then add
-alternate registration order and controlled evaluator-completion orderings, retaining
-counterexample-to-test reproductions for any discrepancy. Acceptance requires passing
-model checks, invalid-control rejection, actual Temporal assertions, and ordered trace
-witnesses with documented scope. A changed source fingerprint requires mapping review.
+| Obligation | Meaning | Kind |
+| --- | --- | --- |
+| DecisionStable | A later event cannot replace the first accepted outcome. | Safety |
+| SingleResolution | Each call resolves at most once. | Safety |
+| AuthorizedDispatch | Dispatch requires an approved outcome. | Safety |
+| DeniedNeverDispatches | A denied call cannot dispatch. | Safety |
+| ScopePreserved | A policy cascade releases only eligible calls. | Safety |
+| CauseBeforeCascade | A remembered decision publishes before its siblings. | Safety |
+| ResolutionProgress | A settled or closed gate eventually reaches a caller outcome, under explicit fairness assumptions. | Conditional liveness |
 
-A scientific contribution still requires comparison with related work and evidence
-that the resulting contract or failure modes matter beyond this harness. Publishable
-claims must identify what is new, the practical consequence, and threats to validity;
-CI success alone cannot establish those claims.
+The [property catalogue](research/properties.md) gives the formulas, assumptions,
+violating examples, and checks. Type consistency is checked separately.
 
+## Formal models
 
-## Current evidence and critical review
+For state vector $v$, both models have the standard behavior specification
 
-The [weakness ledger](research/review-assessment.md) records both research-review and
-upstream-contributor judgments, with unresolved obligations kept explicit. The
-[related-work comparison](research/related-work.md) rules out broad novelty claims.
-The [upstream contribution packet](research/upstream/superseded-result.md) contains a
-small production fix and standalone regressions for malformed superseded evaluator
-output. It has been prepared for review, not submitted to the original team.
+$$
+\mathrm{Spec} = \mathrm{Init} \land \Box[\mathrm{Next}]_v.
+$$
 
-The schema-2 coupled checker binds actions to recorded inputs and permits only three
-internal gate actions to remain hidden. This closes one source of permissiveness;
-it does not establish Python refinement. Generality beyond the harness and the
-validity of an eventual conference submission remain open research questions.
+Here, $\Box$ means “always,” and $[\mathrm{Next}]_v$ allows a model action or a
+stuttering step that leaves $v$ unchanged. Safety excludes bad reachable states;
+liveness constrains infinite behaviors under stated scheduling assumptions.
+
+| Model | State and purpose | Detailed definition |
+| --- | --- | --- |
+| Approval | Per-call decision, evaluator, and caller phase; shared closure flag. Checks human/evaluator/closure competition. | [State variables and transitions](research/models/approval/README.md) |
+| Cascade | Extends Approval with tool eligibility and resolution history. Checks remembered approvals, policy replacement, and publication order. | [Extension and atomic actions](research/models/cascade/README.md) |
+
+## Method and evidence
+
+```mermaid
+flowchart TD
+    C["Python implementation"] --> M["Code-derived TLA+ model"]
+    C --> T["Controlled Temporal executions"]
+    M --> S["TLC safety and progress checks"]
+    M --> V["Recorded-input trace validation"]
+    T --> V
+    S --> E["Retained evidence and findings"]
+    V --> E
+```
+
+**Figure 4.** Model checking explores the abstraction. Trace validation asks whether
+recorded implementation inputs and partial states admit a legal model execution.
+It cannot establish universal implementation refinement.
+
+The verified artifact includes **82 selected tests, 13 model configurations,
+31 matching traces, eight rejected invalid traces, and four detected Python faults**.
+Exact commits, CI links, experiment coverage, and commands are centralized in
+[Evidence and reproduction](research/evidence.md).
+
+An assumption audit also found a concrete robustness defect: a malformed evaluator
+result could abort an already-settled gate. A type guard and regressions fix it.
+The [finding and minimal patch](research/upstream/superseded-result.md) distinguish
+this inspection-led discovery from model-checker findings.
+
+## Scientific scope and next experiment
+
+The evidence supports bounded model properties, controlled trace conformance, and
+selected regression sensitivity. It does not establish arbitrary-call correctness,
+Temporal replay correctness, external-effect atomicity, operator authentication,
+or semantic correctness of evaluator judgments.
+
+Trace validation and formal agent enforcement have substantial precedents; the
+[related-work comparison](research/related-work.md) defines the contribution boundary.
+The next experiment compares existing tests, expanded tests, model checks, and trace
+checks on a predefined fault corpus to measure the formal layer's added value.
+Independent abstraction review and broader policy/replay coverage remain necessary.
+
+## Reading path
+
+1. [Approval model](research/models/approval/README.md) → [Cascade model](research/models/cascade/README.md): understand the state machines.
+2. [Properties](research/properties.md): inspect the mathematical obligations and counterexamples.
+3. [Code correspondence](research/correspondence.md) → [Evidence](research/evidence.md): assess fidelity and reproduce results.
+4. [Related work](research/related-work.md) → [Critical assessment](research/review-assessment.md): evaluate novelty and unresolved claims.

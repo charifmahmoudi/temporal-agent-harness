@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 690" role="img" aria-labelledby="title desc">
+<title id="title">Figure 1. Approval model</title><desc id="desc">Decision status and caller phase are separate. Cancellation cleanup precedes finalization.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#516579"/></marker></defs>
+<rect width="1120" height="690" fill="white"/>
+<g font-family="DejaVu Sans,Arial,sans-serif">
+<text x="32" y="40" font-size="25" fill="#15283b" font-weight="bold">Figure 1. Approval model</text>
+<text x="32" y="78" font-size="18" fill="#516579" font-weight="normal">Two state dimensions: decision status and caller phase</text>
+<text x="32" y="121" font-size="16" fill="#15283b" font-weight="bold">DECISION STATUS</text>
+<rect x="35" y="142" width="220" height="70" rx="9" fill="#f5f8fc" stroke="#245bb2" stroke-width="2"/>
+<text x="50" y="171" font-size="17" fill="#245bb2" font-weight="bold">pending</text>
+<text x="50" y="195" font-size="17" fill="#15283b" font-weight="normal">No accepted resolution</text>
+<rect x="445" y="142" width="220" height="70" rx="9" fill="#f5f8fc" stroke="#167052" stroke-width="2"/>
+<text x="460" y="171" font-size="17" fill="#167052" font-weight="bold">approved</text>
+<text x="460" y="195" font-size="17" fill="#15283b" font-weight="normal">First decision retained</text>
+<rect x="855" y="142" width="220" height="70" rx="9" fill="#f5f8fc" stroke="#a52f38" stroke-width="2"/>
+<text x="870" y="171" font-size="17" fill="#a52f38" font-weight="bold">denied</text>
+<text x="870" y="195" font-size="17" fill="#15283b" font-weight="normal">First decision retained</text>
+<path d="M255,160  L445,160" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<text x="302" y="148" font-size="15" fill="#516579" font-weight="normal">Approve</text>
+<path d="M145,212 L145,248 L965,248 L965,212" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<text x="310" y="237" font-size="15" fill="#516579" font-weight="normal">Deny; or close at finalization</text>
+<text x="32" y="275" font-size="16" fill="#15283b" font-weight="bold">CALLER PHASE</text>
+<rect x="35" y="302" width="220" height="70" rx="9" fill="#f5f8fc" stroke="#245bb2" stroke-width="2"/>
+<text x="50" y="331" font-size="17" fill="#245bb2" font-weight="bold">evaluating</text>
+<text x="50" y="355" font-size="17" fill="#15283b" font-weight="normal">Wait for deciding event</text>
+<rect x="445" y="302" width="220" height="70" rx="9" fill="#f5f8fc" stroke="#245bb2" stroke-width="2"/>
+<text x="460" y="331" font-size="17" fill="#245bb2" font-weight="bold">cancelling</text>
+<text x="460" y="355" font-size="17" fill="#15283b" font-weight="normal">Evaluator cleanup</text>
+<rect x="445" y="448" width="220" height="70" rx="9" fill="#f5f8fc" stroke="#245bb2" stroke-width="2"/>
+<text x="460" y="477" font-size="17" fill="#245bb2" font-weight="bold">gate</text>
+<text x="460" y="501" font-size="17" fill="#15283b" font-weight="normal">Wait / finalize outcome</text>
+<rect x="855" y="395" width="220" height="70" rx="9" fill="#f5f8fc" stroke="#167052" stroke-width="2"/>
+<text x="870" y="424" font-size="17" fill="#167052" font-weight="bold">dispatched</text>
+<text x="870" y="448" font-size="17" fill="#15283b" font-weight="normal">Approved permission</text>
+<rect x="855" y="540" width="220" height="70" rx="9" fill="#f5f8fc" stroke="#a52f38" stroke-width="2"/>
+<text x="870" y="569" font-size="17" fill="#a52f38" font-weight="bold">rejected</text>
+<text x="870" y="593" font-size="17" fill="#15283b" font-weight="normal">Denied outcome</text>
+<path d="M255,337  L445,337" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<text x="268" y="323" font-size="15" fill="#516579" font-weight="normal">Consume: superseded</text>
+<path d="M555,372  L555,448" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<text x="574" y="417" font-size="15" fill="#516579" font-weight="normal">Cancelled</text>
+<path d="M145,372  L445,478" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<text x="48" y="450" font-size="15" fill="#516579" font-weight="normal">Consume: ordinary result</text>
+<path d="M665,469  L855,430" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<text x="675" y="415" font-size="15" fill="#516579" font-weight="normal">Finalize: approved</text>
+<path d="M665,500  L855,575" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<text x="679" y="570" font-size="15" fill="#516579" font-weight="normal">Finalize: deny</text>
+<text x="32" y="630" font-size="17" fill="#516579" font-weight="normal">Complete records a verdict; it does not itself resolve the decision.</text>
+<text x="32" y="657" font-size="17" fill="#516579" font-weight="normal">Close sets a flag. An unresolved gate is denied only when Finalize executes.</text>
+</g>
+</svg>
