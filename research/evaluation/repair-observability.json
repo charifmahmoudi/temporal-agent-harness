@@ -1,0 +1,1015 @@
+{
+  "archive_sha256": "2a7490c635b4c12b1041c39ee9d752ffcabb9c0fd674757c14b2fb92ef37172a",
+  "features": [
+    "approved",
+    "cancelled",
+    "patch_branch"
+  ],
+  "fresh_policy": [
+    {
+      "id": "fresh-approve",
+      "kind": "synthetic-policy",
+      "observed": {
+        "approved": true,
+        "cancelled": false,
+        "patch_branch": false
+      },
+      "producer": "fresh",
+      "required_command": true
+    },
+    {
+      "id": "fresh-deny",
+      "kind": "synthetic-policy",
+      "observed": {
+        "approved": false,
+        "cancelled": false,
+        "patch_branch": false
+      },
+      "producer": "fresh",
+      "required_command": false
+    },
+    {
+      "id": "fresh-cancel",
+      "kind": "synthetic-policy",
+      "observed": {
+        "approved": true,
+        "cancelled": true,
+        "patch_branch": true
+      },
+      "producer": "fresh",
+      "required_command": false
+    }
+  ],
+  "oracle_comparisons": 40,
+  "oracle_leakage_control": "feasible but inadmissible",
+  "retained": [
+    {
+      "history_sha256": "8c8dadf686d3b2164286748111b869207b1c51b8882d2857c524f699978ebb48",
+      "id": "baseline--approve",
+      "kind": "retained-replay",
+      "observed": {
+        "approved": true,
+        "cancelled": false,
+        "patch_branch": false
+      },
+      "producer": "baseline",
+      "required_command": true
+    },
+    {
+      "history_sha256": "a549546b6d0116901b08ecbf440555d3af729a5564a8ba0c124d08f8ffc155b4",
+      "id": "baseline--deny",
+      "kind": "retained-replay",
+      "observed": {
+        "approved": false,
+        "cancelled": false,
+        "patch_branch": false
+      },
+      "producer": "baseline",
+      "required_command": false
+    },
+    {
+      "history_sha256": "9f8526a9121613e4a9a6aafd544c87fec3f5450b2e17668029a7b728d723ad54",
+      "id": "baseline--second_raise",
+      "kind": "retained-replay",
+      "observed": {
+        "approved": true,
+        "cancelled": true,
+        "patch_branch": false
+      },
+      "producer": "baseline",
+      "required_command": true
+    },
+    {
+      "history_sha256": "d7ff8a16b0e5c747b40b5f119459bcdc3cb8a4e21ba6642698c19c07c78e945a",
+      "id": "baseline--second_return",
+      "kind": "retained-replay",
+      "observed": {
+        "approved": true,
+        "cancelled": true,
+        "patch_branch": false
+      },
+      "producer": "baseline",
+      "required_command": true
+    },
+    {
+      "history_sha256": "708cd6a662b4b8be7de4ee82d0bd8d5b270a9ec692b3dcad58ab00f6952f6043",
+      "id": "corrected--approve",
+      "kind": "retained-replay",
+      "observed": {
+        "approved": true,
+        "cancelled": false,
+        "patch_branch": false
+      },
+      "producer": "corrected",
+      "required_command": true
+    },
+    {
+      "history_sha256": "20ed2ce6550515cfc7a629e5c54d29eae732eeeb024ab466e7fe553004e88179",
+      "id": "corrected--deny",
+      "kind": "retained-replay",
+      "observed": {
+        "approved": false,
+        "cancelled": false,
+        "patch_branch": false
+      },
+      "producer": "corrected",
+      "required_command": false
+    },
+    {
+      "history_sha256": "21a5de18be6ce551683b5a2267976969e72b8b28422857ad6c7fb9a2681e515e",
+      "id": "corrected--second_raise",
+      "kind": "retained-replay",
+      "observed": {
+        "approved": true,
+        "cancelled": true,
+        "patch_branch": false
+      },
+      "producer": "corrected",
+      "required_command": false
+    },
+    {
+      "history_sha256": "6b7060f75a18b5bd7dc14ba19ff3dd08c8fd6d51e05da4bd42d8aa35e0f6ba9d",
+      "id": "corrected--second_return",
+      "kind": "retained-replay",
+      "observed": {
+        "approved": true,
+        "cancelled": true,
+        "patch_branch": false
+      },
+      "producer": "corrected",
+      "required_command": false
+    },
+    {
+      "history_sha256": "e38331133738fb89db1e8989a8a2a33be1168e753ff7b1de68c6d7c2a89388da",
+      "id": "versioned--approve",
+      "kind": "retained-replay",
+      "observed": {
+        "approved": true,
+        "cancelled": false,
+        "patch_branch": false
+      },
+      "producer": "versioned",
+      "required_command": true
+    },
+    {
+      "history_sha256": "e976fd7244cca33a5c0783bd7a00ef9cfabb1b73d6e0e2670071524714c659ea",
+      "id": "versioned--deny",
+      "kind": "retained-replay",
+      "observed": {
+        "approved": false,
+        "cancelled": false,
+        "patch_branch": false
+      },
+      "producer": "versioned",
+      "required_command": false
+    },
+    {
+      "history_sha256": "79a8d33453903b24aef14b9d6457d35248422569eff1d3f4a6a111bae6793230",
+      "id": "versioned--second_raise",
+      "kind": "retained-replay",
+      "observed": {
+        "approved": true,
+        "cancelled": true,
+        "patch_branch": true
+      },
+      "producer": "versioned",
+      "required_command": false
+    },
+    {
+      "history_sha256": "e8ca14a1c2865fcbead6e582143b514952de1847824c191456ac1490c0402339",
+      "id": "versioned--second_return",
+      "kind": "retained-replay",
+      "observed": {
+        "approved": true,
+        "cancelled": true,
+        "patch_branch": true
+      },
+      "producer": "versioned",
+      "required_command": false
+    }
+  ],
+  "scenarios": {
+    "B": {
+      "feature_subsets": [
+        {
+          "conflict": [
+            "baseline--approve",
+            "baseline--deny"
+          ],
+          "feasible": false,
+          "features": [],
+          "observation": []
+        },
+        {
+          "conflict": [
+            "baseline--approve",
+            "fresh-cancel"
+          ],
+          "feasible": false,
+          "features": [
+            "approved"
+          ],
+          "observation": [
+            true
+          ]
+        },
+        {
+          "conflict": [
+            "baseline--approve",
+            "baseline--deny"
+          ],
+          "feasible": false,
+          "features": [
+            "cancelled"
+          ],
+          "observation": [
+            false
+          ]
+        },
+        {
+          "conflict": [
+            "baseline--approve",
+            "baseline--deny"
+          ],
+          "feasible": false,
+          "features": [
+            "patch_branch"
+          ],
+          "observation": [
+            false
+          ]
+        },
+        {
+          "conflict": [
+            "baseline--second_raise",
+            "fresh-cancel"
+          ],
+          "feasible": false,
+          "features": [
+            "approved",
+            "cancelled"
+          ],
+          "observation": [
+            true,
+            true
+          ]
+        },
+        {
+          "feasible": true,
+          "features": [
+            "approved",
+            "patch_branch"
+          ],
+          "table": [
+            {
+              "command": false,
+              "observation": [
+                false,
+                false
+              ]
+            },
+            {
+              "command": true,
+              "observation": [
+                true,
+                false
+              ]
+            },
+            {
+              "command": false,
+              "observation": [
+                true,
+                true
+              ]
+            }
+          ]
+        },
+        {
+          "conflict": [
+            "baseline--approve",
+            "baseline--deny"
+          ],
+          "feasible": false,
+          "features": [
+            "cancelled",
+            "patch_branch"
+          ],
+          "observation": [
+            false,
+            false
+          ]
+        },
+        {
+          "feasible": true,
+          "features": [
+            "approved",
+            "cancelled",
+            "patch_branch"
+          ],
+          "table": [
+            {
+              "command": false,
+              "observation": [
+                false,
+                false,
+                false
+              ]
+            },
+            {
+              "command": true,
+              "observation": [
+                true,
+                false,
+                false
+              ]
+            },
+            {
+              "command": true,
+              "observation": [
+                true,
+                true,
+                false
+              ]
+            },
+            {
+              "command": false,
+              "observation": [
+                true,
+                true,
+                true
+              ]
+            }
+          ]
+        }
+      ],
+      "minimum_feature_sets": [
+        [
+          "approved",
+          "patch_branch"
+        ]
+      ],
+      "rows": [
+        "baseline--approve",
+        "baseline--deny",
+        "baseline--second_raise",
+        "baseline--second_return",
+        "fresh-approve",
+        "fresh-deny",
+        "fresh-cancel"
+      ]
+    },
+    "B_C_V": {
+      "feature_subsets": [
+        {
+          "conflict": [
+            "baseline--approve",
+            "baseline--deny"
+          ],
+          "feasible": false,
+          "features": [],
+          "observation": []
+        },
+        {
+          "conflict": [
+            "baseline--approve",
+            "corrected--second_raise"
+          ],
+          "feasible": false,
+          "features": [
+            "approved"
+          ],
+          "observation": [
+            true
+          ]
+        },
+        {
+          "conflict": [
+            "baseline--approve",
+            "baseline--deny"
+          ],
+          "feasible": false,
+          "features": [
+            "cancelled"
+          ],
+          "observation": [
+            false
+          ]
+        },
+        {
+          "conflict": [
+            "baseline--approve",
+            "baseline--deny"
+          ],
+          "feasible": false,
+          "features": [
+            "patch_branch"
+          ],
+          "observation": [
+            false
+          ]
+        },
+        {
+          "conflict": [
+            "baseline--second_raise",
+            "corrected--second_raise"
+          ],
+          "feasible": false,
+          "features": [
+            "approved",
+            "cancelled"
+          ],
+          "observation": [
+            true,
+            true
+          ]
+        },
+        {
+          "conflict": [
+            "baseline--approve",
+            "corrected--second_raise"
+          ],
+          "feasible": false,
+          "features": [
+            "approved",
+            "patch_branch"
+          ],
+          "observation": [
+            true,
+            false
+          ]
+        },
+        {
+          "conflict": [
+            "baseline--approve",
+            "baseline--deny"
+          ],
+          "feasible": false,
+          "features": [
+            "cancelled",
+            "patch_branch"
+          ],
+          "observation": [
+            false,
+            false
+          ]
+        },
+        {
+          "conflict": [
+            "baseline--second_raise",
+            "corrected--second_raise"
+          ],
+          "feasible": false,
+          "features": [
+            "approved",
+            "cancelled",
+            "patch_branch"
+          ],
+          "observation": [
+            true,
+            true,
+            false
+          ]
+        }
+      ],
+      "minimum_feature_sets": [],
+      "rows": [
+        "baseline--approve",
+        "baseline--deny",
+        "baseline--second_raise",
+        "baseline--second_return",
+        "corrected--approve",
+        "corrected--deny",
+        "corrected--second_raise",
+        "corrected--second_return",
+        "versioned--approve",
+        "versioned--deny",
+        "versioned--second_raise",
+        "versioned--second_return",
+        "fresh-approve",
+        "fresh-deny",
+        "fresh-cancel"
+      ]
+    },
+    "B_V": {
+      "feature_subsets": [
+        {
+          "conflict": [
+            "baseline--approve",
+            "baseline--deny"
+          ],
+          "feasible": false,
+          "features": [],
+          "observation": []
+        },
+        {
+          "conflict": [
+            "baseline--approve",
+            "fresh-cancel"
+          ],
+          "feasible": false,
+          "features": [
+            "approved"
+          ],
+          "observation": [
+            true
+          ]
+        },
+        {
+          "conflict": [
+            "baseline--approve",
+            "baseline--deny"
+          ],
+          "feasible": false,
+          "features": [
+            "cancelled"
+          ],
+          "observation": [
+            false
+          ]
+        },
+        {
+          "conflict": [
+            "baseline--approve",
+            "baseline--deny"
+          ],
+          "feasible": false,
+          "features": [
+            "patch_branch"
+          ],
+          "observation": [
+            false
+          ]
+        },
+        {
+          "conflict": [
+            "baseline--second_raise",
+            "fresh-cancel"
+          ],
+          "feasible": false,
+          "features": [
+            "approved",
+            "cancelled"
+          ],
+          "observation": [
+            true,
+            true
+          ]
+        },
+        {
+          "feasible": true,
+          "features": [
+            "approved",
+            "patch_branch"
+          ],
+          "table": [
+            {
+              "command": false,
+              "observation": [
+                false,
+                false
+              ]
+            },
+            {
+              "command": true,
+              "observation": [
+                true,
+                false
+              ]
+            },
+            {
+              "command": false,
+              "observation": [
+                true,
+                true
+              ]
+            }
+          ]
+        },
+        {
+          "conflict": [
+            "baseline--approve",
+            "baseline--deny"
+          ],
+          "feasible": false,
+          "features": [
+            "cancelled",
+            "patch_branch"
+          ],
+          "observation": [
+            false,
+            false
+          ]
+        },
+        {
+          "feasible": true,
+          "features": [
+            "approved",
+            "cancelled",
+            "patch_branch"
+          ],
+          "table": [
+            {
+              "command": false,
+              "observation": [
+                false,
+                false,
+                false
+              ]
+            },
+            {
+              "command": true,
+              "observation": [
+                true,
+                false,
+                false
+              ]
+            },
+            {
+              "command": true,
+              "observation": [
+                true,
+                true,
+                false
+              ]
+            },
+            {
+              "command": false,
+              "observation": [
+                true,
+                true,
+                true
+              ]
+            }
+          ]
+        }
+      ],
+      "minimum_feature_sets": [
+        [
+          "approved",
+          "patch_branch"
+        ]
+      ],
+      "rows": [
+        "baseline--approve",
+        "baseline--deny",
+        "baseline--second_raise",
+        "baseline--second_return",
+        "versioned--approve",
+        "versioned--deny",
+        "versioned--second_raise",
+        "versioned--second_return",
+        "fresh-approve",
+        "fresh-deny",
+        "fresh-cancel"
+      ]
+    },
+    "C": {
+      "feature_subsets": [
+        {
+          "conflict": [
+            "corrected--approve",
+            "corrected--deny"
+          ],
+          "feasible": false,
+          "features": [],
+          "observation": []
+        },
+        {
+          "conflict": [
+            "corrected--approve",
+            "corrected--second_raise"
+          ],
+          "feasible": false,
+          "features": [
+            "approved"
+          ],
+          "observation": [
+            true
+          ]
+        },
+        {
+          "conflict": [
+            "corrected--approve",
+            "corrected--deny"
+          ],
+          "feasible": false,
+          "features": [
+            "cancelled"
+          ],
+          "observation": [
+            false
+          ]
+        },
+        {
+          "conflict": [
+            "corrected--approve",
+            "corrected--deny"
+          ],
+          "feasible": false,
+          "features": [
+            "patch_branch"
+          ],
+          "observation": [
+            false
+          ]
+        },
+        {
+          "feasible": true,
+          "features": [
+            "approved",
+            "cancelled"
+          ],
+          "table": [
+            {
+              "command": false,
+              "observation": [
+                false,
+                false
+              ]
+            },
+            {
+              "command": true,
+              "observation": [
+                true,
+                false
+              ]
+            },
+            {
+              "command": false,
+              "observation": [
+                true,
+                true
+              ]
+            }
+          ]
+        },
+        {
+          "conflict": [
+            "corrected--approve",
+            "corrected--second_raise"
+          ],
+          "feasible": false,
+          "features": [
+            "approved",
+            "patch_branch"
+          ],
+          "observation": [
+            true,
+            false
+          ]
+        },
+        {
+          "conflict": [
+            "corrected--approve",
+            "corrected--deny"
+          ],
+          "feasible": false,
+          "features": [
+            "cancelled",
+            "patch_branch"
+          ],
+          "observation": [
+            false,
+            false
+          ]
+        },
+        {
+          "feasible": true,
+          "features": [
+            "approved",
+            "cancelled",
+            "patch_branch"
+          ],
+          "table": [
+            {
+              "command": false,
+              "observation": [
+                false,
+                false,
+                false
+              ]
+            },
+            {
+              "command": true,
+              "observation": [
+                true,
+                false,
+                false
+              ]
+            },
+            {
+              "command": false,
+              "observation": [
+                true,
+                true,
+                false
+              ]
+            },
+            {
+              "command": false,
+              "observation": [
+                true,
+                true,
+                true
+              ]
+            }
+          ]
+        }
+      ],
+      "minimum_feature_sets": [
+        [
+          "approved",
+          "cancelled"
+        ]
+      ],
+      "rows": [
+        "corrected--approve",
+        "corrected--deny",
+        "corrected--second_raise",
+        "corrected--second_return",
+        "fresh-approve",
+        "fresh-deny",
+        "fresh-cancel"
+      ]
+    },
+    "C_V": {
+      "feature_subsets": [
+        {
+          "conflict": [
+            "corrected--approve",
+            "corrected--deny"
+          ],
+          "feasible": false,
+          "features": [],
+          "observation": []
+        },
+        {
+          "conflict": [
+            "corrected--approve",
+            "corrected--second_raise"
+          ],
+          "feasible": false,
+          "features": [
+            "approved"
+          ],
+          "observation": [
+            true
+          ]
+        },
+        {
+          "conflict": [
+            "corrected--approve",
+            "corrected--deny"
+          ],
+          "feasible": false,
+          "features": [
+            "cancelled"
+          ],
+          "observation": [
+            false
+          ]
+        },
+        {
+          "conflict": [
+            "corrected--approve",
+            "corrected--deny"
+          ],
+          "feasible": false,
+          "features": [
+            "patch_branch"
+          ],
+          "observation": [
+            false
+          ]
+        },
+        {
+          "feasible": true,
+          "features": [
+            "approved",
+            "cancelled"
+          ],
+          "table": [
+            {
+              "command": false,
+              "observation": [
+                false,
+                false
+              ]
+            },
+            {
+              "command": true,
+              "observation": [
+                true,
+                false
+              ]
+            },
+            {
+              "command": false,
+              "observation": [
+                true,
+                true
+              ]
+            }
+          ]
+        },
+        {
+          "conflict": [
+            "corrected--approve",
+            "corrected--second_raise"
+          ],
+          "feasible": false,
+          "features": [
+            "approved",
+            "patch_branch"
+          ],
+          "observation": [
+            true,
+            false
+          ]
+        },
+        {
+          "conflict": [
+            "corrected--approve",
+            "corrected--deny"
+          ],
+          "feasible": false,
+          "features": [
+            "cancelled",
+            "patch_branch"
+          ],
+          "observation": [
+            false,
+            false
+          ]
+        },
+        {
+          "feasible": true,
+          "features": [
+            "approved",
+            "cancelled",
+            "patch_branch"
+          ],
+          "table": [
+            {
+              "command": false,
+              "observation": [
+                false,
+                false,
+                false
+              ]
+            },
+            {
+              "command": true,
+              "observation": [
+                true,
+                false,
+                false
+              ]
+            },
+            {
+              "command": false,
+              "observation": [
+                true,
+                true,
+                false
+              ]
+            },
+            {
+              "command": false,
+              "observation": [
+                true,
+                true,
+                true
+              ]
+            }
+          ]
+        }
+      ],
+      "minimum_feature_sets": [
+        [
+          "approved",
+          "cancelled"
+        ]
+      ],
+      "rows": [
+        "corrected--approve",
+        "corrected--deny",
+        "corrected--second_raise",
+        "corrected--second_return",
+        "versioned--approve",
+        "versioned--deny",
+        "versioned--second_raise",
+        "versioned--second_return",
+        "fresh-approve",
+        "fresh-deny",
+        "fresh-cancel"
+      ]
+    }
+  },
+  "schema": 1,
+  "source_sha256": {
+    "research/scripts/check_history_model.py": "6190e3a36547ea54043a74fb07720b5b81a0ddc33ab3c3ad1a7cb954b13923b2",
+    "research/scripts/check_repair_observability.py": "35d710d809e1ccbdfb64ea90f9f386ee43d15508fef8b75b1810de3a36a367dc"
+  },
+  "status": "retrospective restricted-grammar diagnostic; novelty not established"
+}

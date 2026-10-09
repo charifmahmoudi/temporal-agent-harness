@@ -3,6 +3,10 @@
 Status: design prepared; **no second case selected, predictions frozen, or experiment run**.
 [Novelty assessment](novelty-review.md) · [Review packet](review-packet.md)
 
+The [active contribution search](scientific-contribution-search.md) now supplies the
+candidate-selection question. Its retrospective pilot is not the prospective second
+case and does not satisfy this gate. The objective remains scientific contribution.
+
 ## Decision now
 
 Defer execution, not preparation. The literature already establishes cancellation
@@ -84,7 +88,9 @@ broad prevalence or universal correctness.
 - If the contract is disputed, request maintainer clarification; do not label the
   implementation defective solely because it conflicts with our preferred contract.
 - If no candidate meets the selection criteria, stop broadening the artifact and
-  pursue independent review of the existing experience report.
+  revisit candidate selection and the research hypothesis. Do not substitute a toy
+  case or declare the scientific objective achieved. Independent review of existing
+  evidence can proceed separately.
 
 The go decision requires a qualifying selection record and explicit predictions,
 plus a reviewer judgment that the study addresses a question the literature has not

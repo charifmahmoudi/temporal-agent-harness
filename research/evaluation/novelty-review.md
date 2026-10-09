@@ -3,6 +3,16 @@
 Review date: 2026-10-09. Subject: `ccb74997404f6b9fd9f5654ac5a441337581d673`.
 [Storyline](../storyline.md) · [Earlier related-work review](../related-work.md) · [Independent review packet](review-packet.md)
 
+## Current research direction
+
+The owner has chosen to pursue a scientific contribution and rejected an
+experience-report reframing. [Search iteration 1](scientific-contribution-search.md)
+adds live synthesis, execution-edit checking, and partial-observation control to the
+closest-work comparison. It rejects the broad update-synthesis novelty claim and
+retains source-derived replay/observation analysis as an unestablished candidate.
+The assessment below concerns what the earlier evidence supports, not a decision
+to lower or replace the scientific objective.
+
 ## Decision
 
 The present evidence supports a focused engineering case study. It does not support
@@ -106,4 +116,4 @@ analysis procedure on a previously unmeasured implementation, with predictions f
 before execution and failures retained. The [prospective-case gate](prospective-case.md)
 defines selection, falsification, and stopping rules. No qualifying second case has
 been selected or run yet. Independent review should first decide whether this would
-answer a useful question beyond the experience report.
+test a scientifically distinct hypothesis against the closest existing methods.

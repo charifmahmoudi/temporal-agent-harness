@@ -146,6 +146,16 @@ and seven invalid records, and adds a separate History model. Twelve expected TL
 results include agreement with all 36 retained replay cells. These are retrospective
 checks over existing evidence, not new independent reproduction or a refinement proof.
 
+## Active scientific question
+
+The [contribution search](research/evaluation/scientific-contribution-search.md)
+asks whether replay obligations and implementable repair conditions can be derived
+soundly from asynchronous source code. Its first executable pilot diagnoses a
+conflict between two retained cohorts under a declared observation vocabulary.
+The pilot's finite consistency algorithm is established reasoning, not a new method;
+source-level derivation and scientific novelty remain unestablished. This research
+objective has not been replaced by an engineering-report objective.
+
 ## Scientific scope and next evidence
 
 The evidence supports bounded model properties, controlled trace conformance, and

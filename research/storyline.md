@@ -2,6 +2,16 @@
 
 [Case study](../RESEARCH.md) · [Concrete walkthrough](walkthrough.md)
 
+## Scientific objective
+
+The objective is a scientific contribution, not a change of destination to an
+engineering experience report. The [active contribution search](evaluation/scientific-contribution-search.md)
+records a formal candidate, its closest precedents, an executed diagnostic, and
+explicit rejection criteria. The broad safe-update idea and elementary observation
+conflict are not new principles. Automatic, sound derivation from async code remains
+a hypothesis to investigate. The central claim below states existing evidence,
+not a claim that this research objective has already been achieved.
+
 ## Central claim
 
 **For the studied tool gate, preserving an accepted approval is insufficient to
