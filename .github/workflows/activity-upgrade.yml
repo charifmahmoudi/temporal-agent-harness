@@ -25,6 +25,12 @@ jobs:
         run: uv run --frozen pytest tests/activity_upgrade/test_scoring.py -q
       - name: Measure activities, cross-version replay, and worker replacement
         run: uv run --frozen python research/scripts/run_activity_study.py
+      - name: Run all harness regressions against versioned correction
+        working-directory: research/results/activity-upgrade/variants/versioned
+        run: |
+          PYTHONPATH="$PWD" "$GITHUB_WORKSPACE/.venv/bin/python" run_regressions.py \
+            "$GITHUB_WORKSPACE/research/results/activity-upgrade/versioned-manifest.json" \
+            "$GITHUB_WORKSPACE/research/results/activity-upgrade/versioned-regressions.xml"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -34,5 +40,6 @@ jobs:
             research/results/activity-upgrade/*.json
             research/results/activity-upgrade/*.log
             research/results/activity-upgrade/*.patch
+            research/results/activity-upgrade/*.xml
             research/results/activity-upgrade/histories/
             research/results/activity-upgrade/cases/

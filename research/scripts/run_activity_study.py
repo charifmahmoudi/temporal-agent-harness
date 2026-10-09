@@ -61,7 +61,7 @@ def prepare(output):
         cwd = ROOT if name == 'baseline' else output / 'variants' / name
         if name != 'baseline':
             cwd.mkdir(parents=True)
-            for folder in ('temporal_agent_harness', 'tests/activity_upgrade'):
+            for folder in ('temporal_agent_harness', 'tests', 'examples'):
                 shutil.copytree(ROOT / folder, cwd / folder,
                                 ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
             (cwd / SOURCE).write_text(source)
@@ -71,6 +71,19 @@ def prepare(output):
         manifest_path = output / (name + '-manifest.json')
         write(manifest_path, manifest)
         variants[name] = (cwd, manifest_path)
+        if name != 'baseline':
+            # A synchronous entry point lets pytest own its event loops. Imports
+            # and bytes are checked before running the entire harness suite.
+            (cwd / 'run_regressions.py').write_text('''from pathlib import Path
+import hashlib, json, sys
+import temporal_agent_harness.harness.agent_workflow as impl
+expected = Path('temporal_agent_harness/harness/agent_workflow.py').resolve()
+assert Path(impl.__file__).resolve() == expected, 'Wrong regression import'
+manifest = json.loads(Path(sys.argv[1]).read_text())
+assert hashlib.sha256(expected.read_bytes()).hexdigest() == manifest['source_sha256']
+import pytest
+sys.exit(pytest.main(['tests/harness/', '-q', '--junitxml=' + sys.argv[2]]))
+''')
     # Retain exact proposed implementation diffs, not only their fingerprints.
     import difflib
     for name, source in [('corrected', fixed), ('versioned', versioned)]:
@@ -233,15 +246,18 @@ class Study:
                 # Preserve the explicit failed-task history before administrative
                 # teardown; termination is cleanup, not an experimental outcome.
                 await handle.terminate(reason='v4 experiment finished after recorded nondeterminism')
-            await self.observe(handle, case, 'terminal')
+            row['terminal_history'] = await self.observe(handle, case, 'terminal')
+            row['ledger_after'] = self.ledger(case)
+            write(self.output / 'cases' / case / 'result.json', row)
             if cut == 'before_cancel':
                 assert recovered['recovery'] == 'compatible'
                 assert recovered['state']['outcome'] == 'cancelled'
-                assert not row['ledger_after'] and not recovered['history']['scheduled']
+                assert not row['ledger_after'] and not row['terminal_history']['scheduled']
             elif target == 'versioned':
                 assert recovered['recovery'] == 'compatible'
                 assert recovered['state']['outcome'] == 'dispatched'
                 assert len(row['ledger_before']) == len(row['ledger_after']) == 1
+                assert len(row['terminal_history']['scheduled']) == 1
             # The unversioned post-activity case is measured, not pre-scored.
 
     async def replay(self):
@@ -280,7 +296,9 @@ class Study:
             write(self.output / 'summary.json', {'schema': 1, 'fresh': self.fresh,
                 'live': self.live, 'errors': self.errors,
                 'source_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
-                'runner_sha256': sha(Path(__file__)), 'lock_sha256': sha(ROOT / 'uv.lock')})
+                'runner_sha256': sha(Path(__file__)),
+                'process_sha256': sha(ROOT / 'research/scripts/activity_process.py'),
+                'lock_sha256': sha(ROOT / 'uv.lock')})
 
 
 if __name__ == '__main__':

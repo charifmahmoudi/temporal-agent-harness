@@ -84,3 +84,18 @@ The local test server failed startup before this experiment. CI will execute the
 arms. A successful result requires every planned case accounted for, valid controls,
 retained evidence, a clear mechanism, and synchronized maintainer/scientific assessment.
 Independent review, deployment incidence, generality, and novelty remain open.
+
+## Validation extension after the first run
+
+Run 37936552316 completed all 12 fresh executions, 36 replay cells, and eight live
+replacements. It reproduced baseline activity execution after cancellation and
+explicit nondeterminism for direct correction after the old activity completed.
+V preserved baseline replay and prevented newly delivered pre-dispatch cancellation.
+The full matrix also exposed incompatible paths involving unversioned C histories.
+
+Before the final retained run, strengthen validation by running the entire existing
+harness suite against the isolated V source with import/hash checks. Also compare
+ledger and scheduled-event counts after terminal cleanup, not only at the first
+recovered observation. These additions do not change the frozen cases or scoring.
+They test remedy compatibility and guard against effects that arrive after an early
+observation. The first run remains identified as the initial measurement.
