@@ -1,0 +1,38 @@
+name: Activity-backed cancellation and upgrade
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'tests/activity_upgrade/**'
+      - 'research/scripts/*activity*'
+      - 'research/evaluation/activity-*'
+      - 'temporal_agent_harness/**'
+      - '.github/workflows/activity-upgrade.yml'
+      - 'uv.lock'
+permissions:
+  contents: read
+jobs:
+  investigate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          version: '0.12.23'
+          python-version: '3.12'
+      - name: Check experiment scoring
+        run: uv run --frozen pytest tests/activity_upgrade/test_scoring.py -q
+      - name: Measure activities, cross-version replay, and worker replacement
+        run: uv run --frozen python research/scripts/run_activity_study.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: activity-upgrade
+          path: |
+            research/results/activity-upgrade/summary.json
+            research/results/activity-upgrade/*.json
+            research/results/activity-upgrade/*.log
+            research/results/activity-upgrade/*.patch
+            research/results/activity-upgrade/histories/
+            research/results/activity-upgrade/cases/
