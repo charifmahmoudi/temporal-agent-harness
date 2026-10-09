@@ -21,8 +21,9 @@ See [implementation correspondence](research/correspondence.md),
 1. Establish a small auditable code-to-model mapping and reproducible CI checks.
 2. Validate scheduling assumptions against real Temporal executions; retain the
    existing integration tests alongside controlled method-boundary experiments.
-3. Extend to policy changes and approve-and-remember only after the initial mapping
-   is reviewed. Inspect upstream history for evidence of actual engineering needs.
+3. Review the implemented policy-change and approve-and-remember extension, its
+   projection boundaries, and retained evidence. Inspect upstream history for
+   evidence of actual engineering needs.
 4. If extraction is pursued, define a restricted Python subset and fail on unsupported
    semantics. The AST drift guard in this contribution is not an extractor.
 5. Evaluate findings against full-text related work before making publication claims.
@@ -36,4 +37,22 @@ by the initial model.
 The [coupled policy extension](research/models/cascade/README.md) adds tool-name
 eligibility, remembered approvals, synchronous cascades, and restrictive updates.
 Its [interpretation report](research/findings-policy.md) separates intended findings
-from the exact-commit CI evidence needed to establish them.
+from their exact-commit CI evidence and the limits of those results.
+
+## Immediate next milestone
+
+The objective is an auditable case study of approval stability under competing
+resolutions and changing tool-name policy. The next milestone is independent review
+of the abstraction and scenario coverage, followed by broader controlled schedules.
+
+Before enlarging the model, review each transition against its mapped implementation
+function and inspect the raw-event evidence for atomicity assumptions. Then add
+alternate registration order and controlled evaluator-completion orderings, retaining
+counterexample-to-test reproductions for any discrepancy. Acceptance requires passing
+model checks, invalid-control rejection, actual Temporal assertions, and ordered trace
+witnesses with documented scope. A changed source fingerprint requires mapping review.
+
+A scientific contribution still requires comparison with related work and evidence
+that the resulting contract or failure modes matter beyond this harness. Publishable
+claims must identify what is new, the practical consequence, and threats to validity;
+CI success alone cannot establish those claims.
