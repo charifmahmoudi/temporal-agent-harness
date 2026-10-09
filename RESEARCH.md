@@ -142,7 +142,7 @@ history must be replayed. These are distinct probes and results, not a contradic
 
 The [model-connection follow-up](research/evaluation/model-bridges.md) checks four
 retained cancellation traces directly against Cleanup, rejects eight model controls
-and three malformed records, and adds a separate History model. Twelve expected TLC
+and seven invalid records, and adds a separate History model. Twelve expected TLC
 results include agreement with all 36 retained replay cells. These are retrospective
 checks over existing evidence, not new independent reproduction or a refinement proof.
 

@@ -10,7 +10,7 @@ from check_cleanup_traces import module, require
 from check_history_model import observations, evidence_module
 
 EVAL = ROOT/'research/evaluation'
-FILES = ['research/scripts/check_cleanup_traces.py','research/scripts/check_history_model.py',
+FILES = ['tests/cancellation/audit.py','research/scripts/check_cleanup_traces.py','research/scripts/check_history_model.py',
          'research/models/approval/Approval.tla','research/models/cancellation/Cleanup.tla',
          'research/models/history/History.tla']
 
@@ -41,7 +41,7 @@ def validate():
     cm = json.loads((EVAL/'cancellation-results.json').read_text())
     require(cleanup['archive_sha256'] == cm['artifacts']['implementation']['sha256'], 'cleanup archive mismatch')
     require(len(cleanup['results']) == 12 and sum(r['matched'] for r in cleanup['results']) == 4, 'cleanup counts mismatch')
-    require(len(cleanup['projection_rejections']) == 3 and len(history['results']) == 12 and history['cells'] == 36, 'bridge counts mismatch')
+    require(len(cleanup['projection_rejections']) == 7 and len(history['results']) == 12 and history['cells'] == 36, 'bridge counts mismatch')
     for group,summary in [('cleanup-conformance',cleanup),('history-model',history)]:
         require(summary['jar_sha256'] == JAR_SHA256, 'jar mismatch')
         for result in summary['results']:
@@ -74,7 +74,7 @@ reproduction or a prospective prediction exercise.
 | --- | --- | --- |
 | Cleanup correspondence | Four retained caller-cancellation traces matched | Both child responses, under baseline and corrected code, admit executions of the corresponding Cleanup model |
 | Model rejection controls | Eight rejected | Wrong cancellation semantics, invented approval, wrong input/order, and rewritten decision cannot explain the supplied observations |
-| Projection validation | Three malformed records rejected | Missing child response, duplicate settlement, and premature tool-start evidence are not silently accepted |
+| Projection validation | Seven invalid records rejected | Missing child response, duplicate settlement, premature dispatch, mismatched tool/evaluation identity, and duplicate ended/error terminals are rejected |
 | History model | Twelve expected TLC results | Finite guarantees, expected counterexamples, a duplicate-effect fault, and evidence agreement behave as specified |
 | Recorded replay comparison | All 36 cells agree | The model's command/marker rules explain the retained compatibility results within its restricted scope |
 
@@ -93,6 +93,20 @@ ledger effect, and replay. It explains why C's fresh cancellation property and i
 failure to preserve B's history can both hold. V preserves the modeled B histories
 but fails the proposed universal C-to-V property. These are explicit finite checks,
 not a general deployment theorem.
+
+## Review follow-up: audit integrity (F05)
+
+The projection now checks tool identity, matching evaluation start/terminal IDs,
+and exactly one terminal across ended, superseded, and error events. These are
+concrete preconditions for the single-call probe, not new Cleanup state variables
+or a proof of general audit integrity. The projector is not a full event-schema
+validator. Regression tests validate the added ended/error payloads against the
+actual Pydantic classes, so those controls cannot be dismissed as invalid schemas.
+
+The original [v1 snapshot](model-bridges-v1.json.gz) retains the pre-review checker
+hash and its three projection controls. This refreshed snapshot adds four controls
+and preserves the same four trace witnesses and eight model rejections. Original
+implementation histories and scientific counterexamples are unchanged.
 
 ## Evidence and reproduction
 
@@ -138,7 +152,7 @@ def main():
     text = render(); path = EVAL/'model-bridges.md'
     if args.check: require(path.read_text() == text, 'bridge report drift')
     else: path.write_text(text)
-    print('Model bridges verified: 4 trace witnesses, 8 model rejections, 3 projection rejections, 12 history checks, 36 replay cells.')
+    print('Model bridges verified: 4 trace witnesses, 8 model rejections, 7 projection rejections, 12 history checks, 36 replay cells.')
 
 
 if __name__ == '__main__': main()

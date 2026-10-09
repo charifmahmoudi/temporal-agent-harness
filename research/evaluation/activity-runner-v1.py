@@ -19,8 +19,6 @@ import uuid
 from prepare_cancellation_variant import corrected, SOURCE
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT))
-from tests.cancellation.audit import validate_audit
 PATCH_ID = 'approval-caller-cancel-v1'
 SCENARIOS = ('approve', 'deny', 'second_raise', 'second_return')
 
@@ -206,7 +204,9 @@ class Study:
             count = int(expected == 'dispatched')
             assert len(row['ledger']) == len(row['history']['scheduled']) == len(row['history']['completed']) == count
             assert all(e['workflow_id'] == handle.id and e['attempt'] == 1 for e in row['ledger'])
-            validate_audit(row['state']['events'])
+            terminals = [e for e in row['state']['events']
+                         if e['type'] == 'auto_approval_evaluation_superseded']
+            assert len(terminals) == 1
             if scenario.startswith('second_'):
                 assert row['state']['caller_cancel_requested'] and row['state']['second_cancel']
                 assert len(row['history']['caller_signals']) == 1

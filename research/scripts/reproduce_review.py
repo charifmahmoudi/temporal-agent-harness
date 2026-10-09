@@ -49,6 +49,11 @@ def git(subject, *args):
     return subprocess.check_output(['git',*args],cwd=subject,text=True).strip()
 
 
+def interpreter_path(subject, explicit=None):
+    """Preserve executable symlinks: resolving a venv Python loses its environment."""
+    return Path(os.path.abspath(explicit)) if explicit else subject / ".venv/bin/python"
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--subject',type=Path,required=True)
@@ -59,7 +64,7 @@ def main():
     parser.add_argument('--reviewer',help='Identity or explicitly self-test; does not establish independence')
     args = parser.parse_args()
     subject = args.subject.resolve()
-    python = args.python.resolve() if args.python else subject/'.venv/bin/python'
+    python = interpreter_path(subject, args.python)
     jar = args.jar.resolve() if args.jar else Path('/path/to/pinned/tla2tools.jar')
     plan = {stage:commands(subject,python,jar,stage) for stage in ('audit','models','activity','cancellation')}
     if args.stage == 'plan':

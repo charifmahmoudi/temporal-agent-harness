@@ -10,9 +10,13 @@ import json
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 import zipfile
 
 from check_model import ROOT, JAR_SHA256
+
+sys.path.insert(0, str(ROOT))
+from tests.cancellation.audit import validate_audit
 
 
 def require(condition, message):
@@ -36,6 +40,7 @@ def project(record):
     require(after['done'] is True and after['outcome'] in {'dispatched', 'cancelled'},
             'unsupported final observation')
     events = after['events']
+    validate_audit(events)
     require(events[:len(before['events'])] == before['events'], 'event prefix changed')
     types = [e['type'] for e in events]
     relevant = ('tool_approval_requested', 'auto_approval_evaluation_started',
@@ -149,11 +154,24 @@ def main():
     for name,trace in invalid.items():
         rows.append(run_case(jar,output,name,trace,True,False))
     rejected = []
-    for name in ('missing-child-response','duplicate-resolution','early-tool-start'):
+    for name in ('missing-child-response','duplicate-resolution','early-tool-start',
+                 'wrong-tool-identity','wrong-evaluation-identity','duplicate-ended','duplicate-error'):
         record = deepcopy(records['baseline-second_raise'])
         if name == 'missing-child-response': record['after']['second_cancel'] = False
         elif name == 'duplicate-resolution':
             record['after']['events'].append(next(e for e in record['after']['events'] if e['type']=='tool_approval_resolved'))
+        elif name == 'wrong-tool-identity':
+            next(e for e in record['after']['events'] if e['type']=='tool_start')['tool_id'] = 'unrelated-call'
+        elif name == 'wrong-evaluation-identity':
+            next(e for e in record['after']['events'] if e['type']=='auto_approval_evaluation_superseded')['evaluation_id'] = 'unrelated-evaluation'
+        elif name.startswith('duplicate-'):
+            event = deepcopy(next(e for e in record['after']['events'] if e['type']=='auto_approval_evaluation_superseded'))
+            if name == 'duplicate-ended':
+                event.update(type='auto_approval_evaluation_ended', verdict='deny', reason=None, details={})
+            else:
+                event.pop('verdict', None)
+                event.update(type='auto_approval_evaluation_error', message='synthetic control')
+            record['after']['events'].append(event)
         else:
             events = record['after']['events']; index = next(i for i,e in enumerate(events) if e['type']=='tool_start')
             event = events.pop(index); events.insert(len(record['before']['events']),event)
@@ -166,7 +184,7 @@ def main():
               'checker_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
               'sources':sources,'results':rows,'projection_rejections':rejected}
     (output/'summary.json').write_text(json.dumps(result,indent=2)+'\n')
-    print('Cleanup: 4 retained traces matched, 8 model controls rejected, 3 malformed records rejected.')
+    print('Cleanup: 4 retained traces matched, 8 model controls rejected, 7 invalid records rejected.')
 
 
 if __name__ == '__main__': main()

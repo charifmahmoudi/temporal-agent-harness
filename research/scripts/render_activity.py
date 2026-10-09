@@ -1,5 +1,6 @@
 """Regenerate the v4 report only after checking its raw histories and effect ledger."""
 import argparse
+import ast
 import base64
 from collections import Counter
 import hashlib
@@ -9,7 +10,7 @@ from types import SimpleNamespace
 import xml.etree.ElementTree as ET
 import zipfile
 
-from run_activity_study import history_projection, PATCH_ID, SCENARIOS
+from run_activity_study import history_projection, PATCH_ID, SCENARIOS, validate_audit
 
 ROOT = Path(__file__).resolve().parents[2]
 VARIANTS = ('baseline', 'corrected', 'versioned')
@@ -28,7 +29,14 @@ def validate():
         summary = json.loads(archive.read('summary.json'))
         assert not summary['errors']
         assert summary['source_commit'] == metadata['checkout_sha']
-        assert summary['runner_sha256'] == hashlib.sha256((ROOT / 'research/scripts/run_activity_study.py').read_bytes()).hexdigest()
+        # Preserve the exact measured runner; current assertions were strengthened by F05.
+        frozen_runner = ROOT / 'research/evaluation/activity-runner-v1.py'
+        assert summary['runner_sha256'] == hashlib.sha256(frozen_runner.read_bytes()).hexdigest()
+        def projection_nodes(path):
+            return [ast.dump(n, include_attributes=False) for n in ast.parse(path.read_text()).body
+                    if (isinstance(n, ast.FunctionDef) and n.name == 'history_projection')
+                    or (isinstance(n, ast.Assign) and any(isinstance(t, ast.Name) and t.id in {'PATCH_ID', 'SCENARIOS'} for t in n.targets))]
+        assert projection_nodes(frozen_runner) == projection_nodes(ROOT / 'research/scripts/run_activity_study.py')
         assert summary['process_sha256'] == hashlib.sha256((ROOT / 'research/scripts/activity_process.py').read_bytes()).hexdigest()
         assert summary['lock_sha256'] == hashlib.sha256((ROOT / 'uv.lock').read_bytes()).hexdigest()
         manifests = {v: json.loads(archive.read(v + '-manifest.json')) for v in VARIANTS}
@@ -51,7 +59,7 @@ def validate():
             assert row['state']['outcome'] == expected
             assert row['state']['status'] == ('denied' if row['scenario'] == 'deny' else 'approved')
             assert len(actual) == len(row['history']['scheduled']) == len(row['history']['completed']) == int(expected == 'dispatched')
-            assert len([e for e in row['state']['events'] if e['type'] == 'auto_approval_evaluation_superseded']) == 1
+            validate_audit(row['state']['events'])
             if row['scenario'].startswith('second_'):
                 assert row['state']['second_cancel'] and row['state']['caller_cancel_requested']
                 assert len(row['history']['caller_signals']) == 1

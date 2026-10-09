@@ -98,7 +98,7 @@ The before snapshot's phase/pending mapping relies on the delayed evaluator prob
 it is an explicit projection assumption, not extraction of Python task internals.
 
 Four traces match; four wrong-model checks and four altered input/state sequences
-are rejected by TLC. Three malformed records are rejected before TLC. See the
+are rejected by TLC. Seven invalid records are rejected before TLC, including call/evaluation identity mismatches and duplicate audit terminals. See the
 [retained results](evaluation/model-bridges.md). These are retrospective conformance
 checks, not an independent reproduction or a universal implementation theorem.
 

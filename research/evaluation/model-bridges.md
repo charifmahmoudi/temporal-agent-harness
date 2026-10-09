@@ -10,7 +10,7 @@ reproduction or a prospective prediction exercise.
 | --- | --- | --- |
 | Cleanup correspondence | Four retained caller-cancellation traces matched | Both child responses, under baseline and corrected code, admit executions of the corresponding Cleanup model |
 | Model rejection controls | Eight rejected | Wrong cancellation semantics, invented approval, wrong input/order, and rewritten decision cannot explain the supplied observations |
-| Projection validation | Three malformed records rejected | Missing child response, duplicate settlement, and premature tool-start evidence are not silently accepted |
+| Projection validation | Seven invalid records rejected | Missing child response, duplicate settlement, premature dispatch, mismatched tool/evaluation identity, and duplicate ended/error terminals are rejected |
 | History model | Twelve expected TLC results | Finite guarantees, expected counterexamples, a duplicate-effect fault, and evidence agreement behave as specified |
 | Recorded replay comparison | All 36 cells agree | The model's command/marker rules explain the retained compatibility results within its restricted scope |
 
@@ -29,6 +29,20 @@ ledger effect, and replay. It explains why C's fresh cancellation property and i
 failure to preserve B's history can both hold. V preserves the modeled B histories
 but fails the proposed universal C-to-V property. These are explicit finite checks,
 not a general deployment theorem.
+
+## Review follow-up: audit integrity (F05)
+
+The projection now checks tool identity, matching evaluation start/terminal IDs,
+and exactly one terminal across ended, superseded, and error events. These are
+concrete preconditions for the single-call probe, not new Cleanup state variables
+or a proof of general audit integrity. The projector is not a full event-schema
+validator. Regression tests validate the added ended/error payloads against the
+actual Pydantic classes, so those controls cannot be dismissed as invalid schemas.
+
+The original [v1 snapshot](model-bridges-v1.json.gz) retains the pre-review checker
+hash and its three projection controls. This refreshed snapshot adds four controls
+and preserves the same four trace witnesses and eight model rejections. Original
+implementation histories and scientific counterexamples are unchanged.
 
 ## Evidence and reproduction
 

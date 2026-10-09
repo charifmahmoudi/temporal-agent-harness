@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'tests/activity_upgrade/**'
+      - 'tests/cancellation/audit.py'
       - 'research/scripts/*activity*'
       - 'research/evaluation/activity-*'
       - 'temporal_agent_harness/**'

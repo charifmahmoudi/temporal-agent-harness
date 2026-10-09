@@ -121,3 +121,16 @@ finalization may occur between observations. Wrong-model and malformed-record co
 are rejected. See [results and limits](../../evaluation/model-bridges.md).
 The separate [History model](../history/README.md) covers a reduced durable-command
 boundary; no formal composition with Cleanup is claimed.
+
+## Audit checks and an additional suspension
+
+The concrete trace projector and current experiment assertions check that dispatch
+belongs to the reviewed call and that the evaluation has one correlated terminal
+across ended, superseded, and error events. These are single-probe observation
+checks outside Cleanup's state space; see the [F05 follow-up](../../evaluation/owner-review-followup.md).
+They do not establish full event-schema validity or general audit integrity.
+
+After evaluator cleanup returns, `_apply_approval_policy` also awaits
+`workflow.wait_condition` before synchronous gate finalization. The five-state
+witness abstracts this path; it does not enumerate every Python scheduling point.
+Cancellation arriving after cleanup is outside this model's `CancelCaller` guard.

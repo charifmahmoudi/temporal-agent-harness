@@ -24,6 +24,8 @@ from temporal_agent_harness.harness.agent import AutoApprovalCriteria, AutoAppro
 from temporal_agent_harness.harness.agent_protocol import AgentConfig, AgentMessage, TextMessage, TextReply, ToolApprovalDecision
 from temporal_agent_harness.harness.agent_workflow import AgentWorkflowRunner, ToolApprovalDenied
 
+from tests.cancellation.audit import validate_audit
+
 VARIANT = os.environ.get('CANCELLATION_VARIANT', 'baseline')
 OUTPUT = Path('research/results/cancellation') / VARIANT
 
@@ -191,8 +193,7 @@ async def test_cleanup_preserves_settlement(environment, mode, decision):
         retain(name,evidence)
         assert evidence['outcome'] == ('dispatched' if decision=='approve' else 'rejected')
         assert evidence['status'] == ('approved' if decision=='approve' else 'denied')
-        terminals = [e for e in evidence['events'] if e['type']=='auto_approval_evaluation_superseded']
-        assert len(terminals)==1
+        validate_audit(evidence['events'])
         if decision!='close':
             await handle.signal('close')
         await finish_and_replay(handle,name)
@@ -232,7 +233,7 @@ async def test_caller_cancellation_during_cleanup(environment,mode):
         assert after['status']=='approved'
         assert after['outcome']==('cancelled' if VARIANT=='corrected' else 'dispatched')
         assert any(e['type']=='tool_start' for e in after['events']) is (VARIANT=='baseline')
-        assert len([e for e in after['events'] if e['type']=='auto_approval_evaluation_superseded'])==1
+        validate_audit(after['events'])
         await handle.signal('close')
         await finish_and_replay(handle,'caller-'+mode)
 

@@ -1,5 +1,7 @@
 # Response to owner review F01–F03
 
+**Historical response:** the [extended follow-up](owner-review-followup.md) records reviewer acceptance of F01–F03 and the subsequent F04/F05 fixes. The unreviewed-item status below describes the initial review only.
+
 [Issue #2](https://github.com/charifmahmoudi/temporal-agent-harness/issues/2) · [Original review](https://github.com/charifmahmoudi/temporal-agent-harness/issues/2#issuecomment-6088725189) · [Validation record](owner-review-response.json)
 
 The input is an AI-assisted static review posted on the owner's behalf. It is not
