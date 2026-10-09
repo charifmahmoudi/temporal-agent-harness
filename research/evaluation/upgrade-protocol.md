@@ -62,3 +62,14 @@ cross-framework guarantees. Versioning changes require a separate experiment.
 Complete this milestone when all cells are reported, controls pass, and documentation
 states the result and deployment implications without altering v2's historical claims.
 Independent review and maintainer feedback remain external gates.
+
+## Observer-control amendment
+
+The first local pilot completed all 64 cells: same-version observations matched,
+while both caller-cancellation scenarios changed application outcome across versions
+despite successful command replay. Before the final measured run, add a paired replay
+without the observer for every cell. Require equal command classification in every
+pair. This checks one possible instrumentation explanation; it does not prove full
+observer noninterference. Also freeze workflow and dependency-lock hashes and test
+timeout/error classification separately. Report 64 matrix cells and 128 replay
+executions, rather than counting the ablation as additional independent histories.
