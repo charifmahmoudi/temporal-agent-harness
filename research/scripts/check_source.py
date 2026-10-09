@@ -17,6 +17,8 @@ def digests():
         "AgentWorkflowRunner._validate_tool_approval", "AgentWorkflowRunner._handle_tool_approval",
         "AgentWorkflowRunner._run_auto_mode_evaluator", "AgentWorkflowRunner._handle_close",
         "AgentWorkflowRunner._resolve_and_publish",
+        "AgentWorkflowRunner._apply_policy_update", "AgentWorkflowRunner._policy_auto_approves",
+        "_WorkflowStatus.set_approval_policy", "_WorkflowStatus.pending_approval_entries",
     }
     found = {}
     for node in module.body:

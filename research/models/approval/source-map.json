@@ -7,9 +7,13 @@
     "_WorkflowStatus.is_approval_resolved": "b62c4b0ea9a61859dc1acd2a5cc45131c27141179b095b0038a727002e594c18",
     "_WorkflowStatus.resolve_approval": "9a4d9784102f86592209ac1be2cf1df1c705f6e9dcdec6ad3fe74f957357817f",
     "_WorkflowStatus.finalize_approval": "6e745df991580fa113b328c7e304bed67b60b56a52657200bc1102183e2dc351",
+    "_WorkflowStatus.pending_approval_entries": "1651a805682c5810794a36bfc33bf23385475d3108cf7220320018a234d3867b",
+    "_WorkflowStatus.set_approval_policy": "1e8fb4cfde50bb62a4c0c7128debe5d8e02e6d011c770e7d114c599d6b1c1cc2",
     "AgentWorkflowRunner._validate_tool_approval": "f478028bc9c1a242d0a4cb6d4a1b5fa03ade58b805df1b9bb52ea5b30d6cdd7d",
     "AgentWorkflowRunner._handle_tool_approval": "4344b42271538acdfee44354e87a056004223010515751875e5ba667b72db1cd",
+    "AgentWorkflowRunner._policy_auto_approves": "9cd2ecf66d2bdac9829b3c4821adc82ce2eeb29eff484295fd0c72227d4cf8fa",
     "AgentWorkflowRunner._run_auto_mode_evaluator": "c703dd22f80a0654de37c3fb4dac90e5cf5f466e639670a95227b7394091499d",
+    "AgentWorkflowRunner._apply_policy_update": "4d1241445106d14d84eb0d1ca5ec9299492657cbcaa2443981f8a208c8d279f3",
     "AgentWorkflowRunner._resolve_and_publish": "57b8ef2d84eb112fab680e37bd6cbb0b06460a4df2360bd868adedd552d56c15",
     "AgentWorkflowRunner._handle_close": "4481c6a76f024e0e9987550169364b09998ca497f08ee000790e707d758e53bc"
   }

@@ -32,11 +32,15 @@ jobs:
         run: curl --fail --location --retry 3 https://github.com/tlaplus/tlaplus/releases/download/v1.8.0/tla2tools.jar -o "$RUNNER_TEMP/tla2tools.jar"
       - name: Check safety, liveness, and synthetic faults
         run: python research/scripts/check_model.py --jar "$RUNNER_TEMP/tla2tools.jar"
+      - name: Check policy cascades, conditional progress, and synthetic faults
+        run: python research/scripts/check_cascade.py --jar "$RUNNER_TEMP/tla2tools.jar"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: approval-model-results
-          path: research/results/latest/
+          path: |
+            research/results/latest/
+            research/results/cascade/
   implementation:
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -57,6 +61,8 @@ jobs:
         run: curl --fail --location --retry 3 https://github.com/tlaplus/tlaplus/releases/download/v1.8.0/tla2tools.jar -o "$RUNNER_TEMP/tla2tools.jar"
       - name: Check observed traces against TLA+ and reject invalid traces
         run: uv run --frozen python research/scripts/check_traces.py --jar "$RUNNER_TEMP/tla2tools.jar"
+      - name: Check coupled policy traces and reject invalid traces
+        run: uv run --frozen python research/scripts/check_cascade_traces.py --jar "$RUNNER_TEMP/tla2tools.jar"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -65,3 +71,5 @@ jobs:
             research/results/implementation.xml
             research/results/traces/
             research/results/conformance/
+            research/results/cascade-traces/
+            research/results/cascade-conformance/

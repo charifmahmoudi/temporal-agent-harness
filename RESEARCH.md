@@ -29,6 +29,11 @@ See [implementation correspondence](research/correspondence.md),
 
 Research value will depend on consequential findings, faithful correspondence, and
 transferable lessons. A passing model alone is not sufficient for a conference paper.
-Approval scope, identity/authentication of operators, external side effects, retries,
+Argument-specific approval scope, identity/authentication of operators, external side effects, retries,
 Temporal internals, event ordering, callbacks, and policy revocation are not verified
-by this initial model.
+by the initial model.
+
+The [coupled policy extension](research/models/cascade/README.md) adds tool-name
+eligibility, remembered approvals, synchronous cascades, and restrictive updates.
+Its [interpretation report](research/findings-policy.md) separates intended findings
+from the exact-commit CI evidence needed to establish them.

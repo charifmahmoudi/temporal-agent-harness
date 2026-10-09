@@ -26,7 +26,7 @@ have no intervening suspension and are modeled together.
 | Finalize | Gate wait, `_WorkflowStatus.finalize_approval`, and dispatch permission / `ToolApprovalDenied` |
 
 `first` and `resolutions` are observer variables, not implementation fields. The
-source-map manifest fingerprints executable AST of 11 relevant functions. Drift
+source-map manifest fingerprints executable AST of 15 relevant functions. Drift
 forces a review; unchanged hashes do not prove correspondence, and changes elsewhere
 can invalidate assumptions without triggering this guard.
 
@@ -79,3 +79,6 @@ DecisionStable, SingleResolution, AuthorizedDispatch, DeniedNeverDispatches; wit
 fairness, ResolutionProgress. Synthetic Overwrite violates SingleResolution and
 Bypass violates AuthorizedDispatch. No parameterized proof, automatic extraction,
 exhaustive trace conformance, or implementation-verification theorem is claimed.
+
+Policy cascades are studied separately in [Cascade](../cascade/README.md), which
+extends this module without duplicating its gate transitions.
