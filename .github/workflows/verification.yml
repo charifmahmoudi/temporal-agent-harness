@@ -48,9 +48,20 @@ jobs:
           version: '0.12.23'
           python-version: '3.12'
       - name: Run approval integration and boundary experiments
-        run: uv run --frozen pytest tests/harness/test_tool_approvals.py tests/research/test_approval_boundary.py -q --junitxml=research/results/implementation.xml
+        run: uv run --frozen pytest tests/harness/test_tool_approvals.py tests/research/ -q --junitxml=research/results/implementation.xml
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Download pinned TLA+ tools for trace correspondence
+        run: curl --fail --location --retry 3 https://github.com/tlaplus/tlaplus/releases/download/v1.8.0/tla2tools.jar -o "$RUNNER_TEMP/tla2tools.jar"
+      - name: Check observed traces against TLA+ and reject invalid traces
+        run: uv run --frozen python research/scripts/check_traces.py --jar "$RUNNER_TEMP/tla2tools.jar"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: approval-implementation-results
-          path: research/results/implementation.xml
+          path: |
+            research/results/implementation.xml
+            research/results/traces/
+            research/results/conformance/

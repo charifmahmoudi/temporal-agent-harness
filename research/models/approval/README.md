@@ -39,15 +39,15 @@ can invalidate assumptions without triggering this guard.
   evaluator decision objects. Malformed return values in the superseded branch are
   outside scope. No policy updates, remember cascade, or argument reconstruction.
 - Validator and non-yielding handler are treated as one atomic accepted update.
-- Superseded evaluator cancellation terminates. Cancellation-resistant evaluators
-  require a richer model and can invalidate progress conclusions.
+- Cancellation has an explicit cancelling phase. Progress assumes eventual cleanup;
+  cancellation-resistant evaluators can invalidate progress conclusions.
 - `dispatched` means permission to dispatch, not a committed external effect.
-- Progress assumes weak fairness of Consume and Finalize. It does not assert that
+- Progress assumes weak fairness of Consume, Cancelled, and Finalize. It does not assert that
   humans answer or that a hung evaluator finishes without closure/resolution.
 - Terminal deadlocks are permitted (`CHECK_DEADLOCK FALSE`); explicit temporal
   properties check progress. No state-space constraints prune reachable states.
-- Abstracting cancellation as terminating removes intermediate states. This has not
-  been proved to overapproximate all relevant concrete behaviors.
+- Cancellation completion is nondeterministic. No refinement or overapproximation
+  theorem connecting this abstraction to every concrete behavior is established.
 
 ## Reproduction
 
@@ -68,7 +68,8 @@ version under `research/results/latest`; CI uploads them.
 
 Boundary experiments run the actual validator, decision handler, evaluator-resolution
 method, closure method, and finalizer with a controlled scheduling shim. They are not
-a Temporal emulator or an automatic trace-refinement checker. The existing integration
+a Temporal emulator or a refinement proof. Real Temporal traces and their separate model checker are
+documented in [the correspondence report](../../correspondence.md). The existing integration
 suite supplies separate evidence under the actual Temporal test environment.
 
 ## Claims and limits
@@ -77,4 +78,4 @@ Passing TLC means these properties hold in the finite abstraction: TypeOK,
 DecisionStable, SingleResolution, AuthorizedDispatch, DeniedNeverDispatches; with
 fairness, ResolutionProgress. Synthetic Overwrite violates SingleResolution and
 Bypass violates AuthorizedDispatch. No parameterized proof, automatic extraction,
-full trace conformance, or implementation-verification theorem is claimed.
+exhaustive trace conformance, or implementation-verification theorem is claimed.

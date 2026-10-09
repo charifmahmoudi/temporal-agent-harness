@@ -26,7 +26,7 @@ Complete(c, v) ==
   /\ UNCHANGED <<status, phase, closed, first, resolutions>>
 
 \* No normal-path await occurs between checking settlement and applying a verdict.
-\* Superseded-task cancellation is abstracted as terminating successfully.
+\* Superseded cancellation has an explicit unwinding phase; termination is fairness.
 Consume(c) ==
   /\ phase[c] = "evaluating"
   /\ evaluator[c] = "done" \/ status[c] # "pending" \/ closed
@@ -36,9 +36,14 @@ Consume(c) ==
      IN /\ status' = IF decides THEN [status EXCEPT ![c] = d] ELSE status
         /\ first' = IF decides THEN [first EXCEPT ![c] = d] ELSE first
         /\ resolutions' = IF decides THEN [resolutions EXCEPT ![c] = @ + 1] ELSE resolutions
-        /\ evaluator' = [evaluator EXCEPT ![c] = IF superseded THEN "stopped" ELSE "consumed"]
-  /\ phase' = [phase EXCEPT ![c] = "gate"]
+        /\ evaluator' = [evaluator EXCEPT ![c] = IF superseded THEN "cancelling" ELSE "consumed"]
+        /\ phase' = [phase EXCEPT ![c] = IF superseded THEN "cancelling" ELSE "gate"]
   /\ UNCHANGED <<verdict, closed>>
+
+Cancelled(c) == /\ phase[c] = "cancelling"
+                /\ phase' = [phase EXCEPT ![c] = "gate"]
+                /\ evaluator' = [evaluator EXCEPT ![c] = "stopped"]
+                /\ UNCHANGED <<status, verdict, closed, first, resolutions>>
 
 Finalize(c) ==
   /\ phase[c] = "gate"
@@ -59,13 +64,13 @@ Close == /\ ~closed /\ closed' = TRUE
 Next == Close \/ \E c \in Calls :
           (\E d \in {"approved", "denied"} : Human(c, d))
           \/ (\E v \in Verdicts : Complete(c, v))
-          \/ Consume(c) \/ Finalize(c) \/ Bypass(c)
+          \/ Consume(c) \/ Cancelled(c) \/ Finalize(c) \/ Bypass(c)
 Spec == Init /\ [][Next]_vars
-FairSpec == Spec /\ \A c \in Calls : WF_vars(Consume(c)) /\ WF_vars(Finalize(c))
+FairSpec == Spec /\ \A c \in Calls : WF_vars(Consume(c)) /\ WF_vars(Cancelled(c)) /\ WF_vars(Finalize(c))
 TypeOK == /\ status \in [Calls -> {"pending", "approved", "denied"}]
-          /\ evaluator \in [Calls -> {"running", "done", "stopped", "consumed"}]
+          /\ evaluator \in [Calls -> {"running", "done", "cancelling", "stopped", "consumed"}]
           /\ verdict \in [Calls -> Verdicts \cup {"none"}]
-          /\ phase \in [Calls -> {"evaluating", "gate", "dispatched", "rejected"}]
+          /\ phase \in [Calls -> {"evaluating", "cancelling", "gate", "dispatched", "rejected"}]
           /\ closed \in BOOLEAN
           /\ first \in [Calls -> {"none", "approved", "denied"}]
           /\ resolutions \in [Calls -> 0..2]

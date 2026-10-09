@@ -12,7 +12,8 @@ no confirmed implementation defect and no claim of whole-system verification.
 Synthetic faults are included to check that the verification detects overwritten
 decisions and dispatch without approval; they do not describe original-code defects.
 
-See [model contract and mapping](research/models/approval/README.md) and the
+See [implementation correspondence](research/correspondence.md),
+[model contract and mapping](research/models/approval/README.md) and the
 [verification workflow](.github/workflows/verification.yml).
 
 ## Strategy and next experiments
