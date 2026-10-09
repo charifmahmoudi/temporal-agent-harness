@@ -1,12 +1,13 @@
 # Preserve caller cancellation while settling evaluator cleanup
 
-[Measured results](../evaluation/cancellation-results.md) · [Minimal patch](caller-cancellation.patch) · [Standalone regressions](test_cancel_and_settle.py)
+[Measured results](../evaluation/cancellation-results.md) · [Original-upstream patch](caller-cancellation.patch) · [Frozen-research patch](caller-cancellation-research.patch) · [Standalone regressions](test_cancel_and_settle.py)
 
 ## Problem and trigger
 
-`_cancel_and_settle` documents that workflow cancellation must propagate, but catches
-`asyncio.CancelledError` without distinguishing the child evaluator from its waiting
-caller. An outstanding caller cancellation can therefore be consumed. If approval
+The measured baseline `_cancel_and_settle` catches `asyncio.CancelledError` without
+distinguishing the child evaluator from its waiting caller. Its original docstring
+overstated what the exception class establishes; a follow-up documentation correction
+now states the limitation explicitly without changing executable behavior. An outstanding caller cancellation can therefore be consumed. If approval
 already settled, the caller can proceed to tool execution despite being cancelled.
 
 The deterministic trigger is:
@@ -40,6 +41,26 @@ with `uncancel()`; a regression covers that case. Python 3.11 or newer is requir
 consistent with the project. This is a proposed contract for maintainer review.
 
 ## Validation and application
+
+### Choose the patch for the source revision
+
+| Artifact | Exact base | Contents and purpose |
+| --- | --- | --- |
+| [Original-upstream patch](caller-cancellation.patch) | `049e01c9d726ef68bff7be857c735723b9801512` | Historical standalone submission packet: correction plus seven regressions; predates the malformed-result guard |
+| [Frozen-research direct patch](caller-cancellation-research.patch) | `ccb74997404f6b9fd9f5654ac5a441337581d673` | Source-only diff produced by `prepare_cancellation_variant.corrected`; preserves the malformed-result type guard |
+| [Versioned study patch](caller-cancellation-versioned.patch) | Research source at `ccb74997404f6b9fd9f5654ac5a441337581d673` | Retained activity-study V diff; standard patch marker with the measured migration limits |
+
+For the review's C source, use the frozen-research direct patch. The original-upstream
+patch is not represented as a diff against that source. The authoritative measured
+correction also remains in the cancellation archive's `proposed.patch` and the
+activity archive's `corrected.patch`; compare resulting source bytes, not diff context
+or formatting. The new research diff changes no runtime policy beyond that measured
+correction and adds no standalone tests. Use the existing experiment/regression suites.
+
+The current branch additionally clarifies the baseline helper docstring. The table's
+base revisions remain frozen; do not replace their hashes with the follow-up revision.
+
+### Historical standalone validation
 
 The patch is generated against original upstream revision
 `049e01c9d726ef68bff7be857c735723b9801512` and contains only the helper correction,

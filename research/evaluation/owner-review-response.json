@@ -1,0 +1,58 @@
+{
+  "review_comment": "https://github.com/charifmahmoudi/temporal-agent-harness/issues/2#issuecomment-6088725189",
+  "scope": "author follow-up; no independent runtime reproduction",
+  "driver_revision": "f152a9787292ff8ccfba204c0a892cc5555f6e46",
+  "subject_revision": "ccb74997404f6b9fd9f5654ac5a441337581d673",
+  "F01": {
+    "fresh_remote_clone": true,
+    "plan_completed": true,
+    "audit": {
+      "schema": 1,
+      "subject_revision": "ccb74997404f6b9fd9f5654ac5a441337581d673",
+      "stage": "audit",
+      "reviewer": "author-follow-up-to-F01",
+      "independence": "not assessed by this runner",
+      "utc_started": "2026-10-09T20:32:16.819092+00:00",
+      "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+      "driver_python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+      "lock_sha256": "2f579bed101ee2d63d0f77e1d979188115a1b549a3b4aacb6adcb96646d4a1b2",
+      "driver_sha256": "543687a0d90a6a18c0cd7fc32fec4b76a39153ef2ef74e18beb40e03b98fd3e9",
+      "results": [
+        {
+          "name": "documentation",
+          "log": "00-documentation.log",
+          "returncode": 0,
+          "status": "completed",
+          "log_sha256": "877f764ad4c57f3497ae59f7ee3b49f2406efe91e3499180ce0a1998eceb643e"
+        },
+        {
+          "name": "source-map",
+          "log": "01-source-map.log",
+          "returncode": 0,
+          "status": "completed",
+          "log_sha256": "01eaaecd2177f8e0c9e216637f6282fe166b153994d3e11846f883d3366e157e"
+        }
+      ],
+      "all_commands_completed": true,
+      "utc_finished": "2026-10-09T20:32:17.254777+00:00"
+    },
+    "logs": {
+      "00-documentation.log": "Comparison report matches its evidence snapshot.\nCancellation evidence verified; report is current.\nUpgrade evidence and report agree: 64 cells, 128 replay executions.\nActivity evidence verified: 12 fresh, 36 replay, 8 live, 375 harness regressions.\nModel bridges verified: 4 trace witnesses, 8 model rejections, 3 projection rejections, 12 history checks, 36 replay cells.\n213 relative documentation links resolve; figure outputs are reproducible.\n",
+      "01-source-map.log": "Mapped executable AST unchanged (15 methods).\n"
+    }
+  },
+  "F02": {
+    "whole_file_AST_equal_after_removing_only_helper_docstring": true,
+    "frozen_source_sha256": "1375ca7040fd8c1044f839ce244c30351212bc75fb4ecb90ecf394693635ce38",
+    "followup_source_sha256": "e81560fba5a9d97251afb14de64cf7b767294c1d0438d4f54e306e4ae3cbbe65"
+  },
+  "F03": {
+    "git_apply_check": true,
+    "git_apply": true,
+    "patched_source_equals_preparer": true,
+    "malformed_result_guard_preserved": true,
+    "patched_source_sha256": "eb887d8c3b996c91f0171c72b1beda3505c13c60f612b979fe238a37b2dddc9d",
+    "matches_retained_corrected_source_sha256": true,
+    "patch_sha256": "50a1aeef40d11428245091d98940b4ca96e6e92d775d33596ebe869e3f8b2758"
+  }
+}

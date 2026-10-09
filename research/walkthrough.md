@@ -50,7 +50,7 @@ schedule, it can also consume cancellation of the awaiting caller. Moreover, the
 child can suppress the second cancellation and return normally, so simply removing
 one exception handler is not the whole correction.
 
-The [isolated correction](upstream/caller-cancellation.patch) checks the caller's
+The [isolated correction against the frozen research source](upstream/caller-cancellation-research.patch) checks the caller's
 outstanding cancellation after the await, including normal return, and propagates it.
 It also closes the superseded evaluation's audit record on the tested live path.
 The direct and versioned cancellation corrections remain experiment patches;

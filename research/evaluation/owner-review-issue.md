@@ -1,6 +1,7 @@
 # Owner review issue draft
 
-Status: not created. GitHub rejected issue creation because Issues are disabled in this repository.
+Status: created as [issue #2](https://github.com/charifmahmoudi/temporal-agent-harness/issues/2).
+The body below is the original template; live verdicts and follow-up responses are recorded in the issue.
 Intended assignee: `charifmahmoudi`.
 Intended title: Review the cancellation case study: clarity, model–code correspondence, evidence, and research claims.
 

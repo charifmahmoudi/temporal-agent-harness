@@ -34,9 +34,11 @@ From a parent directory you control:
 ```bash
 git clone https://github.com/charifmahmoudi/temporal-agent-harness.git review-tools
 cd review-tools
-git checkout research/approval-verification
+git checkout --detach f152a9787292ff8ccfba204c0a892cc5555f6e46
+git rev-parse HEAD
 git worktree add --detach ../review-subject ccb74997404f6b9fd9f5654ac5a441337581d673
 cd ../review-subject
+git rev-parse HEAD
 uv sync --frozen --python 3.12
 cd ..
 curl --fail --location --retry 3 https://github.com/tlaplus/tlaplus/releases/download/v1.8.0/tla2tools.jar -o tla2tools.jar
@@ -44,8 +46,11 @@ curl --fail --location --retry 3 https://github.com/tlaplus/tlaplus/releases/dow
 
 Expected JAR SHA-256:
 `7beec0f04818732a62fa193731711a99aa4f11279499b2360a7d156c519ea78d`.
-The model runners enforce it. Record `git -C review-tools rev-parse HEAD` too, since
-the review driver may evolve separately from the frozen subject.
+The model runners enforce it. Before running the driver, verify that `git -C review-tools rev-parse HEAD` is
+`f152a9787292ff8ccfba204c0a892cc5555f6e46` and
+`git -C review-subject rev-parse HEAD` is
+`ccb74997404f6b9fd9f5654ac5a441337581d673`. Stop if either differs. The updated
+guide pins the original review driver; it does not move the frozen subject.
 
 Inspect the plan before execution:
 

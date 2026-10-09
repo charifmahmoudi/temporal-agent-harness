@@ -46,7 +46,7 @@ the 36 measured replay cells retain both child responses.
 | `Compare` / `compatible` | Command equality and marker acceptance for this reduced history |
 
 [Production source](../../../temporal_agent_harness/harness/agent_workflow.py),
-[direct patch](../../upstream/caller-cancellation.patch),
+[direct patch against the frozen research source](../../upstream/caller-cancellation-research.patch),
 [versioned patch](../../upstream/caller-cancellation-versioned.patch), and
 [activity probe](../../../tests/activity_upgrade/activity_probe.py) expose the concrete
 boundaries. Source hashes remain in the original experiment archives. The new model

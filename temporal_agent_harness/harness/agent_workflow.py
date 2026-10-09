@@ -287,9 +287,15 @@ async def _cancel_and_settle(task: asyncio.Future[Any]) -> None:
     worker. Whatever it raises on the way out is discarded — the gate has already been
     settled by someone else, so there is no longer any question this task could answer.
 
-    ``CancelledError`` is a ``BaseException``, so it is caught by name; catching bare
-    ``BaseException`` would also swallow a cancellation of the WORKFLOW, which must keep
-    propagating.
+    ``CancelledError`` is caught by name because it derives from ``BaseException``.
+    This baseline helper does not distinguish cancellation of the evaluator child
+    from cancellation of the caller awaiting it: the catch can consume the caller's
+    cancellation too. A child can also suppress that cancellation and return normally.
+    Accepted approval does not imply that a cancelled invocation should still run;
+    the isolated research correction propagates the caller's outstanding request.
+
+    Whole-workflow cancellation is a separate scope. The exception class alone does
+    not establish its propagation; this helper makes no general guarantee about it.
     """
     task.cancel()
     try:

@@ -1,0 +1,52 @@
+--- a/temporal_agent_harness/harness/agent_workflow.py
++++ b/temporal_agent_harness/harness/agent_workflow.py
+@@ -291,11 +291,16 @@
+     ``BaseException`` would also swallow a cancellation of the WORKFLOW, which must keep
+     propagating.
+     """
++    caller = asyncio.current_task()
+     task.cancel()
+     try:
+         await task
+     except (Exception, asyncio.CancelledError):
+         pass
++    # Child cleanup cannot consume an outstanding cancellation of its caller.
++    # Check after a normal return too: a child may suppress the second request.
++    if caller is not None and caller.cancelling():
++        raise asyncio.CancelledError
+ 
+ # Harness default publish-flush cadence for activity-side stream publishers (see
+ # ``AgentWorkflowRunner.publisher_from_activity``). Each flush is one Signal into the
+@@ -2571,16 +2576,22 @@
+                 reached_decision = task.result()
+                 if isinstance(reached_decision, AutoApprovalDecision):
+                     reached = reached_decision.verdict
+-            await _cancel_and_settle(task)
+-            close(
+-                AutoApprovalEvaluationSuperseded(
+-                    tool_id=tool_id,
+-                    tool_name=ctx.tool_name,
+-                    evaluation_id=evaluation_id,
+-                    evaluator=evaluator,
+-                    verdict=reached,
+-                )
+-            )
++            terminal = AutoApprovalEvaluationSuperseded(
++                tool_id=tool_id,
++                tool_name=ctx.tool_name,
++                evaluation_id=evaluation_id,
++                evaluator=evaluator,
++                verdict=reached,
++            )
++            try:
++                await _cancel_and_settle(task)
++            except asyncio.CancelledError:
++                # A live caller cancellation closes this already-settled bracket.
++                # Offline eviction must not publish on a destroyed workflow loop.
++                if workflow.in_workflow():
++                    close(terminal)
++                raise
++            close(terminal)
+             return None
+ 
+         try:
