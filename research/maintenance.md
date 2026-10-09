@@ -39,7 +39,7 @@ regenerated from `research/figures/generate.py` when semantics change.
 | Independent abstraction review | Outstanding | External review addressing correspondence and atomicity |
 | External reproduction | Outstanding | Independent environment and retained categorical results |
 | Upstream feedback | Prepared, not submitted | Explicitly authorized submission and recorded maintainer response |
-| Novelty assessment | Incomplete | Full closest-work comparison plus a justified contribution |
+| Novelty assessment | Focused claim comparison complete; novelty unestablished | Independent assessment and resolution of remaining literature gaps; a justified contribution |
 | Publication decision | Open | Evidence supports chosen claim and submission category |
 
 Future effort logs should record task, date, contributor, elapsed effort, and artifact
@@ -55,3 +55,17 @@ check validates exact case inventories, replay classifications, raw server-event
 counts, ledger records, patch-marker identity, source hashes, and regression JUnit.
 New migration cohorts or retry/routing assumptions require a new protocol; do not
 extend the B → V result to untested histories or overwrite the measured C → V failures.
+
+
+## Review handoff and prospective work
+
+The [review quickstart](evaluation/review-quickstart.md) pins subject `ccb7499` and
+separates retained-evidence auditing, fresh TLC execution, and fresh implementation
+runs. The driver was smoke-tested by the author; this is not external reproduction.
+The [invitation](evaluation/review-invitation.md) remains unsent, recipient unselected.
+Only an actual reviewer response can close the independent-review gates.
+
+The [novelty review](evaluation/novelty-review.md) rejects claims of a new tracing or
+versioning method. [Second-case execution](evaluation/prospective-case.md) is deferred
+until a qualifying candidate and pre-execution predictions are recorded. A hand-built
+repeat of documented SDK behavior does not meet that gate.

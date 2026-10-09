@@ -105,3 +105,14 @@ baseline or unmarked-correction histories. The model agrees with 36 retained rep
 cells, retrospectively. Independent review should challenge the projection rules,
 marker abstraction, and omitted schedules; these checks do not establish refinement,
 prospective predictive value, or novelty.
+
+
+## Literature and next-case decision
+
+The [claim-by-claim review](evaluation/novelty-review.md) finds substantial direct
+precedent for tracing, cancellation suppression, and replay-aware migration. Our
+candidate contribution is the connected, evidenced implementation case, not a new
+verification or versioning method. The [review handoff](evaluation/review-quickstart.md)
+is ready. A second case should test prospective transfer on independently authored
+code under the [selection protocol](evaluation/prospective-case.md); none is selected
+or run yet. External review is still outstanding.

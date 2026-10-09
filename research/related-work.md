@@ -6,6 +6,11 @@ implementation refinement, agent runtime enforcement, tool authorization, and hu
 approval reuse. Recent preprints are separated from published work. Summaries describe
 what the sources study; contrasts with this repository are our assessment.
 
+The [claim-by-claim follow-up](evaluation/novelty-review.md) adds TraceLink,
+workflow-migration literature, and official cancellation/versioning documentation.
+It narrows the present contribution to a candidate engineering case study; it does
+not establish novelty or erase the full-text gaps recorded below.
+
 ## Closest precedents
 
 | Source and reading scope | Relevant contribution | Consequence for our claims |
@@ -28,15 +33,14 @@ what the sources study; contrasts with this repository are our assessment.
 
 ## Defensible research question
 
-How can an auditable, bounded model and action-constrained implementation traces expose
-mismatches between an agent harness's accepted-resolution contract and its asynchronous
-evaluator/cancellation implementation?
+How do an existing agent harness's permission, caller-cancellation, and durable-history
+obligations interact when repairing asynchronous evaluator cleanup?
 
-The present contribution is a single-system case study: a documented model, stronger
-trace constraints, regression-sensitive experiments, and a malformed-result discrepancy
-found by challenging an excluded input assumption. The defect was found through code
-inspection and a targeted reproducer, not by a TLC counterexample. That provenance
-must be reported honestly.
+The present contribution candidate is a single-system case study: manually specified
+contracts, bounded model checks, input-constrained trace validation, concrete repairs,
+and measured history-cohort limits. Both concrete defects were inspection-led. The
+new History model was constructed after the replay results were known. These facts
+prevent crediting TLC with discovery or the new model with prospective prediction.
 
 ## Review-committee assessment
 

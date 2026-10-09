@@ -167,6 +167,13 @@ it does not reverse the comparison's negative result. Independent abstraction re
 external reproduction, and broader policy/recovery coverage remain necessary; superior
 detection and conference novelty are not established.
 
+A [focused claim-by-claim literature comparison](research/evaluation/novelty-review.md)
+is complete. It finds direct precedents for the component methods and leaves novelty
+unestablished. The [pinned review quickstart](research/evaluation/review-quickstart.md)
+and response template are ready; no invitation has been sent and no independent
+review is claimed. [Second-case execution](research/evaluation/prospective-case.md)
+is deferred until selection and predictions are fixed without observing outcomes.
+
 The next evidence milestones are concrete:
 
 | Priority | Work | Why it matters / completion criterion |

@@ -4,6 +4,14 @@ Start with the [one-call walkthrough](../walkthrough.md) for the source-to-model
 
 [Case study](../../RESEARCH.md) · [Protocol](protocol.md) · [Corpus](corpus.json)
 
+## Start the review
+
+Use the [pinned quickstart](review-quickstart.md) for executable stages and expected
+outcomes. Record findings with the [response template](review-response-template.md).
+The [invitation](review-invitation.md) is a draft with no selected recipient; it has
+not been sent. The [claim-by-claim comparison](novelty-review.md) and
+[prospective-case gate](prospective-case.md) make the current research decisions explicit.
+
 ## Status and requested expertise
 
 Prepared for an external reviewer; **no independent review or external reproduction
