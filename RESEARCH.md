@@ -156,6 +156,12 @@ The pilot's finite consistency algorithm is established reasoning, not a new met
 source-level derivation and scientific novelty remain unestablished. This research
 objective has not been replaced by an engineering-report objective.
 
+The [source-boundary follow-up](research/evaluation/repair-boundary.md) derives a
+conditional decision slice and checks nine lexical function inventories. It identifies
+the missing link between history-derived inputs and actual cancellation/SDK reads,
+and compares source extraction, update merging, and finite registration precedents.
+Automatic semantic certification remains unsupported; novelty is still unestablished.
+
 ## Scientific scope and next evidence
 
 The evidence supports bounded model properties, controlled trace conformance, and

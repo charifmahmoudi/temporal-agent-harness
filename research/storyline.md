@@ -12,6 +12,13 @@ conflict are not new principles. Automatic, sound derivation from async code rem
 a hypothesis to investigate. The central claim below states existing evidence,
 not a claim that this research objective has already been achieved.
 
+The [source-boundary analysis](evaluation/repair-boundary.md) now makes the next gap
+concrete: a cancellation signal in history is not itself the caller's cancellation
+count at the repair site, and marker presence is not the full SDK patch decision.
+Deriving those relationships is the candidate research problem. A lexical inventory
+alone does not solve it, and comparable extraction and update transformations already
+exist in prior work.
+
 ## Central claim
 
 **For the studied tool gate, preserving an accepted approval is insufficient to

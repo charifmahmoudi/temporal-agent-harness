@@ -184,9 +184,13 @@ these exclusions are provisional, not a convenient way to hide failed cases.
    provides no meaningful precision/cost/diagnosis benefit. One successful second case
    would not establish generality. A negative result must remain in the record.
 
-No second case has been selected or run. No prospective prediction or external
-validation is claimed. The next step is a source-derived slice and a comparison of
-translation obligations, not more retrospective model states or aggregate CI counts.
+The [source-boundary follow-up](repair-boundary.md) completes a first manual,
+conditional slice and nine reproducible lexical inventories, with implementation-level
+comparison of extraction and registration precedents and a dynamic-update merging
+comparison. It finds unproved correspondence between the pilot's features and actual
+caller/SDK state. Semantic certification remains unsupported. The next discriminating
+step is the paired operational/merged-program encoding specified there. No second
+case has been selected or run; no prospective prediction or external validation is claimed.
 
 ## Sources, reading scope, and search record
 
@@ -195,7 +199,7 @@ translation obligations, not more retrospective model states or aggregate CI cou
 - **S3:** Zheng et al., [Execution Edits, v1](https://arxiv.org/pdf/2608.22928), introduction, theorem 4, §IX, and appendix registration-reflection/rejection-proof passages inspected. The preprint includes correspondence machinery and atomic enforcement; it must not be dismissed as merely accepting an arbitrary agent plan. We did not rerun its Lean artifact or verify every proof.
 - **S4:** Arnold, Vincent, Walukiewicz, [Games for synthesis of controllers with partial observation](https://www.labri.fr/perso/igw/Papers/igw-synthesis.pdf), abstract and controller-observation framework inspected. Partial-observation control is established prior art; the pilot claims no advance over its general machinery.
 - **S5:** [Temporal Python versioning](https://docs.temporal.io/develop/python/workflows/versioning), patching, deprecation, and replay-testing sections inspected. The pilot's hypothetical guard table is not a replacement for SDK replay.
-- **S6:** [Temporal Explorer](https://github.com/stevekinney/temporal-explorer), repository search-result description screened: advertises source/history extraction including cancellation and patches. Source and correctness properties not yet inspected; no absence claim rests on this screen.
+- **S6:** [Temporal Explorer](https://github.com/stevekinney/temporal-explorer), initially search-result screened; the [follow-up](repair-boundary.md) now pins and inspects command extraction, control-tree construction, and bounded helper traversal. No full-tool execution or repository-wide absence claim is made.
 
 Searches used both available engines, including: `durable workflow replay safe update
 automatic synthesis`; `workflow migration history equivalence`; `synthesis update
