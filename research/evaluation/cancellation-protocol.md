@@ -77,3 +77,12 @@ also had a runner diagnostic mismatch: TLC emitted the named singular
 `Temporal property CleanupProgress was violated.` rather than the plural string.
 The runner now requires that exact named diagnostic and exit 13. The first attempt
 remains retained as an incomplete run; it is not presented as a successful study.
+
+A second attempt (37891534941) passed the six model checks but again timed out while
+waiting specifically for the original `cleanup_entered` observer flag after restart.
+The next attempt retains the first recovered query and accepts either a waiting
+cleanup state or an already completed invocation for measurement. Exact state equality
+is recorded as `matches_before`, not assumed. Stable approval and final outcome are
+still asserted, and the complete history is replayed. This changes H4's measurement
+procedure, not its interpretation: a false equality result must be reported as a
+reconstruction discrepancy, not as preservation of the waiting cleanup state.

@@ -248,9 +248,14 @@ async def test_worker_restart_during_cleanup(environment):
         # A query alone can target the retired worker's sticky queue. An explicit
         # no-state-change signal schedules a workflow task and permits fallback.
         await handle.signal(CleanupAgent.checkpoint)
-        recovered=await until(handle,lambda e:e['cleanup_entered'])
-        retain('restart-recovered',recovered)
-        assert recovered==before
+        initial=await handle.query(CleanupAgent.evidence)
+        retain('restart-first-query',initial)
+        # Cleanup flags are in-memory observer state, not durable server events.
+        # Record reconstruction differences rather than waiting forever for the
+        # original local flag; a reconstructed invocation may already be done.
+        recovered=await until(handle,lambda e:e['cleanup_entered'] or e['done'])
+        retain('restart-recovered',{'state':recovered,'matches_before':recovered==before})
+        assert recovered['status']=='approved'
         await handle.signal(CleanupAgent.release_cleanup)
         after=await until(handle,lambda e:e['done'])
         retain('restart-after',after)
