@@ -162,6 +162,12 @@ the missing link between history-derived inputs and actual cancellation/SDK read
 and compares source extraction, update merging, and finite registration precedents.
 Automatic semantic certification remains unsupported; novelty is still unestablished.
 
+The [paired encoding comparison](research/evaluation/encoding-comparison.md) then
+found agreement across 7,290 declared cases and 58,320 symbolic word cells. It rejects
+the local Boolean reduction as a standalone contribution: the conventional encoding
+handles the same domain. Source correspondence and a demonstrated advantage over
+existing analyses remain the unresolved scientific requirements.
+
 ## Scientific scope and next evidence
 
 The evidence supports bounded model properties, controlled trace conformance, and

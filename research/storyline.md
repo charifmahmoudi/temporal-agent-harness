@@ -19,6 +19,13 @@ Deriving those relationships is the candidate research problem. A lexical invent
 alone does not solve it, and comparable extraction and update transformations already
 exist in prior work.
 
+The [paired comparison](evaluation/encoding-comparison.md) now provides a negative
+novelty result: the local reduction matches a conventional encoding throughout its
+declared domain. Count positivity suffices after cleanup under the stated assumptions,
+but loses necessary information if used while `uncancel()` can still occur. That
+distinction guides the source-analysis question; it is not a new method or proof of
+full workflow correctness.
+
 ## Central claim
 
 **For the studied tool gate, preserving an accepted approval is insufficient to

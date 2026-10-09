@@ -46,6 +46,8 @@ def main():
     subprocess.run([sys.executable, str(ROOT/'research/scripts/check_repair_observability.py'), '--check'], check=True)
     subprocess.run([sys.executable, str(ROOT/'research/scripts/extract_repair_boundary.py'), '--check'], check=True)
     subprocess.run([sys.executable, str(ROOT/'research/scripts/test_repair_boundary.py')], check=True)
+    subprocess.run([sys.executable, str(ROOT/'research/scripts/compare_repair_encodings.py'), '--check'], check=True)
+    subprocess.run([sys.executable, str(ROOT/'research/scripts/test_repair_encodings.py')], check=True)
     print(f'{count} relative documentation links resolve; figure outputs are reproducible.')
 
 

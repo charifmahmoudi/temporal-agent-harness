@@ -141,6 +141,12 @@ guard. Its retained results have not been rewritten.
 
 ## Research decision and next discriminating experiment
 
+**Follow-up:** the experiment proposed below has now been
+[executed within a declared fragment](encoding-comparison.md). It found no advantage
+over the conventional encoding and rejects the local reduction as a standalone
+contribution. The original proposal below records the motivation and intended scope;
+the follow-up states what was actually implemented and what remains unsupported.
+
 **Retain C3 only as an unconfirmed hypothesis.** Ordinary extraction, generic update
 translation, and finite registration correctness have substantial overlap with prior
 work. We have no demonstrated expressiveness separation or superior precision/cost.

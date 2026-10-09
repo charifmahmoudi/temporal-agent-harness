@@ -188,9 +188,13 @@ The [source-boundary follow-up](repair-boundary.md) completes a first manual,
 conditional slice and nine reproducible lexical inventories, with implementation-level
 comparison of extraction and registration precedents and a dynamic-update merging
 comparison. It finds unproved correspondence between the pilot's features and actual
-caller/SDK state. Semantic certification remains unsupported. The next discriminating
-step is the paired operational/merged-program encoding specified there. No second
-case has been selected or run; no prospective prediction or external validation is claimed.
+caller/SDK state. Semantic certification remains unsupported. The
+[paired encoding comparison](encoding-comparison.md) has now executed that bounded
+development step. All arms agree on 7,290 cases; no expressiveness or correctness
+advantage is demonstrated. The local Boolean reduction is rejected as a standalone
+contribution. C3 still requires source correspondence and a substantive advantage over
+ordinary analysis. No second case has been selected or run; no prospective prediction
+or external validation is claimed.
 
 ## Sources, reading scope, and search record
 
