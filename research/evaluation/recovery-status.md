@@ -80,3 +80,35 @@ should preserve negative and inconclusive results and distinguish a new failure
 mechanism from another timing variant of an existing one.
 
 No upstream report or invitation has been sent by this project. No changes are merged.
+
+## Adjacent work and datasets to start from
+
+A preliminary source check finds solid foundations, but no drop-in dataset combining
+durable-workflow restarts with independently committed external effects:
+
+| Starting point | What it gives us | Important mismatch with our question |
+|---|---|---|
+| [RIFL, SOSP 2015](https://sigops.org/s/conferences/sosp/2015/current/SOSP-2015.pdf) | A foundational exactly-once RPC mechanism: durable operation identities and recorded results across crashes/reconfiguration. | It is a mechanism paper, not an agent/workflow recovery dataset. It makes operation identity and retention policy core variables any study must control. |
+| [Durable Functions semantics](https://www.microsoft.com/en-us/research/wp-content/uploads/2021/10/DF-Semantics-Final.pdf) | Formal semantics for event-sourced durable functions, replay histories, state, and observational equivalence. | Its model does not by itself characterize a particular engine or an external provider's effect ledger. |
+| [WfCommons / WfInstances](https://wfcommons.org/instances) | Hundreds of real scientific-workflow execution instances in a common format, with task graphs, task inputs/outputs, runtime, resource use, and machine information; useful workload/provenance material. | These traces are primarily execution/performance records, not paired fault/recovery trials with effectful external APIs. |
+| [ToolSandbox](https://arxiv.org/abs/2408.04682) and its [code](https://github.com/apple-aiml-research/ToolSandbox) | A runnable stateful tool environment, dependent operations, user simulation, and state-based milestone evaluation. | It targets agent tool-use behavior; its published setup does not supply our durable-process restart and provider-idempotency experiment. |
+| [Thinkingbox / Thinkingbox-Bench](https://arxiv.org/abs/2608.19741) | A recent stateful business-workflow sandbox with executable checks over final backend state and wrong, missing, or extra effects. | It is close prior work for broad consequential-agent claims. Its reported benchmark is not, by itself, an experiment on durable workflow-engine recovery across ambiguous provider outcomes. |
+| [WfBench](https://arxiv.org/abs/2210.03170) | A generator for tunable, reproducible scientific workflow structures and resource profiles. | Synthetic workflow structure does not supply realistic external-side-effect semantics or establish a recovery research question. |
+
+This is a focused starting bibliography, **not** an exhaustive systematic review or a
+claim that no closer dataset exists. WfInstances is useful if the question is about
+workflow shape or workload realism; ToolSandbox is useful if the question is about
+stateful agent/tool actions; Thinkingbox is a close benchmark to read before framing
+any broad state-correctness contribution. RIFL and Durable Functions supply essential
+systems/semantic baselines. None alone is a sound reason to continue the Medusa case.
+
+A plausible direction to assess (not yet selected or claimed novel) is a controlled
+study of the boundary between workflow recovery and provider-side effect guarantees:
+vary whether an effect is absent, committed with a lost response, or committed under
+an expired operation key; measure duplicate/missing effects and recovery decisions
+against provider readback/reconciliation controls. Before any CI experiment, compare
+this exact estimand with recent work including stateful business-workflow benchmarks,
+ambiguous-outcome recovery studies, and provider idempotency/reconciliation contracts.
+If that comparison leaves no consequential unanswered question, stop. The current
+Medusa baseline remains only a fixture candidate; it has not qualified as the right
+substrate.
