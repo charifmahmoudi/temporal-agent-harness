@@ -1,4 +1,4 @@
-# Independent recovery investigation: development case selection
+# Independent recovery investigation: reproduced development case
 
 ## Problem and limits
 
@@ -82,3 +82,52 @@ and differential conformance testing described by
 [Durable Functions' formal replay semantics](https://angelhof.github.io/files/papers/durable-functions-2021-oopsla.pdf).
 This round must demonstrate an actual gap against those techniques before proposing
 a new method. A passing reproduction alone only establishes an executable starting point.
+
+## First measured result — 2026-10-10
+
+[CI run 38030115380](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38030115380)
+executed the prediction committed in `5e4ee16c45f2da712f0d4824f57daadc369e02d0`.
+Both arms used Python 3.12.15. The [retained evidence](recovery-673-evidence.json)
+contains the complete summaries and six losslessly compressed histories, each with
+its SHA-256 digest. This retains evidence beyond CI artifact expiration.
+
+| SDK | Live executions satisfying precondition | Typed replay nondeterminism | Successful replay |
+|---|---:|---:|---:|
+| 1.8.0 | 3/3 | 3/3 | 0/3 |
+| 1.9.0 | 3/3 | 0/3 | 3/3 |
+
+All affected failures report an update state-machine mismatch at the second activity
+schedule. The affected histories have that schedule at event 20, 20, and 17; the
+variation confirms that event numbers alone should not define a scenario. There
+were no infrastructure or collection errors in CI. These are six executions of one
+known defect family, not six discoveries. Release and server provenance limitations
+above still apply. We have reproduced an external report; we have not independently
+validated a new testing method.
+
+## Next discriminating experiment
+
+The upstream fix already adds `replay_with_signal_and_update_same_task` and
+`update_after_empty_wft` regressions. Our adapter currently adds retained evidence
+and release comparison, but demonstrates no detection advantage over those tests.
+The research question is therefore: **can a causal boundary coverage strategy expose
+live/replay divergence more efficiently or more broadly than existing regression
+selection and seeded random scheduling under the same execution budget?**
+
+Before implementing that strategy:
+
+1. Pin and record a shared test-server executable and SDK dependencies. Replay the
+   same retained histories under both releases to remove history-generation differences
+   from that comparison. A single-Core-patch experiment remains a separate control.
+2. Define scenarios by observable causal relations: signal delivery, first activity
+   completion, update acceptance, timer firing, and workflow-task boundaries. Use
+   real executions to obtain histories; do not fabricate impossible event orders.
+3. Give systematic and random selection the same scenario grammar, oracle, and
+   execution budget. Include upstream regressions as a strong baseline, report
+   invalid/inconclusive trials, and charge setup and minimization costs explicitly.
+4. Freeze that protocol before collecting comparative outcomes. Use this case for
+   development only; reserve previously uninspected cases for evaluation.
+
+A candidate contribution would require evidence that the coverage criterion or
+minimization method adds something existing techniques do not already supply.
+If comparable baselines obtain the same coverage and detection results, reject the
+candidate. Do not rename reproduction as scientific novelty.

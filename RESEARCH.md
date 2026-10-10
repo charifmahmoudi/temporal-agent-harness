@@ -1,5 +1,15 @@
 # Verifying approval, cancellation, and upgrades in Temporal Agent Harness
 
+## Current scientific search
+
+The [external recovery investigation](research/evaluation/recovery-investigation.md)
+now reproduces a known live/replay defect: three affected-release executions fail
+replay, while three fixed-release executions succeed. Complete histories are retained.
+This establishes an executable development case, not a novel method. The next test
+is whether causal scenario coverage adds measurable value over upstream regressions
+and equal-budget random scheduling. The approval case below remains prior evidence;
+its reduction and composition analyses did not establish novelty.
+
 ## Start here
 
 **An approved tool invocation can still need to stop. A correction that stops new

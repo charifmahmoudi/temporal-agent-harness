@@ -2,10 +2,25 @@
 
 [Case study](../RESEARCH.md) · [Concrete walkthrough](walkthrough.md)
 
+## Current research direction
+
+The [external recovery investigation](evaluation/recovery-investigation.md) is the
+active next phase. Its story begins with unchanged workflow code that succeeds live
+but fails when reconstructed from its own durable history. We reproduced this known
+failure on SDK 1.8.0 in three timing probes and observed successful replay on 1.9.0
+in three probes. This is one development case, not a discovery or independent
+validation of a method. The scientific question is whether a specified causal
+coverage criterion improves failure discovery over existing regression and random
+testing. That comparison has not been run.
+
+The following sections preserve the earlier approval investigation and its negative
+novelty results. The extraction hypothesis is not an established contribution and
+is no longer the immediate experiment.
+
 ## Scientific objective
 
 The objective is a scientific contribution, not a change of destination to an
-engineering experience report. The [active contribution search](evaluation/scientific-contribution-search.md)
+engineering experience report. The [earlier contribution search](evaluation/scientific-contribution-search.md)
 records a formal candidate, its closest precedents, an executed diagnostic, and
 explicit rejection criteria. The broad safe-update idea and elementary observation
 conflict are not new principles. Automatic, sound derivation from async code remains
