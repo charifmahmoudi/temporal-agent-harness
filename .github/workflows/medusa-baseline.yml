@@ -21,7 +21,11 @@ jobs:
         options: >-
           --health-cmd "pg_isready -U postgres"
           --health-interval 5s --health-timeout 5s --health-retries 10
+    defaults:
+      run:
+        shell: bash
     env:
+      NODE_OPTIONS: --experimental-vm-modules
       DB_HOST: localhost
       DB_PORT: '5432'
       DB_USERNAME: postgres
@@ -50,9 +54,12 @@ jobs:
             curl -fsS http://127.0.0.1:8877/ledger && break
             sleep 1
           done
+          curl -fsS http://127.0.0.1:8877/ledger
       - name: Run baseline
         working-directory: research/medusa-baseline
-        run: npm test 2>&1 | tee ../../evidence/test.log
+        run: |
+          npm test 2>&1 | tee ../../evidence/test.log
+          node -e "const a=require('../../evidence/jest.json'); const b=require('../../evidence/summary.json'); if(!a.success || a.numPassedTests!==1 || b.status!=='passed') process.exit(1)"
       - name: Retain evidence
         if: always()
         uses: actions/upload-artifact@v4

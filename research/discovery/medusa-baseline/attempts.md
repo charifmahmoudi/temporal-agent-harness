@@ -1,0 +1,3 @@
+# Qualification attempts
+
+1. [38071912240](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38071912240): **failed before business execution**. Jest dynamic import required Node VM-module support. The original shell pipeline masked the test failure and the job was green; it is not a successful qualification. Corrected explicit bash/pipefail, VM option and mandatory Jest+summary checks. Artifact 11676998326, SHA256 73b339d42b3b0190665ab8b6ddb434b0bbad0f8f8df72bac2c2474c3eb6c7f26. Dependency inventory also reports ajv-formats/picomatch compatibility warnings; retained, not silently treated as a clean dependency audit.
