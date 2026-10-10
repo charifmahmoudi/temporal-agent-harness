@@ -70,6 +70,11 @@ medusaIntegrationTestRunner({
  assert.equal(final.tables.order_transaction.filter(x=>x.reference==="refund").length,1);
  assert.equal(Number(final.tables.order_transaction.find(x=>x.reference==="refund").amount),-50);
  assert.equal(Number(final.tables.inventory_level[0].stocked_quantity),1);
+ const latestVersion=Math.max(...final.tables.order_summary.map(x=>x.version));
+ const latest=final.tables.order_summary.filter(x=>x.version===latestVersion);
+ assert.ok(latest.length>0);
+ for(const row of latest){assert.equal(Number(row.totals.refunded_total),50);assert.equal(Number(row.totals.pending_difference),0);}
+ assert.equal(final.tables.capture.length,1);assert.equal(Number(final.tables.capture[0].amount),50);
  fs.writeFileSync(path.join(out,"summary.json"),JSON.stringify({status:"passed",case:"two-units-one-damaged",stock_before:0,stock_after:1,received:2,damaged:1,captured:50,refunded:50,refund_count:1,injected_faults:0,limitations:["seeded fulfillment","payment test contract","no crash/recovery experiment"]},null,2));
  });
  }});
