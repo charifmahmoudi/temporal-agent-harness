@@ -1,0 +1,547 @@
+{
+  "note": "Convenience extracts from CI reports. Per-group comparisons and full per-file provenance remain in the retained ZIP reports. Some perturbation outputs are omitted here and marked output_retained_in_zip.",
+  "subjects": {
+    "arb": {
+      "subject": "arb",
+      "run_id": "38069032708",
+      "python": "3.12.15 (main, Oct  1 2026, 02:35:59) [GCC 13.3.0]",
+      "harness_commit": "5f763a521bc9a5e27034431bc7d2734d31f19c54",
+      "observer_sha256": "7c9b2a2ab3f6c2df2eb2a0a478ad0397f2373cc84cf2c1446ead0c7775d8b5cd",
+      "subject_commit": "149723ed7dac540a437ee14a34dc5fcf17e7a5e3",
+      "identity": {
+        "rows": 1000,
+        "unique": 1000,
+        "duplicate_identities": []
+      },
+      "table_agrees": true,
+      "committed_summary_byte_identical": true,
+      "completion_disagreements": [],
+      "headline_evidence": [
+        {
+          "model": "arb-resilient",
+          "p": 0.05,
+          "n": 50,
+          "counts": {
+            "success": 50,
+            "recovered": 19
+          },
+          "independent": {
+            "success": 1,
+            "recovered": 0.38
+          },
+          "official": {
+            "success": 1,
+            "recovered": 0.38
+          }
+        },
+        {
+          "model": "arb-resilient",
+          "p": 0.2,
+          "n": 50,
+          "counts": {
+            "success": 28,
+            "recovered": 23
+          },
+          "independent": {
+            "success": 0.56,
+            "recovered": 0.46
+          },
+          "official": {
+            "success": 0.56,
+            "recovered": 0.46
+          }
+        },
+        {
+          "model": "llm-claude-haiku-4-5-20251001",
+          "p": 0.05,
+          "n": 50,
+          "counts": {
+            "success": 47,
+            "recovered": 18
+          },
+          "independent": {
+            "success": 0.94,
+            "recovered": 0.36
+          },
+          "official": {
+            "success": 0.94,
+            "recovered": 0.36
+          }
+        },
+        {
+          "model": "llm-claude-haiku-4-5-20251001",
+          "p": 0.2,
+          "n": 50,
+          "counts": {
+            "success": 15,
+            "recovered": 10
+          },
+          "independent": {
+            "success": 0.3,
+            "recovered": 0.2
+          },
+          "official": {
+            "success": 0.3,
+            "recovered": 0.2
+          }
+        }
+      ],
+      "perturbations": {
+        "missing": {
+          "status": "rejected",
+          "exception": "KeyError",
+          "message": "'success'"
+        },
+        "null": {
+          "status": "rejected",
+          "exception": "TypeError",
+          "message": "float() argument must be a string or a real number, not 'NoneType'"
+        },
+        "duplicate": {
+          "status": "returned",
+          "output_retained_in_zip": true
+        },
+        "empty": {
+          "status": "returned",
+          "output_retained_in_zip": true
+        }
+      },
+      "provenance": {
+        "manifest_sha256": "ab0ac608743a8d1735b7634c1122017152102c842aa9f6c5a079e248ac539050"
+      },
+      "execution_status": "completed"
+    },
+    "aerb": {
+      "subject": "aerb",
+      "run_id": "38069032708",
+      "python": "3.12.15 (main, Oct  1 2026, 02:35:59) [GCC 13.3.0]",
+      "harness_commit": "5f763a521bc9a5e27034431bc7d2734d31f19c54",
+      "observer_sha256": "7c9b2a2ab3f6c2df2eb2a0a478ad0397f2373cc84cf2c1446ead0c7775d8b5cd",
+      "subject_commit": "585b34e045d7b63b501b5c86a96d14659f31cec1",
+      "identity": {
+        "rows": 416,
+        "unique": 416,
+        "duplicate_identities": []
+      },
+      "table_agrees": true,
+      "verifier_disagreements": [],
+      "coverage": {
+        "expected": 1040,
+        "observed": 416,
+        "missing": 624,
+        "unexpected": 0,
+        "missing_examples": [
+          [
+            "ollama:llama3.2:1b",
+            "A",
+            "silent_noop_first_persistent",
+            "a_fs_00"
+          ],
+          [
+            "ollama:llama3.2:1b",
+            "A",
+            "silent_noop_first_persistent",
+            "a_fs_01"
+          ],
+          [
+            "ollama:llama3.2:1b",
+            "A",
+            "silent_noop_first_persistent",
+            "a_fw_00"
+          ],
+          [
+            "ollama:llama3.2:1b",
+            "A",
+            "silent_noop_first_persistent",
+            "a_fw_01"
+          ],
+          [
+            "ollama:llama3.2:1b",
+            "A",
+            "silent_noop_first_persistent",
+            "a_sc_00"
+          ]
+        ]
+      },
+      "perturbations": {
+        "missing": {
+          "status": "rejected",
+          "exception": "KeyError",
+          "message": "'success'"
+        },
+        "null": {
+          "status": "rejected",
+          "exception": "TypeError",
+          "message": "unsupported operand type(s) for +: 'int' and 'NoneType'"
+        },
+        "duplicate": {
+          "status": "returned",
+          "output_retained_in_zip": true
+        },
+        "empty": {
+          "status": "returned",
+          "output_retained_in_zip": true
+        }
+      },
+      "provenance": {
+        "manifest_sha256": "76649111bd5df64348bc4a86ddf7a7a0b7251c020238f64da6a01df67054cce1"
+      },
+      "execution_status": "completed"
+    },
+    "sabot": {
+      "subject": "sabot",
+      "run_id": "38069032708",
+      "python": "3.12.15 (main, Oct  1 2026, 02:35:59) [GCC 13.3.0]",
+      "harness_commit": "5f763a521bc9a5e27034431bc7d2734d31f19c54",
+      "observer_sha256": "7c9b2a2ab3f6c2df2eb2a0a478ad0397f2373cc84cf2c1446ead0c7775d8b5cd",
+      "subject_commit": "be602555726f3592aaa6cb845685e7853f7fc47a",
+      "identity": {
+        "rows": 825,
+        "unique": 825,
+        "duplicate_identities": []
+      },
+      "independent": {
+        "O1": [
+          119,
+          69,
+          110,
+          48,
+          45,
+          4,
+          110
+        ],
+        "O2": [
+          119,
+          112,
+          38,
+          16,
+          7,
+          81,
+          37
+        ],
+        "O3": [
+          119,
+          112,
+          105,
+          102,
+          3,
+          10,
+          104
+        ],
+        "O4": [
+          119,
+          115,
+          32,
+          14,
+          1,
+          84,
+          27
+        ],
+        "O5": [
+          119,
+          119,
+          104,
+          1,
+          0,
+          15,
+          104
+        ],
+        "O6": [
+          119,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "official": {
+        "O1": [
+          119,
+          69,
+          110,
+          48,
+          45,
+          4,
+          110
+        ],
+        "O2": [
+          119,
+          112,
+          38,
+          16,
+          7,
+          81,
+          37
+        ],
+        "O3": [
+          119,
+          112,
+          105,
+          102,
+          3,
+          10,
+          104
+        ],
+        "O4": [
+          119,
+          115,
+          32,
+          14,
+          1,
+          84,
+          27
+        ],
+        "O5": [
+          119,
+          119,
+          104,
+          1,
+          0,
+          15,
+          104
+        ],
+        "O6": [
+          119,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "table_agrees": true,
+      "raw_reconstruction_differences": [],
+      "rebuilt_rows": 825,
+      "exclusions": {
+        "BASELINE_FAIL": 39,
+        "not_reviewer_bearing": 72
+      },
+      "clean_false_flags": {
+        "O1": [
+          37,
+          125
+        ],
+        "O2": [
+          8,
+          125
+        ],
+        "O3": [
+          15,
+          125
+        ],
+        "O4": [
+          31,
+          125
+        ],
+        "O5": [
+          24,
+          125
+        ],
+        "O6": [
+          0,
+          125
+        ]
+      },
+      "official_check": {
+        "argv": [
+          "/opt/hostedtoolcache/Python/3.12.15/x64/bin/python",
+          "scripts/score_by_operator.py",
+          "--check"
+        ],
+        "exit_code": 0
+      },
+      "empty_rate_rendering": "n/a",
+      "perturbations": {
+        "missing": {
+          "status": "rejected",
+          "exception": "KeyError",
+          "message": "'recovered'"
+        },
+        "null": {
+          "status": "returned",
+          "output": {
+            "O1": [
+              119,
+              68,
+              110,
+              48,
+              46,
+              4,
+              110
+            ],
+            "O2": [
+              119,
+              112,
+              38,
+              16,
+              7,
+              81,
+              37
+            ],
+            "O3": [
+              119,
+              112,
+              105,
+              102,
+              3,
+              10,
+              104
+            ],
+            "O4": [
+              119,
+              115,
+              32,
+              14,
+              1,
+              84,
+              27
+            ],
+            "O5": [
+              119,
+              119,
+              104,
+              1,
+              0,
+              15,
+              104
+            ],
+            "O6": [
+              119,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "duplicate": {
+          "status": "returned",
+          "output": {
+            "O1": [
+              120,
+              70,
+              111,
+              48,
+              45,
+              4,
+              111
+            ],
+            "O2": [
+              119,
+              112,
+              38,
+              16,
+              7,
+              81,
+              37
+            ],
+            "O3": [
+              119,
+              112,
+              105,
+              102,
+              3,
+              10,
+              104
+            ],
+            "O4": [
+              119,
+              115,
+              32,
+              14,
+              1,
+              84,
+              27
+            ],
+            "O5": [
+              119,
+              119,
+              104,
+              1,
+              0,
+              15,
+              104
+            ],
+            "O6": [
+              119,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "empty": {
+          "status": "returned",
+          "output": {
+            "O1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "O2": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "O3": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "O4": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "O5": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "O6": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      },
+      "provenance": {
+        "manifest_sha256": "8907bd89c4b793567887120047896e3fa48de86f70e7e9466f33661a359f953e"
+      },
+      "execution_status": "completed"
+    }
+  }
+}

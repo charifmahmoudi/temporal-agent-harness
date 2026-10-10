@@ -2,6 +2,14 @@
 
 ## Current scientific search
 
+The [independent measurement pilot](research/discovery/measurement-pilot/results.md)
+completed three separately authored evaluator audits in GitHub CI. Their numeric
+summaries agree with independent aggregation; the observed caveats are an ARB
+narrative overstatement, incomplete AERB coverage, and injected-input robustness
+limits. Sabot's 825 scored rows reconstruct exactly. The frozen advancement gate
+is not met: do not expand the UndoBench reporting defect into a strong contribution
+claim on this evidence. Protocols, clean results and raw CI artifacts are retained.
+
 The latest [public-evidence continuation](research/discovery/baseline-qualification/results.md)
 qualifies a published recovery benchmark in GitHub CI. Its main aggregate results
 reproduce, but the advertised general CLI silently reports zero duplicate and
