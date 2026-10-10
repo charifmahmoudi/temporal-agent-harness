@@ -2,6 +2,14 @@
 
 ## Current scientific search
 
+The [consequence-led incident round](research/discovery/incidents/results.md) now
+reviews fourteen reports across three engines, extracting operator decisions and
+recording corrections and existing answers. One prospectively documented eight-cell
+DBOS probe tests backend scope of a known failed-operation recovery report. Corrected
+CI collection completed all eight cells on SQLite and PostgreSQL; both fit the known
+success-only checkpoint explanation. Initial observer failures remain documented.
+The retained-evidence audit is pending. No broader evaluation is justified by this result.
+
 **Bounded discovery completed; external feedback pending:** the
 [five-step results](research/discovery/results.md) include a
 [43-issue inventory](research/discovery/inventory.md), three assessed candidates,

@@ -4,6 +4,12 @@
 
 ## Current research direction
 
+The subsequent [incident round](discovery/incidents/results.md) broadens problem
+selection beyond cancellation and replay keywords. Fourteen reports have been reviewed;
+one cross-backend scope probe confirms the known explanation on both tested backends.
+The separate evidence audit is pending. This is exploratory community work and does
+not reverse the earlier rejection of method novelty.
+
 **Current decision:** the [question audit](evaluation/question-audit.md) stops
 expansion of the contribution proposal. Its evidence checks passed in GitHub CI.
 The paragraphs below record how the earlier directions were narrowed and rejected;

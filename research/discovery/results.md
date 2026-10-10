@@ -1,5 +1,9 @@
 # Bounded discovery: results and decision
 
+For the subsequent consequence-led round, see the [incident results ledger](incidents/results.md),
+[fourteen-case review](incidents/review.md), and [nearest prior answers](incidents/prior-answers.md).
+The historical five-step result below is unchanged.
+
 2026-10-10. **No strong new scientific finding established.** The process produced
 a corrected issue screen and a reproducible two-engine comparison of known recovery
 semantics. We reject a novelty claim for the observed cancellation/termination
