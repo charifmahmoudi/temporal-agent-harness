@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'research/scripts/reproduce_local_activity_identity.py'
+      - 'research/scripts/identity_scoring.py'
       - '.github/workflows/local-activity-identity.yml'
   workflow_dispatch:
 permissions:

@@ -25,8 +25,9 @@ The fixed revision passes all twelve cells. The failures are recorded live befor
 offline replay, so reconstruction is not yet a necessary cause. A frozen
 [ordinary continuation sweep](evaluation/continuation-protocol.md) is running.
 The [prior-work comparison](evaluation/continuation-prior-work.md) makes state
-identification and crash-testing baselines explicit. The next distinct mechanism
-has its own [local-activity protocol](evaluation/local-activity-protocol.md).
+identification and crash-testing baselines explicit. The [local-activity study](evaluation/local-activity-results.md) reproduces a
+second mechanism across twelve workflows: immediate same-version replay detects
+the affected local decoding signature; remote and fixed controls pass.
 No advantage or new method is claimed from reproducing these known defects.
 
 The following sections preserve the earlier approval investigation and its negative

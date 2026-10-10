@@ -68,3 +68,9 @@ Only after this gate should query/restart treatments and a second result-identit
 mechanism be added. Selection comparisons must share the same continuations and
 oracles. State-identification testing, exhaustive bounded cuts, random cuts,
 dependency-based selection, and upstream regressions are required baselines.
+
+## Execution status
+
+The [24-cell result](open-recovery-results.md) is now audited and retained. The
+original predictions above remain unchanged. Both cached and cold open contexts
+failed live on the affected SDK; fixed and immediate controls passed.

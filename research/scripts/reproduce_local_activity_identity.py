@@ -13,6 +13,7 @@ import temporalio
 from temporalio import activity, workflow
 from temporalio.testing import WorkflowEnvironment
 from temporalio.worker import Replayer, Worker, UnsandboxedWorkflowRunner
+from identity_scoring import decoding_mechanism
 
 
 @activity.defn
@@ -77,7 +78,7 @@ async def trial(env, local, directory):
         (directory / "history.json").write_bytes(raw)
         record["history_sha256"] = hashlib.sha256(raw).hexdigest()
         events = json.loads(raw)["events"]
-        record["local_marker_count"] = sum(e.get("markerRecordedEventAttributes", {}).get("markerName") == "LocalActivity" for e in events)
+        record["local_marker_count"] = sum(e.get("markerRecordedEventAttributes", {}).get("markerName") == "core_local_activity" for e in events)
         record["remote_schedule_count"] = sum("activityTaskScheduledEventAttributes" in e for e in events)
         try:
             async with asyncio.timeout(30):
@@ -87,8 +88,7 @@ async def trial(env, local, directory):
             chain = exception_chain(error)
             if isinstance(error, workflow.NondeterminismError):
                 verdict = "typed_nondeterminism"
-            elif any(e["type"] == "TypeError" and "Expected value to be str" in e["message"]
-                     and "bool" in e["message"] for e in chain):
+            elif decoding_mechanism(chain):
                 verdict = "reported_decoding_mechanism"
             else:
                 verdict = "inconclusive_replay_error"

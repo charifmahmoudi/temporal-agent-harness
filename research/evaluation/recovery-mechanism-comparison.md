@@ -34,7 +34,7 @@ oracle. It does not falsely mark these other exceptions as successful replay.
 | Case | Failure mechanism | State or operation needed | Relevant observation | Evidence status |
 |---|---|---|---|---|
 | Temporal Python [#673](https://github.com/temporalio/sdk-python/issues/673), Core [#833](https://github.com/temporalio/sdk-rust/pull/833) | Update delivery crosses an activity-completion boundary during reconstruction | Signal, completion, update; replay resulting history | Required activity schedule versus reconstructed commands | Reproduced here; typed nondeterminism |
-| Temporal Python [#1881](https://github.com/temporalio/sdk-python/issues/1881), Core [#1616](https://github.com/temporalio/sdk-rust/pull/1616) | Regrouping local-activity resolutions changes which activity owns a sequence number | Fan-out, first-completion wait, conditional follow-up activity | Result-to-handle identity; reported decoding failure | Report and marker-schema patch inspected; not reproduced here |
+| Temporal Python [#1881](https://github.com/temporalio/sdk-python/issues/1881), Core [#1616](https://github.com/temporalio/sdk-rust/pull/1616) | Regrouping local-activity resolutions changes which activity owns a sequence number | Fan-out, first-completion wait, conditional follow-up activity | Result-to-handle identity; reported decoding failure | 12 live/replay trials; affected local decoding signature, remote/fixed controls pass (see local-activity results) |
 | Rust SDK [#1353](https://github.com/temporalio/sdk-rust/pull/1353) | Internal shared-future wake is classified as a non-SDK wake during replay | Await Nexus result, remain open, then query/evict/restart | Recovery/query success and ability to continue | 24 matched executions; timer continuation exposes live task failure before offline replay (see results) |
 | DBOS Python [#358](https://github.com/dbos-inc/dbos-transact-py/pull/358) | Database error leaves process-local receive coordination uncleared | Disconnect during receive and subsequently recover | Recorded notification is eventually consumed under restored service | Fix patch and developer account inspected; not reproduced here |
 
@@ -140,6 +140,6 @@ a distinction; it does not justify assuming which of these cells will fail.
 **Current status:** the [24-cell Nexus experiment](open-recovery-results.md) establishes
 a continuation-sensitive missed context, including failures under default caching.
 It does not establish restart as a necessary cause. Ordinary suffix enumeration
-and activation diagnosis are the next baseline, and local-activity identity is a
-separate development mechanism. A new method, independent validation, and novelty
+and activation diagnosis are the next baseline, and [local-activity identity](local-activity-results.md) is a
+separately reproduced development mechanism caught by immediate replay. A new method, independent validation, and novelty
 remain unestablished.

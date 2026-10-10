@@ -50,6 +50,9 @@ def main():
     subprocess.run([sys.executable, str(ROOT/'research/scripts/test_repair_encodings.py')], check=True)
     subprocess.run([sys.executable, str(ROOT/'research/scripts/check_composition_argument.py')], check=True)
     subprocess.run([sys.executable, str(ROOT/'research/scripts/summarize_recovery_comparison.py'), '--check'], check=True)
+    subprocess.run([sys.executable, str(ROOT/'research/scripts/audit_nexus_evidence.py'), '--check'], check=True)
+    subprocess.run([sys.executable, str(ROOT/'research/scripts/test_nexus_evidence.py')], check=True)
+    subprocess.run([sys.executable, str(ROOT/'research/scripts/audit_local_activity_evidence.py'), '--check'], check=True)
     print(f'{count} relative documentation links resolve; figure outputs are reproducible.')
 
 

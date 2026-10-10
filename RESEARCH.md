@@ -1,4 +1,4 @@
-# Verifying approval, cancellation, and upgrades in Temporal Agent Harness
+# Research on durable workflow correctness
 
 ## Current scientific search
 
@@ -21,8 +21,10 @@ necessary. The [conventional continuation baseline](research/evaluation/continua
 is running to diagnose activation versus replay and test ordinary suffix enumeration.
 The [closest-method comparison](research/evaluation/continuation-prior-work.md)
 explains why distinguishing continuations are already established prior work.
-A separate [local-activity protocol](research/evaluation/local-activity-protocol.md)
-tests whether immediate replay detects a different identity mechanism. Results,
+The [local-activity study](research/evaluation/local-activity-results.md) now
+reproduces a separate decoding signature: three affected local replays fail,
+while remote controls and all fixed fresh histories pass. Immediate completed
+replay suffices there. Results,
 manual assumptions, and unrun experiments are kept separate; novelty remains open.
 
 ## Start here
