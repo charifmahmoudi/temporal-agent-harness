@@ -90,9 +90,11 @@ def audit(bundle):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
+    parser.add_argument("--corrected", action="store_true")
     args = parser.parse_args()
-    report = audit(json.loads((ROOT / "evaluation/local-activity-evidence.json").read_text()))
-    target = ROOT / "evaluation/local-activity-summary.json"
+    name = "local-activity-corrected" if args.corrected else "local-activity"
+    report = audit(json.loads((ROOT / f"evaluation/{name}-evidence.json").read_text()))
+    target = ROOT / f"evaluation/{name}-summary.json"
     encoded = json.dumps(report, indent=2) + "\n"
     if args.check:
         assert target.read_text() == encoded

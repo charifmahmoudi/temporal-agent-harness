@@ -97,5 +97,22 @@ class IdentityBridgeTests(unittest.TestCase):
         self.assertFalse(decoding_mechanism([{"type": "RuntimeError", "message": 'Expected value to be str bool Failed decoding arguments r#type: "TypeError"'}]))
 
 
+class ContinuationDiagnosisTests(unittest.TestCase):
+    def test_first_cached_failures_precede_replay_and_eviction(self):
+        from prepare_nexus_continuations import SUFFIXES
+        cases = [f"nexus_continuation_{s}_{c}" for s in SUFFIXES for c in ("cached", "cold")]
+        report = audit(json.loads((ROOT / "evaluation/continuation-evidence.json").read_text()), cases)
+        affected = report["arms"][0]
+        self.assertEqual(affected["verdicts"], {"passed": 12, "confirmed_mechanism": 12})
+        self.assertEqual(report["arms"][1]["verdicts"], {"passed": 24})
+        failures = [r for r in affected["rows"] if r["verdict"] == "confirmed_mechanism"]
+        for row in failures:
+            self.assertEqual(row["wake_failure_markers"][0], "false")
+            self.assertTrue(row["timer_fired_events"])
+            if row["case"].endswith("cached"):
+                self.assertTrue(row["caller_activations_before_first_wake_failure"])
+                self.assertEqual(set(map(tuple, row["caller_activations_before_first_wake_failure"])), {("false", "false")})
+
+
 if __name__ == "__main__":
     unittest.main()

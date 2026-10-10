@@ -1,0 +1,731 @@
+{
+  "schema": 1,
+  "run_url": "https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38040064854",
+  "arms": [
+    {
+      "sdk": "1.33.0",
+      "verdicts": {
+        "reported_decoding_mechanism": 3,
+        "compatible": 3
+      },
+      "rows": [
+        {
+          "local": true,
+          "repetition": 1,
+          "original_verdict": "reported_decoding_mechanism",
+          "audited_verdict": "reported_decoding_mechanism",
+          "original_marker_count": 5,
+          "audited_marker_count": 5,
+          "markers": [
+            {
+              "event_id": 5,
+              "data": {
+                "seq": 1,
+                "attempt": 1,
+                "activity_id": "1",
+                "activity_type": "identity_work",
+                "complete_time": {
+                  "seconds": 1791623053,
+                  "nanos": 647588951
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623053,
+                  "nanos": 653542253
+                }
+              },
+              "result": "0"
+            },
+            {
+              "event_id": 6,
+              "data": {
+                "seq": 2,
+                "attempt": 1,
+                "activity_id": "2",
+                "activity_type": "identity_work",
+                "complete_time": {
+                  "seconds": 1791623053,
+                  "nanos": 647754198
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623053,
+                  "nanos": 653552532
+                }
+              },
+              "result": "1"
+            },
+            {
+              "event_id": 7,
+              "data": {
+                "seq": 3,
+                "attempt": 1,
+                "activity_id": "3",
+                "activity_type": "identity_work",
+                "complete_time": {
+                  "seconds": 1791623053,
+                  "nanos": 647952110
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623053,
+                  "nanos": 653554315
+                }
+              },
+              "result": "2"
+            },
+            {
+              "event_id": 8,
+              "data": {
+                "seq": 4,
+                "attempt": 1,
+                "activity_id": "4",
+                "activity_type": "identity_expired",
+                "complete_time": {
+                  "seconds": 1791623053,
+                  "nanos": 648720592
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623053,
+                  "nanos": 656550928
+                }
+              },
+              "result": false
+            },
+            {
+              "event_id": 9,
+              "data": {
+                "seq": 5,
+                "attempt": 1,
+                "activity_id": "5",
+                "activity_type": "identity_finish",
+                "complete_time": {
+                  "seconds": 1791623053,
+                  "nanos": 649163048
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623053,
+                  "nanos": 658995295
+                }
+              },
+              "result": "finished"
+            }
+          ]
+        },
+        {
+          "local": false,
+          "repetition": 1,
+          "original_verdict": "compatible",
+          "audited_verdict": "compatible",
+          "original_marker_count": 0,
+          "audited_marker_count": 0,
+          "markers": []
+        },
+        {
+          "local": true,
+          "repetition": 2,
+          "original_verdict": "reported_decoding_mechanism",
+          "audited_verdict": "reported_decoding_mechanism",
+          "original_marker_count": 5,
+          "audited_marker_count": 5,
+          "markers": [
+            {
+              "event_id": 5,
+              "data": {
+                "seq": 1,
+                "attempt": 1,
+                "activity_id": "1",
+                "activity_type": "identity_work",
+                "complete_time": {
+                  "seconds": 1791623053,
+                  "nanos": 766062524
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623053,
+                  "nanos": 769660183
+                }
+              },
+              "result": "0"
+            },
+            {
+              "event_id": 6,
+              "data": {
+                "seq": 2,
+                "attempt": 1,
+                "activity_id": "2",
+                "activity_type": "identity_work",
+                "complete_time": {
+                  "seconds": 1791623053,
+                  "nanos": 766208158
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623053,
+                  "nanos": 769666575
+                }
+              },
+              "result": "1"
+            },
+            {
+              "event_id": 7,
+              "data": {
+                "seq": 3,
+                "attempt": 1,
+                "activity_id": "3",
+                "activity_type": "identity_work",
+                "complete_time": {
+                  "seconds": 1791623053,
+                  "nanos": 766195534
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623053,
+                  "nanos": 769668559
+                }
+              },
+              "result": "2"
+            },
+            {
+              "event_id": 8,
+              "data": {
+                "seq": 4,
+                "attempt": 1,
+                "activity_id": "4",
+                "activity_type": "identity_expired",
+                "complete_time": {
+                  "seconds": 1791623053,
+                  "nanos": 766762558
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623053,
+                  "nanos": 772004287
+                }
+              },
+              "result": false
+            },
+            {
+              "event_id": 9,
+              "data": {
+                "seq": 5,
+                "attempt": 1,
+                "activity_id": "5",
+                "activity_type": "identity_finish",
+                "complete_time": {
+                  "seconds": 1791623053,
+                  "nanos": 767209908
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623053,
+                  "nanos": 774204486
+                }
+              },
+              "result": "finished"
+            }
+          ]
+        },
+        {
+          "local": false,
+          "repetition": 2,
+          "original_verdict": "compatible",
+          "audited_verdict": "compatible",
+          "original_marker_count": 0,
+          "audited_marker_count": 0,
+          "markers": []
+        },
+        {
+          "local": true,
+          "repetition": 3,
+          "original_verdict": "reported_decoding_mechanism",
+          "audited_verdict": "reported_decoding_mechanism",
+          "original_marker_count": 5,
+          "audited_marker_count": 5,
+          "markers": [
+            {
+              "event_id": 5,
+              "data": {
+                "seq": 1,
+                "attempt": 1,
+                "activity_id": "1",
+                "activity_type": "identity_work",
+                "complete_time": {
+                  "seconds": 1791623053,
+                  "nanos": 881128409
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623053,
+                  "nanos": 885976363
+                }
+              },
+              "result": "0"
+            },
+            {
+              "event_id": 6,
+              "data": {
+                "seq": 2,
+                "attempt": 1,
+                "activity_id": "2",
+                "activity_type": "identity_work",
+                "complete_time": {
+                  "seconds": 1791623053,
+                  "nanos": 881680854
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623053,
+                  "nanos": 885981543
+                }
+              },
+              "result": "1"
+            },
+            {
+              "event_id": 7,
+              "data": {
+                "seq": 3,
+                "attempt": 1,
+                "activity_id": "3",
+                "activity_type": "identity_work",
+                "complete_time": {
+                  "seconds": 1791623053,
+                  "nanos": 881248412
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623053,
+                  "nanos": 885983377
+                }
+              },
+              "result": "2"
+            },
+            {
+              "event_id": 8,
+              "data": {
+                "seq": 4,
+                "attempt": 1,
+                "activity_id": "4",
+                "activity_type": "identity_expired",
+                "complete_time": {
+                  "seconds": 1791623053,
+                  "nanos": 883079048
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623053,
+                  "nanos": 889347499
+                }
+              },
+              "result": false
+            },
+            {
+              "event_id": 9,
+              "data": {
+                "seq": 5,
+                "attempt": 1,
+                "activity_id": "5",
+                "activity_type": "identity_finish",
+                "complete_time": {
+                  "seconds": 1791623053,
+                  "nanos": 883505388
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623053,
+                  "nanos": 891904725
+                }
+              },
+              "result": "finished"
+            }
+          ]
+        },
+        {
+          "local": false,
+          "repetition": 3,
+          "original_verdict": "compatible",
+          "audited_verdict": "compatible",
+          "original_marker_count": 0,
+          "audited_marker_count": 0,
+          "markers": []
+        }
+      ]
+    },
+    {
+      "sdk": "1.34.0",
+      "verdicts": {
+        "compatible": 6
+      },
+      "rows": [
+        {
+          "local": true,
+          "repetition": 1,
+          "original_verdict": "compatible",
+          "audited_verdict": "compatible",
+          "original_marker_count": 5,
+          "audited_marker_count": 5,
+          "markers": [
+            {
+              "event_id": 5,
+              "data": {
+                "seq": 1,
+                "attempt": 1,
+                "activity_id": "1",
+                "activity_type": "identity_work",
+                "complete_time": {
+                  "seconds": 1791623057,
+                  "nanos": 730142662
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623057,
+                  "nanos": 737911472
+                },
+                "activation_index": 1
+              },
+              "result": "0"
+            },
+            {
+              "event_id": 6,
+              "data": {
+                "seq": 2,
+                "attempt": 1,
+                "activity_id": "2",
+                "activity_type": "identity_work",
+                "complete_time": {
+                  "seconds": 1791623057,
+                  "nanos": 730109272
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623057,
+                  "nanos": 737920558
+                },
+                "activation_index": 2
+              },
+              "result": "1"
+            },
+            {
+              "event_id": 7,
+              "data": {
+                "seq": 3,
+                "attempt": 1,
+                "activity_id": "3",
+                "activity_type": "identity_work",
+                "complete_time": {
+                  "seconds": 1791623057,
+                  "nanos": 730181735
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623057,
+                  "nanos": 737922542
+                },
+                "activation_index": 2
+              },
+              "result": "2"
+            },
+            {
+              "event_id": 8,
+              "data": {
+                "seq": 4,
+                "attempt": 1,
+                "activity_id": "4",
+                "activity_type": "identity_expired",
+                "complete_time": {
+                  "seconds": 1791623057,
+                  "nanos": 730881992
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623057,
+                  "nanos": 742580963
+                },
+                "activation_index": 3
+              },
+              "result": false
+            },
+            {
+              "event_id": 9,
+              "data": {
+                "seq": 5,
+                "attempt": 1,
+                "activity_id": "5",
+                "activity_type": "identity_finish",
+                "complete_time": {
+                  "seconds": 1791623057,
+                  "nanos": 731318858
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623057,
+                  "nanos": 745024802
+                },
+                "activation_index": 4
+              },
+              "result": "finished"
+            }
+          ]
+        },
+        {
+          "local": false,
+          "repetition": 1,
+          "original_verdict": "compatible",
+          "audited_verdict": "compatible",
+          "original_marker_count": 0,
+          "audited_marker_count": 0,
+          "markers": []
+        },
+        {
+          "local": true,
+          "repetition": 2,
+          "original_verdict": "compatible",
+          "audited_verdict": "compatible",
+          "original_marker_count": 5,
+          "audited_marker_count": 5,
+          "markers": [
+            {
+              "event_id": 5,
+              "data": {
+                "seq": 1,
+                "attempt": 1,
+                "activity_id": "1",
+                "activity_type": "identity_work",
+                "complete_time": {
+                  "seconds": 1791623057,
+                  "nanos": 832785301
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623057,
+                  "nanos": 836485558
+                },
+                "activation_index": 1
+              },
+              "result": "0"
+            },
+            {
+              "event_id": 6,
+              "data": {
+                "seq": 2,
+                "attempt": 1,
+                "activity_id": "2",
+                "activity_type": "identity_work",
+                "complete_time": {
+                  "seconds": 1791623057,
+                  "nanos": 832869166
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623057,
+                  "nanos": 836489706
+                },
+                "activation_index": 2
+              },
+              "result": "1"
+            },
+            {
+              "event_id": 7,
+              "data": {
+                "seq": 3,
+                "attempt": 1,
+                "activity_id": "3",
+                "activity_type": "identity_work",
+                "complete_time": {
+                  "seconds": 1791623057,
+                  "nanos": 833396214
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623057,
+                  "nanos": 836491319
+                },
+                "activation_index": 2
+              },
+              "result": "2"
+            },
+            {
+              "event_id": 8,
+              "data": {
+                "seq": 4,
+                "attempt": 1,
+                "activity_id": "4",
+                "activity_type": "identity_expired",
+                "complete_time": {
+                  "seconds": 1791623057,
+                  "nanos": 833342413
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623057,
+                  "nanos": 838872617
+                },
+                "activation_index": 3
+              },
+              "result": false
+            },
+            {
+              "event_id": 9,
+              "data": {
+                "seq": 5,
+                "attempt": 1,
+                "activity_id": "5",
+                "activity_type": "identity_finish",
+                "complete_time": {
+                  "seconds": 1791623057,
+                  "nanos": 833788890
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623057,
+                  "nanos": 841244708
+                },
+                "activation_index": 4
+              },
+              "result": "finished"
+            }
+          ]
+        },
+        {
+          "local": false,
+          "repetition": 2,
+          "original_verdict": "compatible",
+          "audited_verdict": "compatible",
+          "original_marker_count": 0,
+          "audited_marker_count": 0,
+          "markers": []
+        },
+        {
+          "local": true,
+          "repetition": 3,
+          "original_verdict": "compatible",
+          "audited_verdict": "compatible",
+          "original_marker_count": 5,
+          "audited_marker_count": 5,
+          "markers": [
+            {
+              "event_id": 5,
+              "data": {
+                "seq": 1,
+                "attempt": 1,
+                "activity_id": "1",
+                "activity_type": "identity_work",
+                "complete_time": {
+                  "seconds": 1791623057,
+                  "nanos": 944844285
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623057,
+                  "nanos": 948500799
+                },
+                "activation_index": 1
+              },
+              "result": "0"
+            },
+            {
+              "event_id": 6,
+              "data": {
+                "seq": 2,
+                "attempt": 1,
+                "activity_id": "2",
+                "activity_type": "identity_work",
+                "complete_time": {
+                  "seconds": 1791623057,
+                  "nanos": 945566169
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623057,
+                  "nanos": 948505748
+                },
+                "activation_index": 2
+              },
+              "result": "1"
+            },
+            {
+              "event_id": 7,
+              "data": {
+                "seq": 3,
+                "attempt": 1,
+                "activity_id": "3",
+                "activity_type": "identity_work",
+                "complete_time": {
+                  "seconds": 1791623057,
+                  "nanos": 944894038
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623057,
+                  "nanos": 948507952
+                },
+                "activation_index": 3
+              },
+              "result": "2"
+            },
+            {
+              "event_id": 8,
+              "data": {
+                "seq": 4,
+                "attempt": 1,
+                "activity_id": "4",
+                "activity_type": "identity_expired",
+                "complete_time": {
+                  "seconds": 1791623057,
+                  "nanos": 945676016
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623057,
+                  "nanos": 950395404
+                },
+                "activation_index": 4
+              },
+              "result": false
+            },
+            {
+              "event_id": 9,
+              "data": {
+                "seq": 5,
+                "attempt": 1,
+                "activity_id": "5",
+                "activity_type": "identity_finish",
+                "complete_time": {
+                  "seconds": 1791623057,
+                  "nanos": 946122336
+                },
+                "backoff": null,
+                "original_schedule_time": {
+                  "seconds": 1791623057,
+                  "nanos": 953873200
+                },
+                "activation_index": 5
+              },
+              "result": "finished"
+            }
+          ]
+        },
+        {
+          "local": false,
+          "repetition": 3,
+          "original_verdict": "compatible",
+          "audited_verdict": "compatible",
+          "original_marker_count": 0,
+          "audited_marker_count": 0,
+          "markers": []
+        }
+      ]
+    }
+  ],
+  "server_sha256": "e9c897664607c9bcc25cda5a9ced07f4c352e03e4d2c76d60c86d1c086f830bc",
+  "runner_sha256": "2100ce7b9aeacfc9512d278fb434737ad83da46fb385d853c4307009ff97c253",
+  "shared_dependencies": [
+    "nexus-rpc==1.4.0",
+    "protobuf==7.36.2",
+    "types-protobuf==7.35.1.20260906",
+    "typing_extensions==4.16.0"
+  ],
+  "scoring_revision": "Recognize serialized Core TypeError cause and core_local_activity marker name; original artifact unchanged"
+}

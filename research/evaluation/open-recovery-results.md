@@ -19,9 +19,8 @@ The first affected cached failure follows the timer firing. It is a live
 workflow-task failure, before the runner ever invokes offline replay. Thus the
 reproducer establishes a **continuation-sensitive activation defect**; explicit
 restart is not required by the fixture. The cache setting alone cannot prove
-the worker never evicted. Activation instrumentation in the
-[follow-up protocol](continuation-protocol.md) will distinguish that remaining
-ambiguity. The upstream report's broader query/restart account remains a lead,
+the worker never evicted. The [48-cell diagnostic follow-up](continuation-results.md) now confirms that
+all six cached timer failures precede any caller replay or eviction. The upstream report's broader query/restart account remains a lead,
 not something this experiment has measured.
 
 ## Evidence and reproduction
@@ -73,8 +72,9 @@ or established that every legal continuation triggers it.
 
 Gate 1 succeeds narrowly: an ordinary completed-workflow regression shape misses
 a real defect exposed by a legal continuation. Recovery is not yet demonstrated
-as a necessary condition. The next gate is the conventional suffix sweep and
-activation diagnosis, not a novel selector.
+as a necessary condition. The conventional suffix sweep and
+activation diagnosis are [complete](continuation-results.md): ordinary enumeration
+detects the case, and no selector advantage is established.
 
 The [prior-work comparison](continuation-prior-work.md) rules out claiming that
 state-distinguishing continuations or post-recovery operations are new ideas.

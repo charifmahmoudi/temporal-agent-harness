@@ -22,8 +22,9 @@ The [matched Nexus result](evaluation/open-recovery-results.md) establishes a
 concrete context distinction across 24 executions. Immediate completion passes;
 a subsequent timer exposes the affected SDK defect under both cache settings.
 The fixed revision passes all twelve cells. The failures are recorded live before
-offline replay, so reconstruction is not yet a necessary cause. A frozen
-[ordinary continuation sweep](evaluation/continuation-protocol.md) is running.
+offline replay, so reconstruction is not yet a necessary cause. The [48-cell ordinary suffix sweep](evaluation/continuation-results.md) now
+confirms detection by conventional enumeration and first cached failures before
+replay or eviction. No baseline selection advantage is demonstrated.
 The [prior-work comparison](evaluation/continuation-prior-work.md) makes state
 identification and crash-testing baselines explicit. The [local-activity study](evaluation/local-activity-results.md) reproduces a
 second mechanism across twelve workflows: immediate same-version replay detects

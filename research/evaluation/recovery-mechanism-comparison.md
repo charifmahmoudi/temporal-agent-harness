@@ -139,7 +139,7 @@ a distinction; it does not justify assuming which of these cells will fail.
 
 **Current status:** the [24-cell Nexus experiment](open-recovery-results.md) establishes
 a continuation-sensitive missed context, including failures under default caching.
-It does not establish restart as a necessary cause. Ordinary suffix enumeration
-and activation diagnosis are the next baseline, and [local-activity identity](local-activity-results.md) is a
+It does not establish restart as a necessary cause. The [48-cell suffix baseline](continuation-results.md) now
+detects the Nexus defect before any cached caller replay or eviction, and [local-activity identity](local-activity-results.md) is a
 separately reproduced development mechanism caught by immediate replay. A new method, independent validation, and novelty
 remain unestablished.

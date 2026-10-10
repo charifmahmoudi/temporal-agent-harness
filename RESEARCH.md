@@ -2,6 +2,9 @@
 
 ## Current scientific search
 
+The [recovery research checkpoint](research/evaluation/recovery-status.md) gives
+the current evidence ledger, decisions, and community reproduction path.
+
 The [external recovery investigation](research/evaluation/recovery-investigation.md)
 reproduces a known live/replay defect and retains complete histories. Its
 [72-execution comparison](research/evaluation/recovery-comparison-results.md) found
@@ -17,15 +20,17 @@ reproduces a continuation-sensitive defect: immediate completion passes, while a
 follow-up SDK timer fails on the affected revision under both cache settings.
 All fixed-revision cells pass. The 24 retained histories and payloads are audited.
 The failure happens live before offline replay; restart is not established as
-necessary. The [conventional continuation baseline](research/evaluation/continuation-protocol.md)
-is running to diagnose activation versus replay and test ordinary suffix enumeration.
+necessary. The [48-cell conventional baseline](research/evaluation/continuation-results.md)
+now catches the timer-sensitive distinction. Diagnostic logs establish that the
+first cached failures precede replay and eviction. All fixed cells pass.
 The [closest-method comparison](research/evaluation/continuation-prior-work.md)
 explains why distinguishing continuations are already established prior work.
 The [local-activity study](research/evaluation/local-activity-results.md) now
 reproduces a separate decoding signature: three affected local replays fail,
 while remote controls and all fixed fresh histories pass. Immediate completed
 replay suffices there. Results,
-manual assumptions, and unrun experiments are kept separate; novelty remains open.
+manual assumptions, and remaining research gates are kept separate; no limitation
+of a well-equipped conventional baseline has been established. Novelty remains open.
 
 ## Start here
 

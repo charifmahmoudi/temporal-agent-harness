@@ -63,3 +63,9 @@ If it does not, diagnose the instrumentation or fixture before inventing an anal
 This experiment cannot establish general test reduction, coverage beyond this
 grammar, crash recovery equivalence, or scientific novelty. Do not expand selection
 heuristics until a second mechanism and a concrete baseline limitation are established.
+
+## Execution status
+
+The [48-cell comparison](continuation-results.md) is now complete. No predictions
+or grammar choices above were rewritten. Both affected timers fail; return/state
+controls and all fixed cells pass. Cached first failures precede replay/eviction.

@@ -24,6 +24,9 @@
           "nexus_completed_event": 10,
           "timer_fired_events": [],
           "first_failure_event": null,
+          "caller_run_id": "01a124f3-49d2-7149-a500-33b9aa9a9983",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -38,6 +41,9 @@
           "nexus_completed_event": 10,
           "timer_fired_events": [],
           "first_failure_event": null,
+          "caller_run_id": "01a124f3-5a4b-717b-a741-9ffd7e70c5e5",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -54,6 +60,9 @@
             15
           ],
           "first_failure_event": 18,
+          "caller_run_id": "01a124f3-688c-7dda-bd92-26bc0e83f208",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -70,6 +79,9 @@
             15
           ],
           "first_failure_event": 18,
+          "caller_run_id": "01a124f3-c46b-7778-8dd9-27662cf53e3c",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -84,6 +96,9 @@
           "nexus_completed_event": 10,
           "timer_fired_events": [],
           "first_failure_event": null,
+          "caller_run_id": "01a124f4-2060-7ef9-a172-15bfc2fb2c5d",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -98,6 +113,9 @@
           "nexus_completed_event": 10,
           "timer_fired_events": [],
           "first_failure_event": null,
+          "caller_run_id": "01a124f4-2e46-7e90-8c67-ab5cc895bdcc",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -114,6 +132,9 @@
             15
           ],
           "first_failure_event": 18,
+          "caller_run_id": "01a124f4-3c44-7cb7-9ccd-f9f385f6828f",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -130,6 +151,9 @@
             15
           ],
           "first_failure_event": 18,
+          "caller_run_id": "01a124f4-9825-73b0-b593-0ae0ace352dc",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -144,6 +168,9 @@
           "nexus_completed_event": 10,
           "timer_fired_events": [],
           "first_failure_event": null,
+          "caller_run_id": "01a124f4-f418-7e76-a35a-38ae3d8566b2",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -158,6 +185,9 @@
           "nexus_completed_event": 10,
           "timer_fired_events": [],
           "first_failure_event": null,
+          "caller_run_id": "01a124f5-0242-7268-b4ec-848f73435dce",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -174,6 +204,9 @@
             15
           ],
           "first_failure_event": 18,
+          "caller_run_id": "01a124f5-1064-7d13-96c4-c0e73deb167e",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -190,6 +223,9 @@
             15
           ],
           "first_failure_event": 18,
+          "caller_run_id": "01a124f5-6c5e-7b0b-8653-5f006b4bda7d",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         }
       ]
@@ -213,6 +249,9 @@
           "nexus_completed_event": 10,
           "timer_fired_events": [],
           "first_failure_event": null,
+          "caller_run_id": "01a124f3-0487-7412-87c1-ff9097175c65",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -227,6 +266,9 @@
           "nexus_completed_event": 10,
           "timer_fired_events": [],
           "first_failure_event": null,
+          "caller_run_id": "01a124f3-1485-797a-9aaf-58a17b23ab41",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -243,6 +285,9 @@
             15
           ],
           "first_failure_event": null,
+          "caller_run_id": "01a124f3-2279-7200-9159-a29f412e904c",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -259,6 +304,9 @@
             15
           ],
           "first_failure_event": null,
+          "caller_run_id": "01a124f3-3481-7479-a77a-13c7ed397b8e",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -273,6 +321,9 @@
           "nexus_completed_event": 10,
           "timer_fired_events": [],
           "first_failure_event": null,
+          "caller_run_id": "01a124f3-4698-7214-a79c-bd12eeb785b1",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -287,6 +338,9 @@
           "nexus_completed_event": 10,
           "timer_fired_events": [],
           "first_failure_event": null,
+          "caller_run_id": "01a124f3-5505-7aac-ad23-664c14770ffb",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -303,6 +357,9 @@
             15
           ],
           "first_failure_event": null,
+          "caller_run_id": "01a124f3-633f-7711-8620-2afcc0ac3561",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -319,6 +376,9 @@
             15
           ],
           "first_failure_event": null,
+          "caller_run_id": "01a124f3-7521-7002-adfe-3e2f9ffe2c3d",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -333,6 +393,9 @@
           "nexus_completed_event": 10,
           "timer_fired_events": [],
           "first_failure_event": null,
+          "caller_run_id": "01a124f3-86f1-79a5-9a85-5d9d0d80217b",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -347,6 +410,9 @@
           "nexus_completed_event": 10,
           "timer_fired_events": [],
           "first_failure_event": null,
+          "caller_run_id": "01a124f3-94e7-7e32-a99a-800ec045b80d",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -363,6 +429,9 @@
             15
           ],
           "first_failure_event": null,
+          "caller_run_id": "01a124f3-a2d6-7bff-831f-4a44fe2c966c",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         },
         {
@@ -379,6 +448,9 @@
             15
           ],
           "first_failure_event": null,
+          "caller_run_id": "01a124f3-b4b0-7f41-b3fc-b7e19049c017",
+          "caller_activation_states": [],
+          "caller_activations_before_first_wake_failure": [],
           "wake_failure_markers": []
         }
       ]

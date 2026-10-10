@@ -56,5 +56,14 @@ appropriate observation boundary per mechanism; it does not yet demonstrate a
 difficult selection problem or a better automatic derivation method.
 
 No new defect, cross-framework generality, prevalence estimate, independent
-validation, or scientific novelty is claimed. The corrected runner is being
-rechecked in CI; that run is validation of our measurement code, not a new mechanism.
+validation, or scientific novelty is claimed. The corrected runner passed
+[CI run 38040064854](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38040064854)
+with twelve additional workflows showing the same affected/local failure split.
+The [corrected raw evidence](local-activity-corrected-evidence.json) and
+[summary](local-activity-corrected-summary.json) verify that original and audited
+classifications now agree, and local marker counts are five in all six local
+histories. This validates measurement code; it is not a new mechanism or holdout.
+
+```bash
+python research/scripts/audit_local_activity_evidence.py --check --corrected
+```

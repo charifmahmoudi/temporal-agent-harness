@@ -39,6 +39,10 @@ def audit(bundle, cases=CASES):
             generated = archive.read("fixture/fixture.rs")
             assert sha(generated) == provenance["generated_sha256"]
             fixtures.add(sha(generated))
+        else:
+            generated = provenance["generated_hashes"]
+            for path, expected in generated.items():
+                assert sha(archive.read("fixture/" + Path(path).name)) == expected
         rows = json.loads(archive.read("runs/summary.json"))
         assert len(rows) == len(cases) * 3
         seen, output = set(), []
@@ -78,11 +82,21 @@ def audit(bundle, cases=CASES):
                 assert f"RECOVERY_PHASE {case} offline=start" not in log
             version = json.loads(archive.read(prefix + "server-version.txt"))["serverVersion"]
             versions.add(version)
-            failure_markers = re.findall(r"CONTINUATION_WAKE_FAILURE run=(\S+) replay=(true|false)", log)
+            caller_run = attributes(events[0])["original_execution_run_id"]
+            failure_markers = [replay for run, replay in re.findall(
+                r"CONTINUATION_WAKE_FAILURE run=(\S+) replay=(true|false)", log) if run == caller_run]
+            activations = [[replay, eviction] for run, replay, eviction in re.findall(
+                r"CONTINUATION_HOST run=(\S+) replay=(true|false) eviction=(true|false)", log) if run == caller_run]
+            marker = f"CONTINUATION_WAKE_FAILURE run={caller_run} replay="
+            prefix_log = log.split(marker, 1)[0] if marker in log else ""
+            before_failure = [[replay, eviction] for run, replay, eviction in re.findall(
+                r"CONTINUATION_HOST run=(\S+) replay=(true|false) eviction=(true|false)", prefix_log) if run == caller_run]
             output.append({"case": case, "repetition": repetition, **verdict,
                 "nexus_completed_event": nexus[0]["event_id"],
                 "timer_fired_events": [e["event_id"] for e in events if e["event_type"] == 18],
                 "first_failure_event": min((e["event_id"] for e in matching), default=None),
+                "caller_run_id": caller_run, "caller_activation_states": activations,
+                "caller_activations_before_first_wake_failure": before_failure,
                 "wake_failure_markers": failure_markers})
         reports.append({"arm": arm["arm"], "sdk_revision": revision,
             "verdicts": dict(Counter(r["verdict"] for r in output)), "rows": output})
