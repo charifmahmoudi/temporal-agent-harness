@@ -3,12 +3,14 @@
 ## Current scientific search
 
 The [external recovery investigation](research/evaluation/recovery-investigation.md)
-now reproduces a known live/replay defect: three affected-release executions fail
-replay, while three fixed-release executions succeed. Complete histories are retained.
-This establishes an executable development case, not a novel method. The next test
-is whether causal scenario coverage adds measurable value over upstream regressions
-and equal-budget random scheduling. The approval case below remains prior evidence;
-its reduction and composition analyses did not establish novelty.
+reproduces a known live/replay defect and retains complete histories. Its
+[72-execution comparison](research/evaluation/recovery-comparison-results.md) found
+no advantage for the tested systematic schedule heuristic: random selection matched
+or beat its detection budget, and the adapted known regression detected immediately.
+All 36 fixed-release trials replayed successfully. This candidate advantage is
+rejected for the pilot; scientific novelty remains unestablished. The approval case
+below remains prior evidence, whose reduction and composition analyses also did not
+establish novelty.
 
 ## Start here
 

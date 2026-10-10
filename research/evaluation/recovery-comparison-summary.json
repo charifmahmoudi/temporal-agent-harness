@@ -1,0 +1,204 @@
+{
+  "run_url": "https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38033588999",
+  "protocol_commit": "b852fb53137f745fa186144c7c155ae8c7ab47ec",
+  "arms": [
+    {
+      "sdk": "1.8.0",
+      "setup_seconds": 0.8998721509999967,
+      "total_seconds": 14.035304498999999,
+      "methods": [
+        {
+          "method": "systematic",
+          "verdicts": {
+            "compatible": 6,
+            "nondeterministic": 6
+          },
+          "first_detection_by_seed": [
+            2,
+            2,
+            2
+          ],
+          "first_detection_trial_seconds": [
+            0.736,
+            0.534,
+            0.685
+          ],
+          "repetitions_detecting_by_budget": [
+            0,
+            3,
+            3,
+            3
+          ],
+          "coverage_by_seed": [
+            2,
+            2,
+            2
+          ],
+          "trial_seconds": 3.112,
+          "replay_seconds": 0.044,
+          "missing_trial_times": 0
+        },
+        {
+          "method": "random",
+          "verdicts": {
+            "nondeterministic": 9,
+            "compatible": 3
+          },
+          "first_detection_by_seed": [
+            1,
+            1,
+            2
+          ],
+          "first_detection_trial_seconds": [
+            0.37,
+            0.218,
+            0.683
+          ],
+          "repetitions_detecting_by_budget": [
+            2,
+            3,
+            3,
+            3
+          ],
+          "coverage_by_seed": [
+            2,
+            2,
+            2
+          ],
+          "trial_seconds": 3.779,
+          "replay_seconds": 0.044,
+          "missing_trial_times": 0
+        },
+        {
+          "method": "regression",
+          "verdicts": {
+            "nondeterministic": 12
+          },
+          "first_detection_by_seed": [
+            1,
+            1,
+            1
+          ],
+          "first_detection_trial_seconds": [
+            0.517,
+            0.518,
+            0.52
+          ],
+          "repetitions_detecting_by_budget": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "coverage_by_seed": [
+            1,
+            1,
+            1
+          ],
+          "trial_seconds": 6.227,
+          "replay_seconds": 0.044,
+          "missing_trial_times": 0
+        }
+      ]
+    },
+    {
+      "sdk": "1.9.0",
+      "setup_seconds": 0.19719718700000044,
+      "total_seconds": 13.502086489999996,
+      "methods": [
+        {
+          "method": "systematic",
+          "verdicts": {
+            "compatible": 12
+          },
+          "first_detection_by_seed": [
+            null,
+            null,
+            null
+          ],
+          "first_detection_trial_seconds": [
+            null,
+            null,
+            null
+          ],
+          "repetitions_detecting_by_budget": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "coverage_by_seed": [
+            2,
+            2,
+            2
+          ],
+          "trial_seconds": 3.117,
+          "replay_seconds": 0.051,
+          "missing_trial_times": 0
+        },
+        {
+          "method": "random",
+          "verdicts": {
+            "compatible": 12
+          },
+          "first_detection_by_seed": [
+            null,
+            null,
+            null
+          ],
+          "first_detection_trial_seconds": [
+            null,
+            null,
+            null
+          ],
+          "repetitions_detecting_by_budget": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "coverage_by_seed": [
+            2,
+            2,
+            2
+          ],
+          "trial_seconds": 3.931,
+          "replay_seconds": 0.054,
+          "missing_trial_times": 0
+        },
+        {
+          "method": "regression",
+          "verdicts": {
+            "compatible": 12
+          },
+          "first_detection_by_seed": [
+            null,
+            null,
+            null
+          ],
+          "first_detection_trial_seconds": [
+            null,
+            null,
+            null
+          ],
+          "repetitions_detecting_by_budget": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "coverage_by_seed": [
+            1,
+            1,
+            1
+          ],
+          "trial_seconds": 6.239,
+          "replay_seconds": 0.055,
+          "missing_trial_times": 0
+        }
+      ]
+    }
+  ],
+  "server_sha256": "19defb9f7318c7cf249518b3642a735efb79876c2b6918afe312336476b796a5",
+  "runner_sha256": "ccd1ed1010b2e241d4f877abb968c327aedccbe0d848a149d04cccbbb401d51b"
+}

@@ -11,7 +11,12 @@ failure on SDK 1.8.0 in three timing probes and observed successful replay on 1.
 in three probes. This is one development case, not a discovery or independent
 validation of a method. The scientific question is whether a specified causal
 coverage criterion improves failure discovery over existing regression and random
-testing. That comparison has not been run.
+testing. The [frozen pilot comparison](evaluation/recovery-comparison-results.md) has now run:
+72 executions, no advantage for the tested systematic heuristic over random selection
+or the adapted regression, and no replay failures in the fixed release. This rejects
+that heuristic's advantage on the development case. It supplies neither a novel
+method nor independent validation. The next step requires identifying a limitation
+across distinct mechanisms before expanding the generator.
 
 The following sections preserve the earlier approval investigation and its negative
 novelty results. The extraction hypothesis is not an established contribution and

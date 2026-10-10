@@ -104,7 +104,14 @@ known defect family, not six discoveries. Release and server provenance limitati
 above still apply. We have reproduced an external report; we have not independently
 validated a new testing method.
 
-## Next discriminating experiment
+## Comparison outcome
+
+The [frozen 72-execution pilot](recovery-comparison-results.md) has completed. The
+systematic heuristic offered no detection advantage over seeded random selection
+or the adapted known-regression schedule. All fixed-release trials replayed
+successfully. This candidate advantage is rejected on the development case.
+
+## Comparison rationale recorded before the pilot
 
 The upstream fix already adds `replay_with_signal_and_update_same_task` and
 `update_after_empty_wft` regressions. Our adapter currently adds retained evidence
