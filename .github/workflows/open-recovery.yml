@@ -9,7 +9,24 @@ on:
 permissions:
   contents: read
 jobs:
+  dependencies:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: temporalio/sdk-rust
+          ref: '0689f769ccc440e8d5008d4a623dee3c82a94ff2'
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: '1.94.0'
+      - run: cargo generate-lockfile
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nexus-context-shared-lockfile
+          path: Cargo.lock
   context:
+    needs: dependencies
     runs-on: ubuntu-latest
     timeout-minutes: 45
     strategy:
@@ -33,6 +50,10 @@ jobs:
         with:
           toolchain: '1.94.0'
           components: rustfmt
+      - uses: actions/download-artifact@v4
+        with:
+          name: nexus-context-shared-lockfile
+          path: sdk-rust
       - name: Install protobuf compiler
         run: sudo apt-get update && sudo apt-get install -y protobuf-compiler
       - name: Download and verify shared server executable
@@ -50,7 +71,9 @@ jobs:
         working-directory: sdk-rust
         run: |
           rustfmt --edition 2024 crates/sdk-core/tests/integ_tests/workflow_tests/nexus.rs
-          cargo integ-test --just-build
+          cargo integ-test --just-build -c --locked
+          cp crates/sdk-core/tests/integ_tests/workflow_tests/nexus.rs ../research/results/open-recovery/fixture/formatted-fixture.rs
+          git diff -- crates/sdk-core/tests/integ_tests/workflow_tests/nexus.rs > ../research/results/open-recovery/fixture/formatted-fixture.patch
       - name: Run matched controls with retained histories
         run: python research/scripts/run_nexus_context.py --sdk-root sdk-rust --temporal research/results/open-recovery/server/temporal --output research/results/open-recovery/runs
       - uses: actions/upload-artifact@v4

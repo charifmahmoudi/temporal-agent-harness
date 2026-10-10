@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import os
+import signal
 import subprocess
 import time
 
@@ -71,13 +72,15 @@ def main():
                     raise RuntimeError("server readiness alarm")
                 version = subprocess.run([str(args.temporal), "operator", "cluster", "describe", "--output", "json"], capture_output=True, text=True, timeout=5)
                 (directory / "server-version.txt").write_text(version.stdout + version.stderr)
-                command = ["cargo", "integ-test", "--server-kind", "external", "--", case, "--nocapture", "--test-threads", "1"]
+                command = ["cargo", "integ-test", "--server-kind", "external", "-c", "--locked", "--", case, "--nocapture", "--test-threads", "1"]
                 record["command"] = command
                 with (directory / "test.log").open("w") as log:
                     try:
-                        result = subprocess.run(command, cwd=args.sdk_root, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=180)
-                        record["returncode"] = result.returncode
+                        process = subprocess.Popen(command, cwd=args.sdk_root, env=env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
+                        record["returncode"] = process.wait(timeout=180)
                     except subprocess.TimeoutExpired:
+                        os.killpg(process.pid, signal.SIGKILL)
+                        process.wait()
                         record["returncode"] = None
                         record["invocation_alarm"] = True
                 path = directory / f"{case}.json"
