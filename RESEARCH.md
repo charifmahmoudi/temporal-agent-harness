@@ -2,6 +2,14 @@
 
 ## Current scientific search
 
+The [Medusa business-workflow baseline](research/discovery/medusa-baseline/results.md)
+is now implemented and qualified in GitHub CI. Independent PostgreSQL and payment-ledger
+observations confirm two received items (one damaged), one unit restocked, and one USD50
+refund after explicit settlement, with zero remaining obligation. The normal-path case
+passes; six harness/setup failures and all original artifacts are retained. This provides
+an observable application baseline, not a recovery result or new scientific contribution.
+
+
 The [question-first reset](research/discovery/question-reset/results.md) compares three
 operator decisions against their closest primary sources: recovery after deduplication
 expiry, selective revalidation, and ambiguous external outcomes. **None advances to
