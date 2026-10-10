@@ -1,0 +1,64 @@
+name: Medusa return baseline
+on:
+  pull_request:
+    paths:
+      - 'research/medusa-baseline/**'
+      - '.github/workflows/medusa-baseline.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DB_HOST: localhost
+      DB_PORT: '5432'
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/medusa_return_qualification
+      MEDUSA_TELEMETRY_DISABLED: 'true'
+      NODE_ENV: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Resolve exact release packages
+        working-directory: research/medusa-baseline
+        run: |
+          mkdir -p ../../evidence
+          npm install --no-audit --no-fund 2>&1 | tee ../../evidence/install.log
+          cp package-lock.json ../../evidence/package-lock.json
+          npm ls --all --json > ../../evidence/dependencies.json || true
+          node --version > ../../evidence/node-version.txt
+          git rev-parse HEAD > ../../evidence/checkout.txt
+      - name: Start independent payment ledger
+        run: |
+          python research/medusa-baseline/ledger.py > evidence/provider.log 2>&1 &
+          for i in $(seq 1 20); do
+            curl -fsS http://127.0.0.1:8877/ledger && break
+            sleep 1
+          done
+      - name: Run baseline
+        working-directory: research/medusa-baseline
+        run: npm test 2>&1 | tee ../../evidence/test.log
+      - name: Retain evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: medusa-return-baseline
+          path: |
+            evidence/
+            research/evidence/
+          retention-days: 30
