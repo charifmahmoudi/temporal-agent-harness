@@ -42,7 +42,6 @@ jobs:
         working-directory: research/medusa-baseline
         run: |
           mkdir -p ../../evidence
-          npm install --package-lock-only --no-audit --no-fund 2>&1 | tee ../../evidence/lock-repair.log
           npm ci --no-audit --no-fund 2>&1 | tee ../../evidence/install.log
           cp package-lock.json ../../evidence/package-lock.json
           npm ls --all --json > ../../evidence/dependencies.json || true

@@ -8,7 +8,7 @@ fs.mkdirSync(out,{recursive:true});
 function event(type,data){fs.appendFileSync(path.join(out,"events.jsonl"),JSON.stringify({time:new Date().toISOString(),type,data})+"\n");}
 medusaIntegrationTestRunner({
  dbName:"medusa_return_qualification",
- testSuite:({getContainer,dbConnection})=>{
+ testSuite:({getContainer,dbConfig})=>{
  it("qualifies two returned units, one damaged, and explicit refund",async()=>{
  const c=getContainer(),orderSvc=c.resolve(Modules.ORDER),inv=c.resolve(Modules.INVENTORY),pay=c.resolve(Modules.PAYMENT);
  const link=c.resolve(ContainerRegistrationKeys.LINK);
@@ -31,9 +31,13 @@ medusaIntegrationTestRunner({
  let returnId;
  async function snapshot(stage){
  const tables={};
- for(const table of ["inventory_level","return","return_item","payment","capture","refund","order_transaction"]){
-  tables[table]=await dbConnection(table).select("*");
+ const observer=new (require("pg").Client)({connectionString:dbConfig.clientUrl});
+ await observer.connect();
+ try {
+ for(const table of ["inventory_level","return","return_item","payment","capture","refund","order_transaction","order_summary"]){
+  tables[table]=(await observer.query('SELECT * FROM "'+table+'"')).rows;
  }
+ } finally {await observer.end();}
  const external=await (await fetch("http://127.0.0.1:8877/ledger")).json();
  const observed={stage,ids:{order:order.id,item:item.id,inventory:inventory.id,location:location.id,payment:payment.id,return:returnId},tables,external};
  fs.writeFileSync(path.join(out,stage+".json"),JSON.stringify(observed,null,2));
