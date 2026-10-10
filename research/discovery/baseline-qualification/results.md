@@ -134,3 +134,22 @@ The paper's B6 and B2-K analyses also make the earlier suggested “vary repair 
 **Do not run a new recovery experiment on Medusa or another borrowed benchmark on this proposal.** UndoBench subsumes the current repair-capability candidate; the remaining crash/checkpoint boundary is adjacent to established durable-execution and dual-write semantics, and we have not identified an outcome that would change a scientific conclusion or operator decision. Do not rename an untested boundary as novelty.
 
 The defensible current output is a careful qualification/reproduction record and a stopped contribution proposal. To reopen, first supply an independently motivated question that changes a decision (for example, an effect/contract class with materially different safe actions), show how its estimand is not already answered by UndoBench's B6/B2-K or the Resume Contract's crash/effect probes, and specify independently selected cases. Only then freeze a protocol and run it in GitHub CI. No new experiment was run for this comparison.
+
+
+## Finite provider-key retention: focused novelty check (2026-10-10)
+
+### Finding
+
+The TTL-only version of the proposed recovery question is already answered at the guarantee level. Andreakis, *Machine-Checked Dual-Write Recovery from a Commit Log* ([arXiv:2608.00501v5](https://arxiv.org/abs/2608.00501)), submitted in August and revised 11 September 2026, machine-checks source-only recovery limits, sink-side evidence requirements, fences for in-flight requests and competing recoverers, and the lifetime limits imposed by bounded deduplication state and truncated source history. This formal dual-write result covers the core claim that finite provider deduplication retention can make a formerly safe replay unsafe. It is a recent preprint, not a peer-reviewed empirical study, and it does not study LLM-agent choices.
+
+The agent-behavior side is also close prior work: *Where Does Exactly-Once Live?* ([arXiv:2609.29095](https://arxiv.org/abs/2609.29095)) evaluates agents under tool-service contracts that vary idempotency, readback strength/lag, timeout and late-commit behavior, redelivery, and escalation. The paper reports 25,930 episodes across nine models and simulated services. The inspected paper does not identify finite key expiry as an evaluated variable. Stripe's official API contract illustrates that this omission could matter in practice: keys are retained for at least 24 hours, may be pruned afterward, and reuse after pruning can execute a new request ([Stripe idempotent requests](https://docs.stripe.com/api/idempotent_requests)).
+
+### Decision
+
+**Reject “finite idempotency TTL makes retries unsafe” as a novel scientific claim.** The formal result directly covers that guarantee boundary. Do not run a TTL-only experiment or repackage it as agent recovery.
+
+The residual agent-specific question is narrower: do agents or workflow recovery policies correctly use documented provider expiry bounds to decide when to retry, reconcile, or stop? The reviewed agent benchmark does not appear to test that variable, but absence from one paper is not evidence of a consequential research gap. A strong study would first need independent evidence that deployed or representative workflows can outlive provider retention windows, a defined provider/API population, and a decision-relevant estimand that the formal result does not settle. Until those are established, this is a candidate for evidence gathering, **not an approved experiment or a claimed contribution**. No runtime experiment was run for this assessment.
+
+### Sources and limits
+
+This is a focused comparison, not a systematic review. The formal paper concerns dual-write recovery in an abstract model; the agent benchmark uses simulated service contracts. The Stripe document establishes one concrete contract example, not how common finite TTLs are across APIs. These sources support rejecting the broad TTL claim while leaving the empirical agent-policy question open but unqualified.
