@@ -4,6 +4,11 @@ This page is the current decision record; detailed protocols and raw evidence st
 in their linked files. The objective is an open, reproducible scientific contribution.
 Known defects provide development fixtures, not discoveries or blind validation.
 
+**2026-10-10: research-question audit in progress.** The
+[audit protocol](question-audit-protocol.md) takes precedence over earlier proposed
+next steps. Expansion is paused while we check whether any candidate justifies a
+new scientific experiment. Evidence consistency will be checked in GitHub CI.
+
 ## Evidence ledger
 
 | Investigation | What is established | What it does not establish |
