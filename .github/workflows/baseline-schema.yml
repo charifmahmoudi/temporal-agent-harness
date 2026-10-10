@@ -1,0 +1,43 @@
+name: Baseline metric schema check
+on:
+  pull_request:
+    paths:
+      - 'research/scripts/audit_undobench_schema.py'
+      - '.github/workflows/baseline-schema.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  qualification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: tradertanmay/undobench
+          ref: 4a25c4fa0f12bb6c79dc6e0e3a8f31deeb6af21e
+          path: subject
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install subject and retain dependency resolution
+        run: |
+          mkdir -p research/results/baseline-qualification
+          pip install -e ./subject 'pytest==8.4.2'
+          pip freeze > research/results/baseline-qualification/dependencies.txt
+          python --version > research/results/baseline-qualification/runtime.txt
+      - name: Run frozen schema intervention
+        run: python research/scripts/audit_undobench_schema.py subject research/results/baseline-qualification
+      - name: Check documentation
+        if: always()
+        run: python research/scripts/check_documentation.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: baseline-schema
+          path: research/results/baseline-qualification/
+          if-no-files-found: error
