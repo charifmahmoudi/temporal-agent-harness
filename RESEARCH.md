@@ -168,6 +168,12 @@ the local Boolean reduction as a standalone contribution: the conventional encod
 handles the same domain. Source correspondence and a demonstrated advantage over
 existing analyses remain the unresolved scientific requirements.
 
+The [minimal composition argument](research/evaluation/composition-argument.md)
+also rejects composition alone as the contribution: ordinary contract conjunction
+explains the conflict, and explicitly scoping cancellation to newly executing behavior
+removes it for the approved historical command. This does not establish that a
+compatible repair is implementable from the observations available in code.
+
 ## Scientific scope and next evidence
 
 The evidence supports bounded model properties, controlled trace conformance, and

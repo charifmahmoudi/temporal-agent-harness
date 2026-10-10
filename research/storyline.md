@@ -26,6 +26,11 @@ but loses necessary information if used while `uncancel()` can still occur. That
 distinction guides the source-analysis question; it is not a new method or proof of
 full workflow correctness.
 
+The [composition test](evaluation/composition-argument.md) reaches another negative
+novelty verdict: the minimal example needs no new composition rule. An unconditional
+ban on command production conflicts with replay; a policy for newly executing behavior
+has a different scope. Neither a past effect nor its safety can be changed retroactively.
+
 ## Central claim
 
 **For the studied tool gate, preserving an accepted approval is insufficient to

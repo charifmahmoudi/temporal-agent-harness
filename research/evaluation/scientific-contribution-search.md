@@ -196,6 +196,12 @@ contribution. C3 still requires source correspondence and a substantive advantag
 ordinary analysis. No second case has been selected or run; no prospective prediction
 or external validation is claimed.
 
+The subsequent [minimal composition test](composition-argument.md) rejects the
+suggested missing-composition-rule direction for this example. Ordinary conjunction
+derives the exact local compatibility condition. Distinguishing newly executing
+behavior from command reproduction explains the apparent conflict. The algebra does
+not establish observability or implementation of its existential repair witness.
+
 ## Sources, reading scope, and search record
 
 - **S1:** Finkbeiner, Klein, Metzger, [Live Synthesis, 2021 author version](https://arxiv.org/pdf/2107.01136), §§4–6, definitions 10–11, theorems 4–5; [journal version](https://link.springer.com/article/10.1007/s11334-022-00447-5) overview inspected. Finite-trace and universal update contexts are already explicit. No new implementation experiment with BoSy was run.
