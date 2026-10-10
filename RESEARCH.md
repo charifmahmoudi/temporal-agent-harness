@@ -12,6 +12,13 @@ rejected for the pilot; scientific novelty remains unestablished. The approval c
 below remains prior evidence, whose reduction and composition analyses also did not
 establish novelty.
 
+The [mechanism comparison](research/evaluation/recovery-mechanism-comparison.md)
+now identifies the next concrete problem: our 72 histories are all completed, while
+source reports describe failures involving still-running recovery, result identity,
+and stalled progress. The next candidate is automatic selection of recovery points
+and legal continuations. Existing work already supports recovery and progress checks;
+novelty would require a demonstrably better derivation or reduction method.
+
 ## Start here
 
 **An approved tool invocation can still need to stop. A correction that stops new
