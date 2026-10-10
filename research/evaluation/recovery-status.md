@@ -113,3 +113,7 @@ ambiguous-outcome recovery studies, and provider idempotency/reconciliation cont
 If that comparison leaves no consequential unanswered question, stop. The current
 Medusa baseline remains only a fixture candidate; it has not qualified as the right
 substrate.
+
+## 2026-10-10 nearest-work decision
+
+The full [UndoBench / Resume Means Resume comparison](../discovery/baseline-qualification/results.md#full-nearest-work-comparison-no-experiment-justified) rejects the proposed repair-capability study as already substantially covered: UndoBench tests verify-before-retry, benchmark-wide idempotency, and multiple mutation boundaries; Resume Means Resume measures crash-resume effects with a separate durable ledger. UndoBench also explicitly discloses its initial zero EOR aggregation and forensic correction, so our pinned CLI discrepancy is a useful reuse qualification, not a new metric failure. **No next runtime experiment is justified on this proposal; no scientific contribution is claimed.**
