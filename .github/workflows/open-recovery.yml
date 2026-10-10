@@ -1,0 +1,63 @@
+name: Open-workflow recovery context
+on:
+  pull_request:
+    paths:
+      - 'research/scripts/prepare_nexus_context.py'
+      - 'research/scripts/run_nexus_context.py'
+      - '.github/workflows/open-recovery.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  context:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        revision:
+          - '0689f769ccc440e8d5008d4a623dee3c82a94ff2'
+          - 'd936c6cc6455256417c917c3637d52e53acb8178'
+    env:
+      CARGO_BUILD_JOBS: '2'
+      CARGO_PROFILE_DEV_DEBUG: '0'
+      CARGO_PROFILE_TEST_DEBUG: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: temporalio/sdk-rust
+          ref: ${{ matrix.revision }}
+          path: sdk-rust
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: '1.94.0'
+          components: rustfmt
+      - name: Install protobuf compiler
+        run: sudo apt-get update && sudo apt-get install -y protobuf-compiler
+      - name: Download and verify shared server executable
+        run: |
+          mkdir -p research/results/open-recovery/server
+          curl --fail --location --retry 3 https://github.com/temporalio/cli/releases/download/v1.7.0/temporal_cli_1.7.0_linux_amd64.tar.gz -o research/results/open-recovery/server/cli.tar.gz
+          echo '8b5de72e622f4ae062d0d5d948ca398de6212d63b2f25766a1cb810a3dc2d0ed  research/results/open-recovery/server/cli.tar.gz' | sha256sum -c -
+          tar -xzf research/results/open-recovery/server/cli.tar.gz -C research/results/open-recovery/server
+          research/results/open-recovery/server/temporal --version > research/results/open-recovery/server/version.txt
+      - name: Derive matched fixture from frozen upstream test
+        run: |
+          python research/scripts/prepare_nexus_context.py --sdk-root sdk-rust --output research/results/open-recovery/fixture
+          cp sdk-rust/Cargo.lock research/results/open-recovery/fixture/Cargo.lock
+      - name: Format and compile integration fixture
+        working-directory: sdk-rust
+        run: |
+          rustfmt --edition 2024 crates/sdk-core/tests/integ_tests/workflow_tests/nexus.rs
+          cargo integ-test --just-build
+      - name: Run matched controls with retained histories
+        run: python research/scripts/run_nexus_context.py --sdk-root sdk-rust --temporal research/results/open-recovery/server/temporal --output research/results/open-recovery/runs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: open-recovery-${{ matrix.revision }}
+          path: |
+            research/results/open-recovery/fixture/
+            research/results/open-recovery/server/version.txt
+            research/results/open-recovery/runs/
