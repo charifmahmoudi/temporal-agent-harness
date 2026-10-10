@@ -5,8 +5,10 @@ Read the [14-case review](review.md), [selection manifest](sources.json),
 
 Activities 1–2: report/discussion review and operator-decision extraction complete.
 Implementation inspection is scoped explicitly per case, not claimed for every fix.
-Activity 3: one eight-cell cross-backend probe selected; collection correction underway.
-Activity 4: expansion not authorized by evidence yet; no new method or paper claim.
+Activity 3: eight corrected cross-backend cells completed in GitHub CI; initial
+observer failures preserved separately. Raw-evidence audit passed.
+Activity 4: no expansion justified by these results; publish the scoped reproduction
+and backend extension, with no new method or paper claim.
 
 ## Failed initial collection
 
@@ -22,7 +24,7 @@ uses the object's attributes. Protocol, workload, and predictions are unchanged.
 | SQLite initial | 11673621188 | 6b40edb387fd68d56770984d97e1e79e4e4e537cead24beac30be5de26c4db18 |
 | PostgreSQL initial | 11673895775 | 166a17d33b74234cd91f7474a7077fcbd0ad318d4a5374bd74b0948144defd63 |
 
-Raw logs and checkpoint databases remain in these CI artifacts. Retain this failed
+Raw logs and checkpoint databases remain in these CI artifacts and the retained ZIPs below. Retain this failed
 attempt separately from subsequent successful collection; do not reduce the denominator.
 
 ## Scientific gate
@@ -93,5 +95,12 @@ the inspected Git tag is made. No runtime probe was executed locally.
 The separate [CI auditor](../../scripts/audit_incident_probe.py) verifies ZIP hashes,
 all declared cells, starting PENDING state, crash/branch evidence, unchanged marker
 records, intervention snapshots, and terminal results. Three deliberately contradictory
-evidence variants must be rejected. Its first CI execution is pending; manual inspection
-and successful collection are not substitutes for that audit.
+evidence variants must be rejected.
+
+[Audit run 38062212830](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38062212830)
+passed on 8d093539: all eight corrected cells matched the frozen predictions, eight
+initial cells remained inconclusive, three negative controls were rejected, and 400
+relative documentation links resolved. The [exact derived summary](audit-summary.json)
+is retained from artifact 11673103542 (original ZIP SHA-256
+1a296fc3ffca807f62199ab986259318fc18e0f4cba3744a952836aa533a4600).
+This validates the retained record; it is not independent scientific review.

@@ -7,7 +7,7 @@
 The subsequent [incident round](discovery/incidents/results.md) broadens problem
 selection beyond cancellation and replay keywords. Fourteen reports have been reviewed;
 one cross-backend scope probe confirms the known explanation on both tested backends.
-The separate evidence audit is pending. This is exploratory community work and does
+The separate evidence audit passed in GitHub CI. This is exploratory community work and does
 not reverse the earlier rejection of method novelty.
 
 **Current decision:** the [question audit](evaluation/question-audit.md) stops

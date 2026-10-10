@@ -8,7 +8,8 @@ recording corrections and existing answers. One prospectively documented eight-c
 DBOS probe tests backend scope of a known failed-operation recovery report. Corrected
 CI collection completed all eight cells on SQLite and PostgreSQL; both fit the known
 success-only checkpoint explanation. Initial observer failures remain documented.
-The retained-evidence audit is pending. No broader evaluation is justified by this result.
+The retained-evidence audit and documentation checks passed in GitHub CI. No broader
+evaluation is justified by this result.
 
 **Bounded discovery completed; external feedback pending:** the
 [five-step results](research/discovery/results.md) include a
