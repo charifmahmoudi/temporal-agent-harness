@@ -12,12 +12,18 @@ rejected for the pilot; scientific novelty remains unestablished. The approval c
 below remains prior evidence, whose reduction and composition analyses also did not
 establish novelty.
 
-The [mechanism comparison](research/evaluation/recovery-mechanism-comparison.md)
-now identifies the next concrete problem: our 72 histories are all completed, while
-source reports describe failures involving still-running recovery, result identity,
-and stalled progress. The next candidate is automatic selection of recovery points
-and legal continuations. Existing work already supports recovery and progress checks;
-novelty would require a demonstrably better derivation or reduction method.
+The [matched Nexus experiment](research/evaluation/open-recovery-results.md) now
+reproduces a continuation-sensitive defect: immediate completion passes, while a
+follow-up SDK timer fails on the affected revision under both cache settings.
+All fixed-revision cells pass. The 24 retained histories and payloads are audited.
+The failure happens live before offline replay; restart is not established as
+necessary. The [conventional continuation baseline](research/evaluation/continuation-protocol.md)
+is running to diagnose activation versus replay and test ordinary suffix enumeration.
+The [closest-method comparison](research/evaluation/continuation-prior-work.md)
+explains why distinguishing continuations are already established prior work.
+A separate [local-activity protocol](research/evaluation/local-activity-protocol.md)
+tests whether immediate replay detects a different identity mechanism. Results,
+manual assumptions, and unrun experiments are kept separate; novelty remains open.
 
 ## Start here
 

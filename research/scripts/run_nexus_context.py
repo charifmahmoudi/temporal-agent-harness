@@ -24,11 +24,17 @@ def classify(history, log, returncode, case):
     nexus_completed = any(is_event(e, 50, "NEXUS_OPERATION_COMPLETED") for e in events)
     failures = sum(is_event(e, 9, "WORKFLOW_TASK_FAILED") for e in events)
     timeouts = sum(is_event(e, 8, "WORKFLOW_TASK_TIMED_OUT") for e in events)
-    raw = json.dumps(history)
-    mechanism = "TMPRL1100" in raw and "non-SDK source" in raw
-    if mechanism and nexus_completed:
+    # Require the mechanism in a particular task failure after the result;
+    # unrelated strings elsewhere in history must not confirm this defect.
+    nexus_ids = [int(e.get("eventId", e.get("event_id", 0))) for e in events
+                 if is_event(e, 50, "NEXUS_OPERATION_COMPLETED")]
+    mechanism_ids = [int(e.get("eventId", e.get("event_id", 0))) for e in events
+        if is_event(e, 9, "WORKFLOW_TASK_FAILED") and "TMPRL1100" in json.dumps(e)
+        and "non-SDK source" in json.dumps(e)]
+    mechanism = bool(nexus_ids and any(i > min(nexus_ids) for i in mechanism_ids))
+    if mechanism:
         verdict, reason = "confirmed_mechanism", "recorded non-SDK wake after Nexus completion"
-    elif returncode == 0 and completed and failures == 0 and timeouts == 0 and f"RECOVERY_PHASE {case} offline=passed" in log:
+    elif returncode == 0 and nexus_completed and completed and failures == 0 and timeouts == 0 and f"RECOVERY_PHASE {case} offline=passed" in log:
         verdict, reason = "passed", "logical payload assertion, completion, clean tasks, and offline replay passed"
     elif nexus_completed and f"RECOVERY_PHASE {case} offline=start" in log and "TMPRL1100" in log and "non-SDK source" in log:
         verdict, reason = "confirmed_mechanism", "offline phase reports non-SDK wake"

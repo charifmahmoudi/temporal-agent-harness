@@ -18,13 +18,16 @@ that heuristic's advantage on the development case. It supplies neither a novel
 method nor independent validation. The next step requires identifying a limitation
 across distinct mechanisms before expanding the generator.
 
-The [mechanism comparison](evaluation/recovery-mechanism-comparison.md) now separates
-four failure mechanisms and the observations they require. Its immediate lead is
-recovery while a workflow remains open after an operation result. All 72 pilot
-histories are completed workflows, so they do not exercise that context. The proposed
-research problem is deriving recovery points and follow-up operations automatically;
-the general ideas of recovery testing and liveness monitoring are established prior
-work. The new cases are inspected development leads, not reproduced results.
+The [matched Nexus result](evaluation/open-recovery-results.md) establishes a
+concrete context distinction across 24 executions. Immediate completion passes;
+a subsequent timer exposes the affected SDK defect under both cache settings.
+The fixed revision passes all twelve cells. The failures are recorded live before
+offline replay, so reconstruction is not yet a necessary cause. A frozen
+[ordinary continuation sweep](evaluation/continuation-protocol.md) is running.
+The [prior-work comparison](evaluation/continuation-prior-work.md) makes state
+identification and crash-testing baselines explicit. The next distinct mechanism
+has its own [local-activity protocol](evaluation/local-activity-protocol.md).
+No advantage or new method is claimed from reproducing these known defects.
 
 The following sections preserve the earlier approval investigation and its negative
 novelty results. The extraction hypothesis is not an established contribution and

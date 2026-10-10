@@ -1,0 +1,387 @@
+{
+  "schema": 1,
+  "run_url": "https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38037723644",
+  "shared_lock_sha256": "d6ba223baee5fc86be19ed0bcf3c6eb1190ce894a7e6627b87e580848692067e",
+  "server_version": "1.31.0",
+  "arms": [
+    {
+      "arm": "affected",
+      "sdk_revision": "0689f769ccc440e8d5008d4a623dee3c82a94ff2",
+      "verdicts": {
+        "passed": 6,
+        "confirmed_mechanism": 6
+      },
+      "rows": [
+        {
+          "case": "nexus_context_completed_cached",
+          "repetition": 1,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_completed_cold",
+          "repetition": 1,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_open_cached",
+          "repetition": 1,
+          "verdict": "confirmed_mechanism",
+          "reason": "recorded non-SDK wake after Nexus completion",
+          "completed": false,
+          "nexus_completed": true,
+          "task_failures": 2,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": 18,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_open_cold",
+          "repetition": 1,
+          "verdict": "confirmed_mechanism",
+          "reason": "recorded non-SDK wake after Nexus completion",
+          "completed": false,
+          "nexus_completed": true,
+          "task_failures": 1,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": 18,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_completed_cached",
+          "repetition": 2,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_completed_cold",
+          "repetition": 2,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_open_cached",
+          "repetition": 2,
+          "verdict": "confirmed_mechanism",
+          "reason": "recorded non-SDK wake after Nexus completion",
+          "completed": false,
+          "nexus_completed": true,
+          "task_failures": 2,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": 18,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_open_cold",
+          "repetition": 2,
+          "verdict": "confirmed_mechanism",
+          "reason": "recorded non-SDK wake after Nexus completion",
+          "completed": false,
+          "nexus_completed": true,
+          "task_failures": 1,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": 18,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_completed_cached",
+          "repetition": 3,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_completed_cold",
+          "repetition": 3,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_open_cached",
+          "repetition": 3,
+          "verdict": "confirmed_mechanism",
+          "reason": "recorded non-SDK wake after Nexus completion",
+          "completed": false,
+          "nexus_completed": true,
+          "task_failures": 2,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": 18,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_open_cold",
+          "repetition": 3,
+          "verdict": "confirmed_mechanism",
+          "reason": "recorded non-SDK wake after Nexus completion",
+          "completed": false,
+          "nexus_completed": true,
+          "task_failures": 1,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": 18,
+          "wake_failure_markers": []
+        }
+      ]
+    },
+    {
+      "arm": "fixed",
+      "sdk_revision": "d936c6cc6455256417c917c3637d52e53acb8178",
+      "verdicts": {
+        "passed": 12
+      },
+      "rows": [
+        {
+          "case": "nexus_context_completed_cached",
+          "repetition": 1,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_completed_cold",
+          "repetition": 1,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_open_cached",
+          "repetition": 1,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": null,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_open_cold",
+          "repetition": 1,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": null,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_completed_cached",
+          "repetition": 2,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_completed_cold",
+          "repetition": 2,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_open_cached",
+          "repetition": 2,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": null,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_open_cold",
+          "repetition": 2,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": null,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_completed_cached",
+          "repetition": 3,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_completed_cold",
+          "repetition": 3,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_open_cached",
+          "repetition": 3,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": null,
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_context_open_cold",
+          "repetition": 3,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": null,
+          "wake_failure_markers": []
+        }
+      ]
+    }
+  ]
+}

@@ -15,7 +15,9 @@ prefix, a recovery operation, and an executable continuation.
 ## What was actually checked
 
 On 2026-10-10, we inspected primary issue reports, linked patches, and testing
-literature. Only the #673 family has been reproduced by this project. The other
+literature. At that inspection only the #673 family had been reproduced by this project.
+The later [Nexus context experiment](open-recovery-results.md) now supplies measured
+evidence; its live continuation failures narrow the recovery-specific interpretation. The other
 rows are source-supported development cases, not our experimental results. Reading
 them excludes them from a future blind holdout set. This is a purposive mechanism
 comparison, not a systematic prevalence study or exhaustive literature review.
@@ -33,7 +35,7 @@ oracle. It does not falsely mark these other exceptions as successful replay.
 |---|---|---|---|---|
 | Temporal Python [#673](https://github.com/temporalio/sdk-python/issues/673), Core [#833](https://github.com/temporalio/sdk-rust/pull/833) | Update delivery crosses an activity-completion boundary during reconstruction | Signal, completion, update; replay resulting history | Required activity schedule versus reconstructed commands | Reproduced here; typed nondeterminism |
 | Temporal Python [#1881](https://github.com/temporalio/sdk-python/issues/1881), Core [#1616](https://github.com/temporalio/sdk-rust/pull/1616) | Regrouping local-activity resolutions changes which activity owns a sequence number | Fan-out, first-completion wait, conditional follow-up activity | Result-to-handle identity; reported decoding failure | Report and marker-schema patch inspected; not reproduced here |
-| Rust SDK [#1353](https://github.com/temporalio/sdk-rust/pull/1353) | Internal shared-future wake is classified as a non-SDK wake during replay | Await Nexus result, remain open, then query/evict/restart | Recovery/query success and ability to continue | PR description and implementation patch inspected; not reproduced here |
+| Rust SDK [#1353](https://github.com/temporalio/sdk-rust/pull/1353) | Internal shared-future wake is classified as a non-SDK wake during replay | Await Nexus result, remain open, then query/evict/restart | Recovery/query success and ability to continue | 24 matched executions; timer continuation exposes live task failure before offline replay (see results) |
 | DBOS Python [#358](https://github.com/dbos-inc/dbos-transact-py/pull/358) | Database error leaves process-local receive coordination uncleared | Disconnect during receive and subsequently recover | Recorded notification is eventually consumed under restored service | Fix patch and developer account inspected; not reproduced here |
 
 For #1881, the reported symptom is a bool/string conversion failure, not demonstrated
@@ -135,6 +137,9 @@ a distinction; it does not justify assuming which of these cells will fail.
   result at comparable cost, reject the novelty claim. Reserve uninspected cases
   before tuning; none of the four cases above is a blind holdout.
 
-**Current status:** a concrete limitation of our exercised test boundary is established;
-a source-supported candidate for the next controlled experiment is selected. A new
-scientific method, independent validation, and novelty are still unestablished.
+**Current status:** the [24-cell Nexus experiment](open-recovery-results.md) establishes
+a continuation-sensitive missed context, including failures under default caching.
+It does not establish restart as a necessary cause. Ordinary suffix enumeration
+and activation diagnosis are the next baseline, and local-activity identity is a
+separate development mechanism. A new method, independent validation, and novelty
+remain unestablished.
