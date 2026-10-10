@@ -1,5 +1,4 @@
 """CI-only, two-process exploration of DBOS #880; not a novelty benchmark."""
-import dataclasses
 import datetime
 import json
 import os
@@ -70,7 +69,7 @@ def worker(phase, directory, suffix, mutation):
         # of the convenience API's interpretation. Fresh DB contains synthetic data.
         with client._sys_db.engine.connect() as connection:
             rows = connection.execute(sa.select(SystemSchema.operation_outputs)).mappings().all()
-        return {"status": dataclasses.asdict(status),
+        return {"status": vars(status),
                 "schedule": client.get_schedule("nightly"),
                 "steps": client.list_workflow_steps("W"),
                 "raw_operations": [dict(row) for row in rows]}
