@@ -93,6 +93,14 @@ def main():
                         "Mechanical consistency does not establish novelty or causal sufficiency.",
                         "Same SDK Core lineage; language bindings are not independent engines."],
     }
+    retained = EVALUATION / "question-audit-ci.json"
+    if retained.exists():
+        historical = json.loads(retained.read_text())
+        provenance = {"run_url", "run_attempt", "checkout_commit", "pr_head_commit"}
+        observed = {k: v for k, v in report.items() if k not in provenance}
+        expected = {k: v for k, v in historical.items() if k not in provenance}
+        if observed != expected:
+            raise SystemExit("Audit differs from retained CI output; investigate before updating it.")
     out = ROOT / "research/results/question-audit"
     out.mkdir(parents=True, exist_ok=True)
     (out / "audit.json").write_text(json.dumps(report, indent=2) + "\n")

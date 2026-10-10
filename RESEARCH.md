@@ -2,6 +2,14 @@
 
 ## Current scientific search
 
+**2026-10-10 decision: stop expansion of the current contribution proposal.**
+The [research-question audit](research/evaluation/question-audit.md) revisits the
+competing explanations, primary literature, selection bias, and evidentiary limits.
+Its [GitHub CI evidence audit](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38058606710)
+passed. The existing results remain reproducible, but no proposed next experiment
+currently meets the scientific justification gate. No replacement direction or
+novel contribution is claimed. The scientific objective is unchanged.
+
 The [recovery research checkpoint](research/evaluation/recovery-status.md) gives
 the current evidence ledger, decisions, and community reproduction path.
 
@@ -178,7 +186,11 @@ and seven invalid records, and adds a separate History model. Twelve expected TL
 results include agreement with all 36 retained replay cells. These are retrospective
 checks over existing evidence, not new independent reproduction or a refinement proof.
 
-## Active scientific question
+## Earlier contribution candidates
+
+The proposals below preserve the search history. The
+[current audit](research/evaluation/question-audit.md) supersedes their suggested
+next steps; automatic source analysis is deferred pending a substantiated question.
 
 The [contribution search](research/evaluation/scientific-contribution-search.md)
 asks whether replay obligations and implementable repair conditions can be derived
@@ -234,7 +246,8 @@ and response template are ready; no invitation has been sent and no independent
 review is claimed. [Second-case execution](research/evaluation/prospective-case.md)
 is deferred until selection and predictions are fixed without observing outcomes.
 
-The next evidence milestones are concrete:
+The following case-specific review work remains available, but does not by itself
+justify a new scientific contribution or reopen the stopped proposal:
 
 | Priority | Work | Why it matters / completion criterion |
 | --- | --- | --- |
@@ -242,9 +255,9 @@ The next evidence milestones are concrete:
 | 2 | Maintainer assessment of both minimal patches | Confirm intended behavior and practical usefulness. Record actual feedback separately from scientific validation. Submission remains pending. |
 | 3 | Review the supported migration cohorts and routing assumptions | The activity-backed cases pass for B → V, but not all C → V or rollback histories. Assess production routing, retry policy, and additional history cohorts before deployment claims. |
 
-Broader modeling follows evidence of a missing obligation, rather than a target test
-count. A paper should center the reproduced discrepancies and contract lessons; any
-claim of a new verification method requires further evidence against the closest work.
+Broader modeling requires the [reopening gate](research/evaluation/question-audit.md).
+The present audit does not recommend a paper claim or substitute an experience-report
+objective for the requested scientific contribution.
 
 ## Reading path
 

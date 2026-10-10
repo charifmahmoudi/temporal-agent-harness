@@ -4,8 +4,13 @@
 
 ## Current research direction
 
+**Current decision:** the [question audit](evaluation/question-audit.md) stops
+expansion of the contribution proposal. Its evidence checks passed in GitHub CI.
+The paragraphs below record how the earlier directions were narrowed and rejected;
+they are not an active experiment queue. No new scientific contribution is claimed.
+
 The [external recovery investigation](evaluation/recovery-investigation.md) is the
-active next phase. Its story begins with unchanged workflow code that succeeds live
+earlier recovery phase. Its story begins with unchanged workflow code that succeeds live
 but fails when reconstructed from its own durable history. We reproduced this known
 failure on SDK 1.8.0 in three timing probes and observed successful replay on 1.9.0
 in three probes. This is one development case, not a discovery or independent
@@ -42,7 +47,7 @@ engineering experience report. The [earlier contribution search](evaluation/scie
 records a formal candidate, its closest precedents, an executed diagnostic, and
 explicit rejection criteria. The broad safe-update idea and elementary observation
 conflict are not new principles. Automatic, sound derivation from async code remains
-a hypothesis to investigate. The central claim below states existing evidence,
+an unformulated, deferred possibility. The central claim below states existing evidence,
 not a claim that this research objective has already been achieved.
 
 The [source-boundary analysis](evaluation/repair-boundary.md) now makes the next gap

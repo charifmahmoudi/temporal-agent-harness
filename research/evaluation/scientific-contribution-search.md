@@ -1,5 +1,9 @@
 # Scientific contribution search — iteration 1
 
+**Historical candidate:** the [2026-10-10 question audit](question-audit.md)
+supersedes the next-step recommendations below. Source analysis remains a deferred
+possibility without a specified contribution; the scientific objective is unchanged.
+
 Date: 2026-10-09. Starting artifact: `8da75419a2d3e0d097d8082193d539d9ec85f109`.
 [Storyline](../storyline.md) · [Earlier novelty assessment](novelty-review.md) · [Pilot evidence](repair-observability.json)
 

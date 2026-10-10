@@ -1,5 +1,9 @@
 # Continuation testing: closest baselines and unresolved burden
 
+**Current decision:** the [question audit](question-audit.md) stops expansion of the
+proposal. The source comparisons remain relevant; candidate directions below are
+historical possibilities, not justified next experiments.
+
 Primary sources inspected 2026-10-10. This is a focused comparison, not a complete
 systematic review. Published claims are attributed to their authors; these tools
 have not been benchmarked against our corpus. The

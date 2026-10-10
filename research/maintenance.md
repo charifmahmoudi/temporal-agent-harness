@@ -41,6 +41,7 @@ regenerated from `research/figures/generate.py` when semantics change.
 | Upstream feedback | Prepared, not submitted | Explicitly authorized submission and recorded maintainer response |
 | Novelty assessment | Focused claim comparison complete; novelty unestablished | Independent assessment and resolution of remaining literature gaps; a justified contribution |
 | Publication decision | Open | Evidence supports chosen claim and submission category |
+| Current question audit | Complete: [stop expansion](evaluation/question-audit.md); evidence checked in GitHub CI | Reopen only with a consequential question, precise closest-work limitation, and discriminating evidence plan |
 
 Future effort logs should record task, date, contributor, elapsed effort, and artifact
 or issue link. Historical modeling effort was not recorded and must not be invented.

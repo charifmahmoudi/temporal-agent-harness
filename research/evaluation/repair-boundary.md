@@ -1,5 +1,9 @@
 # From cancellation code to a possible scientific contribution
 
+**Historical analysis:** the [current question audit](question-audit.md) supersedes
+the research recommendations below. The correspondence obligation remains unsolved,
+but an unsolved implementation obligation alone does not establish a novel problem.
+
 The next research step has narrowed the problem, but has **not established novelty**.
 We can locate the repair's inputs in source. We cannot yet certify that the earlier
 history-derived inputs denote those same values at the decision point. That missing

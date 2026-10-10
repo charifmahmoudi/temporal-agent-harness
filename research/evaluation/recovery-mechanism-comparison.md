@@ -1,6 +1,11 @@
 # Recovery mechanisms: what the current experiments cannot observe
 
-## Decision
+## Historical proposal — superseded
+
+The [2026-10-10 question audit](question-audit.md) stops expansion of this proposal.
+The decisions and next experiment below are retained as historical reasoning.
+Nexus and local-activity follow-ups have since run; their results reject the
+proposed baseline advantage. No new method is justified by this comparison.
 
 Investigate **automatic selection of recovery points and post-recovery operations
 for still-running workflows**. The immediate problem is to expose states missed

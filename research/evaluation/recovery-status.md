@@ -4,10 +4,12 @@ This page is the current decision record; detailed protocols and raw evidence st
 in their linked files. The objective is an open, reproducible scientific contribution.
 Known defects provide development fixtures, not discoveries or blind validation.
 
-**2026-10-10: research-question audit in progress.** The
-[audit protocol](question-audit-protocol.md) takes precedence over earlier proposed
-next steps. Expansion is paused while we check whether any candidate justifies a
-new scientific experiment. Evidence consistency will be checked in GitHub CI.
+**2026-10-10 decision: stop expansion of this contribution proposal.** The
+[completed question audit](question-audit.md) takes precedence over earlier proposed
+next steps. Its [protocol](question-audit-protocol.md) preceded execution and its
+[GitHub CI audit](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38058606710)
+passed. No candidate currently justifies another scientific experiment. This does
+not establish that the field has no open problems; it stops this unsupported proposal.
 
 ## Evidence ledger
 
@@ -33,7 +35,7 @@ exception or alarm is not automatically a defect; a completed workflow is not
 automatically a sufficient test. SDK state can matter even when application-visible
 fields agree. These are useful lessons, not by themselves new theoretical results.
 
-## Gates before proposing a method
+## Gates before reopening
 
 - [x] Reproduce externally reported cases with affected/fixed and matched controls.
 - [x] Preserve raw evidence and mechanically rederive results.
@@ -42,6 +44,13 @@ fields agree. These are useful lessons, not by themselves new theoretical result
 - [ ] Establish a concrete deficiency of a baseline equipped with the same grammar/oracle.
 - [ ] State a supported language, fault model, observation contract, and technical claim.
 - [ ] Obtain independently selected evaluation cases before adapting a method to them.
+
+A baseline deficiency is relevant to a claimed method advantage, not a universal
+requirement for science. An empirical study instead needs a significant estimand,
+defined population/sampling, and defensible inference; a theoretical contribution
+needs a precise substantive claim. None is established here. The proposed
+live/replay/reconstruction taxonomy does not pass merely by adding categories or
+cases. No replacement direction has been selected.
 
 If ordinary enumeration handles the development cases cheaply, reject an advantage
 on those cases. A larger framework is justified only after evidence identifies what
