@@ -1,0 +1,146 @@
+{
+  "fixture_checks": {
+    "conditional_numerator": "passed",
+    "duplicate_vs_missing": "passed"
+  },
+  "run_id": "38066672086",
+  "checkout": "42eb852ac53fa36c647ee8fda771d75c3a9218af",
+  "subject_commit": "4a25c4fa0f12bb6c79dc6e0e3a8f31deeb6af21e",
+  "commands": {
+    "smoke": {
+      "argv": [
+        "undobench",
+        "smoke"
+      ],
+      "exit_code": 0
+    },
+    "evaluate": {
+      "argv": [
+        "undobench",
+        "evaluate",
+        "results/rb3c_test_raw.jsonl"
+      ],
+      "exit_code": 0
+    },
+    "reproduce_eor": {
+      "argv": [
+        "/opt/hostedtoolcache/Python/3.12.15/x64/bin/python",
+        "scripts/reproduce_eor.py",
+        "--json"
+      ],
+      "exit_code": 0
+    },
+    "freeze_integrity": {
+      "argv": [
+        "/opt/hostedtoolcache/Python/3.12.15/x64/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_freeze_integrity.py"
+      ],
+      "exit_code": 0
+    }
+  },
+  "dataset_sha256": "1016768449aae019484130b23fda33456861abeb161a5f8dfbeb16e9e5e9f882",
+  "hash_matches": true,
+  "independent_aggregation": {
+    "counts": {
+      "pairs": 2880,
+      "control_success": 2406,
+      "fault_success": 1124,
+      "conditional_success": 1124,
+      "fault_success_without_control": 0,
+      "duplicate": 1444,
+      "missing": 284,
+      "unsafe_label": 1444,
+      "unsafe_label_without_duplicate": 0,
+      "duplicate_without_unsafe_label": 0,
+      "conditional_eor_from_flags_and_wire": 1124,
+      "successful_fault_without_wire_commit": 0,
+      "stored_commit_count_differs_from_wire": 2862,
+      "repeated_pair_id": 0
+    },
+    "by_method": {
+      "B0": {
+        "pairs": 960,
+        "control_success": 802,
+        "fault_success": 343,
+        "conditional_success": 343,
+        "fault_success_without_control": 0,
+        "duplicate": 512,
+        "missing": 101,
+        "unsafe_label": 512,
+        "unsafe_label_without_duplicate": 0,
+        "duplicate_without_unsafe_label": 0,
+        "conditional_eor_from_flags_and_wire": 343,
+        "successful_fault_without_wire_commit": 0,
+        "stored_commit_count_differs_from_wire": 954,
+        "repeated_pair_id": 0
+      },
+      "B2": {
+        "pairs": 960,
+        "control_success": 802,
+        "fault_success": 429,
+        "conditional_success": 429,
+        "fault_success_without_control": 0,
+        "duplicate": 436,
+        "missing": 91,
+        "unsafe_label": 436,
+        "unsafe_label_without_duplicate": 0,
+        "duplicate_without_unsafe_label": 0,
+        "conditional_eor_from_flags_and_wire": 429,
+        "successful_fault_without_wire_commit": 0,
+        "stored_commit_count_differs_from_wire": 954,
+        "repeated_pair_id": 0
+      },
+      "B5": {
+        "pairs": 960,
+        "control_success": 802,
+        "fault_success": 352,
+        "conditional_success": 352,
+        "fault_success_without_control": 0,
+        "duplicate": 496,
+        "missing": 92,
+        "unsafe_label": 496,
+        "unsafe_label_without_duplicate": 0,
+        "duplicate_without_unsafe_label": 0,
+        "conditional_eor_from_flags_and_wire": 352,
+        "successful_fault_without_wire_commit": 0,
+        "stored_commit_count_differs_from_wire": 954,
+        "repeated_pair_id": 0
+      }
+    },
+    "samples": {
+      "stored_commit_count_differs_from_wire": [
+        {
+          "pair_id": "pair_RB-CLOUD-004_M1_F1_B0_t1_eac346",
+          "task_id": "RB-CLOUD-004",
+          "outcome": "SUCCESS",
+          "duplicates": 0,
+          "missing": 0,
+          "stored_commits": 0,
+          "wire_commits": 2
+        },
+        {
+          "pair_id": "pair_RB-CLOUD-004_M1_F1_B0_t0_cbbe37",
+          "task_id": "RB-CLOUD-004",
+          "outcome": "SUCCESS",
+          "duplicates": 0,
+          "missing": 0,
+          "stored_commits": 0,
+          "wire_commits": 2
+        },
+        {
+          "pair_id": "pair_RB-CLOUD-004_M1_F1_B0_t2_8f0dee",
+          "task_id": "RB-CLOUD-004",
+          "outcome": "SUCCESS",
+          "duplicates": 0,
+          "missing": 0,
+          "stored_commits": 0,
+          "wire_commits": 2
+        }
+      ]
+    },
+    "unique_pairs": 2880
+  }
+}

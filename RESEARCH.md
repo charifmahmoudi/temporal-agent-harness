@@ -2,6 +2,14 @@
 
 ## Current scientific search
 
+The latest [public-evidence continuation](research/discovery/baseline-qualification/results.md)
+qualifies a published recovery benchmark in GitHub CI. Its main aggregate results
+reproduce, but the advertised general CLI silently reports zero duplicate and
+missing effects on legacy data. A separately frozen schema intervention restores
+the counts without changing recovery success. This is a verified artifact-reuse
+finding, not an established scientific contribution. Protocols, exact CI outputs,
+and reuse limits are retained. No external outreach is part of this continuation.
+
 The [consequence-led incident round](research/discovery/incidents/results.md) now
 reviews fourteen reports across three engines, extracting operator decisions and
 recording corrections and existing answers. One prospectively documented eight-cell
