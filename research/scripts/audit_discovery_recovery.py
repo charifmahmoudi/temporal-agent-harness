@@ -67,7 +67,8 @@ def check_engine(engine):
             invocation = row['invocation']
             operation = 'kill' if arm == 'broken_force' else 'cancel'
             controls = [r for r in http if r['method'] == 'PATCH' and r['url'].endswith(f'/{invocation}/{operation}')]
-            assert len(controls) == 1 and controls[0]['status'] == 200
+            assert len(controls) == 1 and 200 <= controls[0]['status'] < 300
+            assert controls[0]['status'] == row['acknowledgement_status']
             snapshots = []
             for response in http:
                 if response['url'].endswith('/query') and response['status'] == 200:

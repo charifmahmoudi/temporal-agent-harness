@@ -63,8 +63,15 @@ and actual terminal evidence. It does not use the probe's `matches_prediction` f
 as its verdict. Temporal's intermediate describe status is retained in the summary;
 final history independently shows a further mismatch after the cancellation request.
 Restate's timed intermediate state is also checked against the HTTP transcript.
-The audit is run by the Bounded research discovery workflow; its first result is
-pending at publication of this result note.
+The audit is run by the Bounded research discovery workflow. Its
+[first run](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38060319730)
+failed because the new checker incorrectly required HTTP 200 for every Restate
+control acknowledgement. The retained transcript shows cancellation returns 202
+Accepted and kill returns 200. The original probe correctly accepted successful
+HTTP responses and separately checked completion. The audit correction accepts 2xx,
+cross-checks the recorded acknowledgement status, and preserves all terminal-state
+requirements. No probe code, outcome, or raw evidence was changed. Corrected audit
+execution is pending at this update; the first failed audit remains visible.
 
 One diagnostic wording limitation: Restate's mismatch message labels sleep as the
 previous command and run as the current command, whereas the retained original
