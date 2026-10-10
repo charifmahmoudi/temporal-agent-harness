@@ -2,12 +2,19 @@
 
 ## Current scientific search
 
+**Active bounded discovery:** the [five-step protocol](research/discovery/protocol.md)
+now has a [43-issue inventory](research/discovery/inventory.md),
+[three assessed candidates](research/discovery/candidates.md), and a prospective
+[two-engine recovery probe](research/discovery/recovery-protocol.md).
+This is exploratory problem discovery; no strong new finding is claimed. The earlier
+contribution proposal below remains stopped. Executable work runs in GitHub Actions.
+
 **2026-10-10 decision: stop expansion of the current contribution proposal.**
 The [research-question audit](research/evaluation/question-audit.md) revisits the
 competing explanations, primary literature, selection bias, and evidentiary limits.
 Its [GitHub CI evidence audit](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38058606710)
 passed. The existing results remain reproducible, but no proposed next experiment
-currently meets the scientific justification gate. No replacement direction or
+from that proposal meets the scientific justification gate. No replacement direction or
 novel contribution is claimed. The scientific objective is unchanged.
 
 The [recovery research checkpoint](research/evaluation/recovery-status.md) gives

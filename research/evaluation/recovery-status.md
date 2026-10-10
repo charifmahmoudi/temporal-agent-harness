@@ -4,6 +4,11 @@ This page is the current decision record; detailed protocols and raw evidence st
 in their linked files. The objective is an open, reproducible scientific contribution.
 Known defects provide development fixtures, not discoveries or blind validation.
 
+**Active follow-up:** [bounded five-step discovery](../discovery/protocol.md) now
+screens three independent engines. The [candidate assessment](../discovery/candidates.md)
+rejects two premises/directions and advances one to a small exploratory probe.
+This does not reopen the stopped method-advantage proposal below.
+
 **2026-10-10 decision: stop expansion of this contribution proposal.** The
 [completed question audit](question-audit.md) takes precedence over earlier proposed
 next steps. Its [protocol](question-audit-protocol.md) preceded execution and its

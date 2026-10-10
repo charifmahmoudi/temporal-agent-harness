@@ -45,6 +45,14 @@ within-invocation causal control; restart transport failures remain distinguisha
 
 ## Interpretation and failures
 
+Implementation clarification before first execution: Restate uses a durable promise
+as its wait barrier (persisted GetPromise journal command), pauses the invocation,
+restarts the same endpoint URI, and resumes it. Pause/resume is applied to compatible
+and broken arms alike. Temporal uses a no-op signal to schedule a new workflow task
+after the cold worker change. Neither wake action releases the workflow's wait.
+Restate's new deployment registration is not used to bypass normal version pinning;
+the incompatible endpoint replacement is deliberate fault injection.
+
 Setup failures, missing barriers, unsupported API calls, or missing mismatch evidence
 are inconclusive. Preserve them and label any driver corrections before rerunning.
 Do not silently change the planned arms or reclassify timeouts as confirmed defects.
