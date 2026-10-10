@@ -70,8 +70,18 @@ control acknowledgement. The retained transcript shows cancellation returns 202
 Accepted and kill returns 200. The original probe correctly accepted successful
 HTTP responses and separately checked completion. The audit correction accepts 2xx,
 cross-checks the recorded acknowledgement status, and preserves all terminal-state
-requirements. No probe code, outcome, or raw evidence was changed. Corrected audit
-execution is pending at this update; the first failed audit remains visible.
+requirements. No probe code, outcome, or raw evidence was changed. The
+[corrected audit run 38060385076](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38060385076)
+passed both the evidence audit and documentation check (381 relative links).
+Its [exact output](audit-ci.json) is retained; subsequent audits compare derived facts
+with that record, excluding the audit run ID. The first failed audit remains visible.
+
+The general tests also passed on the probe implementation revision in
+[run 38059968170](https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38059968170).
+Automatically triggered repetitions on later documentation/auditor revisions are
+validation repetitions, not additional discovery cases. Long-running legacy Rust
+reproductions may still be compiling; this note does not assert that every PR check
+has finished or that an earlier intermittent tool-order test failure is explained.
 
 One diagnostic wording limitation: Restate's mismatch message labels sleep as the
 previous command and run as the current command, whereas the retained original

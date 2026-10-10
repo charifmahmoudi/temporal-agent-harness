@@ -1,0 +1,163 @@
+{
+  "kind": "retained_recovery_evidence_audit",
+  "source_run": "38059968219",
+  "audit_run": "38060385076",
+  "engines": [
+    {
+      "engine": "temporal",
+      "artifact_sha256": "3639897379f0a03897d3f354f1d418fa5428707e2feb475c8421633c56eb1b39",
+      "cases": [
+        {
+          "key": "discovery-0-compatible_cancel",
+          "arm": "compatible_cancel",
+          "typed_mismatch_before_control": false,
+          "terminal": "EVENT_TYPE_WORKFLOW_EXECUTION_CANCELED",
+          "effect_count": 1,
+          "cleanup_count": 1
+        },
+        {
+          "key": "discovery-0-broken_cancel_restore",
+          "arm": "broken_cancel_restore",
+          "typed_mismatch_before_control": true,
+          "terminal": "EVENT_TYPE_WORKFLOW_EXECUTION_CANCELED",
+          "effect_count": 1,
+          "cleanup_count": 1
+        },
+        {
+          "key": "discovery-0-broken_force",
+          "arm": "broken_force",
+          "typed_mismatch_before_control": true,
+          "terminal": "EVENT_TYPE_WORKFLOW_EXECUTION_TERMINATED",
+          "effect_count": 1,
+          "cleanup_count": 0
+        },
+        {
+          "key": "discovery-1-compatible_cancel",
+          "arm": "compatible_cancel",
+          "typed_mismatch_before_control": false,
+          "terminal": "EVENT_TYPE_WORKFLOW_EXECUTION_CANCELED",
+          "effect_count": 1,
+          "cleanup_count": 1
+        },
+        {
+          "key": "discovery-1-broken_cancel_restore",
+          "arm": "broken_cancel_restore",
+          "typed_mismatch_before_control": true,
+          "terminal": "EVENT_TYPE_WORKFLOW_EXECUTION_CANCELED",
+          "effect_count": 1,
+          "cleanup_count": 1
+        },
+        {
+          "key": "discovery-1-broken_force",
+          "arm": "broken_force",
+          "typed_mismatch_before_control": true,
+          "terminal": "EVENT_TYPE_WORKFLOW_EXECUTION_TERMINATED",
+          "effect_count": 1,
+          "cleanup_count": 0
+        },
+        {
+          "key": "discovery-2-compatible_cancel",
+          "arm": "compatible_cancel",
+          "typed_mismatch_before_control": false,
+          "terminal": "EVENT_TYPE_WORKFLOW_EXECUTION_CANCELED",
+          "effect_count": 1,
+          "cleanup_count": 1
+        },
+        {
+          "key": "discovery-2-broken_cancel_restore",
+          "arm": "broken_cancel_restore",
+          "typed_mismatch_before_control": true,
+          "terminal": "EVENT_TYPE_WORKFLOW_EXECUTION_CANCELED",
+          "effect_count": 1,
+          "cleanup_count": 1
+        },
+        {
+          "key": "discovery-2-broken_force",
+          "arm": "broken_force",
+          "typed_mismatch_before_control": true,
+          "terminal": "EVENT_TYPE_WORKFLOW_EXECUTION_TERMINATED",
+          "effect_count": 1,
+          "cleanup_count": 0
+        }
+      ]
+    },
+    {
+      "engine": "restate",
+      "artifact_sha256": "eb4c2bc237801598e54224e726052c16d9985eeb1e535d6b788a6bfa13aa65d0",
+      "cases": [
+        {
+          "key": "discovery-0-compatible_cancel",
+          "arm": "compatible_cancel",
+          "typed_mismatch_before_control": false,
+          "terminal": "[409] cancelled",
+          "effect_count": 1,
+          "cleanup_count": 1
+        },
+        {
+          "key": "discovery-0-broken_cancel_restore",
+          "arm": "broken_cancel_restore",
+          "typed_mismatch_before_control": true,
+          "terminal": "[409] cancelled",
+          "effect_count": 1,
+          "cleanup_count": 1
+        },
+        {
+          "key": "discovery-0-broken_force",
+          "arm": "broken_force",
+          "typed_mismatch_before_control": true,
+          "terminal": "[409] killed",
+          "effect_count": 1,
+          "cleanup_count": 0
+        },
+        {
+          "key": "discovery-1-compatible_cancel",
+          "arm": "compatible_cancel",
+          "typed_mismatch_before_control": false,
+          "terminal": "[409] cancelled",
+          "effect_count": 1,
+          "cleanup_count": 1
+        },
+        {
+          "key": "discovery-1-broken_cancel_restore",
+          "arm": "broken_cancel_restore",
+          "typed_mismatch_before_control": true,
+          "terminal": "[409] cancelled",
+          "effect_count": 1,
+          "cleanup_count": 1
+        },
+        {
+          "key": "discovery-1-broken_force",
+          "arm": "broken_force",
+          "typed_mismatch_before_control": true,
+          "terminal": "[409] killed",
+          "effect_count": 1,
+          "cleanup_count": 0
+        },
+        {
+          "key": "discovery-2-compatible_cancel",
+          "arm": "compatible_cancel",
+          "typed_mismatch_before_control": false,
+          "terminal": "[409] cancelled",
+          "effect_count": 1,
+          "cleanup_count": 1
+        },
+        {
+          "key": "discovery-2-broken_cancel_restore",
+          "arm": "broken_cancel_restore",
+          "typed_mismatch_before_control": true,
+          "terminal": "[409] cancelled",
+          "effect_count": 1,
+          "cleanup_count": 1
+        },
+        {
+          "key": "discovery-2-broken_force",
+          "arm": "broken_force",
+          "typed_mismatch_before_control": true,
+          "terminal": "[409] killed",
+          "effect_count": 1,
+          "cleanup_count": 0
+        }
+      ]
+    }
+  ]
+}

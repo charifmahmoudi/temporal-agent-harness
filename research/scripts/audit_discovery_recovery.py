@@ -101,6 +101,11 @@ def main():
         raise SystemExit('Run this audit in GitHub Actions')
     report = {'kind': 'retained_recovery_evidence_audit', 'source_run': '38059968219',
               'audit_run': os.environ['GITHUB_RUN_ID'], 'engines': [check_engine(e) for e in DIGESTS]}
+    retained = DIR / 'audit-ci.json'
+    if retained.exists():
+        previous = json.loads(retained.read_text())
+        assert {k: v for k, v in report.items() if k != 'audit_run'} == {
+            k: v for k, v in previous.items() if k != 'audit_run'}, 'retained audit output differs'
     out = ROOT / 'research/results/discovery-audit'
     out.mkdir(parents=True, exist_ok=True)
     (out / 'audit.json').write_text(json.dumps(report, indent=2) + '\n')
