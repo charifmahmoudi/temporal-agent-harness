@@ -2,6 +2,15 @@
 
 ## Current scientific search
 
+The [question-first reset](research/discovery/question-reset/results.md) compares three
+operator decisions against their closest primary sources: recovery after deduplication
+expiry, selective revalidation, and ambiguous external outcomes. **None advances to
+experiments.** Direct prior work answers the generic mechanisms; possible empirical
+extensions lack an independently grounded workload. The next gate is a concrete
+operational evidence packet, not another bug hunt or evaluator audit. The comparison
+includes conventional baselines, conditional CI experiment designs, stop criteria, and
+[source-reading limits](research/discovery/question-reset/sources.md).
+
 The [independent measurement pilot](research/discovery/measurement-pilot/results.md)
 completed three separately authored evaluator audits in GitHub CI. Their numeric
 summaries agree with independent aggregation; the observed caveats are an ARB
@@ -27,14 +36,14 @@ success-only checkpoint explanation. Initial observer failures remain documented
 The retained-evidence audit and documentation checks passed in GitHub CI. No broader
 evaluation is justified by this result.
 
-**Bounded discovery completed; external feedback pending:** the
+**Bounded discovery completed; outreach stopped:** the
 [five-step results](research/discovery/results.md) include a
 [43-issue inventory](research/discovery/inventory.md), three assessed candidates,
 and 18 successful protocol-matched trials across Temporal and Restate in GitHub CI.
 The results reproduce known recovery semantics; we reject novelty for that distinction.
-[Review request #3](https://github.com/charifmahmoudi/temporal-agent-harness/issues/3)
-asks for independent challenge. No strong new finding is claimed. The earlier
-contribution proposal below remains stopped.
+The earlier review solicitation is historical; it is not a pending action. Further
+outreach requires explicit authorization of both recipient and message. No strong new
+finding is claimed. The earlier contribution proposal below remains stopped.
 
 **2026-10-10 decision: stop expansion of the current contribution proposal.**
 The [research-question audit](research/evaluation/question-audit.md) revisits the
