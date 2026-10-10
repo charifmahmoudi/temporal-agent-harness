@@ -131,3 +131,29 @@ A candidate contribution would require evidence that the coverage criterion or
 minimization method adds something existing techniques do not already supply.
 If comparable baselines obtain the same coverage and detection results, reject the
 candidate. Do not rename reproduction as scientific novelty.
+
+## Same-history offline control
+
+The [offline runner](../scripts/replay_recovery_evidence.py) replays all six retained
+histories under both SDKs, verifying their digests before replay. On Python 3.12.14,
+with protobuf 5.28.3, typing-extensions 4.12.2, and types-protobuf 5.28.3.20241030
+matched between arms, the results were:
+
+| History producer | Replay on 1.8.0 | Replay on 1.9.0 |
+|---|---|---|
+| 1.8.0, three histories | 3 typed nondeterminism failures | 3 successful replays |
+| 1.9.0, three histories | 3 typed nondeterminism failures | 3 successful replays |
+
+[1.8 evidence](recovery-replay-1.8.json) and [1.9 evidence](recovery-replay-1.9.json)
+retain dependency versions, history hashes, runner hash, and exceptions. No server
+is used in this control. Thus differences in live history generation do not explain
+the replay contrast on these inputs. This remains a release comparison, not proof
+that a single patch is the sole cause. The live server still needs to be pinned for
+future generation experiments. The twelve offline replays reuse six histories and
+must not be counted as twelve independent defect cases.
+
+Reproduce with either isolated SDK environment:
+
+```sh
+python research/scripts/replay_recovery_evidence.py /tmp/recovery-replay.json
+```
