@@ -4,9 +4,11 @@ This page is the current decision record; detailed protocols and raw evidence st
 in their linked files. The objective is an open, reproducible scientific contribution.
 Known defects provide development fixtures, not discoveries or blind validation.
 
-**Active follow-up:** [bounded five-step discovery](../discovery/protocol.md) now
-screens three independent engines. The [candidate assessment](../discovery/candidates.md)
-rejects two premises/directions and advances one to a small exploratory probe.
+**Bounded follow-up completed; external feedback pending:** the
+[five-step discovery results](../discovery/results.md) screen three independent engines
+and report 18 CI trials across Temporal and Restate. All match the known recovery
+contracts; novelty for the cancellation/termination distinction is rejected.
+The public review request and conditional evaluation gates are linked from that note.
 This does not reopen the stopped method-advantage proposal below.
 
 **2026-10-10 decision: stop expansion of this contribution proposal.** The

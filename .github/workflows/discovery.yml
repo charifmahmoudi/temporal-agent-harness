@@ -4,11 +4,30 @@ on:
     paths:
       - 'research/discovery/**'
       - 'research/scripts/collect_discovery_issues.py'
+      - 'research/scripts/audit_discovery_recovery.py'
       - '.github/workflows/discovery.yml'
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
+  retained-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Re-derive outcomes from retained raw CI artifacts
+        run: python research/scripts/audit_discovery_recovery.py
+      - name: Check documentation links
+        run: python research/scripts/check_documentation.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: discovery-evidence-audit
+          path: research/results/discovery-audit/
+          if-no-files-found: error
   screen:
     runs-on: ubuntu-latest
     timeout-minutes: 8

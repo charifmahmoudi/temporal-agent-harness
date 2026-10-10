@@ -2,12 +2,14 @@
 
 ## Current scientific search
 
-**Active bounded discovery:** the [five-step protocol](research/discovery/protocol.md)
-now has a [43-issue inventory](research/discovery/inventory.md),
-[three assessed candidates](research/discovery/candidates.md), and a prospective
-[two-engine recovery probe](research/discovery/recovery-protocol.md).
-This is exploratory problem discovery; no strong new finding is claimed. The earlier
-contribution proposal below remains stopped. Executable work runs in GitHub Actions.
+**Bounded discovery completed; external feedback pending:** the
+[five-step results](research/discovery/results.md) include a
+[43-issue inventory](research/discovery/inventory.md), three assessed candidates,
+and 18 successful protocol-matched trials across Temporal and Restate in GitHub CI.
+The results reproduce known recovery semantics; we reject novelty for that distinction.
+[Review request #3](https://github.com/charifmahmoudi/temporal-agent-harness/issues/3)
+asks for independent challenge. No strong new finding is claimed. The earlier
+contribution proposal below remains stopped.
 
 **2026-10-10 decision: stop expansion of the current contribution proposal.**
 The [research-question audit](research/evaluation/question-audit.md) revisits the
