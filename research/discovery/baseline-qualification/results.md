@@ -110,3 +110,27 @@ to recover the ZIP. The upstream primary dataset is pinned by commit and the
 published hash in the protocol; it is not copied into this repository.
 The full comparison must retain both zero-valued CLI output and nonzero script
 output. Neither is discarded as an inconvenient run.
+
+## Full nearest-work comparison: no experiment justified
+
+Follow-up comparison completed 2026-10-10 against UndoBench v1 in full and *Resume Means Resume* v1's contract, experiments, related work, and validity discussion. This is a source-based comparison, not an independent reproduction of either paper's model/API runs.
+
+### UndoBench already answers the tempting question
+
+UndoBench's primary question is how recovery changes across external mutation boundaries. It defines five boundaries, separates nominal competence from recovery, pairs fault/control runs, and checks both final state and wire-level effect history. Its lost-ack study compares naive retry, idempotency, and a zero-privilege local journal. The follow-up evaluates **verify-before-retry** (B6) on observable and unobservable endpoints, including safe abstention when state cannot be read; a separate benchmark-wide idempotency intervention (B2-K) removes duplicates in its simulated endpoints. It also reports partial-mutation results on four qualified composite workflows.
+
+Consequently, the proposed study of how inspection/repair capability changes safe continuation is already substantially covered. Adding our Medusa workflow or reimplementing readback/reconciliation would be a transfer/replication unless a specific operator consequence, population, or effect type is identified that the existing contrasts do not address. No such differentiator is presently established.
+
+UndoBench explicitly says **POST_ACK_PRE_CHECKPOINT** and **DURING_COMPENSATION** were not measured, with cascading faults and larger suites also left for future work; its reason for the first is that its synchronous harness cannot faithfully realize that boundary. This is a real boundary omission, not by itself a research gap. *Resume Means Resume* then narrows the broad crash/replay gap: it specifies an effect exactly-once obligation, uses SIGKILL and fresh-process recovery, and checks effects in an on-disk ledger separate from the workflow process. It reports re-execution after a task effect was durably written but before the workflow frontier advanced. A remote provider with production failure modes remains outside that study, but replacing its ledger with a payment API would still need a consequential question beyond the established dual-write/idempotency problem. RIFL and logged/idempotent effect systems are longstanding answers to that mechanism class.
+
+### Reclassify our metric observation
+
+UndoBench v1's Appendix C itself says its first EOR aggregation returned 0.00% because the committed_mutation_count field was absent, then describes deterministic reconstruction from immutable wire logs, tests, and the resulting 46.72% EOR. Our pinned-source audit independently verified that the legacy general CLI can still produce zero duplicate/missing counts while the dedicated script/raw logs produce 1,444/2,880 and 284/2,880. That is useful operational evidence about which reproduction entry point and source revision to use. Given the paper's explicit disclosure of the zero-count failure and forensic repair, it is **not a new metric failure, benchmark invalidation, or strong contribution**. The published headline recovery result is not contradicted by this check.
+
+The paper's B6 and B2-K analyses also make the earlier suggested “vary repair capabilities” experiment a direct overlap. Its sandboxed providers, four-workflow partial-mutation qualification, and unmeasured compensation boundary are legitimate scope limits, but no causal claim about production systems follows from them.
+
+### Decision
+
+**Do not run a new recovery experiment on Medusa or another borrowed benchmark on this proposal.** UndoBench subsumes the current repair-capability candidate; the remaining crash/checkpoint boundary is adjacent to established durable-execution and dual-write semantics, and we have not identified an outcome that would change a scientific conclusion or operator decision. Do not rename an untested boundary as novelty.
+
+The defensible current output is a careful qualification/reproduction record and a stopped contribution proposal. To reopen, first supply an independently motivated question that changes a decision (for example, an effect/contract class with materially different safe actions), show how its estimand is not already answered by UndoBench's B6/B2-K or the Resume Contract's crash/effect probes, and specify independently selected cases. Only then freeze a protocol and run it in GitHub CI. No new experiment was run for this comparison.
