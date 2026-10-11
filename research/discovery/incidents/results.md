@@ -104,3 +104,26 @@ relative documentation links resolved. The [exact derived summary](audit-summary
 is retained from artifact 11673103542 (original ZIP SHA-256
 1a296fc3ffca807f62199ab986259318fc18e0f4cba3744a952836aa533a4600).
 This validates the retained record; it is not independent scientific review.
+
+
+## Finite provider-key evidence gate (2026-10-10)
+
+### Result
+
+We reviewed all fourteen records in the [case review](review.md) and [source manifest](sources.json) specifically for: (1) a named external provider/API that accepts effectful writes, (2) a documented finite idempotency-key or deduplication-retention window, and (3) a workflow retry/replay horizon that can exceed that window. **No case establishes all three; zero cases in this purposive corpus support a TTL experiment.** This is a result about these selected reports, not about prevalence in the field. The corpus contains a related pair and adaptive additions; it is not a representative sample.
+
+| Case(s) | Closest observed boundary | Provider, retention, and horizon evidence | Classification for this question |
+| --- | --- | --- | --- |
+| [Temporal #2464](https://github.com/temporalio/temporal/issues/2464) | Signal to Temporal's archival workflow times out at the caller while the signal is received; archival/deletion proceeds, and a retry sees history missing. The discussion says transfer retries continue until signal delivery. | A configured archival destination may be external, but the report does not identify it. No provider API, idempotency key, retention period, or bounded retry horizon is given. | Closest near miss; ambiguous archival outcome, not evidence of finite provider-key expiry. |
+| [DBOS #770](https://github.com/dbos-inc/dbos-transact-py/issues/770) | A stream append inside an at-least-once step is repeated on retries; maintainers confirm this is the intended step contract. | DBOS-managed stream; no external provider or key TTL. | Adjacent duplicate-effect example, not TTL evidence. |
+| [DBOS #702](https://github.com/dbos-inc/dbos-transact-py/issues/702) | An old debouncer workflow keeps a deduplication ID after a code-version change and cannot be recovered by the new version. | Internal database-backed deduplication ID; the report describes stale-version collision, not key expiry or a third-party API. | Adjacent persistent-deduplication example, not TTL evidence. |
+| [DBOS #880](https://github.com/dbos-inc/dbos-transact-py/issues/880) | A failed internal schedule operation is not recorded as failed; after administrative deletion, replay can create the schedule and take a different branch. | Engine-managed schedule; no external provider key or expiry contract. | Recovery/effect case already probed in this round; not TTL evidence. |
+| [DBOS #544](https://github.com/dbos-inc/dbos-transact-py/issues/544) | Concurrent same-ID workflow bodies can run; the reported workflow has no steps. | No committed external effect is demonstrated. | Exclude as provider-effect evidence. |
+| [Restate #4513](https://github.com/restatedev/restate/issues/4513) | A read-only `/output` query can return a stale 404 during partition reconfiguration; the report marks its internal read as idempotent. | No effectful write or provider-side deduplication. | Read-consistency case, not TTL evidence. |
+| Remaining eight records: Temporal #6514, #3826, #1829; DBOS #714 and #837; Restate #2565, #2655, and #4838 | Server connectivity/startup, read routing, internal patch concurrency, workflow registration, partition recovery, or local store/snapshot lifecycle. | The review describes no named external provider write with a finite deduplication window and an over-window retry/replay. | Outside the provider-key question. |
+
+The source details for #2464 matter: the reporter's concern was that local history might be deleted despite an ambiguous archival signal. A maintainer clarified the retry applies to delivery of the signal, while the archival worker may see history already gone. That is a potentially consequential archival-resiliency question, but it is already a different question from provider-key expiration, and the incident record does not establish an archival-provider contract or a new unexplained mechanism.
+
+### Decision
+
+**No-go on using the current fourteen-case corpus to motivate or select a finite-TTL experiment.** The earlier proposal to audit these incidents does not uncover the needed empirical premise. Keep the TTL direction stopped unless a new, independently selected case names the provider/API and documents both its key-retention bound and the workflow's possible replay horizon. If such evidence appears, assess whether reconciliation or abstention changes an operator decision before writing an experiment protocol. No runtime experiment was run; this was a source-review gate.
