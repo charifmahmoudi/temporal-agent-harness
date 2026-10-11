@@ -1,0 +1,4173 @@
+{
+  "schema": 1,
+  "run_url": "https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38039466357",
+  "shared_lock_sha256": "d6ba223baee5fc86be19ed0bcf3c6eb1190ce894a7e6627b87e580848692067e",
+  "server_version": "1.31.0",
+  "arms": [
+    {
+      "arm": "affected",
+      "sdk_revision": "0689f769ccc440e8d5008d4a623dee3c82a94ff2",
+      "verdicts": {
+        "passed": 12,
+        "confirmed_mechanism": 12
+      },
+      "rows": [
+        {
+          "case": "nexus_continuation_return_cached",
+          "repetition": 1,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250d-8982-7d04-ad17-5b1e4fdb7944",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_return_cold",
+          "repetition": 1,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250d-aff8-7e3d-a81c-a2165fde1e95",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_state_cached",
+          "repetition": 1,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250d-bd68-7af7-b2fa-5a3cdde99edc",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_state_cold",
+          "repetition": 1,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250d-c8cb-72cf-9a35-0a41f8cb97fa",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_timer0_cached",
+          "repetition": 1,
+          "verdict": "confirmed_mechanism",
+          "reason": "recorded non-SDK wake after Nexus completion",
+          "completed": false,
+          "nexus_completed": true,
+          "task_failures": 2,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": 18,
+          "caller_run_id": "01a1250d-d63e-7597-8165-8bb5e1804e2d",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ]
+          ],
+          "wake_failure_markers": [
+            "false",
+            "false",
+            "false",
+            "false"
+          ]
+        },
+        {
+          "case": "nexus_continuation_timer0_cold",
+          "repetition": 1,
+          "verdict": "confirmed_mechanism",
+          "reason": "recorded non-SDK wake after Nexus completion",
+          "completed": false,
+          "nexus_completed": true,
+          "task_failures": 1,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": 18,
+          "caller_run_id": "01a1250e-2f89-7d03-823a-8808e9fcb625",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ]
+          ],
+          "wake_failure_markers": [
+            "false",
+            "false",
+            "false"
+          ]
+        },
+        {
+          "case": "nexus_continuation_timer1_cached",
+          "repetition": 1,
+          "verdict": "confirmed_mechanism",
+          "reason": "recorded non-SDK wake after Nexus completion",
+          "completed": false,
+          "nexus_completed": true,
+          "task_failures": 2,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": 18,
+          "caller_run_id": "01a1250e-8aca-753a-a24a-25ec5060ac47",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ]
+          ],
+          "wake_failure_markers": [
+            "false",
+            "false",
+            "false",
+            "false"
+          ]
+        },
+        {
+          "case": "nexus_continuation_timer1_cold",
+          "repetition": 1,
+          "verdict": "confirmed_mechanism",
+          "reason": "recorded non-SDK wake after Nexus completion",
+          "completed": false,
+          "nexus_completed": true,
+          "task_failures": 1,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": 18,
+          "caller_run_id": "01a1250e-e6bb-71cd-933b-c8c4ca07e153",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ]
+          ],
+          "wake_failure_markers": [
+            "false",
+            "false",
+            "false"
+          ]
+        },
+        {
+          "case": "nexus_continuation_return_cached",
+          "repetition": 2,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250f-4203-77ab-95cd-e07a559e72d0",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_return_cold",
+          "repetition": 2,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250f-4d34-78b0-a2bb-38b8ba1cb320",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_state_cached",
+          "repetition": 2,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250f-5a68-7066-b4a3-77f6082cc525",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_state_cold",
+          "repetition": 2,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250f-67cc-72b3-a02b-f7529ae7071b",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_timer0_cached",
+          "repetition": 2,
+          "verdict": "confirmed_mechanism",
+          "reason": "recorded non-SDK wake after Nexus completion",
+          "completed": false,
+          "nexus_completed": true,
+          "task_failures": 2,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": 18,
+          "caller_run_id": "01a1250f-7514-7d70-b2ef-efd7c7c92c09",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ]
+          ],
+          "wake_failure_markers": [
+            "false",
+            "false",
+            "false",
+            "false"
+          ]
+        },
+        {
+          "case": "nexus_continuation_timer0_cold",
+          "repetition": 2,
+          "verdict": "confirmed_mechanism",
+          "reason": "recorded non-SDK wake after Nexus completion",
+          "completed": false,
+          "nexus_completed": true,
+          "task_failures": 1,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": 18,
+          "caller_run_id": "01a1250f-d04b-7adb-8fa3-e5c6f6f361e8",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ]
+          ],
+          "wake_failure_markers": [
+            "false",
+            "false",
+            "false"
+          ]
+        },
+        {
+          "case": "nexus_continuation_timer1_cached",
+          "repetition": 2,
+          "verdict": "confirmed_mechanism",
+          "reason": "recorded non-SDK wake after Nexus completion",
+          "completed": false,
+          "nexus_completed": true,
+          "task_failures": 2,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": 18,
+          "caller_run_id": "01a12510-2b8d-7d08-b25c-5dd529e1203c",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ]
+          ],
+          "wake_failure_markers": [
+            "false",
+            "false",
+            "false",
+            "false"
+          ]
+        },
+        {
+          "case": "nexus_continuation_timer1_cold",
+          "repetition": 2,
+          "verdict": "confirmed_mechanism",
+          "reason": "recorded non-SDK wake after Nexus completion",
+          "completed": false,
+          "nexus_completed": true,
+          "task_failures": 1,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": 18,
+          "caller_run_id": "01a12510-86e9-75fc-8941-b98ddf76640e",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ]
+          ],
+          "wake_failure_markers": [
+            "false",
+            "false",
+            "false"
+          ]
+        },
+        {
+          "case": "nexus_continuation_return_cached",
+          "repetition": 3,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a12510-e24b-7479-a9a8-718c208cf500",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_return_cold",
+          "repetition": 3,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a12510-efaa-7d22-b1ee-7700f2f3ace8",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_state_cached",
+          "repetition": 3,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a12510-fcf8-79a0-a7f8-c1a9e4bf4c47",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_state_cold",
+          "repetition": 3,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a12511-0a46-76ab-b7d9-91ae03de6168",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_timer0_cached",
+          "repetition": 3,
+          "verdict": "confirmed_mechanism",
+          "reason": "recorded non-SDK wake after Nexus completion",
+          "completed": false,
+          "nexus_completed": true,
+          "task_failures": 2,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": 18,
+          "caller_run_id": "01a12511-177d-79c1-989a-a0185285dc75",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ]
+          ],
+          "wake_failure_markers": [
+            "false",
+            "false",
+            "false",
+            "false"
+          ]
+        },
+        {
+          "case": "nexus_continuation_timer0_cold",
+          "repetition": 3,
+          "verdict": "confirmed_mechanism",
+          "reason": "recorded non-SDK wake after Nexus completion",
+          "completed": false,
+          "nexus_completed": true,
+          "task_failures": 1,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": 18,
+          "caller_run_id": "01a12511-72d3-764e-b1bc-afcf643739a0",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ]
+          ],
+          "wake_failure_markers": [
+            "false",
+            "false",
+            "false"
+          ]
+        },
+        {
+          "case": "nexus_continuation_timer1_cached",
+          "repetition": 3,
+          "verdict": "confirmed_mechanism",
+          "reason": "recorded non-SDK wake after Nexus completion",
+          "completed": false,
+          "nexus_completed": true,
+          "task_failures": 2,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": 18,
+          "caller_run_id": "01a12511-ce30-7588-8f90-172b43833aa0",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ]
+          ],
+          "wake_failure_markers": [
+            "false",
+            "false",
+            "false",
+            "false"
+          ]
+        },
+        {
+          "case": "nexus_continuation_timer1_cold",
+          "repetition": 3,
+          "verdict": "confirmed_mechanism",
+          "reason": "recorded non-SDK wake after Nexus completion",
+          "completed": false,
+          "nexus_completed": true,
+          "task_failures": 1,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": 18,
+          "caller_run_id": "01a12512-2942-7459-94a8-8892076eb32d",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ]
+          ],
+          "wake_failure_markers": [
+            "false",
+            "false",
+            "false"
+          ]
+        }
+      ]
+    },
+    {
+      "arm": "fixed",
+      "sdk_revision": "d936c6cc6455256417c917c3637d52e53acb8178",
+      "verdicts": {
+        "passed": 24
+      },
+      "rows": [
+        {
+          "case": "nexus_continuation_return_cached",
+          "repetition": 1,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250e-ae7a-7a94-90ed-c066c9c5c4de",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_return_cold",
+          "repetition": 1,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250e-be40-7a38-bd09-6ab212b26ce4",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_state_cached",
+          "repetition": 1,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250e-ccb2-721c-a294-526d876042b7",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_state_cold",
+          "repetition": 1,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250e-da9a-7800-8608-dc515c138559",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_timer0_cached",
+          "repetition": 1,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250e-e89b-70ab-9db1-28c71bb60447",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_timer0_cold",
+          "repetition": 1,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250e-fae1-7c41-b9b9-02415c359929",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_timer1_cached",
+          "repetition": 1,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250f-0d1d-729c-883b-fd911b88e0d5",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_timer1_cold",
+          "repetition": 1,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250f-1f7e-77fa-b4a0-460d5f85fd72",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_return_cached",
+          "repetition": 2,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250f-31cb-7766-955f-e32c36393282",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_return_cold",
+          "repetition": 2,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250f-3fdb-7cc9-9674-b5011543de42",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_state_cached",
+          "repetition": 2,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250f-4df2-7941-8ca5-4a26b4d8a7ce",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_state_cold",
+          "repetition": 2,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250f-5bd8-7a10-a16b-061136714c12",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_timer0_cached",
+          "repetition": 2,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250f-69bb-7795-97bc-43e43600db2e",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_timer0_cold",
+          "repetition": 2,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250f-7ba1-760c-8b0f-227c31733a51",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_timer1_cached",
+          "repetition": 2,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250f-8d93-7b56-afcf-161817b160fe",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_timer1_cold",
+          "repetition": 2,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250f-9fab-75d1-b783-613ba072f7af",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_return_cached",
+          "repetition": 3,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250f-b1b7-7248-808e-c12b5774bc64",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_return_cold",
+          "repetition": 3,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250f-bfd0-7034-87d3-bb7b874afcb9",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_state_cached",
+          "repetition": 3,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250f-cdbf-782c-9840-74f31c7a2a2a",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_state_cold",
+          "repetition": 3,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250f-dbe1-78e8-9b8a-68cb824b409f",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_timer0_cached",
+          "repetition": 3,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250f-ea05-775a-9734-122b22ca624f",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_timer0_cold",
+          "repetition": 3,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": null,
+          "caller_run_id": "01a1250f-fbfb-7c5e-83f0-c0d879ae7294",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_timer1_cached",
+          "repetition": 3,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": null,
+          "caller_run_id": "01a12510-0dec-7033-8aec-77ae2f02aedb",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        },
+        {
+          "case": "nexus_continuation_timer1_cold",
+          "repetition": 3,
+          "verdict": "passed",
+          "reason": "logical payload assertion, completion, clean tasks, and offline replay passed",
+          "completed": true,
+          "nexus_completed": true,
+          "task_failures": 0,
+          "task_timeouts": 0,
+          "nexus_completed_event": 10,
+          "timer_fired_events": [
+            15
+          ],
+          "first_failure_event": null,
+          "caller_run_id": "01a12510-1fff-74dd-be99-7fcdcc7fd8e0",
+          "caller_activation_states": [
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "true",
+              "false"
+            ],
+            [
+              "false",
+              "true"
+            ]
+          ],
+          "caller_activations_before_first_wake_failure": [],
+          "wake_failure_markers": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "python": "3.12.14",
+  "sandbox": false,
+  "dependencies": {
+    "temporalio": "1.8.0",
+    "protobuf": "5.28.3",
+    "typing-extensions": "4.12.2",
+    "types-protobuf": "5.28.3.20241030"
+  },
+  "evidence_sha256": "38084d3f789a863ec21c5a47b221a3246e601414587a8107cad9f925f7746a54",
+  "runner_sha256": "0ab28d4c254325cb6a9f58f66b091e9edd8c01f2edadda1048e37f5e81998b4d",
+  "cases": [
+    {
+      "producer_sdk": "1.8.0",
+      "history": "history-0.1.json",
+      "history_sha256": "fc7eb3f9d3203c4d126add7e2f8a102c9c8558a3f6fdb754e9b3873bac2a306b",
+      "verdict": "nondeterministic",
+      "exception_type": "NondeterminismError",
+      "exception": "Workflow activation completion failed: Failure { failure: Some(Failure { message: \"[TMPRL1100] Nondeterminism error: Update machine does not handle this event: HistoryEvent(id: 20, ActivityTaskScheduled)\", source: \"\", stack_trace: \"\", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: \"\", non_retryable: false, details: None, next_retry_delay: None })) }), force_cause: NonDeterministicError }"
+    },
+    {
+      "producer_sdk": "1.8.0",
+      "history": "history-0.5.json",
+      "history_sha256": "340f6060da3c5fa61886258c1fa1c34e7f0d0ef0292be5b3e81ca71b84b7f6f3",
+      "verdict": "nondeterministic",
+      "exception_type": "NondeterminismError",
+      "exception": "Workflow activation completion failed: Failure { failure: Some(Failure { message: \"[TMPRL1100] Nondeterminism error: Update machine does not handle this event: HistoryEvent(id: 20, ActivityTaskScheduled)\", source: \"\", stack_trace: \"\", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: \"\", non_retryable: false, details: None, next_retry_delay: None })) }), force_cause: NonDeterministicError }"
+    },
+    {
+      "producer_sdk": "1.8.0",
+      "history": "history-1.0.json",
+      "history_sha256": "b89493b9f7724d34638553ab624c70c2bfd3efaa2a837db6136409130246d3ba",
+      "verdict": "nondeterministic",
+      "exception_type": "NondeterminismError",
+      "exception": "Workflow activation completion failed: Failure { failure: Some(Failure { message: \"[TMPRL1100] Nondeterminism error: Update machine does not handle this event: HistoryEvent(id: 17, ActivityTaskScheduled)\", source: \"\", stack_trace: \"\", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: \"\", non_retryable: false, details: None, next_retry_delay: None })) }), force_cause: NonDeterministicError }"
+    },
+    {
+      "producer_sdk": "1.9.0",
+      "history": "history-0.1.json",
+      "history_sha256": "387ea0dcc416545373924e9d6ee1437f3a5972e8a15fd730d9e1664453e47dd1",
+      "verdict": "nondeterministic",
+      "exception_type": "NondeterminismError",
+      "exception": "Workflow activation completion failed: Failure { failure: Some(Failure { message: \"[TMPRL1100] Nondeterminism error: Update machine does not handle this event: HistoryEvent(id: 20, ActivityTaskScheduled)\", source: \"\", stack_trace: \"\", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: \"\", non_retryable: false, details: None, next_retry_delay: None })) }), force_cause: NonDeterministicError }"
+    },
+    {
+      "producer_sdk": "1.9.0",
+      "history": "history-0.5.json",
+      "history_sha256": "7618b84ef0cc3da613fdd4e7838247547c8b81c819cd1ba79539a4259ca6c4c8",
+      "verdict": "nondeterministic",
+      "exception_type": "NondeterminismError",
+      "exception": "Workflow activation completion failed: Failure { failure: Some(Failure { message: \"[TMPRL1100] Nondeterminism error: Update machine does not handle this event: HistoryEvent(id: 17, ActivityTaskScheduled)\", source: \"\", stack_trace: \"\", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: \"\", non_retryable: false, details: None, next_retry_delay: None })) }), force_cause: NonDeterministicError }"
+    },
+    {
+      "producer_sdk": "1.9.0",
+      "history": "history-1.0.json",
+      "history_sha256": "bfd6982adf4e34ba63eb0b8507db06d9d7b5a158147e90feefeee1fa43890514",
+      "verdict": "nondeterministic",
+      "exception_type": "NondeterminismError",
+      "exception": "Workflow activation completion failed: Failure { failure: Some(Failure { message: \"[TMPRL1100] Nondeterminism error: Update machine does not handle this event: HistoryEvent(id: 20, ActivityTaskScheduled)\", source: \"\", stack_trace: \"\", encoded_attributes: None, cause: None, failure_info: Some(ApplicationFailureInfo(ApplicationFailureInfo { r#type: \"\", non_retryable: false, details: None, next_retry_delay: None })) }), force_cause: NonDeterministicError }"
+    }
+  ]
+}

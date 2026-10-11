@@ -1,0 +1,37 @@
+name: Independent recovery reproduction
+on:
+  pull_request:
+    paths:
+      - 'research/scripts/reproduce_recovery_673.py'
+      - '.github/workflows/recovery-reproduction.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - sdk: '1.8.0'
+            expected: affected
+          - sdk: '1.9.0'
+            expected: fixed
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install isolated SDK
+        run: pip install temporalio==${{ matrix.sdk }} protobuf==5.28.3 typing-extensions==4.12.2 types-protobuf==5.28.3.20241030
+      - name: Reproduce unchanged-code live versus replay behavior
+        run: python research/scripts/reproduce_recovery_673.py --expect ${{ matrix.expected }} --output research/results/recovery-${{ matrix.sdk }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: recovery-${{ matrix.sdk }}
+          path: |
+            research/results/recovery-${{ matrix.sdk }}/summary.json
+            research/results/recovery-${{ matrix.sdk }}/history-*.json

@@ -1,0 +1,157 @@
+{
+  "schema": 1,
+  "protocol_commit": "c47873ec31c1916c641cdee3074dd5b4bb1d8e58",
+  "protocol_sha256": "7577d5f38f7fc7cc87895aa4924b2f3546242ce24d5d7dc845b249043b081d63",
+  "script_sha256": "e24a6fdbefe00056c1ef5c27e14085ba750c68d67a268d09525d89414e09688a",
+  "source_sha256": {
+    "B": "e81560fba5a9d97251afb14de64cf7b767294c1d0438d4f54e306e4ae3cbbe65",
+    "C": "bf1c8b9b51661559538c15d47297fb04ec63166ec24434091f60c55ec33ff432",
+    "V": "ffcc1c3717874430e442ff9cb71bf5d9d0a272d3edd30dc90f1595f5b3a9447d"
+  },
+  "variant_generator_sha256": "183e07c37ce4d02f458b656a3fd573ee33c1de693345b31d6841a57ccac74dff",
+  "scope": "declared primitive adapters; exact symbolic word matching; not Temporal core replay",
+  "semantic_cases": 7290,
+  "word_comparison_cells": 58320,
+  "disagreements": [],
+  "word_disagreements": [],
+  "transcript_sha256": "a75cb85285846c83598adb7bc0126152d9b4c9c60ccfb58e923b5b83535584ae",
+  "negative_control_disagreements": {
+    "boolean_prefix": 324,
+    "unconditional_patch": 1008,
+    "fresh_always_on": 144,
+    "kind_only_match": 5274
+  },
+  "negative_control_witnesses": {
+    "kind_only_match": {
+      "case": {
+        "variant": "B",
+        "schedule": [],
+        "child": "return",
+        "approved": true,
+        "context": "offline",
+        "signature": "activity:tool:arg0:options0",
+        "exclusion": ""
+      },
+      "commands": [
+        "activity:tool:arg0:options0"
+      ],
+      "expected_word": [
+        "activity:tool:arg1:options0"
+      ]
+    },
+    "boolean_prefix": {
+      "case": {
+        "variant": "C",
+        "schedule": [
+          "cancel",
+          "cancel",
+          "uncancel"
+        ],
+        "child": "return",
+        "approved": false,
+        "context": "offline",
+        "signature": "activity:tool:arg0:options0",
+        "exclusion": ""
+      },
+      "expected": {
+        "outcome": "cancelled",
+        "patch_calls": 0,
+        "commands": []
+      },
+      "mutant": {
+        "outcome": "denied",
+        "patch_calls": 0,
+        "commands": []
+      }
+    },
+    "unconditional_patch": {
+      "case": {
+        "variant": "V",
+        "schedule": [],
+        "child": "return",
+        "approved": false,
+        "context": "fresh_on",
+        "signature": "activity:tool:arg0:options0",
+        "exclusion": ""
+      },
+      "expected": {
+        "outcome": "denied",
+        "patch_calls": 0,
+        "commands": []
+      },
+      "mutant": {
+        "outcome": "denied",
+        "patch_calls": 1,
+        "commands": [
+          "patch:approval-caller-cancel-v1"
+        ]
+      }
+    },
+    "fresh_always_on": {
+      "case": {
+        "variant": "V",
+        "schedule": [
+          "cancel"
+        ],
+        "child": "return",
+        "approved": false,
+        "context": "fresh_off",
+        "signature": "activity:tool:arg0:options0",
+        "exclusion": ""
+      },
+      "expected": {
+        "outcome": "denied",
+        "patch_calls": 1,
+        "commands": []
+      },
+      "mutant": {
+        "outcome": "cancelled",
+        "patch_calls": 1,
+        "commands": [
+          "patch:approval-caller-cancel-v1"
+        ]
+      }
+    }
+  },
+  "fresh_outstanding_cancellation_policy_violations": {
+    "B": 288,
+    "C": 0,
+    "V": 144
+  },
+  "decision_boundary_domain": {
+    "explicit_keys": 1944,
+    "reduced_keys": 324,
+    "meaning": "unique input keys at the suffix cut; excludes prefix computation; not speedup"
+  },
+  "abstention_probes": [
+    {
+      "case": "cancel_after_guard",
+      "all_arms_unsupported": true
+    },
+    {
+      "case": "nonterminating_child",
+      "all_arms_unsupported": true
+    },
+    {
+      "case": "unknown_base_exception",
+      "all_arms_unsupported": true
+    },
+    {
+      "case": "dynamic_publication_effect",
+      "all_arms_unsupported": true
+    },
+    {
+      "case": "unknown_activity_signature",
+      "all_arms_unsupported": true
+    },
+    {
+      "case": "arbitrary_scheduler",
+      "all_arms_unsupported": true
+    },
+    {
+      "case": "invalid_activation_callback",
+      "all_arms_unsupported": true
+    }
+  ],
+  "novelty_verdict": "No advantage in expressiveness or correctness demonstrated; suffix reduction alone is not a new method."
+}

@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "protocol_commit": "82d6093078640c3c8aad0a398bc87875175ae675",
+  "initial_run_id": 37936552316,
+  "run_id": 37936970956,
+  "run_url": "https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/37936970956",
+  "head_sha": "040dde3ac8ae1a3451eb0c91f2af2343a173c48e",
+  "checkout_sha": "3125452790cf553b632a4f9aa91b41a923891fcd",
+  "artifact_id": 11618108804,
+  "archive": "activity-evidence.zip",
+  "archive_sha256": "2a7490c635b4c12b1041c39ee9d752ffcabb9c0fd674757c14b2fb92ef37172a"
+}

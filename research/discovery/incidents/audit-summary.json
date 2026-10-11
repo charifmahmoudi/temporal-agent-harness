@@ -1,0 +1,132 @@
+{
+  "initial_inconclusive": 8,
+  "corrected_cells": [
+    {
+      "backend": "postgres",
+      "suffix": "same",
+      "mutation": "retain",
+      "status": "SUCCESS",
+      "result": "A",
+      "exception": null,
+      "recovery_branches": [
+        "A"
+      ],
+      "schedule_recreated": false,
+      "new_success_checkpoint": false,
+      "bounded_timeout": false,
+      "matches_prediction": true
+    },
+    {
+      "backend": "postgres",
+      "suffix": "same",
+      "mutation": "delete",
+      "status": "SUCCESS",
+      "result": "A",
+      "exception": null,
+      "recovery_branches": [
+        "B"
+      ],
+      "schedule_recreated": true,
+      "new_success_checkpoint": true,
+      "bounded_timeout": false,
+      "matches_prediction": true
+    },
+    {
+      "backend": "postgres",
+      "suffix": "different",
+      "mutation": "retain",
+      "status": "SUCCESS",
+      "result": "A",
+      "exception": null,
+      "recovery_branches": [
+        "A"
+      ],
+      "schedule_recreated": false,
+      "new_success_checkpoint": false,
+      "bounded_timeout": false,
+      "matches_prediction": true
+    },
+    {
+      "backend": "postgres",
+      "suffix": "different",
+      "mutation": "delete",
+      "status": "ERROR",
+      "result": null,
+      "exception": {
+        "type": "DBOSUnexpectedStepError",
+        "message": "DBOS Error 11: During execution of workflow W step 2, function worker.<locals>.mark was recorded when worker.<locals>.mark_b was expected. Check that your workflow is deterministic."
+      },
+      "recovery_branches": [
+        "B"
+      ],
+      "schedule_recreated": true,
+      "new_success_checkpoint": true,
+      "bounded_timeout": false,
+      "matches_prediction": true
+    },
+    {
+      "backend": "sqlite",
+      "suffix": "same",
+      "mutation": "retain",
+      "status": "SUCCESS",
+      "result": "A",
+      "exception": null,
+      "recovery_branches": [
+        "A"
+      ],
+      "schedule_recreated": false,
+      "new_success_checkpoint": false,
+      "bounded_timeout": false,
+      "matches_prediction": true
+    },
+    {
+      "backend": "sqlite",
+      "suffix": "same",
+      "mutation": "delete",
+      "status": "SUCCESS",
+      "result": "A",
+      "exception": null,
+      "recovery_branches": [
+        "B"
+      ],
+      "schedule_recreated": true,
+      "new_success_checkpoint": true,
+      "bounded_timeout": false,
+      "matches_prediction": true
+    },
+    {
+      "backend": "sqlite",
+      "suffix": "different",
+      "mutation": "retain",
+      "status": "SUCCESS",
+      "result": "A",
+      "exception": null,
+      "recovery_branches": [
+        "A"
+      ],
+      "schedule_recreated": false,
+      "new_success_checkpoint": false,
+      "bounded_timeout": false,
+      "matches_prediction": true
+    },
+    {
+      "backend": "sqlite",
+      "suffix": "different",
+      "mutation": "delete",
+      "status": "ERROR",
+      "result": null,
+      "exception": {
+        "type": "DBOSUnexpectedStepError",
+        "message": "DBOS Error 11: During execution of workflow W step 2, function worker.<locals>.mark was recorded when worker.<locals>.mark_b was expected. Check that your workflow is deterministic."
+      },
+      "recovery_branches": [
+        "B"
+      ],
+      "schedule_recreated": true,
+      "new_success_checkpoint": true,
+      "bounded_timeout": false,
+      "matches_prediction": true
+    }
+  ],
+  "negative_controls": 3
+}

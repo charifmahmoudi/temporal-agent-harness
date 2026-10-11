@@ -1,0 +1,29 @@
+name: Incident retained evidence audit
+on:
+  pull_request:
+    paths:
+      - 'research/discovery/incidents/**'
+      - 'research/scripts/audit_incident_probe.py'
+      - '.github/workflows/incident-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify archives and derive every declared cell
+        run: python research/scripts/audit_incident_probe.py
+      - name: Check research documentation
+        run: python research/scripts/check_documentation.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: incident-evidence-audit
+          path: research/results/incident-audit/
+          if-no-files-found: error

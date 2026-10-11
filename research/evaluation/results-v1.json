@@ -1,0 +1,386 @@
+{
+  "schema": 1,
+  "execution_commit": "a61ba1293f4c58586c10833073ab8a9f4d2b5e42",
+  "baseline_commit": "7aa516d13dde8a3f9f4c2d893b34e3e5d6fb9e80",
+  "corpus_sha256": "a18662cb771a99510da1d3ba831b7f9546cce2a474c8bfe2b13cb5ddf17e411e",
+  "source_sha256": "1375ca7040fd8c1044f839ce244c30351212bc75fb4ecb90ecf394693635ce38",
+  "suite_sha256": {
+    "tests/harness/test_tool_approvals.py": "873d3788270606964fb7734a9ccf47a365d2501f49955bbc4eba3b94f2435e18",
+    "tests/harness/test_auto_mode_superseded_result.py": "1937147c17237da480a82432f9fca48651e1424dabb58708f00184ea29b23c9e",
+    "tests/research/test_approval_boundary.py": "d87031e8245c780597f9687e6d7f2b4cb50356560315d81815daf2b63d2b3b71",
+    "tests/research/test_approval_traces.py": "61c33e708aae0734829d794596be381122ec887a99997bcf14fc5c254b1f117a",
+    "tests/research/test_policy_cascade.py": "3bef9e460e4fb7daf768394416a9768ba9bc632b8e5ff8dd5932b6014cf9dfdd"
+  },
+  "model_sha256": {
+    "Approval.tla": "6f2abc363e9dd7e7d491061c9caf1d8f451da160b61e792d6b079ea8898b8e82",
+    "Cascade.tla": "bbf9076f84da42c6263c88bc255d29f5ec4f04406ca0bcdd670942f727bcd45b"
+  },
+  "jar_sha256": "7beec0f04818732a62fa193731711a99aa4f11279499b2360a7d156c519ea78d",
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "java": "openjdk version \"17.0.20.1\" 2026-08-18\nOpenJDK Runtime Environment Temurin-17.0.20.1+1 (build 17.0.20.1+1)\nOpenJDK 64-Bit Server VM Temurin-17.0.20.1+1 (build 17.0.20.1+1, mixed mode, sharing)\n",
+  "model_checking": "Separate 13-configuration design experiment; unchanged model does not consume Python faults",
+  "results": [
+    {
+      "fault": "baseline",
+      "implementation_sha256": "1375ca7040fd8c1044f839ce244c30351212bc75fb4ecb90ecf394693635ce38",
+      "existing": {
+        "outcome": "survived",
+        "returncode": 0,
+        "tests": 23,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 6.1400399750000005
+      },
+      "expanded": {
+        "outcome": "survived",
+        "returncode": 0,
+        "tests": 82,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 10.284257234000002
+      },
+      "trace": {
+        "outcome": "survived",
+        "groups": [
+          {
+            "outcome": "survived",
+            "traces": [
+              {
+                "trace": "denied_remember_ab.json",
+                "outcome": "matched"
+              },
+              {
+                "trace": "denied_remember_ba.json",
+                "outcome": "matched"
+              }
+            ],
+            "collector": {
+              "outcome": "survived",
+              "returncode": 0,
+              "tests": 2,
+              "failures": 0,
+              "errors": 0,
+              "skipped": 0,
+              "seconds": 2.0220178999999945
+            },
+            "seconds": 5.01358346899999
+          },
+          {
+            "outcome": "survived",
+            "traces": [
+              {
+                "trace": "different_tool_ab.json",
+                "outcome": "matched"
+              },
+              {
+                "trace": "different_tool_ba.json",
+                "outcome": "matched"
+              }
+            ],
+            "collector": {
+              "outcome": "survived",
+              "returncode": 0,
+              "tests": 2,
+              "failures": 0,
+              "errors": 0,
+              "skipped": 0,
+              "seconds": 2.0511408010000025
+            },
+            "seconds": 3.310943164000001
+          },
+          {
+            "outcome": "survived",
+            "traces": [
+              {
+                "trace": "policy_relax_ab.json",
+                "outcome": "matched"
+              },
+              {
+                "trace": "policy_relax_ba.json",
+                "outcome": "matched"
+              }
+            ],
+            "collector": {
+              "outcome": "survived",
+              "returncode": 0,
+              "tests": 2,
+              "failures": 0,
+              "errors": 0,
+              "skipped": 0,
+              "seconds": 1.9867223359999997
+            },
+            "seconds": 3.2012195200000093
+          },
+          {
+            "outcome": "survived",
+            "traces": [
+              {
+                "trace": "close.json",
+                "outcome": "matched"
+              }
+            ],
+            "collector": {
+              "outcome": "survived",
+              "returncode": 0,
+              "tests": 1,
+              "failures": 0,
+              "errors": 0,
+              "skipped": 0,
+              "seconds": 1.8681034709999977
+            },
+            "seconds": 2.421306002999998
+          },
+          {
+            "outcome": "survived",
+            "traces": [
+              {
+                "trace": "evaluator_deny.json",
+                "outcome": "matched"
+              }
+            ],
+            "collector": {
+              "outcome": "survived",
+              "returncode": 0,
+              "tests": 1,
+              "failures": 0,
+              "errors": 0,
+              "skipped": 0,
+              "seconds": 1.8547219470000016
+            },
+            "seconds": 2.4177257470000058
+          }
+        ]
+      }
+    },
+    {
+      "fault": "denial_remember",
+      "implementation_sha256": "8c5b455d6dbe4d02db9b509a2eb3bcccb8c3b264f9b50c98a1dc1ab7b0c1b6ff",
+      "existing": {
+        "outcome": "survived",
+        "returncode": 0,
+        "tests": 23,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 5.430546532999998
+      },
+      "expanded": {
+        "outcome": "detected",
+        "returncode": 1,
+        "tests": 64,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 7.5239734049999925
+      },
+      "trace": {
+        "outcome": "inconclusive",
+        "reason": "collector did not complete fixed stimuli",
+        "collector": {
+          "outcome": "inconclusive",
+          "returncode": 1,
+          "tests": 1,
+          "failures": 1,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 1.9230743090000004
+        },
+        "seconds": 1.9230743090000004
+      }
+    },
+    {
+      "fault": "scope_leak",
+      "implementation_sha256": "a9715c510f8ed7728ed75097b2e744b49c96719820faba00ddba24da30e3ec36",
+      "existing": {
+        "outcome": "survived",
+        "returncode": 0,
+        "tests": 23,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 5.419962030000008
+      },
+      "expanded": {
+        "outcome": "detected",
+        "returncode": 1,
+        "tests": 70,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 8.500278572
+      },
+      "trace": {
+        "outcome": "inconclusive",
+        "reason": "collector did not complete fixed stimuli",
+        "collector": {
+          "outcome": "inconclusive",
+          "returncode": 1,
+          "tests": 1,
+          "failures": 1,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 1.8980410019999994
+        },
+        "seconds": 1.8980410019999994
+      }
+    },
+    {
+      "fault": "reverse_publication",
+      "implementation_sha256": "9f4f7c8e85352fc2494f24a3b100c3440110a86ab51468991227626d95534cf8",
+      "existing": {
+        "outcome": "survived",
+        "returncode": 0,
+        "tests": 23,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 5.466545731000011
+      },
+      "expanded": {
+        "outcome": "detected",
+        "returncode": 1,
+        "tests": 66,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 7.842543888999998
+      },
+      "trace": {
+        "outcome": "detected",
+        "traces": [
+          {
+            "trace": "policy_relax_ab.json",
+            "outcome": "rejected"
+          },
+          {
+            "trace": "policy_relax_ba.json",
+            "outcome": "rejected"
+          }
+        ],
+        "collector": {
+          "outcome": "survived",
+          "returncode": 0,
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 2.024767474000001
+        },
+        "seconds": 3.1156664109999923
+      }
+    },
+    {
+      "fault": "unvalidated_superseded",
+      "implementation_sha256": "ef398e0c4fb9a4386ca6e409e466ef9fb1a35a4a9ca655a2af37884890462f70",
+      "existing": {
+        "outcome": "survived",
+        "returncode": 0,
+        "tests": 23,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 5.381049007000001
+      },
+      "expanded": {
+        "outcome": "inconclusive",
+        "returncode": 1,
+        "tests": 24,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 5.436104436999997
+      },
+      "trace": {
+        "outcome": "out_of_scope",
+        "reason": "Malformed input excluded from model"
+      }
+    },
+    {
+      "fault": "close_approves",
+      "implementation_sha256": "4cf7121095d3271a324a9811d4828ee004cd4ff6f7d70ac818dde2127264ad56",
+      "existing": {
+        "outcome": "detected",
+        "returncode": 1,
+        "tests": 22,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 5.27424690700002
+      },
+      "expanded": {
+        "outcome": "detected",
+        "returncode": 1,
+        "tests": 22,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 5.262308894
+      },
+      "trace": {
+        "outcome": "detected",
+        "traces": [
+          {
+            "trace": "close.json",
+            "outcome": "rejected"
+          }
+        ],
+        "collector": {
+          "outcome": "survived",
+          "returncode": 0,
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 1.860585800999985
+        },
+        "seconds": 2.362247378999996
+      }
+    },
+    {
+      "fault": "evaluator_deny_approves",
+      "implementation_sha256": "a207164d0a123e083b25f7ea77616c4abf3f7f19e1670c8e2808f66ebeedfe99",
+      "existing": {
+        "outcome": "detected",
+        "returncode": 1,
+        "tests": 11,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 3.5679335860000094
+      },
+      "expanded": {
+        "outcome": "detected",
+        "returncode": 1,
+        "tests": 11,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 3.5800199859999964
+      },
+      "trace": {
+        "outcome": "detected",
+        "traces": [
+          {
+            "trace": "evaluator_deny.json",
+            "outcome": "rejected"
+          }
+        ],
+        "collector": {
+          "outcome": "survived",
+          "returncode": 0,
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "seconds": 1.8530680799999857
+        },
+        "seconds": 2.3825304860000074
+      }
+    }
+  ],
+  "evidence_url": "https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/37889321814",
+  "protocol_commit": "23df61f790fdc854159372a0bcd1fbc73bf826fd",
+  "head_commit": "c27d6cf7efe160b58c2c81d966aa5489cde49748"
+}

@@ -1,0 +1,86 @@
+[
+  {
+    "attempt": 1,
+    "bytes": 186091,
+    "sha256": "73b339d42b3b0190665ab8b6ddb434b0bbad0f8f8df72bac2c2474c3eb6c7f26",
+    "base64_length": 248124,
+    "blob": "ef2b55b19fafbe0e57a58ad0f21c10186cbcefa9",
+    "path": "research/discovery/medusa-baseline/evidence/attempt-1.zip",
+    "run_id": 38071912240,
+    "run_url": "https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38071912240",
+    "interpretation": "runner failure masked by shell",
+    "artifact_id": 11676998326
+  },
+  {
+    "attempt": 2,
+    "bytes": 193257,
+    "sha256": "b7dcf99c8a10aaf2b4acace94202214ff11d011aa992b26c3a34e3e27b4bcee9",
+    "base64_length": 257676,
+    "blob": "21f67af604e4543299db3f90746389cec80b850e",
+    "path": "research/discovery/medusa-baseline/evidence/attempt-2.zip",
+    "run_id": 38072173193,
+    "run_url": "https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38072173193",
+    "interpretation": "provider capture fixture failure",
+    "artifact_id": 11676913718
+  },
+  {
+    "attempt": 3,
+    "bytes": 749,
+    "sha256": "3cfd9a9d653dd63f0d6503dcdbdfefc9b8f1facf9f8b78c9ce03d7e4eb83f8ec",
+    "base64_length": 1000,
+    "blob": "84eb452a56181cd3ab5a7cabddcd858fcab54cd0",
+    "path": "research/discovery/medusa-baseline/evidence/attempt-3.zip",
+    "run_id": 38072364906,
+    "run_url": "https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38072364906",
+    "interpretation": "dependency clean-install failure",
+    "artifact_id": 11677123892
+  },
+  {
+    "attempt": 4,
+    "bytes": 191243,
+    "sha256": "687b322a28f3d33e2d5b7e3da4e4612d6de3ba401928d8bb933ae92e3223fae5",
+    "base64_length": 254992,
+    "blob": "7b89c391a15ee59fb79faacb601a1649ae8e5adb",
+    "path": "research/discovery/medusa-baseline/evidence/attempt-4.zip",
+    "run_id": 38072610122,
+    "run_url": "https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38072610122",
+    "interpretation": "database observer failure",
+    "artifact_id": 11677880034
+  },
+  {
+    "attempt": 5,
+    "bytes": 198957,
+    "sha256": "1d493661d26f7e25ec2bf522878d660d6daa7958ee8c2107d9ab2f42feea411d",
+    "base64_length": 265276,
+    "blob": "86cb517f690a25bb03af2ec816275663caba8a7f",
+    "path": "research/discovery/medusa-baseline/evidence/attempt-5.zip",
+    "run_id": 38072868485,
+    "run_url": "https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38072868485",
+    "interpretation": "refund serialization assertion failure",
+    "artifact_id": 11677401532
+  },
+  {
+    "attempt": 6,
+    "bytes": 199475,
+    "sha256": "9a4f25819c410994d295dccc5ed1f702fdf05516e532a7c2ca7ddb5f0b21cb69",
+    "base64_length": 265968,
+    "blob": "1d7f72fec73a13d42b536205848f9a81f24492cb",
+    "path": "research/discovery/medusa-baseline/evidence/attempt-6.zip",
+    "run_id": 38073020833,
+    "run_url": "https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38073020833",
+    "interpretation": "raw-amount adapter guard failure",
+    "artifact_id": 11677785925
+  },
+  {
+    "attempt": 7,
+    "bytes": 198290,
+    "sha256": "2a8ff3b8ea2f1aba8a97de0dc184054d7a723d7cb840a234fd246a7e927199fb",
+    "base64_length": 264388,
+    "blob": "70b7a7640cccebe61b17dfe7bc967b53ae6a4e3b",
+    "path": "research/discovery/medusa-baseline/evidence/attempt-7.zip",
+    "run_id": 38073212334,
+    "run_url": "https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38073212334",
+    "interpretation": "qualified",
+    "artifact_id": 11678370165
+  }
+]

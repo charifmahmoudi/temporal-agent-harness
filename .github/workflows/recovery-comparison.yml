@@ -1,0 +1,31 @@
+name: Recovery schedule comparison
+on:
+  pull_request:
+    paths:
+      - 'research/scripts/compare_recovery_schedules.py'
+      - '.github/workflows/recovery-comparison.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install affected SDK
+        run: pip install temporalio==1.8.0 protobuf==5.28.3 typing-extensions==4.12.2 types-protobuf==5.28.3.20241030
+      - name: Run affected arm
+        run: python research/scripts/compare_recovery_schedules.py --server-dir /tmp/recovery-shared-server --output research/results/schedules-1.8
+      - name: Install fixed SDK with matched dependencies
+        run: pip install temporalio==1.9.0 protobuf==5.28.3 typing-extensions==4.12.2 types-protobuf==5.28.3.20241030
+      - name: Run fixed arm with identical server binary
+        run: python research/scripts/compare_recovery_schedules.py --server-dir /tmp/recovery-shared-server --require-existing --output research/results/schedules-1.9
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: recovery-schedule-comparison
+          path: research/results/schedules-*/report.json

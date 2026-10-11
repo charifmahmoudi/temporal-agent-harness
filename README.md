@@ -1,5 +1,8 @@
 # Temporal Agent Harness
 
+This fork includes a [tool-approval verification case study](RESEARCH.md) with
+code-derived TLA+ models and a dedicated GitHub Actions workflow.
+
 [![PyPI](https://img.shields.io/pypi/v/temporal-agent-harness.svg)](https://pypi.org/project/temporal-agent-harness/)
 [![Python](https://img.shields.io/pypi/pyversions/temporal-agent-harness.svg)](https://pypi.org/project/temporal-agent-harness/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)

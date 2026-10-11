@@ -1,0 +1,23 @@
+{
+  "arb": {
+    "artifact_id": 11675368870,
+    "sha256": "e6b2632f43838d6f7cff2d0863fffd392c58449b9cc23cc14ba7173947d031ee",
+    "run_id": 38069032708,
+    "subject_commit": "149723ed7dac540a437ee14a34dc5fcf17e7a5e3",
+    "path": "arb.zip.b64"
+  },
+  "aerb": {
+    "artifact_id": 11676053154,
+    "sha256": "de717ebe76f39f3bf41ade59d9d382dc5d0a106c5ab30cba3e2d68e5024937f5",
+    "run_id": 38069032708,
+    "subject_commit": "585b34e045d7b63b501b5c86a96d14659f31cec1",
+    "path": "aerb.zip.b64"
+  },
+  "sabot": {
+    "artifact_id": 11675593563,
+    "sha256": "8ef42c75a2937890be79b06c504a1f1d25e6926a5e379d738decb421bf314289",
+    "run_id": 38069032708,
+    "subject_commit": "be602555726f3592aaa6cb845685e7853f7fc47a",
+    "path": "sabot.zip.b64"
+  }
+}

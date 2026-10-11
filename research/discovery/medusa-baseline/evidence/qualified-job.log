@@ -1,0 +1,1248 @@
+﻿2026-10-10T17:48:45.3947667Z Current runner version: '2.337.0'
+2026-10-10T17:48:45.3966504Z ##[group]Runner Image Provisioner
+2026-10-10T17:48:45.3967064Z Hosted Compute Agent
+2026-10-10T17:48:45.3967449Z Version: 20261002.596
+2026-10-10T17:48:45.3967862Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+2026-10-10T17:48:45.3968282Z Build Date: 2026-10-02T22:28:27Z
+2026-10-10T17:48:45.3968683Z Worker ID: {3feb2aee-d9da-4c07-8417-797cd977b56d}
+2026-10-10T17:48:45.3969390Z Region: centralus
+2026-10-10T17:48:45.3969749Z Cloud: Azure
+2026-10-10T17:48:45.3970094Z ##[endgroup]
+2026-10-10T17:48:45.3970919Z ##[group]Operating System
+2026-10-10T17:48:45.3971279Z Ubuntu
+2026-10-10T17:48:45.3971639Z 24.04.5
+2026-10-10T17:48:45.3971975Z LTS
+2026-10-10T17:48:45.3972309Z ##[endgroup]
+2026-10-10T17:48:45.3972644Z ##[group]Runner Image
+2026-10-10T17:48:45.3973004Z Image: ubuntu-24.04
+2026-10-10T17:48:45.3973401Z Version: 20261004.327.1
+2026-10-10T17:48:45.3974219Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-10T17:48:45.3975148Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+2026-10-10T17:48:45.3975704Z ##[endgroup]
+2026-10-10T17:48:45.3976418Z ##[group]GITHUB_TOKEN Permissions
+2026-10-10T17:48:45.3977632Z Contents: read
+2026-10-10T17:48:45.3978025Z Metadata: read
+2026-10-10T17:48:45.3978375Z ##[endgroup]
+2026-10-10T17:48:45.3979967Z Secret source: Actions
+2026-10-10T17:48:45.3980544Z Cache mode: write
+2026-10-10T17:48:45.3980962Z Prepare workflow directory
+2026-10-10T17:48:45.4284715Z Prepare all required actions
+2026-10-10T17:48:45.4317567Z Getting action download info
+2026-10-10T17:48:45.6502955Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-10T17:48:45.9767301Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-10-10T17:48:46.3143055Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-10T17:48:46.9056925Z Complete job name: qualify
+2026-10-10T17:48:46.9474778Z ##[group]Checking docker version
+2026-10-10T17:48:46.9483518Z ##[command]/usr/bin/docker version --format '{{.Server.APIVersion}}'
+2026-10-10T17:48:47.0496238Z '1.48'
+2026-10-10T17:48:47.0505842Z Docker daemon API version: '1.48'
+2026-10-10T17:48:47.0506839Z ##[command]/usr/bin/docker version --format '{{.Client.APIVersion}}'
+2026-10-10T17:48:47.0641863Z '1.48'
+2026-10-10T17:48:47.0655846Z Docker client API version: '1.48'
+2026-10-10T17:48:47.0662106Z ##[endgroup]
+2026-10-10T17:48:47.0663841Z ##[group]Clean up resources from previous jobs
+2026-10-10T17:48:47.0668145Z ##[command]/usr/bin/docker ps --all --quiet --no-trunc --filter "label=afd3a9"
+2026-10-10T17:48:47.0955111Z ##[command]/usr/bin/docker network prune --force --filter "label=afd3a9"
+2026-10-10T17:48:47.1063450Z ##[endgroup]
+2026-10-10T17:48:47.1064113Z ##[group]Create local container network
+2026-10-10T17:48:47.1072394Z ##[command]/usr/bin/docker network create --label afd3a9 github_network_d1f6b6fad4934e268070bc35a5b438bc
+2026-10-10T17:48:47.2013132Z 940a1798cc3cde14a59c346f03e1eaf09f5bb5585d81d9942257a9f56e7d635c
+2026-10-10T17:48:47.2032242Z ##[endgroup]
+2026-10-10T17:48:47.2052298Z ##[group]Starting postgres service container
+2026-10-10T17:48:47.2067766Z ##[command]/usr/bin/docker pull postgres:16
+2026-10-10T17:48:48.0536397Z 16: Pulling from library/postgres
+2026-10-10T17:48:48.5768240Z ecc510c1e359: Pulling fs layer
+2026-10-10T17:48:48.5769702Z 79faf13a8736: Pulling fs layer
+2026-10-10T17:48:48.5769900Z 6456bfbf35e7: Pulling fs layer
+2026-10-10T17:48:48.5770119Z b353db459ed1: Pulling fs layer
+2026-10-10T17:48:48.5770319Z 99f49de4fe2b: Pulling fs layer
+2026-10-10T17:48:48.5770758Z 83d1a2a3917c: Pulling fs layer
+2026-10-10T17:48:48.5770970Z 715ea0948cb1: Pulling fs layer
+2026-10-10T17:48:48.5771224Z 486e8305f56f: Pulling fs layer
+2026-10-10T17:48:48.5771452Z e7d675f11ded: Pulling fs layer
+2026-10-10T17:48:48.5771650Z c49864c27f35: Pulling fs layer
+2026-10-10T17:48:48.5772221Z 770ef8b308ea: Pulling fs layer
+2026-10-10T17:48:48.5772438Z 50c25daa0302: Pulling fs layer
+2026-10-10T17:48:48.5772635Z 8309db3ae5b6: Pulling fs layer
+2026-10-10T17:48:48.5772833Z 9731e27f2541: Pulling fs layer
+2026-10-10T17:48:48.5773041Z 83d1a2a3917c: Waiting
+2026-10-10T17:48:48.5773265Z b353db459ed1: Waiting
+2026-10-10T17:48:48.5773432Z 99f49de4fe2b: Waiting
+2026-10-10T17:48:48.5773604Z 715ea0948cb1: Waiting
+2026-10-10T17:48:48.5773762Z 486e8305f56f: Waiting
+2026-10-10T17:48:48.5773947Z e7d675f11ded: Waiting
+2026-10-10T17:48:48.5774113Z c49864c27f35: Waiting
+2026-10-10T17:48:48.5774279Z 770ef8b308ea: Waiting
+2026-10-10T17:48:48.5774450Z 50c25daa0302: Waiting
+2026-10-10T17:48:48.5774619Z 8309db3ae5b6: Waiting
+2026-10-10T17:48:48.5774782Z 9731e27f2541: Waiting
+2026-10-10T17:48:48.7322680Z 79faf13a8736: Verifying Checksum
+2026-10-10T17:48:48.7323067Z 79faf13a8736: Download complete
+2026-10-10T17:48:48.8183652Z 6456bfbf35e7: Verifying Checksum
+2026-10-10T17:48:48.8184044Z 6456bfbf35e7: Download complete
+2026-10-10T17:48:48.9588925Z ecc510c1e359: Verifying Checksum
+2026-10-10T17:48:48.9589847Z ecc510c1e359: Download complete
+2026-10-10T17:48:48.9914103Z b353db459ed1: Verifying Checksum
+2026-10-10T17:48:48.9941865Z b353db459ed1: Download complete
+2026-10-10T17:48:49.0933536Z 99f49de4fe2b: Verifying Checksum
+2026-10-10T17:48:49.0934614Z 99f49de4fe2b: Download complete
+2026-10-10T17:48:49.1254883Z 715ea0948cb1: Download complete
+2026-10-10T17:48:49.1846440Z 83d1a2a3917c: Verifying Checksum
+2026-10-10T17:48:49.1847464Z 83d1a2a3917c: Download complete
+2026-10-10T17:48:49.2205389Z 486e8305f56f: Verifying Checksum
+2026-10-10T17:48:49.2206026Z 486e8305f56f: Download complete
+2026-10-10T17:48:49.3147842Z c49864c27f35: Verifying Checksum
+2026-10-10T17:48:49.3149295Z c49864c27f35: Download complete
+2026-10-10T17:48:49.3511666Z 770ef8b308ea: Verifying Checksum
+2026-10-10T17:48:49.3514958Z 770ef8b308ea: Download complete
+2026-10-10T17:48:49.4503511Z 50c25daa0302: Verifying Checksum
+2026-10-10T17:48:49.4503888Z 50c25daa0302: Download complete
+2026-10-10T17:48:49.5316164Z 8309db3ae5b6: Verifying Checksum
+2026-10-10T17:48:49.5316860Z 8309db3ae5b6: Download complete
+2026-10-10T17:48:49.5859129Z 9731e27f2541: Verifying Checksum
+2026-10-10T17:48:49.5859452Z 9731e27f2541: Download complete
+2026-10-10T17:48:49.5965771Z e7d675f11ded: Verifying Checksum
+2026-10-10T17:48:49.5966111Z e7d675f11ded: Download complete
+2026-10-10T17:48:49.9845725Z ecc510c1e359: Pull complete
+2026-10-10T17:48:55.7871792Z 79faf13a8736: Pull complete
+2026-10-10T17:48:56.0369498Z 6456bfbf35e7: Pull complete
+2026-10-10T17:48:56.0846019Z b353db459ed1: Pull complete
+2026-10-10T17:48:56.4328102Z 99f49de4fe2b: Pull complete
+2026-10-10T17:48:56.5233993Z 83d1a2a3917c: Pull complete
+2026-10-10T17:48:56.5290186Z 715ea0948cb1: Pull complete
+2026-10-10T17:48:56.5371234Z 486e8305f56f: Pull complete
+2026-10-10T17:49:00.0427984Z e7d675f11ded: Pull complete
+2026-10-10T17:49:00.0596312Z c49864c27f35: Pull complete
+2026-10-10T17:49:00.0661645Z 770ef8b308ea: Pull complete
+2026-10-10T17:49:00.0726345Z 50c25daa0302: Pull complete
+2026-10-10T17:49:00.0785292Z 8309db3ae5b6: Pull complete
+2026-10-10T17:49:00.0852534Z 9731e27f2541: Pull complete
+2026-10-10T17:49:00.0881953Z Digest: sha256:ca0bd484cb98bf4b24eb1010e73fb3fcbd6714d240fbc1a10eea5b7dbecb641d
+2026-10-10T17:49:00.0894706Z Status: Downloaded newer image for postgres:16
+2026-10-10T17:49:00.0901965Z docker.io/library/postgres:16
+2026-10-10T17:49:00.0948973Z ##[command]/usr/bin/docker create --name e99421fbfef54b4b917fbade1b510a94_postgres16_1c684e --label afd3a9 --network github_network_d1f6b6fad4934e268070bc35a5b438bc --network-alias postgres -p 5432:5432 --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10 -e "POSTGRES_USER=postgres" -e "POSTGRES_PASSWORD=postgres" -e GITHUB_ACTIONS=true -e CI=true postgres:16
+2026-10-10T17:49:00.1143783Z 6a61d5ffe85a76fe8ddb710f4833b253a2e2036d3dfbacc6d85e09448d5054b0
+2026-10-10T17:49:00.1163304Z ##[command]/usr/bin/docker start 6a61d5ffe85a76fe8ddb710f4833b253a2e2036d3dfbacc6d85e09448d5054b0
+2026-10-10T17:49:00.3024954Z 6a61d5ffe85a76fe8ddb710f4833b253a2e2036d3dfbacc6d85e09448d5054b0
+2026-10-10T17:49:00.3064646Z ##[command]/usr/bin/docker ps --all --filter id=6a61d5ffe85a76fe8ddb710f4833b253a2e2036d3dfbacc6d85e09448d5054b0 --filter status=running --no-trunc --format "{{.ID}} {{.Status}}"
+2026-10-10T17:49:00.3208537Z 6a61d5ffe85a76fe8ddb710f4833b253a2e2036d3dfbacc6d85e09448d5054b0 Up Less than a second (health: starting)
+2026-10-10T17:49:00.3228929Z ##[command]/usr/bin/docker port 6a61d5ffe85a76fe8ddb710f4833b253a2e2036d3dfbacc6d85e09448d5054b0
+2026-10-10T17:49:00.3327784Z 5432/tcp -> 0.0.0.0:5432
+2026-10-10T17:49:00.3328590Z 5432/tcp -> [::]:5432
+2026-10-10T17:49:00.3364697Z ##[endgroup]
+2026-10-10T17:49:00.3371512Z ##[group]Waiting for all services to be ready
+2026-10-10T17:49:00.3382641Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" 6a61d5ffe85a76fe8ddb710f4833b253a2e2036d3dfbacc6d85e09448d5054b0
+2026-10-10T17:49:00.3491027Z starting
+2026-10-10T17:49:00.3510277Z postgres service is starting, waiting 2 seconds before checking again.
+2026-10-10T17:49:02.3512893Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" 6a61d5ffe85a76fe8ddb710f4833b253a2e2036d3dfbacc6d85e09448d5054b0
+2026-10-10T17:49:02.3611943Z starting
+2026-10-10T17:49:02.3623030Z postgres service is starting, waiting 3 seconds before checking again.
+2026-10-10T17:49:06.1559324Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" 6a61d5ffe85a76fe8ddb710f4833b253a2e2036d3dfbacc6d85e09448d5054b0
+2026-10-10T17:49:06.1655420Z healthy
+2026-10-10T17:49:06.1670118Z postgres service is healthy.
+2026-10-10T17:49:06.1670597Z ##[endgroup]
+2026-10-10T17:49:06.1834708Z ##[group]Run actions/checkout@v4
+2026-10-10T17:49:06.1834944Z with:
+2026-10-10T17:49:06.1835081Z   repository: charifmahmoudi/temporal-agent-harness
+2026-10-10T17:49:06.1836317Z   token: ***
+2026-10-10T17:49:06.1836426Z   ssh-strict: true
+2026-10-10T17:49:06.1836534Z   ssh-user: git
+2026-10-10T17:49:06.1836646Z   persist-credentials: true
+2026-10-10T17:49:06.1836769Z   clean: true
+2026-10-10T17:49:06.1836883Z   sparse-checkout-cone-mode: true
+2026-10-10T17:49:06.1837015Z   fetch-depth: 1
+2026-10-10T17:49:06.1837124Z   fetch-tags: false
+2026-10-10T17:49:06.1837249Z   show-progress: true
+2026-10-10T17:49:06.1837359Z   lfs: false
+2026-10-10T17:49:06.1837458Z   submodules: false
+2026-10-10T17:49:06.1837568Z   set-safe-directory: true
+2026-10-10T17:49:06.1837699Z   allow-unsafe-pr-checkout: false
+2026-10-10T17:49:06.1837890Z env:
+2026-10-10T17:49:06.1838008Z   NODE_OPTIONS: --experimental-vm-modules
+2026-10-10T17:49:06.1838151Z   DB_HOST: localhost
+2026-10-10T17:49:06.1838282Z   DB_PORT: 5432
+2026-10-10T17:49:06.1838390Z   DB_USERNAME: postgres
+2026-10-10T17:49:06.1838505Z   DB_PASSWORD: postgres
+2026-10-10T17:49:06.1838769Z   DATABASE_URL: ***localhost:5432/medusa_return_qualification
+2026-10-10T17:49:06.1838949Z   MEDUSA_TELEMETRY_DISABLED: true
+2026-10-10T17:49:06.1839263Z   NODE_ENV: test
+2026-10-10T17:49:06.1839369Z ##[endgroup]
+2026-10-10T17:49:06.2470903Z Syncing repository: charifmahmoudi/temporal-agent-harness
+2026-10-10T17:49:06.2471843Z ##[group]Getting Git version info
+2026-10-10T17:49:06.2472099Z Working directory is '/home/runner/work/temporal-agent-harness/temporal-agent-harness'
+2026-10-10T17:49:06.2472509Z [command]/usr/bin/git version
+2026-10-10T17:49:06.2520472Z git version 2.55.0
+2026-10-10T17:49:06.2532504Z ##[endgroup]
+2026-10-10T17:49:06.2542097Z Temporarily overriding HOME='/home/runner/work/_temp/46788815-4ab8-43b4-a37c-1f6ed78e0418' before making global git config changes
+2026-10-10T17:49:06.2542831Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-10T17:49:06.2547001Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/temporal-agent-harness/temporal-agent-harness
+2026-10-10T17:49:06.2588659Z Deleting the contents of '/home/runner/work/temporal-agent-harness/temporal-agent-harness'
+2026-10-10T17:49:06.2595598Z ##[group]Initializing the repository
+2026-10-10T17:49:06.2596001Z [command]/usr/bin/git init /home/runner/work/temporal-agent-harness/temporal-agent-harness
+2026-10-10T17:49:06.2675425Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-10T17:49:06.2675965Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-10T17:49:06.2676246Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-10T17:49:06.2676444Z hint: call:
+2026-10-10T17:49:06.2676548Z hint:
+2026-10-10T17:49:06.2676721Z hint: 	git config --global init.defaultBranch <name>
+2026-10-10T17:49:06.2676910Z hint:
+2026-10-10T17:49:06.2677112Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-10T17:49:06.2677439Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-10T17:49:06.2677753Z hint:
+2026-10-10T17:49:06.2677927Z hint: 	git branch -m <name>
+2026-10-10T17:49:06.2678115Z hint:
+2026-10-10T17:49:06.2678391Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-10T17:49:06.2678998Z Initialized empty Git repository in /home/runner/work/temporal-agent-harness/temporal-agent-harness/.git/
+2026-10-10T17:49:06.2686643Z [command]/usr/bin/git remote add origin https://github.com/charifmahmoudi/temporal-agent-harness
+2026-10-10T17:49:06.2729694Z ##[endgroup]
+2026-10-10T17:49:06.2730070Z ##[group]Disabling automatic garbage collection
+2026-10-10T17:49:06.2733016Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-10T17:49:06.2758773Z ##[endgroup]
+2026-10-10T17:49:06.2759174Z ##[group]Setting up auth
+2026-10-10T17:49:06.2765112Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-10T17:49:06.2790720Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-10T17:49:06.3091935Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-10T17:49:06.3121520Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-10T17:49:06.3291136Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-10T17:49:06.3318397Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-10T17:49:06.3483961Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-10T17:49:06.3515899Z ##[endgroup]
+2026-10-10T17:49:06.3516128Z ##[group]Fetching the repository
+2026-10-10T17:49:06.3521844Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +3aa5ee9b69bd91bb670b9ae3ddbecd5f0b7b0cf7:refs/remotes/pull/1/merge
+2026-10-10T17:49:07.3278970Z From https://github.com/charifmahmoudi/temporal-agent-harness
+2026-10-10T17:49:07.3281215Z  * [new ref]         3aa5ee9b69bd91bb670b9ae3ddbecd5f0b7b0cf7 -> pull/1/merge
+2026-10-10T17:49:07.3295136Z ##[endgroup]
+2026-10-10T17:49:07.3295474Z ##[group]Determining the checkout info
+2026-10-10T17:49:07.3296047Z ##[endgroup]
+2026-10-10T17:49:07.3301270Z [command]/usr/bin/git sparse-checkout disable
+2026-10-10T17:49:07.3416415Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-10T17:49:07.3441253Z ##[group]Checking out the ref
+2026-10-10T17:49:07.3443696Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/1/merge
+2026-10-10T17:49:07.4099161Z Note: switching to 'refs/remotes/pull/1/merge'.
+2026-10-10T17:49:07.4099376Z 
+2026-10-10T17:49:07.4099516Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-10T17:49:07.4100045Z changes and commit them, and you can discard any commits you make in this
+2026-10-10T17:49:07.4100324Z state without impacting any branches by switching back to a branch.
+2026-10-10T17:49:07.4100561Z 
+2026-10-10T17:49:07.4100665Z If you want to create a new branch to retain commits you create, you may
+2026-10-10T17:49:07.4100911Z do so (now or later) by using -c with the switch command. Example:
+2026-10-10T17:49:07.4101051Z 
+2026-10-10T17:49:07.4101114Z   git switch -c <new-branch-name>
+2026-10-10T17:49:07.4101213Z 
+2026-10-10T17:49:07.4101269Z Or undo this operation with:
+2026-10-10T17:49:07.4101357Z 
+2026-10-10T17:49:07.4101408Z   git switch -
+2026-10-10T17:49:07.4101485Z 
+2026-10-10T17:49:07.4101613Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-10T17:49:07.4101774Z 
+2026-10-10T17:49:07.4101961Z HEAD is now at 3aa5ee9 Merge 533d5fa18dc18d25797ba11101ef1a5bf77c324f into 049e01c9d726ef68bff7be857c735723b9801512
+2026-10-10T17:49:07.4111028Z ##[endgroup]
+2026-10-10T17:49:07.4154231Z [command]/usr/bin/git log -1 --format=%H
+2026-10-10T17:49:07.4177074Z 3aa5ee9b69bd91bb670b9ae3ddbecd5f0b7b0cf7
+2026-10-10T17:49:07.4366197Z ##[group]Run actions/setup-node@v4
+2026-10-10T17:49:07.4366355Z with:
+2026-10-10T17:49:07.4366465Z   node-version: 22
+2026-10-10T17:49:07.4366581Z   always-auth: false
+2026-10-10T17:49:07.4366701Z   check-latest: false
+2026-10-10T17:49:07.4367887Z   token: ***
+2026-10-10T17:49:07.4367995Z env:
+2026-10-10T17:49:07.4368122Z   NODE_OPTIONS: --experimental-vm-modules
+2026-10-10T17:49:07.4368764Z   DB_HOST: localhost
+2026-10-10T17:49:07.4368878Z   DB_PORT: 5432
+2026-10-10T17:49:07.4368992Z   DB_USERNAME: postgres
+2026-10-10T17:49:07.4369305Z   DB_PASSWORD: postgres
+2026-10-10T17:49:07.4369564Z   DATABASE_URL: ***localhost:5432/medusa_return_qualification
+2026-10-10T17:49:07.4369753Z   MEDUSA_TELEMETRY_DISABLED: true
+2026-10-10T17:49:07.4369889Z   NODE_ENV: test
+2026-10-10T17:49:07.4370001Z ##[endgroup]
+2026-10-10T17:49:07.5304906Z Found in cache @ /opt/hostedtoolcache/node/22.23.3/x64
+2026-10-10T17:49:07.5307754Z (node:2488) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-10T17:49:07.5308170Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-10T17:49:07.5309768Z ##[group]Environment details
+2026-10-10T17:49:07.8226655Z node: v22.23.3
+2026-10-10T17:49:07.8226862Z npm: 10.9.9
+2026-10-10T17:49:07.8226965Z yarn: 1.22.22
+2026-10-10T17:49:07.8227372Z ##[endgroup]
+2026-10-10T17:49:07.8332128Z ##[group]Run mkdir -p ../../evidence
+2026-10-10T17:49:07.8332344Z [36;1mmkdir -p ../../evidence[0m
+2026-10-10T17:49:07.8332553Z [36;1mnpm ci --no-audit --no-fund 2>&1 | tee ../../evidence/install.log[0m
+2026-10-10T17:49:07.8332800Z [36;1mcp package-lock.json ../../evidence/package-lock.json[0m
+2026-10-10T17:49:07.8333026Z [36;1mnpm ls --all --json > ../../evidence/dependencies.json || true[0m
+2026-10-10T17:49:07.8333258Z [36;1mnode --version > ../../evidence/node-version.txt[0m
+2026-10-10T17:49:07.8333455Z [36;1mgit rev-parse HEAD > ../../evidence/checkout.txt[0m
+2026-10-10T17:49:07.8498198Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-10T17:49:07.8498385Z env:
+2026-10-10T17:49:07.8498510Z   NODE_OPTIONS: --experimental-vm-modules
+2026-10-10T17:49:07.8498660Z   DB_HOST: localhost
+2026-10-10T17:49:07.8498770Z   DB_PORT: 5432
+2026-10-10T17:49:07.8498878Z   DB_USERNAME: postgres
+2026-10-10T17:49:07.8498994Z   DB_PASSWORD: postgres
+2026-10-10T17:49:07.8499572Z   DATABASE_URL: ***localhost:5432/medusa_return_qualification
+2026-10-10T17:49:07.8499750Z   MEDUSA_TELEMETRY_DISABLED: true
+2026-10-10T17:49:07.8499880Z   NODE_ENV: test
+2026-10-10T17:49:07.8499987Z ##[endgroup]
+2026-10-10T17:49:10.0724764Z npm warn deprecated lodash.isequal@4.5.0: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
+2026-10-10T17:49:10.3140607Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+2026-10-10T17:49:10.7940591Z npm warn deprecated cron-parser@4.9.0: v4 is no longer maintained, upgrade to v5
+2026-10-10T17:49:12.9647244Z npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+2026-10-10T17:49:13.1240666Z npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+2026-10-10T17:49:13.1336003Z npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+2026-10-10T17:49:13.6152697Z npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+2026-10-10T17:49:14.5714955Z npm warn deprecated uuid@9.0.1: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+2026-10-10T17:49:21.3590976Z 
+2026-10-10T17:49:21.3591657Z added 1240 packages in 13s
+2026-10-10T17:49:21.8823809Z ##[group]Run python research/medusa-baseline/ledger.py > evidence/provider.log 2>&1 &
+2026-10-10T17:49:21.8824321Z [36;1mpython research/medusa-baseline/ledger.py > evidence/provider.log 2>&1 &[0m
+2026-10-10T17:49:21.8824669Z [36;1mfor i in $(seq 1 20); do[0m
+2026-10-10T17:49:21.8824941Z [36;1m  curl -fsS http://127.0.0.1:8877/ledger && break[0m
+2026-10-10T17:49:21.8825190Z [36;1m  sleep 1[0m
+2026-10-10T17:49:21.8825360Z [36;1mdone[0m
+2026-10-10T17:49:21.8825547Z [36;1mcurl -fsS http://127.0.0.1:8877/ledger[0m
+2026-10-10T17:49:21.8876480Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-10T17:49:21.8876660Z env:
+2026-10-10T17:49:21.8876786Z   NODE_OPTIONS: --experimental-vm-modules
+2026-10-10T17:49:21.8876932Z   DB_HOST: localhost
+2026-10-10T17:49:21.8877043Z   DB_PORT: 5432
+2026-10-10T17:49:21.8877151Z   DB_USERNAME: postgres
+2026-10-10T17:49:21.8877267Z   DB_PASSWORD: postgres
+2026-10-10T17:49:21.8877780Z   DATABASE_URL: ***localhost:5432/medusa_return_qualification
+2026-10-10T17:49:21.8877958Z   MEDUSA_TELEMETRY_DISABLED: true
+2026-10-10T17:49:21.8878084Z   NODE_ENV: test
+2026-10-10T17:49:21.8878190Z ##[endgroup]
+2026-10-10T17:49:21.9214582Z curl: (7) Failed to connect to 127.0.0.1 port 8877 after 0 ms: Couldn't connect to server
+2026-10-10T17:49:22.9335925Z [][]
+2026-10-10T17:49:22.9429411Z ##[group]Run npm test 2>&1 | tee ../../evidence/test.log
+2026-10-10T17:49:22.9429747Z [36;1mnpm test 2>&1 | tee ../../evidence/test.log[0m
+2026-10-10T17:49:22.9430383Z [36;1mnode -e "const a=require('../../evidence/jest.json'); const b=require('../../evidence/summary.json'); if(!a.success || a.numPassedTests!==1 || b.status!=='passed') process.exit(1)"[0m
+2026-10-10T17:49:22.9484875Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-10T17:49:22.9485061Z env:
+2026-10-10T17:49:22.9485188Z   NODE_OPTIONS: --experimental-vm-modules
+2026-10-10T17:49:22.9485339Z   DB_HOST: localhost
+2026-10-10T17:49:22.9485454Z   DB_PORT: 5432
+2026-10-10T17:49:22.9485566Z   DB_USERNAME: postgres
+2026-10-10T17:49:22.9485685Z   DB_PASSWORD: postgres
+2026-10-10T17:49:22.9486047Z   DATABASE_URL: ***localhost:5432/medusa_return_qualification
+2026-10-10T17:49:22.9486390Z   MEDUSA_TELEMETRY_DISABLED: true
+2026-10-10T17:49:22.9486524Z   NODE_ENV: test
+2026-10-10T17:49:22.9486646Z ##[endgroup]
+2026-10-10T17:49:23.0153998Z 
+2026-10-10T17:49:23.0154728Z > medusa-return-qualification@1.0.0 test
+2026-10-10T17:49:23.0155398Z > jest --runInBand --forceExit --json --outputFile=../../evidence/jest.json
+2026-10-10T17:49:23.0155679Z 
+2026-10-10T17:49:24.8302890Z (node:2689) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+2026-10-10T17:49:24.8303500Z (Use `node --trace-warnings ...` to show where the warning was created)
+2026-10-10T17:49:24.8361779Z {"level":"info","message":"Disabling admin as we run integration tests","timestamp":"2026-10-10 17:49:24"}
+2026-10-10T17:49:24.8369808Z {"level":"info","message":"redisUrl not found. A fake redis instance will be used.","timestamp":"2026-10-10 17:49:24"}
+2026-10-10T17:49:24.8390337Z {"level":"info","message":"Creating database medusa_return_qualification","timestamp":"2026-10-10 17:49:24"}
+2026-10-10T17:49:25.1051545Z {"level":"info","message":"Creating migrations table 'mikro_orm_migrations'...","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.1073172Z {"level":"info","message":"Migrations table created successfully","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.1074829Z {"level":"info","message":"Migrating database with core migrations, links, and search indexes medusa_return_qualification","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.6499991Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.6500506Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.6500986Z {"level":"info","message":"MODULE: stock_location","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.6952176Z {"level":"info","message":"  ● Migrating Migration20240307161216","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7136520Z {"level":"info","message":"  ✔ Migrated Migration20240307161216","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7137481Z {"level":"info","message":"  ● Migrating Migration20241210073813","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7169660Z {"level":"info","message":"  ✔ Migrated Migration20241210073813","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7170301Z {"level":"info","message":"  ● Migrating Migration20250106142624","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7192889Z {"level":"info","message":"  ✔ Migrated Migration20250106142624","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7193691Z {"level":"info","message":"  ● Migrating Migration20250120110820","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7218510Z {"level":"info","message":"  ✔ Migrated Migration20250120110820","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7252894Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7266586Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7267247Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7268005Z {"level":"info","message":"MODULE: inventory","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7373495Z {"level":"info","message":"  ● Migrating Migration20240307132720","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7530808Z {"level":"info","message":"  ✔ Migrated Migration20240307132720","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7531982Z {"level":"info","message":"  ● Migrating Migration20240719123015","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7709768Z {"level":"info","message":"  ✔ Migrated Migration20240719123015","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7710367Z {"level":"info","message":"  ● Migrating Migration20241213063611","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7770842Z {"level":"info","message":"  ✔ Migrated Migration20241213063611","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7771653Z {"level":"info","message":"  ● Migrating Migration20251010131115","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7789792Z {"level":"info","message":"  ✔ Migrated Migration20251010131115","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7790846Z {"level":"info","message":"  ● Migrating Migration20260815185216","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7821154Z {"level":"info","message":"  ✔ Migrated Migration20260815185216","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7896872Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7915702Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7916401Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.7916936Z {"level":"info","message":"MODULE: product","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.8072100Z {"level":"info","message":"  ● Migrating InitialSetup20240401153642","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.8581439Z {"level":"info","message":"  ✔ Migrated InitialSetup20240401153642","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.8582545Z {"level":"info","message":"  ● Migrating Migration20240601111544","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.8660721Z {"level":"info","message":"  ✔ Migrated Migration20240601111544","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.8661674Z {"level":"info","message":"  ● Migrating Migration202408271511","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.8677682Z {"level":"info","message":"  ✔ Migrated Migration202408271511","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.8678283Z {"level":"info","message":"  ● Migrating Migration20241122120331","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.8710258Z {"level":"info","message":"  ✔ Migrated Migration20241122120331","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.8710848Z {"level":"info","message":"  ● Migrating Migration20241125090957","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.8960294Z {"level":"info","message":"  ✔ Migrated Migration20241125090957","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.8961167Z {"level":"info","message":"  ● Migrating Migration20250411073236","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.8983742Z {"level":"info","message":"  ✔ Migrated Migration20250411073236","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.8984526Z {"level":"info","message":"  ● Migrating Migration20250516081326","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9006799Z {"level":"info","message":"  ✔ Migrated Migration20250516081326","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9007823Z {"level":"info","message":"  ● Migrating Migration20250910154539","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9049880Z {"level":"info","message":"  ✔ Migrated Migration20250910154539","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9050588Z {"level":"info","message":"  ● Migrating Migration20250911092221","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9070848Z {"level":"info","message":"  ✔ Migrated Migration20250911092221","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9071829Z {"level":"info","message":"  ● Migrating Migration20250929204438","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9121541Z {"level":"info","message":"  ✔ Migrated Migration20250929204438","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9122153Z {"level":"info","message":"  ● Migrating Migration20251008132218","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9137063Z {"level":"info","message":"  ✔ Migrated Migration20251008132218","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9137685Z {"level":"info","message":"  ● Migrating Migration20251011090511","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9154026Z {"level":"info","message":"  ✔ Migrated Migration20251011090511","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9154709Z {"level":"info","message":"  ● Migrating Migration20251022153442","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9237622Z {"level":"info","message":"  ✔ Migrated Migration20251022153442","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9238352Z {"level":"info","message":"  ● Migrating Migration20251029150809","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9253598Z {"level":"info","message":"  ✔ Migrated Migration20251029150809","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9254342Z {"level":"info","message":"  ● Migrating Migration20251110180907","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9314675Z {"level":"info","message":"  ✔ Migrated Migration20251110180907","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9315387Z {"level":"info","message":"  ● Migrating Migration20251113183352","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9331018Z {"level":"info","message":"  ✔ Migrated Migration20251113183352","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9331723Z {"level":"info","message":"  ● Migrating Migration20260224120000","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9363986Z {"level":"info","message":"  ✔ Migrated Migration20260224120000","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9364668Z {"level":"info","message":"  ● Migrating Migration20260301002050","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9771357Z {"level":"info","message":"  ✔ Migrated Migration20260301002050","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9772068Z {"level":"info","message":"  ● Migrating Migration20260306120000","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9791846Z {"level":"info","message":"  ✔ Migrated Migration20260306120000","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9792551Z {"level":"info","message":"  ● Migrating Migration20260623180000","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9813529Z {"level":"info","message":"  ✔ Migrated Migration20260623180000","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9814123Z {"level":"info","message":"  ● Migrating Migration20260730104846","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:25.9834307Z {"level":"info","message":"  ✔ Migrated Migration20260730104846","timestamp":"2026-10-10 17:49:25"}
+2026-10-10T17:49:26.0033572Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.0052227Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.0052620Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.0053045Z {"level":"info","message":"MODULE: pricing","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.0175261Z {"level":"info","message":"  ● Migrating Migration20230929122253","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.0782241Z {"level":"info","message":"  ✔ Migrated Migration20230929122253","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.0783179Z {"level":"info","message":"  ● Migrating Migration20240322094407","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.0801252Z {"level":"info","message":"  ✔ Migrated Migration20240322094407","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.0802287Z {"level":"info","message":"  ● Migrating Migration20240322113359","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.0832343Z {"level":"info","message":"  ✔ Migrated Migration20240322113359","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.0833059Z {"level":"info","message":"  ● Migrating Migration20240322120125","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.0855541Z {"level":"info","message":"  ✔ Migrated Migration20240322120125","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.0856190Z {"level":"info","message":"  ● Migrating Migration20240626133555","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.0940681Z {"level":"info","message":"  ✔ Migrated Migration20240626133555","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.0941395Z {"level":"info","message":"  ● Migrating Migration20240704094505","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.0982886Z {"level":"info","message":"  ✔ Migrated Migration20240704094505","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.0983886Z {"level":"info","message":"  ● Migrating Migration20241127114534","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1010066Z {"level":"info","message":"  ✔ Migrated Migration20241127114534","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1011021Z {"level":"info","message":"  ● Migrating Migration20241127223829","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1032397Z {"level":"info","message":"  ✔ Migrated Migration20241127223829","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1033437Z {"level":"info","message":"  ● Migrating Migration20241128055359","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1138912Z {"level":"info","message":"  ✔ Migrated Migration20241128055359","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1139640Z {"level":"info","message":"  ● Migrating Migration20241212190401","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1155580Z {"level":"info","message":"  ✔ Migrated Migration20241212190401","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1156304Z {"level":"info","message":"  ● Migrating Migration20250408145122","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1192814Z {"level":"info","message":"  ✔ Migrated Migration20250408145122","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1193834Z {"level":"info","message":"  ● Migrating Migration20250409122219","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1213895Z {"level":"info","message":"  ✔ Migrated Migration20250409122219","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1214623Z {"level":"info","message":"  ● Migrating Migration20251009110625","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1246875Z {"level":"info","message":"  ✔ Migrated Migration20251009110625","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1326330Z {"level":"info","message":"  ● Migrating Migration20251112192723","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1327032Z {"level":"info","message":"  ✔ Migrated Migration20251112192723","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1327764Z {"level":"info","message":"  ● Migrating Migration20260429163502","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1341542Z {"level":"info","message":"  ✔ Migrated Migration20260429163502","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1496140Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1510208Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1510599Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1511025Z {"level":"info","message":"MODULE: promotion","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.1637373Z {"level":"info","message":"  ● Migrating Migration20240227120221","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2172385Z {"level":"info","message":"  ✔ Migrated Migration20240227120221","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2173132Z {"level":"info","message":"  ● Migrating Migration20240617102917","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2197374Z {"level":"info","message":"  ✔ Migrated Migration20240617102917","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2197859Z {"level":"info","message":"  ● Migrating Migration20240624153824","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2219941Z {"level":"info","message":"  ✔ Migrated Migration20240624153824","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2220654Z {"level":"info","message":"  ● Migrating Migration20241211061114","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2434960Z {"level":"info","message":"  ✔ Migrated Migration20241211061114","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2435444Z {"level":"info","message":"  ● Migrating Migration20250113094144","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2461968Z {"level":"info","message":"  ✔ Migrated Migration20250113094144","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2463261Z {"level":"info","message":"  ● Migrating Migration20250120110700","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2511554Z {"level":"info","message":"  ✔ Migrated Migration20250120110700","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2512004Z {"level":"info","message":"  ● Migrating Migration20250226130616","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2536325Z {"level":"info","message":"  ✔ Migrated Migration20250226130616","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2537033Z {"level":"info","message":"  ● Migrating Migration20250508081510","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2552415Z {"level":"info","message":"  ✔ Migrated Migration20250508081510","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2553004Z {"level":"info","message":"  ● Migrating Migration20250828075407","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2574280Z {"level":"info","message":"  ✔ Migrated Migration20250828075407","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2574894Z {"level":"info","message":"  ● Migrating Migration20250909083125","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2633029Z {"level":"info","message":"  ✔ Migrated Migration20250909083125","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2633588Z {"level":"info","message":"  ● Migrating Migration20250916120552","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2653137Z {"level":"info","message":"  ✔ Migrated Migration20250916120552","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2653683Z {"level":"info","message":"  ● Migrating Migration20250917143818","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2691221Z {"level":"info","message":"  ✔ Migrated Migration20250917143818","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2692178Z {"level":"info","message":"  ● Migrating Migration20250919122137","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2712642Z {"level":"info","message":"  ✔ Migrated Migration20250919122137","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2713357Z {"level":"info","message":"  ● Migrating Migration20251006000000","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2731947Z {"level":"info","message":"  ✔ Migrated Migration20251006000000","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2732908Z {"level":"info","message":"  ● Migrating Migration20251015113934","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2747702Z {"level":"info","message":"  ✔ Migrated Migration20251015113934","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2748772Z {"level":"info","message":"  ● Migrating Migration20251107050148","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2762514Z {"level":"info","message":"  ✔ Migrated Migration20251107050148","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2841288Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2854826Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2855229Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2855794Z {"level":"info","message":"MODULE: customer","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.2961548Z {"level":"info","message":"  ● Migrating Migration20240124154000","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.3123783Z {"level":"info","message":"  ✔ Migrated Migration20240124154000","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.3124341Z {"level":"info","message":"  ● Migrating Migration20240524123112","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.3151307Z {"level":"info","message":"  ✔ Migrated Migration20240524123112","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.3152026Z {"level":"info","message":"  ● Migrating Migration20240602110946","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.3283245Z {"level":"info","message":"  ✔ Migrated Migration20240602110946","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.3283968Z {"level":"info","message":"  ● Migrating Migration20241211074630","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.3392206Z {"level":"info","message":"  ✔ Migrated Migration20241211074630","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.3392637Z {"level":"info","message":"  ● Migrating Migration20251010130829","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.3407628Z {"level":"info","message":"  ✔ Migrated Migration20251010130829","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.3438075Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.3449938Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.3450363Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.3450799Z {"level":"info","message":"MODULE: sales_channel","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.3551077Z {"level":"info","message":"  ● Migrating Migration20240115152146","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.3622180Z {"level":"info","message":"  ✔ Migrated Migration20240115152146","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.3645905Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.3659279Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.3659591Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.3659856Z {"level":"info","message":"MODULE: cart","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.3774125Z {"level":"info","message":"  ● Migrating Migration20240222170223","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4056846Z {"level":"info","message":"  ✔ Migrated Migration20240222170223","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4057434Z {"level":"info","message":"  ● Migrating Migration20240831125857","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4073508Z {"level":"info","message":"  ✔ Migrated Migration20240831125857","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4074451Z {"level":"info","message":"  ● Migrating Migration20241106085918","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4095838Z {"level":"info","message":"  ✔ Migrated Migration20241106085918","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4096541Z {"level":"info","message":"  ● Migrating Migration20241205095237","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4203289Z {"level":"info","message":"  ✔ Migrated Migration20241205095237","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4203711Z {"level":"info","message":"  ● Migrating Migration20241216183049","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4276611Z {"level":"info","message":"  ✔ Migrated Migration20241216183049","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4277340Z {"level":"info","message":"  ● Migrating Migration20241218091938","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4292011Z {"level":"info","message":"  ✔ Migrated Migration20241218091938","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4292843Z {"level":"info","message":"  ● Migrating Migration20250120115059","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4307991Z {"level":"info","message":"  ✔ Migrated Migration20250120115059","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4308590Z {"level":"info","message":"  ● Migrating Migration20250212131240","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4359655Z {"level":"info","message":"  ✔ Migrated Migration20250212131240","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4360102Z {"level":"info","message":"  ● Migrating Migration20250326151602","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4378065Z {"level":"info","message":"  ✔ Migrated Migration20250326151602","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4394810Z {"level":"info","message":"  ● Migrating Migration20250508081553","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4402150Z {"level":"info","message":"  ✔ Migrated Migration20250508081553","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4403447Z {"level":"info","message":"  ● Migrating Migration20251017153909","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4453039Z {"level":"info","message":"  ✔ Migrated Migration20251017153909","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4453759Z {"level":"info","message":"  ● Migrating Migration20251208130704","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4490261Z {"level":"info","message":"  ✔ Migrated Migration20251208130704","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4491163Z {"level":"info","message":"  ● Migrating Migration20260626000000","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4491866Z {"level":"info","message":"  ✔ Migrated Migration20260626000000","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4629802Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4645001Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4645539Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4645974Z {"level":"info","message":"MODULE: region","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4772674Z {"level":"info","message":"  ● Migrating Migration20240205173216","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4915852Z {"level":"info","message":"  ✔ Migrated Migration20240205173216","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4916849Z {"level":"info","message":"  ● Migrating Migration20240624200006","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4948501Z {"level":"info","message":"  ✔ Migrated Migration20240624200006","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4949492Z {"level":"info","message":"  ● Migrating Migration20250120110744","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.4977002Z {"level":"info","message":"  ✔ Migrated Migration20250120110744","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5004848Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5017306Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5017713Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5018097Z {"level":"info","message":"MODULE: api_key","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5124266Z {"level":"info","message":"  ● Migrating InitialSetup20240221144943","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5200295Z {"level":"info","message":"  ✔ Migrated InitialSetup20240221144943","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5201017Z {"level":"info","message":"  ● Migrating Migration20240604080145","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5218212Z {"level":"info","message":"  ✔ Migrated Migration20240604080145","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5218672Z {"level":"info","message":"  ● Migrating Migration20241205122700","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5247999Z {"level":"info","message":"  ✔ Migrated Migration20241205122700","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5248800Z {"level":"info","message":"  ● Migrating Migration20251015123842","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5275577Z {"level":"info","message":"  ✔ Migrated Migration20251015123842","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5300160Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5310984Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5311325Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5311591Z {"level":"info","message":"MODULE: store","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5413067Z {"level":"info","message":"  ● Migrating InitialSetup20240227075933","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5488444Z {"level":"info","message":"  ✔ Migrated InitialSetup20240227075933","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5489565Z {"level":"info","message":"  ● Migrating Migration20240621145944","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5534944Z {"level":"info","message":"  ✔ Migrated Migration20240621145944","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5535377Z {"level":"info","message":"  ● Migrating Migration20241206083313","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5554748Z {"level":"info","message":"  ✔ Migrated Migration20241206083313","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5555576Z {"level":"info","message":"  ● Migrating Migration20251202184737","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5600811Z {"level":"info","message":"  ✔ Migrated Migration20251202184737","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5601256Z {"level":"info","message":"  ● Migrating Migration20251212161429","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5617308Z {"level":"info","message":"  ✔ Migrated Migration20251212161429","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5642836Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5654551Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5655109Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5655503Z {"level":"info","message":"MODULE: tax","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5757884Z {"level":"info","message":"  ● Migrating Migration20240227090331","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5987895Z {"level":"info","message":"  ✔ Migrated Migration20240227090331","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.5988458Z {"level":"info","message":"  ● Migrating Migration20240710135844","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6019001Z {"level":"info","message":"  ✔ Migrated Migration20240710135844","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6019597Z {"level":"info","message":"  ● Migrating Migration20240924114005","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6036460Z {"level":"info","message":"  ✔ Migrated Migration20240924114005","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6037033Z {"level":"info","message":"  ● Migrating Migration20241212052837","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6070665Z {"level":"info","message":"  ✔ Migrated Migration20241212052837","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6101522Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6112563Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6112901Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6113175Z {"level":"info","message":"MODULE: currency","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6214249Z {"level":"info","message":"  ● Migrating InitialSetup20240228133303","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6296806Z {"level":"info","message":"  ✔ Migrated InitialSetup20240228133303","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6297889Z {"level":"info","message":"  ● Migrating Migration20240624082354","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6312762Z {"level":"info","message":"  ✔ Migrated Migration20240624082354","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6339579Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6356111Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6356469Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6356744Z {"level":"info","message":"MODULE: payment","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6471807Z {"level":"info","message":"  ● Migrating Migration20240225134525","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6698408Z {"level":"info","message":"  ✔ Migrated Migration20240225134525","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6699974Z {"level":"info","message":"  ● Migrating Migration20240806072619","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6780137Z {"level":"info","message":"  ✔ Migrated Migration20240806072619","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6780786Z {"level":"info","message":"  ● Migrating Migration20241211151053","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6833303Z {"level":"info","message":"  ✔ Migrated Migration20241211151053","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6833762Z {"level":"info","message":"  ● Migrating Migration20250115160517","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6853749Z {"level":"info","message":"  ✔ Migrated Migration20250115160517","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6854177Z {"level":"info","message":"  ● Migrating Migration20250120110552","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6874571Z {"level":"info","message":"  ✔ Migrated Migration20250120110552","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.6875190Z {"level":"info","message":"  ● Migrating Migration20250123122334","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7102542Z {"level":"info","message":"  ✔ Migrated Migration20250123122334","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7103105Z {"level":"info","message":"  ● Migrating Migration20250206105639","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7119136Z {"level":"info","message":"  ✔ Migrated Migration20250206105639","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7119672Z {"level":"info","message":"  ● Migrating Migration20250207132723","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7135682Z {"level":"info","message":"  ✔ Migrated Migration20250207132723","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7136234Z {"level":"info","message":"  ● Migrating Migration20250625084134","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7153173Z {"level":"info","message":"  ✔ Migrated Migration20250625084134","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7154155Z {"level":"info","message":"  ● Migrating Migration20250924135437","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7174952Z {"level":"info","message":"  ✔ Migrated Migration20250924135437","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7175646Z {"level":"info","message":"  ● Migrating Migration20250929124701","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7193973Z {"level":"info","message":"  ✔ Migrated Migration20250929124701","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7194921Z {"level":"info","message":"  ● Migrating Migration20260411223700","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7213656Z {"level":"info","message":"  ✔ Migrated Migration20260411223700","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7255445Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7255932Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7256188Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7256650Z {"level":"info","message":"MODULE: payment","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7364626Z {"level":"info","message":"Skipped. Database is up-to-date for module.","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7365600Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7365998Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7366427Z {"level":"info","message":"MODULE: payment","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7465976Z {"level":"info","message":"Skipped. Database is up-to-date for module.","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7480265Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7480584Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7480858Z {"level":"info","message":"MODULE: order","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.7620840Z {"level":"info","message":"  ● Migrating Migration20240219102530","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.8637489Z {"level":"info","message":"  ✔ Migrated Migration20240219102530","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.8640066Z {"level":"info","message":"  ● Migrating Migration20240604100512","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.8928868Z {"level":"info","message":"  ✔ Migrated Migration20240604100512","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.8929569Z {"level":"info","message":"  ● Migrating Migration20240715102100","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.8946111Z {"level":"info","message":"  ✔ Migrated Migration20240715102100","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.8946569Z {"level":"info","message":"  ● Migrating Migration20240715174100","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.8967914Z {"level":"info","message":"  ✔ Migrated Migration20240715174100","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.8970114Z {"level":"info","message":"  ● Migrating Migration20240716081800","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9015186Z {"level":"info","message":"  ✔ Migrated Migration20240716081800","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9015797Z {"level":"info","message":"  ● Migrating Migration20240801085921","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9108750Z {"level":"info","message":"  ✔ Migrated Migration20240801085921","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9110746Z {"level":"info","message":"  ● Migrating Migration20240821164505","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9152178Z {"level":"info","message":"  ✔ Migrated Migration20240821164505","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9152757Z {"level":"info","message":"  ● Migrating Migration20240821170920","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9171313Z {"level":"info","message":"  ✔ Migrated Migration20240821170920","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9173686Z {"level":"info","message":"  ● Migrating Migration20240827133639","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9193383Z {"level":"info","message":"  ✔ Migrated Migration20240827133639","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9201447Z {"level":"info","message":"  ● Migrating Migration20240902195921","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9213529Z {"level":"info","message":"  ✔ Migrated Migration20240902195921","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9213939Z {"level":"info","message":"  ● Migrating Migration20240913092514","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9234021Z {"level":"info","message":"  ✔ Migrated Migration20240913092514","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9236180Z {"level":"info","message":"  ● Migrating Migration20240930122627","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9249882Z {"level":"info","message":"  ✔ Migrated Migration20240930122627","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9252168Z {"level":"info","message":"  ● Migrating Migration20241014142943","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9268135Z {"level":"info","message":"  ✔ Migrated Migration20241014142943","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9269967Z {"level":"info","message":"  ● Migrating Migration20241106085223","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9284690Z {"level":"info","message":"  ✔ Migrated Migration20241106085223","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9285551Z {"level":"info","message":"  ● Migrating Migration20241129124827","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9308820Z {"level":"info","message":"  ✔ Migrated Migration20241129124827","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9355095Z {"level":"info","message":"  ● Migrating Migration20241217162224","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9355797Z {"level":"info","message":"  ✔ Migrated Migration20241217162224","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9356761Z {"level":"info","message":"  ● Migrating Migration20250326151554","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9371624Z {"level":"info","message":"  ✔ Migrated Migration20250326151554","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9372205Z {"level":"info","message":"  ● Migrating Migration20250522181137","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9393102Z {"level":"info","message":"  ✔ Migrated Migration20250522181137","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9395123Z {"level":"info","message":"  ● Migrating Migration20250702095353","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9409792Z {"level":"info","message":"  ✔ Migrated Migration20250702095353","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9412299Z {"level":"info","message":"  ● Migrating Migration20250704120229","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9431372Z {"level":"info","message":"  ✔ Migrated Migration20250704120229","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:26.9433671Z {"level":"info","message":"  ● Migrating Migration20250910130000","timestamp":"2026-10-10 17:49:26"}
+2026-10-10T17:49:27.0147954Z {"level":"info","message":"  ✔ Migrated Migration20250910130000","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0148686Z {"level":"info","message":"  ● Migrating Migration20251016160403","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0171002Z {"level":"info","message":"  ✔ Migrated Migration20251016160403","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0171580Z {"level":"info","message":"  ● Migrating Migration20251016182939","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0199608Z {"level":"info","message":"  ✔ Migrated Migration20251016182939","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0202183Z {"level":"info","message":"  ● Migrating Migration20251017155709","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0221982Z {"level":"info","message":"  ✔ Migrated Migration20251017155709","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0222466Z {"level":"info","message":"  ● Migrating Migration20251114100559","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0276740Z {"level":"info","message":"  ✔ Migrated Migration20251114100559","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0278776Z {"level":"info","message":"  ● Migrating Migration20251125164002","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0292745Z {"level":"info","message":"  ✔ Migrated Migration20251125164002","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0293408Z {"level":"info","message":"  ● Migrating Migration20251210112909","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0307766Z {"level":"info","message":"  ✔ Migrated Migration20251210112909","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0308389Z {"level":"info","message":"  ● Migrating Migration20251210112924","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0322140Z {"level":"info","message":"  ✔ Migrated Migration20251210112924","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0323124Z {"level":"info","message":"  ● Migrating Migration20251225120947","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0346138Z {"level":"info","message":"  ✔ Migrated Migration20251225120947","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0346801Z {"level":"info","message":"  ● Migrating Migration20260106185528","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0379284Z {"level":"info","message":"  ✔ Migrated Migration20260106185528","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0382130Z {"level":"info","message":"  ● Migrating Migration20260625000000","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0403463Z {"level":"info","message":"  ✔ Migrated Migration20260625000000","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0403903Z {"level":"info","message":"  ● Migrating Migration20260729154253","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0418984Z {"level":"info","message":"  ✔ Migrated Migration20260729154253","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0568789Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0583725Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0584116Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0584540Z {"level":"info","message":"MODULE: settings","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0690819Z {"level":"info","message":"  ● Migrating Migration20250717162007","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0820516Z {"level":"info","message":"  ✔ Migrated Migration20250717162007","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0822482Z {"level":"info","message":"  ● Migrating Migration20260127081758","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0874294Z {"level":"info","message":"  ✔ Migrated Migration20260127081758","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.0875168Z {"level":"info","message":"  ● Migrating Migration20260615151246","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1109147Z {"level":"info","message":"  ✔ Migrated Migration20260615151246","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1137977Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1172303Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1172721Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1173011Z {"level":"info","message":"MODULE: auth","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1288423Z {"level":"info","message":"  ● Migrating Migration20240205025928","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1367200Z {"level":"info","message":"  ✔ Migrated Migration20240205025928","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1367668Z {"level":"info","message":"  ● Migrating Migration20240529080336","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1425663Z {"level":"info","message":"  ✔ Migrated Migration20240529080336","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1426128Z {"level":"info","message":"  ● Migrating Migration20241202100304","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1455184Z {"level":"info","message":"  ✔ Migrated Migration20241202100304","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1455937Z {"level":"info","message":"  ● Migrating Migration20260514083900","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1543804Z {"level":"info","message":"  ✔ Migrated Migration20260514083900","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1544531Z {"level":"info","message":"  ● Migrating Migration20260525090000","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1616035Z {"level":"info","message":"  ✔ Migrated Migration20260525090000","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1618157Z {"level":"info","message":"  ● Migrating Migration20260604120000","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1685545Z {"level":"info","message":"  ✔ Migrated Migration20260604120000","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1686250Z {"level":"info","message":"  ● Migrating Migration20260616075929","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1744685Z {"level":"info","message":"  ✔ Migrated Migration20260616075929","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1789530Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1790003Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1790381Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1799762Z {"level":"info","message":"MODULE: auth","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1905979Z {"level":"info","message":"Skipped. Database is up-to-date for module.","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1906514Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1907164Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.1907584Z {"level":"info","message":"MODULE: auth","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.2017924Z {"level":"info","message":"Skipped. Database is up-to-date for module.","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.2029498Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.2029904Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.2030313Z {"level":"info","message":"MODULE: user","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.2147182Z {"level":"info","message":"  ● Migrating Migration20240214033943","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.2488056Z {"level":"info","message":"  ✔ Migrated Migration20240214033943","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.2490553Z {"level":"info","message":"  ● Migrating Migration20240703095850","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.2676764Z   console.info
+2026-10-10T17:49:27.2677283Z     Note: If the index "IDX_user_email" fails to create, then delete any existing users with duplicate emails before retrying the migration.
+2026-10-10T17:49:27.2677720Z 
+2026-10-10T17:49:27.2678008Z       at Migration20240703095850.up (node_modules/@medusajs/user/src/migrations/Migration20240703095850.ts:11:13)
+2026-10-10T17:49:27.2678279Z 
+2026-10-10T17:49:27.2697795Z {"level":"info","message":"  ✔ Migrated Migration20240703095850","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.2700274Z {"level":"info","message":"  ● Migrating Migration20241202103352","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.2732346Z {"level":"info","message":"  ✔ Migrated Migration20241202103352","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.2767274Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.2801130Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.2801717Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.2814653Z {"level":"info","message":"MODULE: fulfillment","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.2928179Z {"level":"info","message":"  ● Migrating Migration20240311145700_InitialSetupMigration","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.3870922Z {"level":"info","message":"  ✔ Migrated Migration20240311145700_InitialSetupMigration","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.3871520Z {"level":"info","message":"  ● Migrating Migration20240821170957","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.3900280Z {"level":"info","message":"  ✔ Migrated Migration20240821170957","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.3901096Z {"level":"info","message":"  ● Migrating Migration20240917161003","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.3916449Z {"level":"info","message":"  ✔ Migrated Migration20240917161003","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.3966952Z {"level":"info","message":"  ● Migrating Migration20241217110416","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.3967539Z {"level":"info","message":"  ✔ Migrated Migration20241217110416","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.3967959Z {"level":"info","message":"  ● Migrating Migration20250113122235","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.3975646Z {"level":"info","message":"  ✔ Migrated Migration20250113122235","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.3976633Z {"level":"info","message":"  ● Migrating Migration20250120115002","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4015585Z {"level":"info","message":"  ✔ Migrated Migration20250120115002","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4016304Z {"level":"info","message":"  ● Migrating Migration20250822130931","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4027653Z {"level":"info","message":"  ✔ Migrated Migration20250822130931","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4028542Z {"level":"info","message":"  ● Migrating Migration20250825132614","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4042647Z {"level":"info","message":"  ✔ Migrated Migration20250825132614","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4043360Z {"level":"info","message":"  ● Migrating Migration20251114133146","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4062708Z {"level":"info","message":"  ✔ Migrated Migration20251114133146","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4105684Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4118453Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4118827Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4119294Z {"level":"info","message":"MODULE: fulfillment","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4228375Z {"level":"info","message":"Skipped. Database is up-to-date for module.","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4228950Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4230739Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4231060Z {"level":"info","message":"MODULE: fulfillment","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4350631Z {"level":"info","message":"Skipped. Database is up-to-date for module.","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4363955Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4375001Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4375449Z {"level":"info","message":"MODULE: notification","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4489690Z {"level":"info","message":"  ● Migrating Migration20240509083918_InitialSetupMigration","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4612615Z {"level":"info","message":"  ✔ Migrated Migration20240509083918_InitialSetupMigration","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4616702Z {"level":"info","message":"  ● Migrating Migration20240628075401","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4652064Z {"level":"info","message":"  ✔ Migrated Migration20240628075401","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4652547Z {"level":"info","message":"  ● Migrating Migration20240830094712","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4670244Z {"level":"info","message":"  ✔ Migrated Migration20240830094712","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4670717Z {"level":"info","message":"  ● Migrating Migration20250120110514","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4697410Z {"level":"info","message":"  ✔ Migrated Migration20250120110514","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4698169Z {"level":"info","message":"  ● Migrating Migration20251028172715","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4713176Z {"level":"info","message":"  ✔ Migrated Migration20251028172715","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4714172Z {"level":"info","message":"  ● Migrating Migration20251121123942","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4728137Z {"level":"info","message":"  ✔ Migrated Migration20251121123942","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4730602Z {"level":"info","message":"  ● Migrating Migration20251121150408","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4743478Z {"level":"info","message":"  ✔ Migrated Migration20251121150408","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4773596Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4779741Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4780041Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4780325Z {"level":"info","message":"MODULE: notification","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4922305Z {"level":"info","message":"Skipped. Database is up-to-date for module.","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4922874Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4923285Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.4933365Z {"level":"info","message":"MODULE: notification","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5035994Z {"level":"info","message":"Skipped. Database is up-to-date for module.","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5049332Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5049771Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5058736Z {"level":"info","message":"MODULE: search","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5148470Z {"level":"info","message":"  ● Migrating Migration20260805085626","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5265353Z {"level":"info","message":"  ✔ Migrated Migration20260805085626","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5267687Z {"level":"info","message":"  ● Migrating Migration20260903085616","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5334505Z {"level":"info","message":"  ✔ Migrated Migration20260903085616","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5335380Z {"level":"info","message":"  ● Migrating Migration20260911115931","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5350603Z {"level":"info","message":"  ✔ Migrated Migration20260911115931","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5379932Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5380413Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5380782Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5392003Z {"level":"info","message":"MODULE: search","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5495418Z {"level":"info","message":"Skipped. Database is up-to-date for module.","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5495923Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5496311Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5496775Z {"level":"info","message":"MODULE: search","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5590431Z {"level":"info","message":"  ● Migrating Migration20260807120000","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5697881Z {"level":"info","message":"  ✔ Migrated Migration20260807120000","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5722661Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5734909Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5735302Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5735732Z {"level":"info","message":"MODULE: cache","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5847083Z {"level":"info","message":"Skipped. Database is up-to-date for module.","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5856487Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5856946Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5857434Z {"level":"info","message":"MODULE: event_bus","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5967581Z {"level":"info","message":"Skipped. Database is up-to-date for module.","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5979726Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5989116Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.5989537Z {"level":"info","message":"MODULE: workflows","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6125617Z {"level":"info","message":"  ● Migrating Migration20231228143900","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6330497Z {"level":"info","message":"  ✔ Migrated Migration20231228143900","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6330955Z {"level":"info","message":"  ● Migrating Migration20241206101446","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6382096Z {"level":"info","message":"  ✔ Migrated Migration20241206101446","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6382739Z {"level":"info","message":"  ● Migrating Migration20250128174331","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6400993Z {"level":"info","message":"  ✔ Migrated Migration20250128174331","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6401765Z {"level":"info","message":"  ● Migrating Migration20250505092459","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6442610Z {"level":"info","message":"  ✔ Migrated Migration20250505092459","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6443045Z {"level":"info","message":"  ● Migrating Migration20250819104213","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6462693Z {"level":"info","message":"  ✔ Migrated Migration20250819104213","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6463606Z {"level":"info","message":"  ● Migrating Migration20250819110924","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6485631Z {"level":"info","message":"  ✔ Migrated Migration20250819110924","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6486340Z {"level":"info","message":"  ● Migrating Migration20250908080305","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6522938Z {"level":"info","message":"  ✔ Migrated Migration20250908080305","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6560483Z {"level":"info","message":"Completed successfully","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6571747Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6579765Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6580114Z {"level":"info","message":"MODULE: locking","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6713853Z {"level":"info","message":"Skipped. Database is up-to-date for module.","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6725070Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6725466Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6725886Z {"level":"info","message":"MODULE: file","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6833900Z {"level":"info","message":"Skipped. Database is up-to-date for module.","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6834538Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6834978Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6835433Z {"level":"info","message":"MODULE: file","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6941306Z {"level":"info","message":"Skipped. Database is up-to-date for module.","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6942158Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6942563Z {"level":"info","message":"","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.6942977Z {"level":"info","message":"MODULE: file","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.7059630Z {"level":"info","message":"Skipped. Database is up-to-date for module.","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.7088074Z {"level":"info","message":"No link to load from /home/runner/work/temporal-agent-harness/temporal-agent-harness/research/medusa-baseline/node_modules/@medusajs/draft-order/.medusa/server/src/links. skipped.","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.7090320Z {"level":"info","message":"No link to load from /home/runner/work/temporal-agent-harness/temporal-agent-harness/research/medusa-baseline/src/links. skipped.","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.8614747Z {"level":"info","message":"Sync links: \"create\" cart_payment_collection","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.8630366Z {"level":"info","message":"Sync links: \"create\" cart_promotion","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.8631092Z {"level":"info","message":"Sync links: \"create\" customer_account_holder","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.8631784Z {"level":"info","message":"Sync links: \"create\" location_fulfillment_provider","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.8632504Z {"level":"info","message":"Sync links: \"create\" location_fulfillment_set","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.8633138Z {"level":"info","message":"Sync links: \"create\" invite_rbac_role","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.8633767Z {"level":"info","message":"Sync links: \"create\" order_cart","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.8634417Z {"level":"info","message":"Sync links: \"create\" order_fulfillment","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.8635141Z {"level":"info","message":"Sync links: \"create\" order_payment_collection","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.8635771Z {"level":"info","message":"Sync links: \"create\" order_promotion","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.8636400Z {"level":"info","message":"Sync links: \"create\" return_fulfillment","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.8637021Z {"level":"info","message":"Sync links: \"create\" product_sales_channel","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.8637678Z {"level":"info","message":"Sync links: \"create\" product_shipping_profile","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.8638370Z {"level":"info","message":"Sync links: \"create\" product_variant_inventory_item","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.8639245Z {"level":"info","message":"Sync links: \"create\" product_variant_price_set","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.8639955Z {"level":"info","message":"Sync links: \"create\" publishable_api_key_sales_channel","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.8640632Z {"level":"info","message":"Sync links: \"create\" region_payment_provider","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.8641270Z {"level":"info","message":"Sync links: \"create\" sales_channel_stock_location","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.8641917Z {"level":"info","message":"Sync links: \"create\" shipping_option_price_set","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:27.8642527Z {"level":"info","message":"Sync links: \"create\" user_rbac_role","timestamp":"2026-10-10 17:49:27"}
+2026-10-10T17:49:28.0867986Z {"level":"warn","message":"Local Event Bus installed. This is not recommended for production.","timestamp":"2026-10-10 17:49:28"}
+2026-10-10T17:49:28.0896523Z {"level":"info","message":"Locking module: Using \"in-memory\" as default.","timestamp":"2026-10-10 17:49:28"}
+2026-10-10T17:49:28.3493205Z {"level":"info","message":"Search indexes already up-to-date","timestamp":"2026-10-10 17:49:28"}
+2026-10-10T17:49:28.3559493Z {"level":"info","message":"redisUrl not found. A fake redis instance will be used.","timestamp":"2026-10-10 17:49:28"}
+2026-10-10T17:49:28.3671099Z {"level":"info","message":"No link to load from /home/runner/work/temporal-agent-harness/temporal-agent-harness/research/medusa-baseline/node_modules/@medusajs/draft-order/.medusa/server/src/links. skipped.","timestamp":"2026-10-10 17:49:28"}
+2026-10-10T17:49:28.3672511Z {"level":"info","message":"No link to load from /home/runner/work/temporal-agent-harness/temporal-agent-harness/research/medusa-baseline/src/links. skipped.","timestamp":"2026-10-10 17:49:28"}
+2026-10-10T17:49:28.4285534Z {"level":"info","message":"No workflow to load from /home/runner/work/temporal-agent-harness/temporal-agent-harness/research/medusa-baseline/src/workflows. skipped.","timestamp":"2026-10-10 17:49:28"}
+2026-10-10T17:49:28.4286537Z {"level":"info","message":"No workflow to load from /home/runner/work/temporal-agent-harness/temporal-agent-harness/research/medusa-baseline/node_modules/@medusajs/draft-order/.medusa/server/src/workflows. skipped.","timestamp":"2026-10-10 17:49:28"}
+2026-10-10T17:49:28.4289380Z {"level":"info","message":"No subscriber to load from /home/runner/work/temporal-agent-harness/temporal-agent-harness/research/medusa-baseline/src/subscribers. skipped.","timestamp":"2026-10-10 17:49:28"}
+2026-10-10T17:49:28.4290287Z {"level":"info","message":"No subscriber to load from /home/runner/work/temporal-agent-harness/temporal-agent-harness/research/medusa-baseline/node_modules/@medusajs/draft-order/.medusa/server/src/subscribers. skipped.","timestamp":"2026-10-10 17:49:28"}
+2026-10-10T17:49:28.4310264Z {"level":"info","message":"No job to load from /home/runner/work/temporal-agent-harness/temporal-agent-harness/research/medusa-baseline/node_modules/@medusajs/medusa/dist/jobs. skipped.","timestamp":"2026-10-10 17:49:28"}
+2026-10-10T17:49:28.4311417Z {"level":"info","message":"No job to load from /home/runner/work/temporal-agent-harness/temporal-agent-harness/research/medusa-baseline/src/jobs. skipped.","timestamp":"2026-10-10 17:49:28"}
+2026-10-10T17:49:28.4312261Z {"level":"info","message":"No job to load from /home/runner/work/temporal-agent-harness/temporal-agent-harness/research/medusa-baseline/node_modules/@medusajs/draft-order/.medusa/server/src/jobs. skipped.","timestamp":"2026-10-10 17:49:28"}
+2026-10-10T17:49:29.1952275Z   console.log
+2026-10-10T17:49:29.1952820Z     [33mConnection Error: Connection ended unexpectedly[39m
+2026-10-10T17:49:29.1952983Z 
+2026-10-10T17:49:29.1953093Z       at Logger._log (node_modules/knex/lib/logger.js:42:13)
+2026-10-10T17:49:29.1953229Z 
+2026-10-10T17:49:29.1968555Z   console.log
+2026-10-10T17:49:29.1968827Z     [33mConnection Error: Connection ended unexpectedly[39m
+2026-10-10T17:49:29.1968986Z 
+2026-10-10T17:49:29.1969243Z       at Logger._log (node_modules/knex/lib/logger.js:42:13)
+2026-10-10T17:49:29.1969366Z 
+2026-10-10T17:49:29.1984317Z   console.log
+2026-10-10T17:49:29.1984670Z     [33mConnection Error: Connection ended unexpectedly[39m
+2026-10-10T17:49:29.1984889Z 
+2026-10-10T17:49:29.1985033Z       at Logger._log (node_modules/knex/lib/logger.js:42:13)
+2026-10-10T17:49:29.1985224Z 
+2026-10-10T17:49:29.2000528Z   console.log
+2026-10-10T17:49:29.2000857Z     [33mConnection Error: Connection ended unexpectedly[39m
+2026-10-10T17:49:29.2001062Z 
+2026-10-10T17:49:29.2001218Z       at Logger._log (node_modules/knex/lib/logger.js:42:13)
+2026-10-10T17:49:29.2001361Z 
+2026-10-10T17:49:29.2015390Z   console.log
+2026-10-10T17:49:29.2015688Z     [33mConnection Error: Connection ended unexpectedly[39m
+2026-10-10T17:49:29.2015887Z 
+2026-10-10T17:49:29.2016031Z       at Logger._log (node_modules/knex/lib/logger.js:42:13)
+2026-10-10T17:49:29.2016209Z 
+2026-10-10T17:49:29.2030284Z   console.log
+2026-10-10T17:49:29.2030579Z     [33mConnection Error: Connection ended unexpectedly[39m
+2026-10-10T17:49:29.2030774Z 
+2026-10-10T17:49:29.2030932Z       at Logger._log (node_modules/knex/lib/logger.js:42:13)
+2026-10-10T17:49:29.2031098Z 
+2026-10-10T17:49:30.1654243Z PASS ./baseline.spec.js (6.907 s)
+2026-10-10T17:49:30.1655168Z     ✓ qualifies two returned units, one damaged, and explicit refund (844 ms)
+2026-10-10T17:49:30.1655342Z 
+2026-10-10T17:49:30.1666941Z Test Suites: 1 passed, 1 total
+2026-10-10T17:49:30.1667131Z Tests:       1 passed, 1 total
+2026-10-10T17:49:30.1667269Z Snapshots:   0 total
+2026-10-10T17:49:30.1667391Z Time:        6.935 s
+2026-10-10T17:49:30.1667511Z Ran all test suites.
+2026-10-10T17:49:30.1674514Z Test results written to: ../../evidence/jest.json
+2026-10-10T17:49:30.1676759Z Force exiting Jest: Have you considered using `--detectOpenHandles` to detect async operations that kept running after all tests finished?
+2026-10-10T17:49:30.2281500Z ##[group]Run actions/upload-artifact@v4
+2026-10-10T17:49:30.2281671Z with:
+2026-10-10T17:49:30.2281791Z   name: medusa-return-baseline
+2026-10-10T17:49:30.2281943Z   path: evidence/
+research/evidence/
+
+2026-10-10T17:49:30.2282229Z   retention-days: 30
+2026-10-10T17:49:30.2282354Z   if-no-files-found: warn
+2026-10-10T17:49:30.2282482Z   compression-level: 6
+2026-10-10T17:49:30.2282603Z   overwrite: false
+2026-10-10T17:49:30.2282724Z   include-hidden-files: false
+2026-10-10T17:49:30.2282857Z env:
+2026-10-10T17:49:30.2282981Z   NODE_OPTIONS: --experimental-vm-modules
+2026-10-10T17:49:30.2283135Z   DB_HOST: localhost
+2026-10-10T17:49:30.2283249Z   DB_PORT: 5432
+2026-10-10T17:49:30.2283362Z   DB_USERNAME: postgres
+2026-10-10T17:49:30.2283486Z   DB_PASSWORD: postgres
+2026-10-10T17:49:30.2283853Z   DATABASE_URL: ***localhost:5432/medusa_return_qualification
+2026-10-10T17:49:30.2284046Z   MEDUSA_TELEMETRY_DISABLED: true
+2026-10-10T17:49:30.2284182Z   NODE_ENV: test
+2026-10-10T17:49:30.2284309Z ##[endgroup]
+2026-10-10T17:49:30.3317639Z (node:2815) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-10T17:49:30.3318150Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-10T17:49:30.3367915Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-10-10T17:49:30.3369913Z The least common ancestor is /home/runner/work/temporal-agent-harness/temporal-agent-harness. This will be the root directory of the artifact
+2026-10-10T17:49:30.3370784Z With the provided path, there will be 15 files uploaded
+2026-10-10T17:49:30.3372978Z Artifact name is valid!
+2026-10-10T17:49:30.3373574Z Root directory input is valid!
+2026-10-10T17:49:30.6035097Z Beginning upload of artifact content to blob storage
+2026-10-10T17:49:30.6368306Z (node:2815) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-10T17:49:30.8971735Z Uploaded bytes 198290
+2026-10-10T17:49:30.9434634Z Finished uploading artifact content to blob storage!
+2026-10-10T17:49:30.9435287Z SHA256 digest of uploaded artifact zip is 2a8ff3b8ea2f1aba8a97de0dc184054d7a723d7cb840a234fd246a7e927199fb
+2026-10-10T17:49:30.9436489Z Finalizing artifact upload
+2026-10-10T17:49:31.1938226Z Artifact medusa-return-baseline.zip successfully finalized. Artifact ID 11678370165
+2026-10-10T17:49:31.1938949Z Artifact medusa-return-baseline has been successfully uploaded! Final size is 198290 bytes. Artifact ID is 11678370165
+2026-10-10T17:49:31.1943585Z Artifact download URL: https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38073212334/artifacts/11678370165
+2026-10-10T17:49:31.2070019Z Post job cleanup.
+2026-10-10T17:49:31.2815088Z (node:2848) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-10T17:49:31.2815564Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-10T17:49:31.2945017Z Post job cleanup.
+2026-10-10T17:49:31.3535938Z [command]/usr/bin/git version
+2026-10-10T17:49:31.3566788Z git version 2.55.0
+2026-10-10T17:49:31.3592375Z Temporarily overriding HOME='/home/runner/work/_temp/01c355b8-1135-47d1-9001-a97f0f03795c' before making global git config changes
+2026-10-10T17:49:31.3593316Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-10T17:49:31.3608327Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/temporal-agent-harness/temporal-agent-harness
+2026-10-10T17:49:31.3623682Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-10T17:49:31.3649306Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-10T17:49:31.3838033Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-10T17:49:31.3862236Z http.https://github.com/.extraheader
+2026-10-10T17:49:31.3869730Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-10T17:49:31.3902295Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-10T17:49:31.4108344Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-10T17:49:31.4153778Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-10T17:49:31.4459873Z Print service container logs: e99421fbfef54b4b917fbade1b510a94_postgres16_1c684e
+2026-10-10T17:49:31.4462537Z ##[command]/usr/bin/docker logs --details 6a61d5ffe85a76fe8ddb710f4833b253a2e2036d3dfbacc6d85e09448d5054b0
+2026-10-10T17:49:31.4551980Z  The files belonging to this database system will be owned by user "postgres".
+2026-10-10T17:49:31.4553129Z  initdb: warning: enabling "trust" authentication for local connections
+2026-10-10T17:49:31.4553514Z  This user must also own the server process.
+2026-10-10T17:49:31.4554126Z  
+2026-10-10T17:49:31.4554535Z  The database cluster will be initialized with locale "en_US.utf8".
+2026-10-10T17:49:31.4554928Z  The default database encoding has accordingly been set to "UTF8".
+2026-10-10T17:49:31.4555257Z  The default text search configuration will be set to "english".
+2026-10-10T17:49:31.4555540Z  
+2026-10-10T17:49:31.4555746Z  Data page checksums are disabled.
+2026-10-10T17:49:31.4555973Z  
+2026-10-10T17:49:31.4556248Z  fixing permissions on existing directory /var/lib/postgresql/data ... ok
+2026-10-10T17:49:31.4556549Z  creating subdirectories ... ok
+2026-10-10T17:49:31.4556817Z  selecting dynamic shared memory implementation ... posix
+2026-10-10T17:49:31.4557099Z  selecting default max_connections ... 100
+2026-10-10T17:49:31.4557350Z  selecting default shared_buffers ... 128MB
+2026-10-10T17:49:31.4557603Z  selecting default time zone ... Etc/UTC
+2026-10-10T17:49:31.4557852Z  creating configuration files ... ok
+2026-10-10T17:49:31.4558092Z  running bootstrap script ... ok
+2026-10-10T17:49:31.4558348Z  performing post-bootstrap initialization ... ok
+2026-10-10T17:49:31.4558611Z  syncing data to disk ... ok
+2026-10-10T17:49:31.4558827Z  
+2026-10-10T17:49:31.4559013Z  
+2026-10-10T17:49:31.4559424Z  Success. You can now start the database server using:
+2026-10-10T17:49:31.4559791Z  
+2026-10-10T17:49:31.4560010Z      pg_ctl -D /var/lib/postgresql/data -l logfile start
+2026-10-10T17:49:31.4560262Z  
+2026-10-10T17:49:31.4569495Z  initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+2026-10-10T17:49:31.4570267Z  2026-10-10 17:49:01.276 UTC [1] LOG:  starting PostgreSQL 16.15 (Debian 16.15-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+2026-10-10T17:49:31.4570861Z  2026-10-10 17:49:01.277 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2026-10-10T17:49:31.4571256Z  2026-10-10 17:49:01.277 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2026-10-10T17:49:31.4571683Z  2026-10-10 17:49:01.278 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-10-10T17:49:31.4572132Z  2026-10-10 17:49:01.280 UTC [62] LOG:  database system was shut down at 2026-10-10 17:49:01 UTC
+2026-10-10T17:49:31.4572401Z  2026-10-10 17:49:01.283 UTC [1] LOG:  database system is ready to accept connections
+2026-10-10T17:49:31.4572673Z  2026-10-10 17:49:25.699 UTC [102] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4572953Z  2026-10-10 17:49:25.714 UTC [102] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4573223Z  2026-10-10 17:49:25.717 UTC [102] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4573495Z  2026-10-10 17:49:25.719 UTC [102] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4573768Z  2026-10-10 17:49:25.740 UTC [104] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4574196Z  2026-10-10 17:49:25.753 UTC [104] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4574465Z  2026-10-10 17:49:25.771 UTC [104] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4574736Z  2026-10-10 17:49:25.777 UTC [104] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4575004Z  2026-10-10 17:49:25.780 UTC [104] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4575413Z  2026-10-10 17:49:25.810 UTC [114] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4575690Z  2026-10-10 17:49:25.858 UTC [114] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4575960Z  2026-10-10 17:49:25.866 UTC [114] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4576229Z  2026-10-10 17:49:25.868 UTC [114] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4576506Z  2026-10-10 17:49:25.871 UTC [114] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4576775Z  2026-10-10 17:49:25.896 UTC [114] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4577042Z  2026-10-10 17:49:25.898 UTC [114] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4577315Z  2026-10-10 17:49:25.901 UTC [114] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4577589Z  2026-10-10 17:49:25.905 UTC [114] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4577859Z  2026-10-10 17:49:25.907 UTC [114] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4578131Z  2026-10-10 17:49:25.912 UTC [114] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4578401Z  2026-10-10 17:49:25.914 UTC [114] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4578671Z  2026-10-10 17:49:25.915 UTC [114] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4578941Z  2026-10-10 17:49:25.924 UTC [114] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4579402Z  2026-10-10 17:49:25.925 UTC [114] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4579670Z  2026-10-10 17:49:25.931 UTC [114] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4580131Z  2026-10-10 17:49:25.933 UTC [114] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4580569Z  2026-10-10 17:49:25.936 UTC [114] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4580909Z  2026-10-10 17:49:25.977 UTC [114] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4581180Z  2026-10-10 17:49:25.979 UTC [114] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4581448Z  2026-10-10 17:49:25.981 UTC [114] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4581718Z  2026-10-10 17:49:26.020 UTC [116] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4581989Z  2026-10-10 17:49:26.078 UTC [116] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4582258Z  2026-10-10 17:49:26.080 UTC [116] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4582526Z  2026-10-10 17:49:26.083 UTC [116] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4582799Z  2026-10-10 17:49:26.085 UTC [116] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4583066Z  2026-10-10 17:49:26.094 UTC [116] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4583335Z  2026-10-10 17:49:26.098 UTC [116] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4583606Z  2026-10-10 17:49:26.101 UTC [116] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4583977Z  2026-10-10 17:49:26.103 UTC [116] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4584248Z  2026-10-10 17:49:26.114 UTC [116] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4584517Z  2026-10-10 17:49:26.115 UTC [116] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4584786Z  2026-10-10 17:49:26.119 UTC [116] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4585147Z  2026-10-10 17:49:26.121 UTC [116] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4585416Z  2026-10-10 17:49:26.125 UTC [116] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4585693Z  2026-10-10 17:49:26.133 UTC [116] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4585966Z  2026-10-10 17:49:26.166 UTC [118] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4586237Z  2026-10-10 17:49:26.217 UTC [118] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4586509Z  2026-10-10 17:49:26.220 UTC [118] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4586780Z  2026-10-10 17:49:26.222 UTC [118] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4587051Z  2026-10-10 17:49:26.243 UTC [118] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4587322Z  2026-10-10 17:49:26.246 UTC [118] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4587594Z  2026-10-10 17:49:26.251 UTC [118] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4587863Z  2026-10-10 17:49:26.253 UTC [118] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4588131Z  2026-10-10 17:49:26.255 UTC [118] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4588403Z  2026-10-10 17:49:26.257 UTC [118] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4588674Z  2026-10-10 17:49:26.263 UTC [118] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4588941Z  2026-10-10 17:49:26.265 UTC [118] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4589351Z  2026-10-10 17:49:26.269 UTC [118] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4589621Z  2026-10-10 17:49:26.271 UTC [118] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4589889Z  2026-10-10 17:49:26.273 UTC [118] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4590195Z  2026-10-10 17:49:26.275 UTC [118] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4590596Z  2026-10-10 17:49:26.299 UTC [120] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4591044Z  2026-10-10 17:49:26.312 UTC [120] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4591383Z  2026-10-10 17:49:26.315 UTC [120] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4591747Z  2026-10-10 17:49:26.328 UTC [120] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4592150Z  2026-10-10 17:49:26.339 UTC [120] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4592477Z  2026-10-10 17:49:26.358 UTC [122] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4592883Z  2026-10-10 17:49:26.380 UTC [124] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4593224Z  2026-10-10 17:49:26.406 UTC [124] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4593594Z  2026-10-10 17:49:26.407 UTC [124] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4593987Z  2026-10-10 17:49:26.409 UTC [124] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4594438Z  2026-10-10 17:49:26.420 UTC [124] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4594786Z  2026-10-10 17:49:26.428 UTC [124] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4595137Z  2026-10-10 17:49:26.429 UTC [124] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4595549Z  2026-10-10 17:49:26.431 UTC [124] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4595962Z  2026-10-10 17:49:26.436 UTC [124] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4596356Z  2026-10-10 17:49:26.438 UTC [124] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4596696Z  2026-10-10 17:49:26.440 UTC [124] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4597023Z  2026-10-10 17:49:26.445 UTC [124] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4597458Z  2026-10-10 17:49:26.447 UTC [124] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4597797Z  2026-10-10 17:49:26.480 UTC [126] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4598206Z  2026-10-10 17:49:26.491 UTC [126] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4598548Z  2026-10-10 17:49:26.495 UTC [126] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4598979Z  2026-10-10 17:49:26.515 UTC [128] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4599577Z  2026-10-10 17:49:26.520 UTC [128] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4599906Z  2026-10-10 17:49:26.522 UTC [128] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4600314Z  2026-10-10 17:49:26.525 UTC [128] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4600652Z  2026-10-10 17:49:26.544 UTC [130] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4601053Z  2026-10-10 17:49:26.549 UTC [130] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4601417Z  2026-10-10 17:49:26.553 UTC [130] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4601781Z  2026-10-10 17:49:26.555 UTC [130] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4602154Z  2026-10-10 17:49:26.560 UTC [130] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4602512Z  2026-10-10 17:49:26.579 UTC [132] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4602892Z  2026-10-10 17:49:26.599 UTC [132] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4603256Z  2026-10-10 17:49:26.602 UTC [132] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4603626Z  2026-10-10 17:49:26.604 UTC [132] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4603966Z  2026-10-10 17:49:26.626 UTC [134] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4604380Z  2026-10-10 17:49:26.630 UTC [134] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4604730Z  2026-10-10 17:49:26.650 UTC [136] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4605069Z  2026-10-10 17:49:26.670 UTC [136] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4605471Z  2026-10-10 17:49:26.678 UTC [136] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4605838Z  2026-10-10 17:49:26.683 UTC [136] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4606197Z  2026-10-10 17:49:26.685 UTC [136] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4606572Z  2026-10-10 17:49:26.687 UTC [136] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4606901Z  2026-10-10 17:49:26.710 UTC [136] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4607374Z  2026-10-10 17:49:26.712 UTC [136] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4607766Z  2026-10-10 17:49:26.713 UTC [136] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4608137Z  2026-10-10 17:49:26.715 UTC [136] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4608497Z  2026-10-10 17:49:26.717 UTC [136] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4608935Z  2026-10-10 17:49:26.719 UTC [136] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4609450Z  2026-10-10 17:49:26.765 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4609802Z  2026-10-10 17:49:26.864 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4610183Z  2026-10-10 17:49:26.893 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4610525Z  2026-10-10 17:49:26.895 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4610922Z  2026-10-10 17:49:26.897 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4611288Z  2026-10-10 17:49:26.901 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4611615Z  2026-10-10 17:49:26.911 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4612022Z  2026-10-10 17:49:26.915 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4612362Z  2026-10-10 17:49:26.917 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4612759Z  2026-10-10 17:49:26.919 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4613124Z  2026-10-10 17:49:26.921 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4613488Z  2026-10-10 17:49:26.923 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4613862Z  2026-10-10 17:49:26.925 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4614200Z  2026-10-10 17:49:26.927 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4614608Z  2026-10-10 17:49:26.928 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4614971Z  2026-10-10 17:49:26.931 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4615340Z  2026-10-10 17:49:26.935 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4615678Z  2026-10-10 17:49:26.937 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4616063Z  2026-10-10 17:49:26.939 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4616441Z  2026-10-10 17:49:26.941 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4616781Z  2026-10-10 17:49:26.943 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4617178Z  2026-10-10 17:49:27.015 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4617519Z  2026-10-10 17:49:27.017 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4617906Z  2026-10-10 17:49:27.020 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4618281Z  2026-10-10 17:49:27.022 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4618608Z  2026-10-10 17:49:27.028 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4618986Z  2026-10-10 17:49:27.029 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4619514Z  2026-10-10 17:49:27.031 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4620011Z  2026-10-10 17:49:27.032 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4620373Z  2026-10-10 17:49:27.035 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4620733Z  2026-10-10 17:49:27.038 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4621080Z  2026-10-10 17:49:27.040 UTC [140] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4621534Z  2026-10-10 17:49:27.072 UTC [142] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4621915Z  2026-10-10 17:49:27.082 UTC [142] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4622253Z  2026-10-10 17:49:27.087 UTC [142] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4622644Z  2026-10-10 17:49:27.132 UTC [144] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4623013Z  2026-10-10 17:49:27.137 UTC [144] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4623340Z  2026-10-10 17:49:27.142 UTC [144] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4623744Z  2026-10-10 17:49:27.145 UTC [144] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4624081Z  2026-10-10 17:49:27.154 UTC [144] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4624454Z  2026-10-10 17:49:27.161 UTC [144] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4624846Z  2026-10-10 17:49:27.168 UTC [144] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4625206Z  2026-10-10 17:49:27.218 UTC [148] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4625553Z  2026-10-10 17:49:27.249 UTC [148] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4625907Z  2026-10-10 17:49:27.270 UTC [148] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4626291Z  2026-10-10 17:49:27.296 UTC [150] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4626680Z  2026-10-10 17:49:27.387 UTC [150] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4627051Z  2026-10-10 17:49:27.390 UTC [150] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4627389Z  2026-10-10 17:49:27.391 UTC [150] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4627773Z  2026-10-10 17:49:27.395 UTC [150] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4628150Z  2026-10-10 17:49:27.397 UTC [150] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4628488Z  2026-10-10 17:49:27.401 UTC [150] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4628880Z  2026-10-10 17:49:27.403 UTC [150] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4629333Z  2026-10-10 17:49:27.404 UTC [150] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4629694Z  2026-10-10 17:49:27.452 UTC [154] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4630096Z  2026-10-10 17:49:27.462 UTC [154] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4630422Z  2026-10-10 17:49:27.465 UTC [154] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4630803Z  2026-10-10 17:49:27.467 UTC [154] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4631168Z  2026-10-10 17:49:27.470 UTC [154] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4631539Z  2026-10-10 17:49:27.471 UTC [154] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4631904Z  2026-10-10 17:49:27.473 UTC [154] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4632380Z  2026-10-10 17:49:27.518 UTC [158] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4632726Z  2026-10-10 17:49:27.526 UTC [158] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4633078Z  2026-10-10 17:49:27.533 UTC [158] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4633486Z  2026-10-10 17:49:27.562 UTC [161] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4633898Z  2026-10-10 17:49:27.615 UTC [165] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4634293Z  2026-10-10 17:49:27.633 UTC [165] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4634630Z  2026-10-10 17:49:27.638 UTC [165] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4634987Z  2026-10-10 17:49:27.640 UTC [165] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4635392Z  2026-10-10 17:49:27.644 UTC [165] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4635729Z  2026-10-10 17:49:27.646 UTC [165] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4636100Z  2026-10-10 17:49:27.648 UTC [165] WARNING:  SET LOCAL can only be used in transaction blocks
+2026-10-10T17:49:31.4636492Z  2026-10-10 17:49:28.957 UTC [178] ERROR:  database "medusa_return_qualification-template" does not exist
+2026-10-10T17:49:31.4636977Z  2026-10-10 17:49:28.957 UTC [178] STATEMENT:  ALTER DATABASE "medusa_return_qualification-template" WITH ALLOW_CONNECTIONS false;
+2026-10-10T17:49:31.4637403Z  2026-10-10 17:49:28.961 UTC [174] FATAL:  terminating connection due to administrator command
+2026-10-10T17:49:31.4637762Z  2026-10-10 17:49:28.961 UTC [99] FATAL:  terminating connection due to administrator command
+2026-10-10T17:49:31.4638153Z  2026-10-10 17:49:28.961 UTC [177] FATAL:  terminating connection due to administrator command
+2026-10-10T17:49:31.4638551Z  2026-10-10 17:49:28.961 UTC [173] FATAL:  terminating connection due to administrator command
+2026-10-10T17:49:31.4638925Z  2026-10-10 17:49:28.961 UTC [176] FATAL:  terminating connection due to administrator command
+2026-10-10T17:49:31.4639408Z  2026-10-10 17:49:28.962 UTC [175] FATAL:  terminating connection due to administrator command
+2026-10-10T17:49:31.4639782Z  2026-10-10 17:49:29.805 UTC [60] LOG:  checkpoint starting: immediate force wait
+2026-10-10T17:49:31.4640426Z  2026-10-10 17:49:29.967 UTC [60] LOG:  checkpoint complete: wrote 1661 buffers (10.1%); 0 WAL file(s) added, 0 removed, 1 recycled; write=0.139 s, sync=0.017 s, total=0.162 s; sync files=1773, longest=0.008 s, average=0.001 s; distance=18003 kB, estimate=18003 kB; lsn=0/26878E8, redo lsn=0/26878B0
+2026-10-10T17:49:31.4641081Z  2026-10-10 17:49:29.995 UTC [60] LOG:  checkpoint starting: immediate force wait
+2026-10-10T17:49:31.4641755Z  2026-10-10 17:49:29.997 UTC [60] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.003 s; sync files=2, longest=0.001 s, average=0.001 s; distance=1 kB, estimate=16203 kB; lsn=0/2688050, redo lsn=0/2688018
+2026-10-10T17:49:31.4642527Z  waiting for server to start....2026-10-10 17:49:01.051 UTC [48] LOG:  starting PostgreSQL 16.15 (Debian 16.15-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+2026-10-10T17:49:31.4643099Z  2026-10-10 17:49:01.052 UTC [48] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-10-10T17:49:31.4643459Z  2026-10-10 17:49:01.054 UTC [51] LOG:  database system was shut down at 2026-10-10 17:49:00 UTC
+2026-10-10T17:49:31.4643813Z  2026-10-10 17:49:01.057 UTC [48] LOG:  database system is ready to accept connections
+2026-10-10T17:49:31.4644191Z   done
+2026-10-10T17:49:31.4644367Z  server started
+2026-10-10T17:49:31.4644495Z  
+2026-10-10T17:49:31.4644673Z  /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+2026-10-10T17:49:31.4644968Z  
+2026-10-10T17:49:31.4645112Z  2026-10-10 17:49:01.162 UTC [48] LOG:  received fast shutdown request
+2026-10-10T17:49:31.4645385Z  waiting for server to shut down....2026-10-10 17:49:01.162 UTC [48] LOG:  aborting any active transactions
+2026-10-10T17:49:31.4645734Z  2026-10-10 17:49:01.163 UTC [48] LOG:  background worker "logical replication launcher" (PID 54) exited with exit code 1
+2026-10-10T17:49:31.4646013Z  2026-10-10 17:49:01.164 UTC [49] LOG:  shutting down
+2026-10-10T17:49:31.4646301Z  2026-10-10 17:49:01.165 UTC [49] LOG:  checkpoint starting: shutdown immediate
+2026-10-10T17:49:31.4646817Z  2026-10-10 17:49:01.166 UTC [49] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.002 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/14F2AE8, redo lsn=0/14F2AE8
+2026-10-10T17:49:31.4647323Z  2026-10-10 17:49:01.169 UTC [48] LOG:  database system is shut down
+2026-10-10T17:49:31.4647496Z   done
+2026-10-10T17:49:31.4647599Z  server stopped
+2026-10-10T17:49:31.4647712Z  
+2026-10-10T17:49:31.4647843Z  PostgreSQL init process complete; ready for start up.
+2026-10-10T17:49:31.4648003Z  
+2026-10-10T17:49:31.4651727Z Stop and remove container: e99421fbfef54b4b917fbade1b510a94_postgres16_1c684e
+2026-10-10T17:49:31.4654671Z ##[command]/usr/bin/docker rm --force 6a61d5ffe85a76fe8ddb710f4833b253a2e2036d3dfbacc6d85e09448d5054b0
+2026-10-10T17:49:33.3035491Z 6a61d5ffe85a76fe8ddb710f4833b253a2e2036d3dfbacc6d85e09448d5054b0
+2026-10-10T17:49:33.3058699Z Remove container network: github_network_d1f6b6fad4934e268070bc35a5b438bc
+2026-10-10T17:49:33.3061337Z ##[command]/usr/bin/docker network rm github_network_d1f6b6fad4934e268070bc35a5b438bc
+2026-10-10T17:49:33.3865582Z github_network_d1f6b6fad4934e268070bc35a5b438bc
+2026-10-10T17:49:33.3917878Z Cleaning up orphan processes
+2026-10-10T17:49:33.4122529Z Terminate orphan process: pid (2669) (python)
+2026-10-10T17:49:33.4158607Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

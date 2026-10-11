@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 650" role="img" aria-labelledby="title desc">
+<title id="title">Figure 3. Policy-cascade semantics</title><desc id="desc">Remember approves eligible pending calls; restriction preserves accepted decisions; different tools remain isolated.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#516579"/></marker></defs>
+<rect width="1120" height="650" fill="white"/>
+<g font-family="DejaVu Sans,Arial,sans-serif">
+<text x="32" y="40" font-size="25" fill="#15283b" font-weight="bold">Figure 3. Policy-cascade semantics</text>
+<text x="32" y="80" font-size="18" fill="#516579" font-weight="normal">Calls are registered a then b. The initiating remembered approval is b.</text>
+<rect x="35" y="120" width="290" height="135" rx="9" fill="#f5f8fc" stroke="#245bb2" stroke-width="2"/>
+<text x="50" y="149" font-size="17" fill="#245bb2" font-weight="bold">Initial: same tool</text>
+<text x="50" y="173" font-size="17" fill="#15283b" font-weight="normal">a: pending   b: pending</text>
+<text x="50" y="197" font-size="17" fill="#15283b" font-weight="normal">allowed: {}</text>
+<text x="50" y="221" font-size="17" fill="#15283b" font-weight="normal">history: empty</text>
+<rect x="410" y="120" width="290" height="135" rx="9" fill="#f5f8fc" stroke="#167052" stroke-width="2"/>
+<text x="425" y="149" font-size="17" fill="#167052" font-weight="bold">Remember(b)</text>
+<text x="425" y="173" font-size="17" fill="#15283b" font-weight="normal">a: approved   b: approved</text>
+<text x="425" y="197" font-size="17" fill="#15283b" font-weight="normal">allowed: {shared}</text>
+<text x="425" y="221" font-size="17" fill="#15283b" font-weight="normal">history: b, a</text>
+<rect x="785" y="120" width="300" height="135" rx="9" fill="#f5f8fc" stroke="#167052" stroke-width="2"/>
+<text x="800" y="149" font-size="17" fill="#167052" font-weight="bold">Update({})</text>
+<text x="800" y="173" font-size="17" fill="#15283b" font-weight="normal">a: approved   b: approved</text>
+<text x="800" y="197" font-size="17" fill="#15283b" font-weight="normal">allowed: {}</text>
+<text x="800" y="221" font-size="17" fill="#15283b" font-weight="normal">history: b, a</text>
+<path d="M325,187  L410,187" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M700,187  L785,187" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<text x="35" y="300" font-size="19" fill="#15283b" font-weight="bold">Restriction changes eligibility; it does not revoke accepted resolutions.</text>
+<text x="35" y="359" font-size="17" fill="#516579" font-weight="bold">DIFFERENT TOOLS: a is shared; b is other</text>
+<rect x="35" y="395" width="290" height="135" rx="9" fill="#f5f8fc" stroke="#245bb2" stroke-width="2"/>
+<text x="50" y="424" font-size="17" fill="#245bb2" font-weight="bold">Initial: different tools</text>
+<text x="50" y="448" font-size="17" fill="#15283b" font-weight="normal">a: pending   b: pending</text>
+<text x="50" y="472" font-size="17" fill="#15283b" font-weight="normal">allowed: {}</text>
+<text x="50" y="496" font-size="17" fill="#15283b" font-weight="normal">history: empty</text>
+<rect x="410" y="395" width="290" height="135" rx="9" fill="#f5f8fc" stroke="#167052" stroke-width="2"/>
+<text x="425" y="424" font-size="17" fill="#167052" font-weight="bold">Remember(a)</text>
+<text x="425" y="448" font-size="17" fill="#15283b" font-weight="normal">a: approved   b: pending</text>
+<text x="425" y="472" font-size="17" fill="#15283b" font-weight="normal">allowed: {shared}</text>
+<text x="425" y="496" font-size="17" fill="#15283b" font-weight="normal">history: a</text>
+<path d="M325,462  L410,462" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<text x="745" y="430" font-size="19" fill="#15283b" font-weight="bold">ScopePreserved:</text>
+<text x="745" y="463" font-size="18" fill="#15283b" font-weight="normal">the other tool stays gated.</text>
+<text x="35" y="585" font-size="17" fill="#516579" font-weight="normal">Remember / Update are atomic projections of synchronous implementation operations.</text>
+<text x="35" y="614" font-size="17" fill="#516579" font-weight="normal">Resolution publication and evaluator cleanup are different stages.</text>
+</g>
+</svg>

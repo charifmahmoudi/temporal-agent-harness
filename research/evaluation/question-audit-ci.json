@@ -1,0 +1,413 @@
+{
+  "schema": 1,
+  "kind": "retrospective_evidence_audit",
+  "protocol_commit": "c00ebd11100e341046a7d65d21426d83a8849cf6",
+  "evidence_cutoff_commit": "72ed3d82bf11871d526043cbee6c0d0ad9b675bc",
+  "run_url": "https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38058606710",
+  "run_attempt": "1",
+  "checkout_commit": "a40115957f69748f96bd1e2744cea22777c7eaac",
+  "pr_head_commit": "7558fc38d5bb62c3d33855ed9fa4eedb5f9bd0f5",
+  "checks_passed": [
+    [
+      "summarize_recovery_comparison.py",
+      "--check"
+    ],
+    [
+      "audit_nexus_evidence.py",
+      "--check"
+    ],
+    [
+      "audit_nexus_evidence.py",
+      "--check",
+      "--continuations"
+    ],
+    [
+      "test_nexus_evidence.py"
+    ],
+    [
+      "audit_local_activity_evidence.py",
+      "--check"
+    ],
+    [
+      "audit_local_activity_evidence.py",
+      "--check",
+      "--corrected"
+    ]
+  ],
+  "input_sha256": {
+    "continuation-summary.json": "343d116bef27cf5f802fa50badc5c3c616c931dda3ad728539b2b91556ccf39e",
+    "local-activity-summary.json": "0269bf852c70f8af9c067d8c370888b843865a3d5c79019ee2f4d8c5a04e8a17",
+    "local-activity-corrected-summary.json": "4d86a223e56b3cb949051e418f8a019023cee72d860c0b3ddaafc3481ad0764a",
+    "recovery-comparison-summary.json": "f20eb63e0ea7816f625b087bda7b5e58e014249f6d9a379863249a8399122c86",
+    "open-recovery-summary.json": "abbeef10b076e29777f737aba5e97445fa115be2d1886b6cb99361e909094ddc",
+    "continuation-evidence.json": "8c5ad520606d6128c15a1dc556286e2e39adba371609722e87cb5f1ec1ea2ccb",
+    "open-recovery-evidence.json": "50960815a6bb18b4143e8585b06e48921cb45eff9608e7e1f9882536c9c7856c",
+    "local-activity-evidence.json": "4b1578f196610acf526c86eb158de9fc597954d4cc181c3c26b3f4e79ea10714",
+    "local-activity-corrected-evidence.json": "668ab04db448304203dde18e632ab89d4eee50961a1096dd551e3d8cf30f1d59",
+    "recovery-comparison-evidence.json": "96ac1897c44c76610d2f346300b8129656fff0ee39bce976c5e1e825d6c1b798",
+    "question-audit-protocol.md": "2466c8710522f015dccc99dcbf58e1077b1302090c83159d8338803ad53cc8cc"
+  },
+  "context": {
+    "run_url": "https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38037723644",
+    "arms": [
+      {
+        "arm": "affected",
+        "verdicts": {
+          "passed": 6,
+          "confirmed_mechanism": 6
+        }
+      },
+      {
+        "arm": "fixed",
+        "verdicts": {
+          "passed": 12
+        }
+      }
+    ]
+  },
+  "continuation": {
+    "run_url": "https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38039466357",
+    "arms": [
+      {
+        "arm": "affected",
+        "verdicts": {
+          "passed": 12,
+          "confirmed_mechanism": 12
+        }
+      },
+      {
+        "arm": "fixed",
+        "verdicts": {
+          "passed": 24
+        }
+      }
+    ],
+    "confirmed_failure_activation_records": [
+      {
+        "arm": "affected",
+        "case": "nexus_continuation_timer0_cached",
+        "repetition": 1,
+        "only_live_non_eviction_before_first_failure": true,
+        "wake_failure_markers": [
+          "false",
+          "false",
+          "false",
+          "false"
+        ]
+      },
+      {
+        "arm": "affected",
+        "case": "nexus_continuation_timer0_cold",
+        "repetition": 1,
+        "only_live_non_eviction_before_first_failure": false,
+        "wake_failure_markers": [
+          "false",
+          "false",
+          "false"
+        ]
+      },
+      {
+        "arm": "affected",
+        "case": "nexus_continuation_timer1_cached",
+        "repetition": 1,
+        "only_live_non_eviction_before_first_failure": true,
+        "wake_failure_markers": [
+          "false",
+          "false",
+          "false",
+          "false"
+        ]
+      },
+      {
+        "arm": "affected",
+        "case": "nexus_continuation_timer1_cold",
+        "repetition": 1,
+        "only_live_non_eviction_before_first_failure": false,
+        "wake_failure_markers": [
+          "false",
+          "false",
+          "false"
+        ]
+      },
+      {
+        "arm": "affected",
+        "case": "nexus_continuation_timer0_cached",
+        "repetition": 2,
+        "only_live_non_eviction_before_first_failure": true,
+        "wake_failure_markers": [
+          "false",
+          "false",
+          "false",
+          "false"
+        ]
+      },
+      {
+        "arm": "affected",
+        "case": "nexus_continuation_timer0_cold",
+        "repetition": 2,
+        "only_live_non_eviction_before_first_failure": false,
+        "wake_failure_markers": [
+          "false",
+          "false",
+          "false"
+        ]
+      },
+      {
+        "arm": "affected",
+        "case": "nexus_continuation_timer1_cached",
+        "repetition": 2,
+        "only_live_non_eviction_before_first_failure": true,
+        "wake_failure_markers": [
+          "false",
+          "false",
+          "false",
+          "false"
+        ]
+      },
+      {
+        "arm": "affected",
+        "case": "nexus_continuation_timer1_cold",
+        "repetition": 2,
+        "only_live_non_eviction_before_first_failure": false,
+        "wake_failure_markers": [
+          "false",
+          "false",
+          "false"
+        ]
+      },
+      {
+        "arm": "affected",
+        "case": "nexus_continuation_timer0_cached",
+        "repetition": 3,
+        "only_live_non_eviction_before_first_failure": true,
+        "wake_failure_markers": [
+          "false",
+          "false",
+          "false",
+          "false"
+        ]
+      },
+      {
+        "arm": "affected",
+        "case": "nexus_continuation_timer0_cold",
+        "repetition": 3,
+        "only_live_non_eviction_before_first_failure": false,
+        "wake_failure_markers": [
+          "false",
+          "false",
+          "false"
+        ]
+      },
+      {
+        "arm": "affected",
+        "case": "nexus_continuation_timer1_cached",
+        "repetition": 3,
+        "only_live_non_eviction_before_first_failure": true,
+        "wake_failure_markers": [
+          "false",
+          "false",
+          "false",
+          "false"
+        ]
+      },
+      {
+        "arm": "affected",
+        "case": "nexus_continuation_timer1_cold",
+        "repetition": 3,
+        "only_live_non_eviction_before_first_failure": false,
+        "wake_failure_markers": [
+          "false",
+          "false",
+          "false"
+        ]
+      }
+    ]
+  },
+  "identity": {
+    "local-activity-summary.json": {
+      "run_url": "https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38039790691",
+      "cells": [
+        {
+          "sdk": "1.33.0",
+          "local": true,
+          "verdicts": {
+            "reported_decoding_mechanism": 3
+          }
+        },
+        {
+          "sdk": "1.33.0",
+          "local": false,
+          "verdicts": {
+            "compatible": 3
+          }
+        },
+        {
+          "sdk": "1.34.0",
+          "local": true,
+          "verdicts": {
+            "compatible": 3
+          }
+        },
+        {
+          "sdk": "1.34.0",
+          "local": false,
+          "verdicts": {
+            "compatible": 3
+          }
+        }
+      ]
+    },
+    "local-activity-corrected-summary.json": {
+      "run_url": "https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38040064854",
+      "cells": [
+        {
+          "sdk": "1.33.0",
+          "local": true,
+          "verdicts": {
+            "reported_decoding_mechanism": 3
+          }
+        },
+        {
+          "sdk": "1.33.0",
+          "local": false,
+          "verdicts": {
+            "compatible": 3
+          }
+        },
+        {
+          "sdk": "1.34.0",
+          "local": true,
+          "verdicts": {
+            "compatible": 3
+          }
+        },
+        {
+          "sdk": "1.34.0",
+          "local": false,
+          "verdicts": {
+            "compatible": 3
+          }
+        }
+      ]
+    }
+  },
+  "schedules": {
+    "run_url": "https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38033588999",
+    "arms": [
+      {
+        "sdk": "1.8.0",
+        "methods": [
+          {
+            "method": "systematic",
+            "verdicts": {
+              "compatible": 6,
+              "nondeterministic": 6
+            },
+            "first_detection_by_seed": [
+              2,
+              2,
+              2
+            ],
+            "coverage_by_seed": [
+              2,
+              2,
+              2
+            ]
+          },
+          {
+            "method": "random",
+            "verdicts": {
+              "nondeterministic": 9,
+              "compatible": 3
+            },
+            "first_detection_by_seed": [
+              1,
+              1,
+              2
+            ],
+            "coverage_by_seed": [
+              2,
+              2,
+              2
+            ]
+          },
+          {
+            "method": "regression",
+            "verdicts": {
+              "nondeterministic": 12
+            },
+            "first_detection_by_seed": [
+              1,
+              1,
+              1
+            ],
+            "coverage_by_seed": [
+              1,
+              1,
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "sdk": "1.9.0",
+        "methods": [
+          {
+            "method": "systematic",
+            "verdicts": {
+              "compatible": 12
+            },
+            "first_detection_by_seed": [
+              null,
+              null,
+              null
+            ],
+            "coverage_by_seed": [
+              2,
+              2,
+              2
+            ]
+          },
+          {
+            "method": "random",
+            "verdicts": {
+              "compatible": 12
+            },
+            "first_detection_by_seed": [
+              null,
+              null,
+              null
+            ],
+            "coverage_by_seed": [
+              2,
+              2,
+              2
+            ]
+          },
+          {
+            "method": "regression",
+            "verdicts": {
+              "compatible": 12
+            },
+            "first_detection_by_seed": [
+              null,
+              null,
+              null
+            ],
+            "coverage_by_seed": [
+              1,
+              1,
+              1
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "new_runtime_trials": 0,
+  "limitations": [
+    "Previously observed development cases; no blind holdouts.",
+    "Mechanical consistency does not establish novelty or causal sufficiency.",
+    "Same SDK Core lineage; language bindings are not independent engines."
+  ]
+}
