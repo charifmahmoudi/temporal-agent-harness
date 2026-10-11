@@ -1,0 +1,380 @@
+{
+  "cases": [
+    {
+      "repository": "temporalio/temporal",
+      "number": 6514,
+      "title": "Stuck Temporal Server",
+      "url": "https://github.com/temporalio/temporal/issues/6514",
+      "state_at_read": "closed",
+      "updated_at": "2024-10-21T01:50:56Z",
+      "discussion_urls": [
+        "https://github.com/temporalio/temporal/issues/6514#issuecomment-2352472700",
+        "https://github.com/temporalio/temporal/issues/6514#issuecomment-2358402824",
+        "https://github.com/temporalio/temporal/issues/6514#issuecomment-2361436592",
+        "https://github.com/temporalio/temporal/issues/6514#issuecomment-2361583781",
+        "https://github.com/temporalio/temporal/issues/6514#issuecomment-2361629014",
+        "https://github.com/temporalio/temporal/issues/6514#issuecomment-2361652877",
+        "https://github.com/temporalio/temporal/issues/6514#issuecomment-2362092614",
+        "https://github.com/temporalio/temporal/issues/6514#issuecomment-2363760398",
+        "https://github.com/temporalio/temporal/issues/6514#issuecomment-2368048463",
+        "https://github.com/temporalio/temporal/issues/6514#issuecomment-2408255085",
+        "https://github.com/temporalio/temporal/issues/6514#issuecomment-2425394135"
+      ],
+      "selection": "consequence search"
+    },
+    {
+      "repository": "temporalio/temporal",
+      "number": 3826,
+      "title": "context deadline exceeded in worker log when starting a workflow after upgrading to 1.19.0",
+      "url": "https://github.com/temporalio/temporal/issues/3826",
+      "state_at_read": "closed",
+      "updated_at": "2023-02-16T23:18:17Z",
+      "discussion_urls": [
+        "https://github.com/temporalio/temporal/issues/3826#issuecomment-1407155964",
+        "https://github.com/temporalio/temporal/issues/3826#issuecomment-1407166642",
+        "https://github.com/temporalio/temporal/issues/3826#issuecomment-1407195719",
+        "https://github.com/temporalio/temporal/issues/3826#issuecomment-1410797429",
+        "https://github.com/temporalio/temporal/issues/3826#issuecomment-1410856600",
+        "https://github.com/temporalio/temporal/issues/3826#issuecomment-1410987415",
+        "https://github.com/temporalio/temporal/issues/3826#issuecomment-1411111701",
+        "https://github.com/temporalio/temporal/issues/3826#issuecomment-1412111005",
+        "https://github.com/temporalio/temporal/issues/3826#issuecomment-1419540658",
+        "https://github.com/temporalio/temporal/issues/3826#issuecomment-1419575551",
+        "https://github.com/temporalio/temporal/issues/3826#issuecomment-1419746667",
+        "https://github.com/temporalio/temporal/issues/3826#issuecomment-1421448539",
+        "https://github.com/temporalio/temporal/issues/3826#issuecomment-1421515148",
+        "https://github.com/temporalio/temporal/issues/3826#issuecomment-1421654375"
+      ],
+      "selection": "consequence search"
+    },
+    {
+      "repository": "temporalio/temporal",
+      "number": 1829,
+      "title": "CronSchedule workflow stop",
+      "url": "https://github.com/temporalio/temporal/issues/1829",
+      "state_at_read": "closed",
+      "updated_at": "2021-08-29T22:40:03Z",
+      "discussion_urls": [
+        "https://github.com/temporalio/temporal/issues/1829#issuecomment-901079653",
+        "https://github.com/temporalio/temporal/issues/1829#issuecomment-901562780",
+        "https://github.com/temporalio/temporal/issues/1829#issuecomment-901573599",
+        "https://github.com/temporalio/temporal/issues/1829#issuecomment-901582643",
+        "https://github.com/temporalio/temporal/issues/1829#issuecomment-902143632",
+        "https://github.com/temporalio/temporal/issues/1829#issuecomment-902371596",
+        "https://github.com/temporalio/temporal/issues/1829#issuecomment-902376727",
+        "https://github.com/temporalio/temporal/issues/1829#issuecomment-902880579",
+        "https://github.com/temporalio/temporal/issues/1829#issuecomment-903621199",
+        "https://github.com/temporalio/temporal/issues/1829#issuecomment-905429749",
+        "https://github.com/temporalio/temporal/issues/1829#issuecomment-905672874",
+        "https://github.com/temporalio/temporal/issues/1829#issuecomment-907795486",
+        "https://github.com/temporalio/temporal/issues/1829#issuecomment-907888556"
+      ],
+      "selection": "consequence search"
+    },
+    {
+      "repository": "temporalio/temporal",
+      "number": 2464,
+      "title": "Archival attempted for already archived workflow",
+      "url": "https://github.com/temporalio/temporal/issues/2464",
+      "state_at_read": "closed",
+      "updated_at": "2022-02-07T08:17:48Z",
+      "discussion_urls": [
+        "https://github.com/temporalio/temporal/issues/2464#issuecomment-1030352428",
+        "https://github.com/temporalio/temporal/issues/2464#issuecomment-1030533262",
+        "https://github.com/temporalio/temporal/issues/2464#issuecomment-1030935564",
+        "https://github.com/temporalio/temporal/issues/2464#issuecomment-1031186653"
+      ],
+      "selection": "consequence search"
+    },
+    {
+      "repository": "dbos-inc/dbos-transact-py",
+      "number": 544,
+      "title": "SetWorkflowID does not prevent concurrent execution of workflows with the same ID (until completed)",
+      "url": "https://github.com/dbos-inc/dbos-transact-py/issues/544",
+      "state_at_read": "closed",
+      "updated_at": "2026-01-06T19:28:17Z",
+      "discussion_urls": [
+        "https://github.com/dbos-inc/dbos-transact-py/issues/544#issuecomment-3661152898",
+        "https://github.com/dbos-inc/dbos-transact-py/issues/544#issuecomment-3661254928",
+        "https://github.com/dbos-inc/dbos-transact-py/issues/544#issuecomment-3669592356"
+      ],
+      "selection": "consequence search"
+    },
+    {
+      "repository": "dbos-inc/dbos-transact-py",
+      "number": 714,
+      "title": "DBOS.patch_async / deprecate_patch_async are concurrency-unsafe in async workflows: checkpoint race → DBOSWorkflowConflictIDError → persist() polls forever",
+      "url": "https://github.com/dbos-inc/dbos-transact-py/issues/714",
+      "state_at_read": "closed",
+      "updated_at": "2026-06-12T18:55:02Z",
+      "discussion_urls": [
+        "https://github.com/dbos-inc/dbos-transact-py/issues/714#issuecomment-4682130115",
+        "https://github.com/dbos-inc/dbos-transact-py/issues/714#issuecomment-4682941208",
+        "https://github.com/dbos-inc/dbos-transact-py/issues/714#issuecomment-4683304885"
+      ],
+      "selection": "consequence search"
+    },
+    {
+      "repository": "dbos-inc/dbos-transact-py",
+      "number": 770,
+      "title": "DBOS.write_stream from inside a step is not exactly-once — it duplicates the value on every step retry",
+      "url": "https://github.com/dbos-inc/dbos-transact-py/issues/770",
+      "state_at_read": "closed",
+      "updated_at": "2026-07-13T14:21:37Z",
+      "discussion_urls": [
+        "https://github.com/dbos-inc/dbos-transact-py/issues/770#issuecomment-4938615930",
+        "https://github.com/dbos-inc/dbos-transact-py/issues/770#issuecomment-4958972562"
+      ],
+      "selection": "consequence search"
+    },
+    {
+      "repository": "dbos-inc/dbos-transact-py",
+      "number": 702,
+      "title": "Debouncer infinite loop when application version changes between deploys",
+      "url": "https://github.com/dbos-inc/dbos-transact-py/issues/702",
+      "state_at_read": "closed",
+      "updated_at": "2026-06-03T05:13:07Z",
+      "discussion_urls": [
+        "https://github.com/dbos-inc/dbos-transact-py/issues/702#issuecomment-4605128464",
+        "https://github.com/dbos-inc/dbos-transact-py/issues/702#issuecomment-4609285938"
+      ],
+      "selection": "consequence search"
+    },
+    {
+      "repository": "restatedev/restate",
+      "number": 2655,
+      "title": "Restate partition processor can become stuck after a period of network isolation ends",
+      "url": "https://github.com/restatedev/restate/issues/2655",
+      "state_at_read": "closed",
+      "updated_at": "2025-02-11T15:35:18Z",
+      "discussion_urls": [
+        "https://github.com/restatedev/restate/issues/2655#issuecomment-2642544319",
+        "https://github.com/restatedev/restate/issues/2655#issuecomment-2643562784",
+        "https://github.com/restatedev/restate/issues/2655#issuecomment-2647265796",
+        "https://github.com/restatedev/restate/issues/2655#issuecomment-2647289221",
+        "https://github.com/restatedev/restate/issues/2655#issuecomment-2647461832",
+        "https://github.com/restatedev/restate/issues/2655#issuecomment-2647550759",
+        "https://github.com/restatedev/restate/issues/2655#issuecomment-2648370207",
+        "https://github.com/restatedev/restate/issues/2655#issuecomment-2648386333",
+        "https://github.com/restatedev/restate/issues/2655#issuecomment-2648389053",
+        "https://github.com/restatedev/restate/issues/2655#issuecomment-2651186197"
+      ],
+      "selection": "prior inventory consequence lead"
+    },
+    {
+      "repository": "restatedev/restate",
+      "number": 2565,
+      "title": "Brief network partitions can cause all ingress requests to time out even after network is healed",
+      "url": "https://github.com/restatedev/restate/issues/2565",
+      "state_at_read": "closed",
+      "updated_at": "2025-02-11T15:34:19Z",
+      "discussion_urls": [
+        "https://github.com/restatedev/restate/issues/2565#issuecomment-2618962401",
+        "https://github.com/restatedev/restate/issues/2565#issuecomment-2619107399",
+        "https://github.com/restatedev/restate/issues/2565#issuecomment-2620007866",
+        "https://github.com/restatedev/restate/issues/2565#issuecomment-2620013950",
+        "https://github.com/restatedev/restate/issues/2565#issuecomment-2620930211",
+        "https://github.com/restatedev/restate/issues/2565#issuecomment-2650192629",
+        "https://github.com/restatedev/restate/issues/2565#issuecomment-2651183413"
+      ],
+      "selection": "prior inventory consequence lead"
+    },
+    {
+      "repository": "restatedev/restate",
+      "number": 4838,
+      "title": "1.7.0-rc.1: `Invalid column family specified in write batch` in journal completion-id index cleanup crash-loops partition processors after upgrade from 1.6.2",
+      "url": "https://github.com/restatedev/restate/issues/4838",
+      "state_at_read": "closed",
+      "updated_at": "2026-06-02T11:59:21Z",
+      "discussion_urls": [
+        "https://github.com/restatedev/restate/issues/4838#issuecomment-4582349682",
+        "https://github.com/restatedev/restate/issues/4838#issuecomment-4582363902",
+        "https://github.com/restatedev/restate/issues/4838#issuecomment-4584854888"
+      ],
+      "selection": "prior inventory consequence lead"
+    },
+    {
+      "repository": "restatedev/restate",
+      "number": 4513,
+      "title": "Workflow /output endpoint can return spurious 404 during partition reconfiguration",
+      "url": "https://github.com/restatedev/restate/issues/4513",
+      "state_at_read": "closed",
+      "updated_at": "2026-03-31T12:46:16Z",
+      "discussion_urls": [],
+      "selection": "prior inventory consequence lead"
+    },
+    {
+      "repository": "dbos-inc/dbos-transact-py",
+      "number": 837,
+      "title": "Workflows sharing a __qualname__ across modules collapse to one registry entry, so recovery can resolve to the wrong function",
+      "url": "https://github.com/dbos-inc/dbos-transact-py/issues/837",
+      "state_at_read": "closed",
+      "updated_at": "2026-09-01T16:34:27Z",
+      "discussion_urls": [
+        "https://github.com/dbos-inc/dbos-transact-py/issues/837#issuecomment-5469246003",
+        "https://github.com/dbos-inc/dbos-transact-py/issues/837#issuecomment-5469524672",
+        "https://github.com/dbos-inc/dbos-transact-py/issues/837#issuecomment-5480682404",
+        "https://github.com/dbos-inc/dbos-transact-py/issues/837#issuecomment-5481521077",
+        "https://github.com/dbos-inc/dbos-transact-py/issues/837#issuecomment-5482534265",
+        "https://github.com/dbos-inc/dbos-transact-py/issues/837#issuecomment-5482940559",
+        "https://github.com/dbos-inc/dbos-transact-py/issues/837#issuecomment-5497149088",
+        "https://github.com/dbos-inc/dbos-transact-py/issues/837#issuecomment-5497182067"
+      ],
+      "selection": "duplicate search, added after discussion read"
+    },
+    {
+      "repository": "dbos-inc/dbos-transact-py",
+      "number": 880,
+      "title": "Internal workflow operations don't record their failures, so a replay can take a different branch",
+      "url": "https://github.com/dbos-inc/dbos-transact-py/issues/880",
+      "state_at_read": "open",
+      "updated_at": "2026-10-07T17:23:40Z",
+      "discussion_urls": [
+        "https://github.com/dbos-inc/dbos-transact-py/issues/880#issuecomment-6023237623"
+      ],
+      "selection": "adaptive addition from official repository search result"
+    }
+  ],
+  "searches": [
+    {
+      "query": "repo:temporalio/temporal is:issue stuck",
+      "sort": "comments",
+      "order": "desc",
+      "limit": 6,
+      "results": [
+        {
+          "number": 1507,
+          "url": "https://github.com/temporalio/temporal/issues/1507",
+          "title": "Provide priority task queues",
+          "selected": false
+        },
+        {
+          "number": 425,
+          "url": "https://github.com/temporalio/temporal/issues/425",
+          "title": "Repeated \"New timer generated is less than read level\" in logs after adding node to cluster",
+          "selected": false
+        },
+        {
+          "number": 5680,
+          "url": "https://github.com/temporalio/temporal/issues/5680",
+          "title": "Official support for Opensearch",
+          "selected": false
+        },
+        {
+          "number": 3826,
+          "url": "https://github.com/temporalio/temporal/issues/3826",
+          "title": "context deadline exceeded in worker log when starting a workflow after upgrading to 1.19.0",
+          "selected": true
+        },
+        {
+          "number": 1829,
+          "url": "https://github.com/temporalio/temporal/issues/1829",
+          "title": "CronSchedule workflow stop",
+          "selected": true
+        },
+        {
+          "number": 6514,
+          "url": "https://github.com/temporalio/temporal/issues/6514",
+          "title": "Stuck Temporal Server",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "query": "repo:dbos-inc/dbos-transact-py is:issue duplicate",
+      "sort": "comments",
+      "order": "desc",
+      "limit": 6,
+      "results": [
+        {
+          "number": 837,
+          "url": "https://github.com/dbos-inc/dbos-transact-py/issues/837",
+          "title": "Workflows sharing a __qualname__ across modules collapse to one registry entry, so recovery can resolve to the wrong function",
+          "selected": true
+        },
+        {
+          "number": 714,
+          "url": "https://github.com/dbos-inc/dbos-transact-py/issues/714",
+          "title": "DBOS.patch_async / deprecate_patch_async are concurrency-unsafe in async workflows: checkpoint race → DBOSWorkflowConflictIDError → persist() polls forever",
+          "selected": true
+        },
+        {
+          "number": 544,
+          "url": "https://github.com/dbos-inc/dbos-transact-py/issues/544",
+          "title": "SetWorkflowID does not prevent concurrent execution of workflows with the same ID (until completed)",
+          "selected": true
+        },
+        {
+          "number": 770,
+          "url": "https://github.com/dbos-inc/dbos-transact-py/issues/770",
+          "title": "DBOS.write_stream from inside a step is not exactly-once — it duplicates the value on every step retry",
+          "selected": true
+        },
+        {
+          "number": 841,
+          "url": "https://github.com/dbos-inc/dbos-transact-py/issues/841",
+          "title": "Rate limiter's database-clock window bound is numeric, so idx_workflow_status_rate_limited is never used (2.31.0)",
+          "selected": false
+        },
+        {
+          "number": 702,
+          "url": "https://github.com/dbos-inc/dbos-transact-py/issues/702",
+          "title": "Debouncer infinite loop when application version changes between deploys",
+          "selected": true
+        }
+      ]
+    },
+    {
+      "query": "repo:restatedev/restate is:issue upgrade",
+      "sort": "comments",
+      "order": "desc",
+      "limit": 6,
+      "results": [
+        {
+          "number": 3184,
+          "url": "https://github.com/restatedev/restate/issues/3184",
+          "title": "Deprecate service protocol <= 4",
+          "selected": false
+        },
+        {
+          "number": 4898,
+          "url": "https://github.com/restatedev/restate/issues/4898",
+          "title": "[v1.7] data-fusion error in a v1.7/v1.6.x mixed environment",
+          "selected": false
+        },
+        {
+          "number": 4867,
+          "url": "https://github.com/restatedev/restate/issues/4867",
+          "title": "Test that snapshot retention works properly",
+          "selected": false
+        },
+        {
+          "number": 4241,
+          "url": "https://github.com/restatedev/restate/issues/4241",
+          "title": "Datafusion error when running a mixed v1.6 and v1.5.6 environment",
+          "selected": false
+        },
+        {
+          "number": 1911,
+          "url": "https://github.com/restatedev/restate/issues/1911",
+          "title": "Release Restate 1.1",
+          "selected": false
+        },
+        {
+          "number": 96,
+          "url": "https://github.com/restatedev/restate/issues/96",
+          "title": "Port to Hyper 1.0",
+          "selected": false
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Orientation data-loss query returned Temporal #863, #2464, #10436; only #2464 selected for resolved consequence discussion.",
+    "Restate upgrade search returned mostly release/compatibility work; the four earlier consequential inventory leads were retained instead.",
+    "Temporal priority queues/OpenSearch are feature requests; timer-log report not selected for lack of demonstrated severe consequence in initial screen.",
+    "DBOS rate-limiter #841 excluded for performance scope; #837 added for durable identity consequence.",
+    "DBOS #880 was an adaptive addition surfaced by official repository search during prior-answer checking. No claim of prospectively fixed sample or exhaustive search.",
+    "14 issue records; Restate #2565/#2655 overlap and do not count as independent mechanisms."
+  ]
+}

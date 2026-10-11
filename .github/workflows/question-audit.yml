@@ -1,0 +1,29 @@
+name: Research question evidence audit
+on:
+  pull_request:
+    paths:
+      - 'RESEARCH.md'
+      - 'research/**'
+      - '.github/workflows/question-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Audit retained raw evidence and summarize discriminating observations
+        run: python research/scripts/audit_research_question.py
+      - name: Check documentation and historical evidence consistency
+        run: python research/scripts/check_documentation.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: research-question-audit
+          path: research/results/question-audit/
+          if-no-files-found: error

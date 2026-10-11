@@ -1,0 +1,53 @@
+name: Incident failed-operation probe
+on:
+  pull_request:
+    paths:
+      - 'research/scripts/probe_failed_operation.py'
+      - '.github/workflows/incident-probe.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        backend: [sqlite, postgres]
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: probe
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready --health-interval 5s
+          --health-timeout 5s --health-retries 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install frozen subject and record dependencies
+        run: |
+          mkdir -p research/results/incident-880/${{ matrix.backend }}
+          pip install 'dbos==3.2.0' 'SQLAlchemy==2.0.54' 'psycopg[binary]==3.2.10'
+          pip freeze > research/results/incident-880/${{ matrix.backend }}/dependencies.txt
+          python -c 'import sqlite3,sys; print(sys.version); print(sqlite3.sqlite_version)' > research/results/incident-880/${{ matrix.backend }}/runtime.txt
+          docker inspect '${{ job.services.postgres.id }}' --format '{{.Image}}' > research/results/incident-880/${{ matrix.backend }}/postgres-image.txt
+          sha256sum research/scripts/probe_failed_operation.py > research/results/incident-880/${{ matrix.backend }}/source.sha256
+      - name: Run all four declared cells
+        env:
+          PROBE_BACKEND: ${{ matrix.backend }}
+          PROBE_PG_ADMIN: postgresql://postgres:probe@localhost:5432/postgres
+          PROBE_PG_BASE: postgresql+psycopg://postgres:probe@localhost:5432
+        run: python research/scripts/probe_failed_operation.py
+      - name: Verify documentation
+        run: python research/scripts/check_documentation.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: incident-880-${{ matrix.backend }}
+          path: research/results/incident-880/
+          if-no-files-found: error

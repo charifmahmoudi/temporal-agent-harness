@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "baseline_commit": "7aa516d13dde8a3f9f4c2d893b34e3e5d6fb9e80",
+  "upstream_commit": "049e01c9d726ef68bff7be857c735723b9801512",
+  "source_path": "temporal_agent_harness/harness/agent_workflow.py",
+  "baseline_source_sha256": "1375ca7040fd8c1044f839ce244c30351212bc75fb4ecb90ecf394693635ce38",
+  "suite_files": {
+    "tests/harness/test_tool_approvals.py": "873d3788270606964fb7734a9ccf47a365d2501f49955bbc4eba3b94f2435e18",
+    "tests/harness/test_auto_mode_superseded_result.py": "1937147c17237da480a82432f9fca48651e1424dabb58708f00184ea29b23c9e",
+    "tests/research/test_approval_boundary.py": "d87031e8245c780597f9687e6d7f2b4cb50356560315d81815daf2b63d2b3b71",
+    "tests/research/test_approval_traces.py": "61c33e708aae0734829d794596be381122ec887a99997bcf14fc5c254b1f117a",
+    "tests/research/test_policy_cascade.py": "3bef9e460e4fb7daf768394416a9768ba9bc632b8e5ff8dd5932b6014cf9dfdd"
+  },
+  "faults": [
+    {
+      "id": "denial_remember",
+      "before": "if decision.approved and decision.remember and entry is not None:",
+      "after": "if decision.remember and entry is not None:",
+      "trace_model": "cascade",
+      "trace_selector": "denied_remember",
+      "rationale": "Known pilot; denial incorrectly widens policy.",
+      "prior_knowledge": "pilot"
+    },
+    {
+      "id": "scope_leak",
+      "before": "if self._policy_auto_approves(\n                entry.tool_name, inherently_safe=entry.inherently_safe\n            ):",
+      "after": "if True:  # synthetic scope leak",
+      "trace_model": "cascade",
+      "trace_selector": "different_tool",
+      "rationale": "Known pilot; policy iteration releases an unrelated tool.",
+      "prior_knowledge": "pilot"
+    },
+    {
+      "id": "reverse_publication",
+      "before": "return [e for e in self._approvals.values() if e.status is _ApprovalStatus.PENDING]",
+      "after": "return list(reversed([e for e in self._approvals.values() if e.status is _ApprovalStatus.PENDING]))",
+      "trace_model": "cascade",
+      "trace_selector": "policy_relax",
+      "rationale": "Known pilot; sibling publication reverses registration order.",
+      "prior_knowledge": "pilot"
+    },
+    {
+      "id": "unvalidated_superseded",
+      "before": "if isinstance(reached_decision, AutoApprovalDecision):\n                    reached = reached_decision.verdict",
+      "after": "reached = reached_decision.verdict",
+      "trace_model": null,
+      "trace_selector": null,
+      "rationale": "Known real-defect reintroduction; malformed input is excluded from both models.",
+      "prior_knowledge": "pilot"
+    },
+    {
+      "id": "close_approves",
+      "before": "entry.status = _ApprovalStatus.DENIED\n            entry.reason = reason",
+      "after": "entry.status = _ApprovalStatus.APPROVED\n            entry.reason = reason",
+      "trace_model": "approval",
+      "trace_selector": "close",
+      "rationale": "New boundary-derived fault; unresolved closure permits execution.",
+      "prior_knowledge": "new_boundary"
+    },
+    {
+      "id": "evaluator_deny_approves",
+      "before": "elif decision.verdict is AutoApprovalVerdict.DENY:\n            runner._resolve_and_publish(tool_id, approved=False, reason=decision.reason)",
+      "after": "elif decision.verdict is AutoApprovalVerdict.DENY:\n            runner._resolve_and_publish(tool_id, approved=True, reason=decision.reason)",
+      "trace_model": "approval",
+      "trace_selector": "evaluator_deny",
+      "rationale": "New boundary-derived fault; valid denial is consumed as approval.",
+      "prior_knowledge": "new_boundary"
+    }
+  ]
+}

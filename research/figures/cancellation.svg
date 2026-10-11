@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 650" role="img" aria-labelledby="title desc">
+<title id="title">Figure 6. Caller cancellation during cleanup</title><desc id="desc">Current cleanup may swallow caller cancellation and dispatch; proposed correction preserves approval but cancels the invocation.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#516579"/></marker></defs>
+<rect width="1120" height="650" fill="white"/>
+<g font-family="DejaVu Sans,Arial,sans-serif">
+<text x="32" y="40" font-size="25" fill="#15283b" font-weight="bold">Figure 6. Caller cancellation during cleanup</text>
+<text x="32" y="80" font-size="18" fill="#516579" font-weight="normal">Accepted approval remains stable; cancellation changes the invocation outcome.</text>
+<text x="32" y="135" font-size="18" fill="#a52f38" font-weight="bold">CURRENT HELPER</text>
+<rect x="35" y="160" width="235" height="110" rx="9" fill="#f5f8fc" stroke="#245bb2" stroke-width="2"/>
+<text x="50" y="189" font-size="17" fill="#245bb2" font-weight="bold">accepted approval</text>
+<text x="50" y="213" font-size="17" fill="#15283b" font-weight="normal">status: approved</text>
+<path d="M270,215  L310,215" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<rect x="310" y="160" width="235" height="110" rx="9" fill="#f5f8fc" stroke="#245bb2" stroke-width="2"/>
+<text x="325" y="189" font-size="17" fill="#245bb2" font-weight="bold">cleanup waiting</text>
+<text x="325" y="213" font-size="17" fill="#15283b" font-weight="normal">status: approved</text>
+<path d="M545,215  L585,215" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<rect x="585" y="160" width="235" height="110" rx="9" fill="#f5f8fc" stroke="#245bb2" stroke-width="2"/>
+<text x="600" y="189" font-size="17" fill="#245bb2" font-weight="bold">caller cancellation</text>
+<text x="600" y="213" font-size="17" fill="#15283b" font-weight="normal">status: approved</text>
+<path d="M820,215  L860,215" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<rect x="860" y="160" width="235" height="110" rx="9" fill="#f5f8fc" stroke="#a52f38" stroke-width="2"/>
+<text x="875" y="189" font-size="17" fill="#a52f38" font-weight="bold">dispatched</text>
+<text x="875" y="213" font-size="17" fill="#15283b" font-weight="normal">status: approved</text>
+<text x="875" y="237" font-size="17" fill="#15283b" font-weight="normal">tool starts</text>
+<text x="32" y="360" font-size="18" fill="#167052" font-weight="bold">PROPOSED CORRECTION</text>
+<rect x="35" y="385" width="235" height="110" rx="9" fill="#f5f8fc" stroke="#245bb2" stroke-width="2"/>
+<text x="50" y="414" font-size="17" fill="#245bb2" font-weight="bold">accepted approval</text>
+<text x="50" y="438" font-size="17" fill="#15283b" font-weight="normal">status: approved</text>
+<path d="M270,440  L310,440" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<rect x="310" y="385" width="235" height="110" rx="9" fill="#f5f8fc" stroke="#245bb2" stroke-width="2"/>
+<text x="325" y="414" font-size="17" fill="#245bb2" font-weight="bold">cleanup waiting</text>
+<text x="325" y="438" font-size="17" fill="#15283b" font-weight="normal">status: approved</text>
+<path d="M545,440  L585,440" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<rect x="585" y="385" width="235" height="110" rx="9" fill="#f5f8fc" stroke="#245bb2" stroke-width="2"/>
+<text x="600" y="414" font-size="17" fill="#245bb2" font-weight="bold">caller cancellation</text>
+<text x="600" y="438" font-size="17" fill="#15283b" font-weight="normal">status: approved</text>
+<path d="M820,440  L860,440" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<rect x="860" y="385" width="235" height="110" rx="9" fill="#f5f8fc" stroke="#167052" stroke-width="2"/>
+<text x="875" y="414" font-size="17" fill="#167052" font-weight="bold">cancelled</text>
+<text x="875" y="438" font-size="17" fill="#15283b" font-weight="normal">status: approved</text>
+<text x="875" y="462" font-size="17" fill="#15283b" font-weight="normal">no tool start</text>
+<text x="35" y="310" font-size="19" fill="#15283b" font-weight="bold">Decision stability alone does not imply caller-cancellation respect.</text>
+<text x="35" y="580" font-size="17" fill="#516579" font-weight="normal">Cancellation arrives before dispatch, while the caller awaits evaluator cleanup.</text>
+<text x="35" y="612" font-size="17" fill="#516579" font-weight="normal">These are explanatory projections, not complete model-checker state graphs.</text>
+</g>
+</svg>

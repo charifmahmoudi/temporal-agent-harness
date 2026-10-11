@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "case": "two-units-one-damaged",
+  "stock_before": 0,
+  "stock_after": 1,
+  "received": 2,
+  "damaged": 1,
+  "captured": 50,
+  "refunded": 50,
+  "refund_count": 1,
+  "injected_faults": 0,
+  "limitations": [
+    "seeded fulfillment",
+    "payment test contract",
+    "no crash/recovery experiment"
+  ]
+}

@@ -1,0 +1,43 @@
+name: Public baseline qualification
+on:
+  pull_request:
+    paths:
+      - 'research/scripts/qualify_undobench.py'
+      - '.github/workflows/baseline-qualification.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  qualification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: tradertanmay/undobench
+          ref: 4a25c4fa0f12bb6c79dc6e0e3a8f31deeb6af21e
+          path: subject
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install subject and retain dependency resolution
+        run: |
+          mkdir -p research/results/baseline-qualification
+          pip install -e ./subject 'pytest==8.4.2'
+          pip freeze > research/results/baseline-qualification/dependencies.txt
+          python --version > research/results/baseline-qualification/runtime.txt
+      - name: Run all declared qualification arms
+        run: python research/scripts/qualify_undobench.py subject research/results/baseline-qualification
+      - name: Check documentation
+        if: always()
+        run: python research/scripts/check_documentation.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: baseline-qualification
+          path: research/results/baseline-qualification/
+          if-no-files-found: error

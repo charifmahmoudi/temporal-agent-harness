@@ -1,0 +1,592 @@
+{
+  "schema": 1,
+  "kind": "exploratory_issue_screen",
+  "run_url": "https://github.com/charifmahmoudi/temporal-agent-harness/actions/runs/38059388840",
+  "checkout_commit": "4ad2521e9d15722963e5fa2c0b3058334ea1927c",
+  "queries": [
+    {
+      "query": "repo:temporalio/sdk-python is:issue created:2025-01-01..2026-10-09 cancel in:title,body",
+      "total_count": 24,
+      "incomplete_results": false,
+      "selected": [
+        "temporalio/sdk-python#764",
+        "temporalio/sdk-python#779",
+        "temporalio/sdk-python#782",
+        "temporalio/sdk-python#810",
+        "temporalio/sdk-python#814"
+      ]
+    },
+    {
+      "query": "repo:temporalio/sdk-python is:issue created:2025-01-01..2026-10-09 replay in:title,body",
+      "total_count": 17,
+      "incomplete_results": false,
+      "selected": [
+        "temporalio/sdk-python#783",
+        "temporalio/sdk-python#794",
+        "temporalio/sdk-python#848",
+        "temporalio/sdk-python#971",
+        "temporalio/sdk-python#994"
+      ]
+    },
+    {
+      "query": "repo:temporalio/sdk-python is:issue created:2025-01-01..2026-10-09 version in:title,body",
+      "total_count": 104,
+      "incomplete_results": false,
+      "selected": [
+        "temporalio/sdk-python#728",
+        "temporalio/sdk-python#733",
+        "temporalio/sdk-python#743",
+        "temporalio/sdk-python#747",
+        "temporalio/sdk-python#775"
+      ]
+    },
+    {
+      "query": "repo:dbos-inc/dbos-transact-py is:issue created:2025-01-01..2026-10-09 cancel in:title,body",
+      "total_count": 14,
+      "incomplete_results": false,
+      "selected": [
+        "dbos-inc/dbos-transact-py#352",
+        "dbos-inc/dbos-transact-py#404",
+        "dbos-inc/dbos-transact-py#425",
+        "dbos-inc/dbos-transact-py#444",
+        "dbos-inc/dbos-transact-py#640"
+      ]
+    },
+    {
+      "query": "repo:dbos-inc/dbos-transact-py is:issue created:2025-01-01..2026-10-09 replay in:title,body",
+      "total_count": 18,
+      "incomplete_results": false,
+      "selected": [
+        "dbos-inc/dbos-transact-py#378",
+        "dbos-inc/dbos-transact-py#551",
+        "dbos-inc/dbos-transact-py#652",
+        "dbos-inc/dbos-transact-py#664",
+        "dbos-inc/dbos-transact-py#679"
+      ]
+    },
+    {
+      "query": "repo:dbos-inc/dbos-transact-py is:issue created:2025-01-01..2026-10-09 version in:title,body",
+      "total_count": 44,
+      "incomplete_results": false,
+      "selected": [
+        "dbos-inc/dbos-transact-py#260",
+        "dbos-inc/dbos-transact-py#342",
+        "dbos-inc/dbos-transact-py#405",
+        "dbos-inc/dbos-transact-py#447",
+        "dbos-inc/dbos-transact-py#471"
+      ]
+    },
+    {
+      "query": "repo:restatedev/restate is:issue created:2025-01-01..2026-10-09 cancel in:title,body",
+      "total_count": 29,
+      "incomplete_results": false,
+      "selected": [
+        "restatedev/restate#2655",
+        "restatedev/restate#3204",
+        "restatedev/restate#3333",
+        "restatedev/restate#3656",
+        "restatedev/restate#3752"
+      ]
+    },
+    {
+      "query": "repo:restatedev/restate is:issue created:2025-01-01..2026-10-09 replay in:title,body",
+      "total_count": 16,
+      "incomplete_results": false,
+      "selected": [
+        "restatedev/restate#2655",
+        "restatedev/restate#4364",
+        "restatedev/restate#4440",
+        "restatedev/restate#4513",
+        "restatedev/restate#4838"
+      ]
+    },
+    {
+      "query": "repo:restatedev/restate is:issue created:2025-01-01..2026-10-09 version in:title,body",
+      "total_count": 87,
+      "incomplete_results": false,
+      "selected": [
+        "restatedev/restate#2565",
+        "restatedev/restate#2655",
+        "restatedev/restate#2749",
+        "restatedev/restate#2762",
+        "restatedev/restate#2765"
+      ]
+    }
+  ],
+  "records": [
+    {
+      "key": "temporalio/sdk-python#764",
+      "url": "https://github.com/temporalio/sdk-python/issues/764",
+      "title": "Expose Workflow cancel cause/reason",
+      "created_at": "2025-02-11T20:44:19Z",
+      "updated_at": "2026-06-03T16:39:27Z",
+      "state": "closed",
+      "comments": 0,
+      "body_sha256": "98a1a0e447ffccf67160d67535b0db314ae70764c807b7ae2fdd552981621aec",
+      "body_excerpt": "WorkflowExecutionCancelRequestedEventAttributes has a cause field that should be exposed when workflows receive cancels, and we should additionally expose this as an input when users are issuing cancels from clients or commands"
+    },
+    {
+      "key": "temporalio/sdk-python#779",
+      "url": "https://github.com/temporalio/sdk-python/issues/779",
+      "title": "[Feature Request] Adding type checking on workflow_execute activity when a variable number of positional args exist in the callable activity",
+      "created_at": "2025-03-01T03:58:56Z",
+      "updated_at": "2025-03-10T13:50:51Z",
+      "state": "closed",
+      "comments": 1,
+      "body_sha256": "cfe48ac105558967b4244cee03c74de9f037d858e7787a87633dfc647f98a106",
+      "body_excerpt": "### Is your feature request related to a problem? Please describe. How about adding type checking on workflow_execute activity when a variable number of positional args exist in the callable activity? Right now the args are not type checked, Sequence[Any] is allowed in ### Describe the solution you'd like Use TypedVarTupe to define *args, delete the arg input. ### Additional context I got this working with this code which would go in the workflow module ``` Ts = typing.TypeVarTuple(\"Ts\") async def execute_activity( activity: Union[ typing.Callable[[*Ts], ReturnType], typing.Callable[[], ReturnType], ], *args:"
+    },
+    {
+      "key": "temporalio/sdk-python#782",
+      "url": "https://github.com/temporalio/sdk-python/issues/782",
+      "title": "[Bug] cancelled timer callback causes asyncio.exceptions.InvalidStateError",
+      "created_at": "2025-03-05T02:07:47Z",
+      "updated_at": "2026-03-10T16:48:15Z",
+      "state": "closed",
+      "comments": 1,
+      "body_sha256": "eb6f1338f81fbbd231bffdbd49d132a25f4fa7ad79f5b05119a241b76f618703",
+      "body_excerpt": "The workflow below succeeds, but an exception occurs and is logged by the worker. In the example below this exception does not cause a workflow or workflow task failure, but we should nevertheless prevent it. What happens is: 1. An `asyncio.Task` is created, which blocks on a timer. 2. The task is cancelled, which throws `asyncio.CancelledError` into the coroutine, and cancels the `sleep` future. 3. But SDK internals have set a callback that attempts to resolve the future. This callback still fires at the set timer time, despite the future"
+    },
+    {
+      "key": "temporalio/sdk-python#810",
+      "url": "https://github.com/temporalio/sdk-python/issues/810",
+      "title": "[Feature Request] Implement proper behavior for `cancelled`, `uncancel`, and `cancelling` of activities and child workflows",
+      "created_at": "2025-04-01T13:12:44Z",
+      "updated_at": "2025-04-01T13:12:44Z",
+      "state": "open",
+      "comments": 0,
+      "body_sha256": "60f58aca7737e62627862295dd59b7b2f28e855614b593854fd16f5006385d8a",
+      "body_excerpt": "### Describe the solution you'd like Implement proper behavior for `cancelled`, `uncancel`, and `cancelling` of activities and child workflows. The behavior probably looks like: * `cancelled` - return true once it comes back as canceled * `uncancel` - raise an (non-Temporal) exception saying that uncancel is not supported * `cancelling` - probably just works already"
+    },
+    {
+      "key": "temporalio/sdk-python#814",
+      "url": "https://github.com/temporalio/sdk-python/issues/814",
+      "title": "[Bug] Python client not able to connect to self-hosted Temporal server via proxy using authorization header",
+      "created_at": "2025-04-03T01:24:22Z",
+      "updated_at": "2025-04-03T13:14:32Z",
+      "state": "open",
+      "comments": 1,
+      "body_sha256": "cd2eb285d9b5ff1c6044061156fc45bb3c56d4726b0cb714252777e5d3f1844d",
+      "body_excerpt": "### What are you really trying to do? <!-- Tell us at a high level what you're doing, to avoid XY problem (https://en.wikipedia.org/wiki/XY_problem) --> We’re trying to connect Python client to our self-hosted Temporal server via a proxy using an authorization header. ### Describe the bug <!-- A clear and concise description of what the bug is. --> <!-- If applicable, add screenshots or code blocks to help explain your problem. You can also use [Loom](http://loom.com/) to do short, free video bug reports. --> We see that it is able"
+    },
+    {
+      "key": "temporalio/sdk-python#783",
+      "url": "https://github.com/temporalio/sdk-python/issues/783",
+      "title": "[Bug] Sticky execution after Worker shutdown causes \"Workflow Task Timed Out\"",
+      "created_at": "2025-03-05T15:46:10Z",
+      "updated_at": "2025-04-04T14:49:52Z",
+      "state": "closed",
+      "comments": 4,
+      "body_sha256": "5177bc11659286ffa5058c43105f3dc6fb15d8ed2eca520ae4195fa19d24bc1a",
+      "body_excerpt": "### What are you really trying to do? <!-- Tell us at a high level what you're doing, to avoid XY problem (https://en.wikipedia.org/wiki/XY_problem) --> Restarting workers, even with graceful shutdown, causes Workflow Tasks to timeout due to sticky execution. ### Describe the bug <!-- A clear and concise description of what the bug is. --> When a Workflow is executing and the Workflow Worker restarts, the next Workflow Task still gets scheduled to that worker, due to execution stickiness, and causes a \"Workflow Task Timed Out\". It would be expected"
+    },
+    {
+      "key": "temporalio/sdk-python#794",
+      "url": "https://github.com/temporalio/sdk-python/issues/794",
+      "title": "[Feature Request] Make option for OTel workflow spans even if client span not present",
+      "created_at": "2025-03-25T14:10:12Z",
+      "updated_at": "2025-04-10T18:25:40Z",
+      "state": "closed",
+      "comments": 0,
+      "body_sha256": "303ba2d9af020c1a81f15fc9d311e5e35c86e3f695b14575f3964619e61b0a57",
+      "body_excerpt": "### Describe the solution you'd like Today, if the client-created span is not present and on the headers, we don't create any workflow spans because they may be orphaned (especially on replay). But some users starting from schedules or CLI want the workflow spans even if they may be orphaned, so we should allow this opt-in on the tracing interceptor."
+    },
+    {
+      "key": "temporalio/sdk-python#848",
+      "url": "https://github.com/temporalio/sdk-python/issues/848",
+      "title": "[Bug] Updates conflict with replay",
+      "created_at": "2025-04-24T08:32:11Z",
+      "updated_at": "2025-06-02T20:56:00Z",
+      "state": "closed",
+      "comments": 2,
+      "body_sha256": "8f21eb5f205eb6e69479462ba00b870ec9a3fc11c401f33917c0f0aca5e7b240",
+      "body_excerpt": "### What are you really trying to do? I'm using updates to allow the workflow to proceed to the next step. ### Describe the bug <!-- A clear and concise description of what the bug is. --> If an update occurs when the workflow execution is not cached on the worker, the update is effectively \"lost\", and I need to issue another update for it to be applied. ### Minimal Reproduction 1. Start the worker 2. Start the workflow ``` temporal workflow start --task-queue my-task-queue --type Workflow --workflow-id test --id-reuse-policy"
+    },
+    {
+      "key": "temporalio/sdk-python#971",
+      "url": "https://github.com/temporalio/sdk-python/issues/971",
+      "title": "[Feature Request] Configure logging without info on message",
+      "created_at": "2025-07-15T13:08:11Z",
+      "updated_at": "2025-07-16T13:04:31Z",
+      "state": "closed",
+      "comments": 2,
+      "body_sha256": "999fc0b9e45f170872019f0538c8b5e00297f070bb5f449570c252b731e477a1",
+      "body_excerpt": "### Is your feature request related to a problem? Our current logging set-up uses structural logging with all messages being json payloads. Part of configuring logging for our application involves patching the `workflow.logger` and `activity.logger` to drop contextual information out of the log message while keeping that in the logging extras. An example of how our application configures logging is approximately the following: ```python from temporalio import activity, workflow def my_app_configure_logging(): .... # configure workflow logger workflow.logger.workflow_info_on_message = False workflow.logger.workflow_info_on_extra = True # default workflow.logger.full_workflow_info_on_extra = False # default workflow.logger.log_during_replay"
+    },
+    {
+      "key": "temporalio/sdk-python#994",
+      "url": "https://github.com/temporalio/sdk-python/issues/994",
+      "title": "[Feature Request] Worker plugin support for replayers",
+      "created_at": "2025-07-24T18:24:31Z",
+      "updated_at": "2025-08-07T00:04:03Z",
+      "state": "closed",
+      "comments": 0,
+      "body_sha256": "d98973cc5cd4d5217e5ee943a65f677111dfd7a3a20809d3ef3da94ca03b894f",
+      "body_excerpt": "### Describe the solution you'd like Plugins need to be able to be provided to replayers. The problem is worker plugins have a lot of config that a replayer does not, but there are important shared things like interceptors. We're going to have to decide which option we want, here are a few: * Add `configure_replayer` + `run_replayer` on `worker.Plugin` making every plugin author to add extra code to configure common things like interceptors * Try to reuse `configure_worker` + `run_worker` knowing there are a ton of config options and"
+    },
+    {
+      "key": "temporalio/sdk-python#728",
+      "url": "https://github.com/temporalio/sdk-python/issues/728",
+      "title": "[Feature Request] Update Ruff target version to 3.9",
+      "created_at": "2025-01-14T19:38:21Z",
+      "updated_at": "2025-01-24T21:13:58Z",
+      "state": "closed",
+      "comments": 0,
+      "body_sha256": "7676b7fe7b7ffedd1fa24c7973f1ae471051037a252512df95ab0d54e0cc2b47",
+      "body_excerpt": "### Describe the solution you'd like Per comment at https://github.com/temporalio/sdk-python/pull/694#issuecomment-2590851299, we forgot to do this on 3.8 upgrade"
+    },
+    {
+      "key": "temporalio/sdk-python#733",
+      "url": "https://github.com/temporalio/sdk-python/issues/733",
+      "title": "[Bug] Unable to run workflows with OpenTelemetry and ddtrace",
+      "created_at": "2025-01-16T16:08:34Z",
+      "updated_at": "2025-08-04T15:32:24Z",
+      "state": "open",
+      "comments": 10,
+      "body_sha256": "8f082ac73afce2ddce3936c1f53a080c0f543e2718217fbe231f174a9a066f7f",
+      "body_excerpt": "### What are you really trying to do? I'm attempting to enable tracing on my worker using the TracingInterceptor and the tracer provided by ddtrace. ### Describe the bug A change upstream with the OpenTelemetry SDK seems to have caused an issue with Temporal's sandbox environment, causing an error stating os.environ.get isn't allowed in a workflow. The relevant change on the OpenTelemetry side is [here](https://github.com/open-telemetry/opentelemetry-python/commit/52abb610dbdf1751cc745720055119ca1656ec16) - if I run with a version prior to 1.29 then I no longer get an error. ### Minimal Reproduction A workflow implemented on a"
+    },
+    {
+      "key": "temporalio/sdk-python#743",
+      "url": "https://github.com/temporalio/sdk-python/issues/743",
+      "title": "[Bug] ResourceBasedSlotOptions fields not consistent with the underlying Rust implementation",
+      "created_at": "2025-01-21T22:09:44Z",
+      "updated_at": "2025-01-22T13:16:57Z",
+      "state": "closed",
+      "comments": 2,
+      "body_sha256": "348dcedddc586b314c7f06d1277be8c6df7cb12acf72b4c0d64d5c464ef7ddcb",
+      "body_excerpt": "### What are you really trying to do? Trying to start a worker with a resource-based tuner rather than a fixed one. When setting `target_memory_usage` and `target_cpu_usage` to values between 0 and 1, the resulting worker only allocates the minimum number of slots for workflows and activities. To work around the issue, values between 0 and 100 have to be used instead. ### Describe the bug Using the resource-based tuner for the worker as indicated [in the documentation](https://github.com/temporalio/sdk-python/blob/154aab9999bad7fc58e3e481d5a5986aa08d72db/temporalio/worker/_tuning.py#L37-L39) ends up creating a worker which always allocates the minimum for the"
+    },
+    {
+      "key": "temporalio/sdk-python#747",
+      "url": "https://github.com/temporalio/sdk-python/issues/747",
+      "title": "How to Get the Worker ID Executing the Current Activity?",
+      "created_at": "2025-01-24T03:25:09Z",
+      "updated_at": "2025-02-15T08:49:22Z",
+      "state": "closed",
+      "comments": 9,
+      "body_sha256": "2c84ee86a7e0a69ea4a480d62b0df1760f7a6831e81e835eae88271ca9d7448f",
+      "body_excerpt": "### Description: I’m trying to retrieve the worker ID that is executing the current activity. However, I couldn’t find a way to do this using `activity.info()`. Here’s what I’ve tried so far: #### Approaches I Attempted: 1. **Using `get_workflow_execution_history`:** - I wasn’t able to retrieve the activity started event while the activity is still executing. It seems this approach only works for completed activities. 2. **Setting the Worker ID in `Info`:** - I considered adding the worker ID into `Info` manually but couldn’t figure out how to achieve this in"
+    },
+    {
+      "key": "temporalio/sdk-python#775",
+      "url": "https://github.com/temporalio/sdk-python/issues/775",
+      "title": "[Bug] sdk metrics do not include tags added with \"telemetry.global_tags\"",
+      "created_at": "2025-02-25T19:43:48Z",
+      "updated_at": "2025-11-25T17:39:38Z",
+      "state": "closed",
+      "comments": 8,
+      "body_sha256": "bba59627c8540bdd31f299e89dac2f651e5b543bcebac334b4afa7d6ea5eac28",
+      "body_excerpt": "### What are you really trying to do? Add custom tags to SDK metrics <!-- Tell us at a high level what you're doing, to avoid XY problem (https://en.wikipedia.org/wiki/XY_problem) --> ### Describe the bug sdk metrics no longer include tags added with telemetry.global_tags , which appear to be the expected behavior https://python.temporal.io/temporalio.runtime.TelemetryConfig.html#global_tags <img width=\"788\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/1a05b6f8-7bda-4640-8738-28612cafd8e1\" /> running the same with version 1.3 works as expected <img width=\"1456\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/c3c37aa1-671a-491b-ae42-3f38238c5c69\" /> ### Minimal Reproduction <!-- Modify our hello world templates to demonstrate: - TypeScript: https://github.com/temporalio/samples-typescript/tree/main/hello-world - Go: https://github.com/temporalio/money-transfer-project-template-go - Java:"
+    },
+    {
+      "key": "dbos-inc/dbos-transact-py#352",
+      "url": "https://github.com/dbos-inc/dbos-transact-py/issues/352",
+      "title": "Consistently update `updated_at` for workflow status",
+      "created_at": "2025-05-16T17:12:31Z",
+      "updated_at": "2026-01-21T23:55:51Z",
+      "state": "closed",
+      "comments": 0,
+      "body_sha256": "04b3063381ae9c3f2bce917918070cabdaa63c0381c92514ef1aa558077e2e4f",
+      "body_excerpt": "Currently, we update `updated_at` in `insert_workflow_status` and `update_workflow_status`, but we don't update this field in `cancel_workflow` or `resume_workflow` or other places. We should consistently update `updated_at` across all operations. Another issue is that if a workflow has completed but a later request invokes it again, the `updated_at` field will be updated even if the workflow doesn't run at all. We shouldn't update it if the workflow has completed."
+    },
+    {
+      "key": "dbos-inc/dbos-transact-py#404",
+      "url": "https://github.com/dbos-inc/dbos-transact-py/issues/404",
+      "title": "Workflow Status Enum for Autocompletion",
+      "created_at": "2025-07-09T22:42:01Z",
+      "updated_at": "2026-01-21T23:55:51Z",
+      "state": "closed",
+      "comments": 0,
+      "body_sha256": "0ac37d32ddc61c9b76b61a1cda11767bf6859aa69b8e3a283fe0c90538e28399",
+      "body_excerpt": "A user asks that we change ``` class WorkflowStatus: ... # The workflow status. Must be one of ENQUEUED, PENDING, SUCCESS, ERROR, CANCELLED, or RETRIES_EXCEEDED status: str ``` to ``` class WorkflowStatus: ... # The workflow status. status: Literal[\"ENQUEUED\", \"PENDING\", \"SUCCESS\", \"ERROR\", \"CANCELLED\", \"RETRIES_EXCEEDED\"] ```"
+    },
+    {
+      "key": "dbos-inc/dbos-transact-py#425",
+      "url": "https://github.com/dbos-inc/dbos-transact-py/issues/425",
+      "title": "Workflow hanging on `get_result` cancellation",
+      "created_at": "2025-08-07T16:12:51Z",
+      "updated_at": "2025-08-07T18:01:23Z",
+      "state": "closed",
+      "comments": 3,
+      "body_sha256": "80f7af4eb7f6b5080142351376ef3ea8e104e1c8f4ad8deaffbaa6cb4298807c",
+      "body_excerpt": "```python workflow_handle = await DBOS.start_workflow_async(ingest_document) document_id = await workflow_handle.get_result() ``` Not sure if this is intended behavior, but I have the following lines in a FastAPI endpoint, and when the request gets disconnected, and I await `get_result`, my workflow just hangs. However, I expect my workflow to continue processing in the background. This happens because when the request gets disconnected, asyncio cancels the `get_result` future, and somehow that messes things up with DBOS. My temporary solution is to wrap `get_result` with `asyncio.shield`, and this works, but maybe DBOS should internally"
+    },
+    {
+      "key": "dbos-inc/dbos-transact-py#444",
+      "url": "https://github.com/dbos-inc/dbos-transact-py/issues/444",
+      "title": "Support non-retryable exceptions for steps",
+      "created_at": "2025-08-28T15:42:32Z",
+      "updated_at": "2026-03-11T19:30:58Z",
+      "state": "closed",
+      "comments": 1,
+      "body_sha256": "5006d20c9c3d9015bef2260f7c78af8cc20140413b4540a9f8e7bbeb5ba83149",
+      "body_excerpt": "Currently, step retries on all exceptions (except for workflow cancel). Would be convenient to support a configurable list of exceptions that should not be retried."
+    },
+    {
+      "key": "dbos-inc/dbos-transact-py#640",
+      "url": "https://github.com/dbos-inc/dbos-transact-py/issues/640",
+      "title": "BackgroundEventLoop.stop() can hang indefinitely during DBOS.destroy()",
+      "created_at": "2026-04-10T20:40:36Z",
+      "updated_at": "2026-04-20T19:55:38Z",
+      "state": "closed",
+      "comments": 2,
+      "body_sha256": "00f687a004ec943d339af6a6ecdbee22f03284517fa37d8bcc4ff23bf15bec85",
+      "body_excerpt": "## Summary `BackgroundEventLoop.stop()` calls `self._thread.join()` **without a timeout**, which can cause `DBOS.destroy()` to hang indefinitely if any async task in the background event loop doesn't respond to cancellation. This is inconsistent with how the rest of `_destroy()` handles shutdown — background threads are joined with a 10-second timeout (line 716), but the event loop thread has no such protection. ## Reproduction In a long-running server (e.g. FastAPI on Cloud Run), call `DBOS.destroy(workflow_completion_timeout_sec=5)` during shutdown. If any coroutine submitted to the `BackgroundEventLoop` is stuck or doesn't handle `asyncio.CancelledError`, the process hangs"
+    },
+    {
+      "key": "dbos-inc/dbos-transact-py#378",
+      "url": "https://github.com/dbos-inc/dbos-transact-py/issues/378",
+      "title": "dbos debug can't deserialize non primitive python types used as parameters",
+      "created_at": "2025-06-04T00:38:48Z",
+      "updated_at": "2026-01-21T23:37:15Z",
+      "state": "closed",
+      "comments": 5,
+      "body_sha256": "337919d9125d54bdb50d19c0feed914e2d75628554365e514b1fffe7764add30",
+      "body_excerpt": "If you have code like this in your entrypoint file: ```python class DataPipeline(BaseModel): platform: str content: str message_id: int @DBOS.workflow() def create_data_pipeline(request: DataPipeline): # code omitted ``` The `request` parameter doesn't get deserialized correctly when using the replay debugger."
+    },
+    {
+      "key": "dbos-inc/dbos-transact-py#551",
+      "url": "https://github.com/dbos-inc/dbos-transact-py/issues/551",
+      "title": "Support concurrent steps",
+      "created_at": "2026-01-06T02:14:22Z",
+      "updated_at": "2026-01-30T00:04:07Z",
+      "state": "closed",
+      "comments": 2,
+      "body_sha256": "a90ca5ea5a63a179b6026a4192b1841896a37fafcb553759fecdc254509297ac",
+      "body_excerpt": "Currently, DBOS assumes that steps don't overlap. Using `asyncio.create_task` to start multiple concurrent steps may lead to incorrect step context/tracing. We may want to support something similar to https://github.com/dbos-inc/dbos-transact-ts/pull/1051 where steps can be started in parallel and waited later. An example use case: ```python # Create and schedule all steps in parallel tasks = [ asyncio.create_task(process_step(call)) for call in tool_calls ] ... # Wait for results in the same order they started for task in tasks: res = await task ``` All results must be awaited (think using `asyncio.wait()` with"
+    },
+    {
+      "key": "dbos-inc/dbos-transact-py#652",
+      "url": "https://github.com/dbos-inc/dbos-transact-py/issues/652",
+      "title": "Enhancement: async-native `recv_async` / `get_event_async` / `sleep_async` to support large concurrent waiter counts",
+      "created_at": "2026-04-27T15:18:44Z",
+      "updated_at": "2026-04-27T17:55:23Z",
+      "state": "closed",
+      "comments": 2,
+      "body_sha256": "79440667db77b4330ab9a0307169214543a9d040e9fc3d1a344e55a6da66f4ba",
+      "body_excerpt": "### What I'd like to see `DBOS.recv_async` (and `get_event_async` / `sleep_async`) currently consume one thread from the DBOS executor pool for the entire duration of the wait, because they're implemented as `asyncio.to_thread(<sync_blocking_fn>)` where the sync function ultimately calls `threading.Condition.wait(timeout=...)` or `time.sleep(...)`. It would be valuable to have an async-native wait path that parks the calling coroutine on `asyncio.Event` (or equivalent) instead of pinning a thread — keeping the same durability guarantees (notifications still go through Postgres LISTEN/NOTIFY) but supporting much larger concurrent-waiter counts. ### Why it would be valuable For"
+    },
+    {
+      "key": "dbos-inc/dbos-transact-py#664",
+      "url": "https://github.com/dbos-inc/dbos-transact-py/issues/664",
+      "title": "Concurrent asyncio.to_thread calls to @DBOS.transaction lose workflow context inside async workflow",
+      "created_at": "2026-05-06T18:39:57Z",
+      "updated_at": "2026-05-06T22:08:23Z",
+      "state": "closed",
+      "comments": 1,
+      "body_sha256": "05fedaa93b583c24cffe10e81690bc4e04b0ce72029b0fad75bb321cc5ba0b62",
+      "body_excerpt": "# Concurrent `asyncio.to_thread` calls to `@DBOS.transaction` lose workflow context inside async workflow ## Summary In an async DBOS workflow, concurrent calls to a synchronous `@DBOS.transaction` function through `asyncio.to_thread` appear to lose DBOS workflow context for most of the calls. The sequential control case works correctly. The concurrent case partially succeeds: one transaction per workflow is recorded and persists its app-table row, while the remaining transaction calls fail with: ```text AssertionError('Transactions must be called from within workflows') ``` I am not sure whether DBOS intends to support concurrent DBOS operation calls"
+    },
+    {
+      "key": "dbos-inc/dbos-transact-py#679",
+      "url": "https://github.com/dbos-inc/dbos-transact-py/issues/679",
+      "title": "AsyncSQLAlchemyDatasource records PostgreSQL serialization failures as durable errors instead of retrying",
+      "created_at": "2026-05-18T07:49:33Z",
+      "updated_at": "2026-05-18T21:27:03Z",
+      "state": "closed",
+      "comments": 1,
+      "body_sha256": "8662b715d1f7f39ec29b6f80c642f8d3117721815c27f4c1b6846f7dd74656c1",
+      "body_excerpt": "# AsyncSQLAlchemyDatasource records PostgreSQL serialization failures as durable errors instead of retrying ## Summary `AsyncSQLAlchemyDatasource.run_tx_step_async(...)` appears to record PostgreSQL `SERIALIZABLE` transaction conflicts as durable datasource step errors instead of retrying the transaction first. This differs from the existing Python `@DBOS.transaction()` behavior, and also appears to differ from the TypeScript datasource packages, which retry PostgreSQL `40001` before recording a transaction completion error. ## Observed behavior When an async datasource transaction running inside a DBOS workflow hits a PostgreSQL serialization failure: ```text psycopg.errors.SerializationFailure: could not serialize access due to read/write dependencies among"
+    },
+    {
+      "key": "dbos-inc/dbos-transact-py#260",
+      "url": "https://github.com/dbos-inc/dbos-transact-py/issues/260",
+      "title": "Workflow recovery failing when using a step with retries configured",
+      "created_at": "2025-03-27T20:10:16Z",
+      "updated_at": "2025-03-27T23:28:19Z",
+      "state": "closed",
+      "comments": 3,
+      "body_sha256": "fe9df5cae7579f7d5f522012786923c640be26f5c6ddc5bb964ee8aecb6b7ba0",
+      "body_excerpt": "Hi, When I try to recover a workflow that failed in the middle of it's retries, I'm getting the following error: `Exception(\"Output and error are both None\")` Code to reproduce is: ```python import os import random import threading import time from dbos import DBOS, DBOSConfig, Queue import dotenv dotenv.load_dotenv() config: DBOSConfig = { \"name\": \"dbos-starter\", \"database_url\": os.environ.get(\"DBOS_DATABASE_URL\"), } DBOS(config=config) @DBOS.step(retries_allowed=True, max_attempts=4) def unreliable_step(): if random.random() > 0.1: print(\"Simulating a failure\") raise Exception(\"Simulated failure\") print(\"Step completed!\") @DBOS.workflow() def dbos_workflow(): unreliable_step() print(\"Successfully completed all steps\") if __name__ == \"__main__\": DBOS.launch() print(\"Starting workingflow\")"
+    },
+    {
+      "key": "dbos-inc/dbos-transact-py#342",
+      "url": "https://github.com/dbos-inc/dbos-transact-py/issues/342",
+      "title": "DBOS Client should not run migrations",
+      "created_at": "2025-05-06T00:24:24Z",
+      "updated_at": "2025-05-08T19:21:49Z",
+      "state": "closed",
+      "comments": 0,
+      "body_sha256": "a9dead784285254786c4433d5c3482ee7536554e006db027180cbcf1586b55b5",
+      "body_excerpt": "Currently, DBOS Client uses the system DB, but it'll try to create tables if not exist. However, this is not ideal when the client and server have different DBOS versions. We don't want the client to modify the system tables."
+    },
+    {
+      "key": "dbos-inc/dbos-transact-py#405",
+      "url": "https://github.com/dbos-inc/dbos-transact-py/issues/405",
+      "title": "Support async workflow management API",
+      "created_at": "2025-07-10T21:33:09Z",
+      "updated_at": "2025-07-10T23:21:58Z",
+      "state": "closed",
+      "comments": 0,
+      "body_sha256": "3b5b7cdd43c2d4669fdc0f0a15dda77a0e1d9d1145fee7b1341108a00370cd72",
+      "body_excerpt": "For now, `DBOS.list_workflows` and other workflow management APIs only have the sync version. Support async versions as well, like we do in `DBOSClient`."
+    },
+    {
+      "key": "dbos-inc/dbos-transact-py#447",
+      "url": "https://github.com/dbos-inc/dbos-transact-py/issues/447",
+      "title": "User-request: workflow-level versioning",
+      "created_at": "2025-08-29T18:34:46Z",
+      "updated_at": "2026-01-05T15:58:32Z",
+      "state": "closed",
+      "comments": 2,
+      "body_sha256": "86a3e7f7d04d68bb42460f150a2145f72fba83f519a686e77d48ef17331f3215",
+      "body_excerpt": "A user asked us to consider versioning at the workflow level. The per-workflow versions would be optionally specified by the developer. Something like: ``` @DBOS.workflow(version=\"1.0.0\") def foo():... @DBOS.workflow(version=\"1.0.1\") def bar():... ```"
+    },
+    {
+      "key": "dbos-inc/dbos-transact-py#471",
+      "url": "https://github.com/dbos-inc/dbos-transact-py/issues/471",
+      "title": "User request: make `GlobalParams.app_version` accessible through code",
+      "created_at": "2025-09-19T15:46:14Z",
+      "updated_at": "2025-09-23T01:57:46Z",
+      "state": "closed",
+      "comments": 0,
+      "body_sha256": "f68e0c836e0559f2d1f78a8beb3a21ed49556d9d12aed3d5a814c6ac796a59a3",
+      "body_excerpt": "Export `GlobalParams.app_version` as a method on the DBOS class, something like `DBOS.current_app_version`."
+    },
+    {
+      "key": "restatedev/restate#2655",
+      "url": "https://github.com/restatedev/restate/issues/2655",
+      "title": "Restate partition processor can become stuck after a period of network isolation ends",
+      "created_at": "2025-02-06T16:33:16Z",
+      "updated_at": "2025-02-11T15:35:18Z",
+      "state": "closed",
+      "comments": 10,
+      "body_sha256": "5b00e795da8acc0d3ef668c9d4569960e82e21baea8a0e9159361a1f864e5a91",
+      "body_excerpt": "In running the Jepsen virtual object test, I've found the following issue reasonably easy to reproduce (~25% probability of occurring per network partitioning event). The problem manifests after a partition is **healed** following isolation of a single node, the entire cluster stops processing ingress requests for a particular partition. (The Jepsen test currently only creates a single partition.) Here is an illustration of the timeline: ![Image](https://github.com/user-attachments/assets/97249bc6-e369-4167-9e7f-0be8b424c8b0) The problem occurs at approximately the 90s mark when N3 becomes un-isolated; at that point all incoming requests begin timing out and based on"
+    },
+    {
+      "key": "restatedev/restate#3204",
+      "url": "https://github.com/restatedev/restate/issues/3204",
+      "title": "Flaky `restate-server::raft_metadata_cluster raft_metadata_cluster_reconfiguration`",
+      "created_at": "2025-04-30T07:23:18Z",
+      "updated_at": "2025-05-07T13:31:12Z",
+      "state": "closed",
+      "comments": 5,
+      "body_sha256": "d656fbe27c0fb8aca77e34b254bb4a462054586fe52289548ce3c0a94af9d07a",
+      "body_excerpt": "Got this when running `just fmt verify` locally ``` FAIL [ 35.584s] restate-server::raft_metadata_cluster raft_metadata_cluster_reconfiguration ──── STDOUT: restate-server::raft_metadata_cluster raft_metadata_cluster_reconfiguration running 1 test test raft_metadata_cluster_reconfiguration ... 2025-04-30T07:21:38.599686Z INFO restate_local_cluster_runner::cluster: Starting cluster raft_metadata_cluster_reconfiguration in /tmp/.tmp55axHj 2025-04-30T07:21:38.607447Z INFO restate_local_cluster_runner::node: Started node node-1 in /tmp/.tmp55axHj/node-1 (pid 74223) node_address=unix:/tmp/.tmp55axHj/node-1/node.sock admin_address=127.0.0.1:12253 ingress_address=None 2025-04-30T07:21:38.607505Z INFO restate_local_cluster_runner::node: To connect to node node-1 using restate CLI: export RESTATE_ADMIN_URL=http://127.0.0.1:12253 2025-04-30T07:21:38.618677Z INFO restate_local_cluster_runner::node: Started node node-2 in /tmp/.tmp55axHj/node-2 (pid 74225) node_address=unix:/tmp/.tmp55axHj/node-2/node.sock admin_address=127.0.0.1:11715 ingress_address=None 2025-04-30T07:21:38.618728Z INFO restate_local_cluster_runner::node: To connect to node node-2 using restate CLI: export RESTATE_ADMIN_URL=http://127.0.0.1:11715 2025-04-30T07:21:38.628406Z INFO restate_local_cluster_runner::node: Started node node-3"
+    },
+    {
+      "key": "restatedev/restate#3333",
+      "url": "https://github.com/restatedev/restate/issues/3333",
+      "title": "[CLI] `invocations cancel` considers completed invocations when journal retention is enabled",
+      "created_at": "2025-05-30T14:26:48Z",
+      "updated_at": "2025-06-02T07:12:55Z",
+      "state": "closed",
+      "comments": 0,
+      "body_sha256": "29364b20ce926044c575242c5c3c171ba23ffe0e0c4fe71c09b23bfcbbd2686e",
+      "body_excerpt": "Noticed this with the experimental journal retention enabled: ``` % restate inv cancel --kill Counter ID TARGET STATUS inv_1i4G3fO0IBfG3WluVzLBlFHs8gccA2J7vH Counter/le0vczvro5f4/get completed inv_1giDSEyTIcx21YSrqyDWkrMmJ52X4mVvI5 Counter/l35vtdbb06zu/get completed inv_1coNm82dx7P20UqztDdpdt3NxRHk5bs70R Counter/9vvv2aqr7r1h/get completed inv_1hiGx2BbkFJ64fPxl7QeQYKLuQTCW0yi4h Counter/frzm5yznx2m4/get completed inv_17vDkJ60gCyI4x3sEETvJTIGlekvExmr61 Counter/ajcf4nn16l3e/get completed inv_1dWVpOhrLi6I1klTYSvwL41AhMSMeGo4fL Counter/sam4b2oqrgpy/get completed inv_16H4t2rNW3NS31eQH7hcCA1FlwXXvZtIkN Counter/iteztqlvjjg8/get completed inv_1iqKCRi0PKog7Ca7NtC9EFDGrqKYw1Nt8l Counter/4pui38h9bm2e/get completed inv_151BGQ4ulSyQ6FMk9rpJYEdweKvAFIkvkJ Counter/pr4zv6r02zh2/get completed ... ? Are you sure you want to kill these invocations? (y/n) › no ``` These are successfully completed invocations and should not be considered for cancellation. Also consider if there are other code paths that might get tripped up in a similar way."
+    },
+    {
+      "key": "restatedev/restate#3656",
+      "url": "https://github.com/restatedev/restate/issues/3656",
+      "title": "Cancelling invocations in the Backing-Off state seems to have no effect",
+      "created_at": "2025-08-13T18:22:57Z",
+      "updated_at": "2025-09-03T09:25:37Z",
+      "state": "closed",
+      "comments": 4,
+      "body_sha256": "6dad8b95adcb9a63b3a91268a10a3f1fe2ab277758d710200a39da7b1e54bb4e",
+      "body_excerpt": "Restate v1.4.2 I tried both via the UI and the CLI, where I get a success message that the cancellation has been registered, but the invocation continues to retry indefinitely. I tried this on a few different invocations which were in this state. Expected behaviour would be that a terminal error is raised as stated in the docs 😊"
+    },
+    {
+      "key": "restatedev/restate#3752",
+      "url": "https://github.com/restatedev/restate/issues/3752",
+      "title": "CLI command restate invocation cancel MyObject/myKey not working",
+      "created_at": "2025-09-06T10:47:34Z",
+      "updated_at": "2026-08-26T15:18:05Z",
+      "state": "closed",
+      "comments": 2,
+      "body_sha256": "ad33f643657a8991285aa8cd701c3cee7467669fc2e95aa44aaf996d9fe846c2",
+      "body_excerpt": "The CLI does not execute the correct query when cancelling all invocations for a specific object key: <img width=\"1898\" height=\"449\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/c8827c50-2dd4-4497-9967-0b2d96948139\" /> Verbose output: ``` 2025-09-05T18:54:11.223013Z INFO restate_cli_util::context: Didn't load '.env' file 2025-09-05T18:54:11.223489Z INFO restate_cli::app: Using environment from /home/giselle/.config/restate/environment 2025-09-05T18:54:11.223528Z DEBUG cling: Running handler `run_cancel` of type `Cancel` 2025-09-05T18:54:11.223639Z DEBUG restate_cli::clients::admin_client: Sending request GET (http://localhost:9070/version) 2025-09-05T18:54:11.223728Z DEBUG reqwest::connect: starting new connection: http://localhost:9070/ 2025-09-05T18:54:11.223892Z DEBUG hyper_util::client::legacy::connect::http: connecting to 127.0.0.1:9070 2025-09-05T18:54:11.224044Z DEBUG hyper_util::client::legacy::connect::http: connected to 127.0.0.1:9070 2025-09-05T18:54:11.224432Z DEBUG hyper_util::client::legacy::pool: pooling idle connection for (\"http\", localhost:9070) 2025-09-05T18:54:11.224449Z DEBUG restate_cli::clients::admin_client: Response from http://localhost:9070/version"
+    },
+    {
+      "key": "restatedev/restate#4364",
+      "url": "https://github.com/restatedev/restate/issues/4364",
+      "title": "Encoder arena in InvocationTask retains high-water mark memory for invocation lifetime",
+      "created_at": "2026-02-09T09:55:15Z",
+      "updated_at": "2026-02-10T14:19:40Z",
+      "state": "closed",
+      "comments": 0,
+      "body_sha256": "7814e0c9ab07de952815a7337a41c55ca3e5e37002d439dc3b27c194523f7250",
+      "body_excerpt": "## Problem The `Encoder` struct used in the Invoker's `ServiceProtocolRunner` (for both V1-V3 and V4+ protocol versions) uses a `BytesMut` arena that grows to the size of the largest encoded message but **never shrinks**. The arena is held for the entire lifetime of the `ServiceProtocolRunner`, which corresponds to a single invocation attempt — potentially very long-lived during the `bidi_stream_loop` phase. ### How the arena works Both encoder variants (`crates/service-protocol/src/message/encoding.rs:39-41` and `crates/service-protocol-v4/src/message_codec/encoding.rs:38-40`) are structurally identical: ```rust pub struct Encoder { arena: BytesMut, } ``` The `encode()` method calls `self.arena.reserve(needed)`, writes the"
+    },
+    {
+      "key": "restatedev/restate#4440",
+      "url": "https://github.com/restatedev/restate/issues/4440",
+      "title": "Optimize RunCompletionNotification: avoid echoing full payload back to SDK",
+      "created_at": "2026-02-26T21:57:39Z",
+      "updated_at": "2026-05-19T15:23:14Z",
+      "state": "closed",
+      "comments": 3,
+      "body_sha256": "9271001981b5e0d09cf304b13c65c84ab03cf255ffc47a4a491e4e952f8193fb",
+      "body_excerpt": "## Problem When an SDK executes a `ctx.run` block, the following wire exchange occurs: ``` SDK → Server: RunCommandMessage { result_completion_id: N, name: \"...\" } (SDK executes the user's closure locally) SDK → Server: ProposeRunCompletionMessage { result_completion_id: N, result: Value(bytes) } (Server durably stores the result) Server → SDK: RunCompletionNotificationMessage { completion_id: N, result: Value(bytes) } (SDK unblocks and proceeds) ``` The server echoes the **entire result payload** back to the SDK in the `RunCompletionNotificationMessage`, even though the SDK already has the result in memory — it just executed the"
+    },
+    {
+      "key": "restatedev/restate#4513",
+      "url": "https://github.com/restatedev/restate/issues/4513",
+      "title": "Workflow /output endpoint can return spurious 404 during partition reconfiguration",
+      "created_at": "2026-03-20T10:41:53Z",
+      "updated_at": "2026-03-31T12:46:16Z",
+      "state": "closed",
+      "comments": 0,
+      "body_sha256": "a63d12cf84de949105464e3aff8c75e66aae1307f0dc040c66ef2932c29eaa07",
+      "body_excerpt": "## Summary The workflow `/output` endpoint (`GET /restate/workflow/{service}/{key}/output`) can return a spurious HTTP 404 \"invocation not found\" for a workflow that has already completed. This occurs during partition reconfiguration when the request is routed to a node whose partition processor has not yet replayed the log entries containing the invocation. This is **not** just a test instability — it is a correctness issue that can affect production clusters during partition rebalancing. ## Observed Failure - **Test run:** https://github.com/restatedev/restate/actions/runs/23308947715/job/67792723984 - **Test:** `threeNodes => WorkflowAPI => Set and resolve durable promise leads"
+    },
+    {
+      "key": "restatedev/restate#4838",
+      "url": "https://github.com/restatedev/restate/issues/4838",
+      "title": "1.7.0-rc.1: `Invalid column family specified in write batch` in journal completion-id index cleanup crash-loops partition processors after upgrade from 1.6.2",
+      "created_at": "2026-05-30T07:12:22Z",
+      "updated_at": "2026-06-02T11:59:21Z",
+      "state": "closed",
+      "comments": 3,
+      "body_sha256": "dbaf8b44721eebb55080a5de4077c401ca3ef2566e4a813d6d5a00a115dd7c55",
+      "body_excerpt": "## Summary After a rolling upgrade from `1.6.2` to `1.7.0-rc.1` on a 3-node replicated cluster, one node's partition processors began crash-looping with a RocksDB `Invalid argument: Invalid column family specified in write batch` error, originating from the startup task that cleans up orphaned journal completion-id index entries. The crash loop then triggered a cascade: each partition restore retry re-downloaded its snapshot into a fresh `pp-snapshots/` directory without removing the previous one, filling the data volume to 100%. That disabled log-server writes and left the partition store in an unrecoverable state"
+    },
+    {
+      "key": "restatedev/restate#2565",
+      "url": "https://github.com/restatedev/restate/issues/2565",
+      "title": "Brief network partitions can cause all ingress requests to time out even after network is healed",
+      "created_at": "2025-01-28T12:43:00Z",
+      "updated_at": "2025-02-11T15:34:19Z",
+      "state": "closed",
+      "comments": 7,
+      "body_sha256": "32a4659d0736a0c8bca2845d3d1e51ffd9c76f8610c544855c3fd891348abccf",
+      "body_excerpt": "Noted the stuck state that I can consistently replicate when running the Jepsen virtual object workloads against a 3-node cluster that experiences intermittent network partitions. Build: `Restate Server (ad4e5ee x86_64-unknown-linux-gnu 2025-01-28)` ``` lein run test --nodes-file nodes-3.txt --username admin --ssh-private-key ... \\ --image ghcr.io/restatedev/restate@sha256:727254566e53170b9fc099ff8761ec0451c27d3b4b63eeccffc77384ad0a5d4c \\ --workload set-vo --time-limit 60 --rate 10 --concurrency 10 --leave-db-running true --nemesis partition-random-node ``` Here is a visual representation of what's going on - the grey shaded areas are periods when a random single node is isolated from the others: ![Image](https://github.com/user-attachments/assets/673da5d7-c420-453b-970e-2960cbd8d337) The yellow datapoints are ingress"
+    },
+    {
+      "key": "restatedev/restate#2749",
+      "url": "https://github.com/restatedev/restate/issues/2749",
+      "title": "Using restatectl against restate-server running in OrbStack causes panic",
+      "created_at": "2025-02-17T14:48:41Z",
+      "updated_at": "2025-02-17T14:53:48Z",
+      "state": "open",
+      "comments": 1,
+      "body_sha256": "861fab662e53f33e7daaee5239376f3bacbc23555033c1d21b680b619dc26ebc",
+      "body_excerpt": "Extremely bizarre crash that I can consistently reproduce in 1.2.0 (but not 1.1.6) when running the docker container in OrbStack on my mac. It appears that OrbStack does some kind of magical port 80 forwarding which possibly injects something into the request, which in turn makes restate crash. Minimal reproducer: - macOS 15.3 (24D60) - OrbStack Version 1.10.0 (19021) ``` docker run --rm -e RUST_BACKTRACE=full -p 80:8080 -p 8080:8080 --name restate12 docker.io/restatedev/restate:1.2 ``` Call with: ``` ❯ curl -v http://restate12.orb.local:80 * Host restate12.orb.local:80 was resolved. * IPv6: fd07:b51a:cc66:0:a617:db5e:c613:f81b * IPv4:"
+    },
+    {
+      "key": "restatedev/restate#2762",
+      "url": "https://github.com/restatedev/restate/issues/2762",
+      "title": "restatectl <-> restate-server API versioning and compatibility",
+      "created_at": "2025-02-20T12:28:38Z",
+      "updated_at": "2025-04-02T07:42:00Z",
+      "state": "closed",
+      "comments": 0,
+      "body_sha256": "0c18d33592156344ac66e2082a7314e17d5ada53356f8ebd198ac85cf7a26964",
+      "body_excerpt": "It's important for restatectl to detect and give heads up regarding version mismatch or compatibility issues that might occur between the tool and the running servers (for example during an upgrade). ### Specs > TBD"
+    },
+    {
+      "key": "restatedev/restate#2765",
+      "url": "https://github.com/restatedev/restate/issues/2765",
+      "title": "Support enabling PP state machine features in a multi-node setup",
+      "created_at": "2025-02-21T10:14:42Z",
+      "updated_at": "2026-07-20T11:53:58Z",
+      "state": "closed",
+      "comments": 7,
+      "body_sha256": "19fc8e713e5583785f0bbc665aefe0e1eb8749dc945fc3398ad7177e74a36a01",
+      "body_excerpt": "With the introduction of distributed Restate, we now have the situation that enabling features in the PP state machine that change its behavior (e.g. writing different messages, following different code paths, etc.) can lead to a divergence of state if not all state machines start changing their behavior at the same log message. An example of a new feature that would be problematic to activate without a coordinated approach is to skip the outbox and shuffle for outgoing messages that are targeted to oneself. To avoid that state machines go"
+    }
+  ],
+  "limits": "First five per query; not a representative sample or prevalence estimate."
+}

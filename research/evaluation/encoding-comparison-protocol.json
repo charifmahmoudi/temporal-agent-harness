@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "subject_commit": "4f9cfaffdc34a8bd45eec7aae212131cdd00a6ae",
+  "status": "development protocol recorded before implementation; not independent preregistration",
+  "question": "Does a proposed decision-boundary abstraction improve on an ordinary explicit encoding for the declared cancellation/command fragment?",
+  "arms": [
+    "Explicit operational reference with cancellation counter, cleanup outcome, patch state, and command cursor",
+    "Conventional version-dispatch harness executing the actual B/C/V helper AST against declared primitive adapters",
+    "Reduced decision-boundary formula with a separately computed observation map"
+  ],
+  "schedule_alphabet": ["cancel", "uncancel"],
+  "maximum_schedule_length": 3,
+  "initial_cancellation_count": 0,
+  "child_outcomes": ["return", "error", "cancel"],
+  "variants": ["B", "C", "V"],
+  "approved": [false, true],
+  "contexts": [
+    {"name": "offline", "workflow": false, "replay": false, "notified": false, "activation": true, "memo": null},
+    {"name": "fresh_on", "workflow": true, "replay": false, "notified": false, "activation": true, "memo": null},
+    {"name": "fresh_off", "workflow": true, "replay": false, "notified": false, "activation": false, "memo": null},
+    {"name": "replay_absent", "workflow": true, "replay": true, "notified": false, "activation": true, "memo": null},
+    {"name": "replay_present", "workflow": true, "replay": true, "notified": true, "activation": true, "memo": null},
+    {"name": "fresh_memo_true", "workflow": true, "replay": false, "notified": false, "activation": true, "memo": true},
+    {"name": "fresh_memo_false", "workflow": true, "replay": false, "notified": false, "activation": false, "memo": false},
+    {"name": "replay_memo_true", "workflow": true, "replay": true, "notified": true, "activation": true, "memo": true},
+    {"name": "replay_memo_false", "workflow": true, "replay": true, "notified": false, "activation": true, "memo": false}
+  ],
+  "activity_signatures": ["activity:tool:arg0:options0", "activity:tool:arg1:options0", "activity:tool:arg0:options1"],
+  "expected_words": [
+    [],
+    ["patch:approval-caller-cancel-v1"],
+    ["activity:tool:arg0:options0"],
+    ["patch:approval-caller-cancel-v1", "activity:tool:arg0:options0"],
+    ["activity:tool:arg1:options0"],
+    ["activity:tool:arg0:options1"],
+    ["activity:tool:arg0:options0", "activity:tool:arg0:options0"],
+    ["activity:tool:arg0:options0", "patch:approval-caller-cancel-v1"]
+  ],
+  "primitive_contract": [
+    "Caller exists. Prefix events occur while the helper awaits child cleanup. cancel increments the caller counter; uncancel decrements it with floor zero.",
+    "The child settles with the selected outcome after the finite prefix. Child cancellation and caller cancellation are separate inputs.",
+    "No later suspension or cancellation occurs between helper return and the final gate/dispatch decision. Gate outcome is a fixed input; publication and argument preparation are total and command-free in this fragment.",
+    "Reached patch calls use the existing memo when present. Otherwise replay uses notification; fresh execution uses the activation input. A newly true result emits one patch symbol, while memo reuse emits none.",
+    "Activity name/argument/options are represented by one opaque signature. This symbol records an API command request, not a durable external effect.",
+    "Expected-word comparison is exact ordered symbolic equality, with an explicit reference cursor. It is NOT Temporal core replay matching or a claim about real history reachability."
+  ],
+  "unsupported_cases": ["cancel_after_guard", "nonterminating_child", "unknown_base_exception", "dynamic_publication_effect", "unknown_activity_signature", "arbitrary_scheduler", "invalid_activation_callback"],
+  "predictions": [
+    {"id": "P1", "claim": "All three encodings agree on supported terminal outcome, patch-call reachability, and command word."},
+    {"id": "P2", "claim": "A cancellation Boolean maintained throughout the prefix is insufficient when uncancel is allowed: cancel,uncancel and cancel,cancel,uncancel are a distinguishing pair."},
+    {"id": "P3", "claim": "At the post-cleanup decision boundary, count positivity suffices for this suffix under the declared no-later-cancellation restriction."},
+    {"id": "P4", "claim": "Assuming every fresh reached patch activates gives a wrong answer when activation is disabled."},
+    {"id": "P5", "claim": "An unconditional patch call changes observable behavior when the cancellation counter is zero."},
+    {"id": "P6", "claim": "Comparing command kind alone falsely accepts changes to activity arguments/options."},
+    {"id": "P7", "claim": "The conventional encoding can express the supported cases; no expressiveness advantage is expected."}
+  ],
+  "scoring": [
+    "Report complete Cartesian domain size, every disagreement, deterministic transcript hash, and all unsupported probes.",
+    "Report conditional cancellation-policy violations separately from agreement: accurate prediction of unsafe baseline behavior is not safety certification.",
+    "Count distinct explicit decision-boundary keys and reduced keys with identical external context; do not interpret enumeration-size reduction as runtime speedup.",
+    "Record hand-authored semantic contracts and source-derived pieces. No manual-effort superiority claim without independently measured effort.",
+    "Any supported disagreement falsifies the reduction or an implementation; retain the failure and protocol version before fixing.",
+    "If the conventional encoding agrees at this scope, do not claim novelty from the reduced formula or this experiment."
+  ]
+}

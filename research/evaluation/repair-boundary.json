@@ -1,0 +1,1350 @@
+{
+  "schema": 1,
+  "kind": "lexical inventory; manually selected boundary; no semantic slice claim",
+  "source_path": "temporal_agent_harness/harness/agent_workflow.py",
+  "script_sha256": "0ebbe7e9faebe5be15f4159f7bcffab84cd07524bbf9ee5877bcf786cdef2165",
+  "variant_generator_sha256": "183e07c37ce4d02f458b656a3fd573ee33c1de693345b31d6841a57ccac74dff",
+  "analysis_status": "unsupported for automatic safety or replay certification",
+  "open_obligations": [
+    "Resolve dynamic evaluator and runner calls, aliases, and publication effects.",
+    "Give deferred wait predicates and concurrent handlers scheduler semantics.",
+    "Relate caller cancellation count to delivered requests and uncancel operations.",
+    "Model exception propagation, child suppression, and successful cleanup return.",
+    "Model SDK patch memoization, activation callback, markers, and replay cursor.",
+    "Preserve activity command identity, arguments, options, and effect boundary."
+  ],
+  "variants": [
+    {
+      "name": "baseline",
+      "source_sha256": "e81560fba5a9d97251afb14de64cf7b767294c1d0438d4f54e306e4ae3cbbe65",
+      "functions": [
+        {
+          "definition": "_cancel_and_settle",
+          "lines": [
+            282,
+            304
+          ],
+          "ast_sha256": "7f65a58c6e6b72cfa57add9bcfd8ae22b5eadfb2a1785ea1bbd5502869ce213d",
+          "awaits": [
+            {
+              "line": 302,
+              "text": "task"
+            }
+          ],
+          "handlers": [
+            {
+              "line": 303,
+              "text": "(Exception, asyncio.CancelledError)"
+            }
+          ],
+          "guards": [],
+          "calls": [
+            {
+              "line": 300,
+              "text": "task.cancel"
+            }
+          ],
+          "reads": [
+            {
+              "line": 300,
+              "text": "task.cancel"
+            },
+            {
+              "line": 303,
+              "text": "asyncio.CancelledError"
+            }
+          ],
+          "deferred": []
+        },
+        {
+          "definition": "_apply_approval_policy",
+          "lines": [
+            486,
+            634
+          ],
+          "ast_sha256": "b97939be6fb837939a8b768e736c2ff848beb080f9a6de8637bc9cb4c4a816d4",
+          "awaits": [
+            {
+              "line": 603,
+              "text": "runner._run_auto_mode_evaluator(auto_ctx, tool_id=tool_id, stream=ctx)"
+            },
+            {
+              "line": 614,
+              "text": "workflow.wait_condition(lambda: runner._status.is_approval_resolved(tool_id) or runner._closed)"
+            }
+          ],
+          "handlers": [],
+          "guards": [
+            {
+              "line": 558,
+              "text": "runner is None"
+            },
+            {
+              "line": 563,
+              "text": "runner._policy_auto_approves(tool_name, inherently_safe=inherently_safe)"
+            },
+            {
+              "line": 567,
+              "text": "ctx is None"
+            },
+            {
+              "line": 603,
+              "text": "auto_ctx is not None"
+            },
+            {
+              "line": 607,
+              "text": "decision is not None"
+            },
+            {
+              "line": 608,
+              "text": "decision.verdict is AutoApprovalVerdict.APPROVE"
+            },
+            {
+              "line": 610,
+              "text": "decision.verdict is AutoApprovalVerdict.DENY"
+            },
+            {
+              "line": 628,
+              "text": "not runner._status.is_approval_resolved(tool_id)"
+            },
+            {
+              "line": 633,
+              "text": "not outcome.approved"
+            }
+          ],
+          "calls": [
+            {
+              "line": 557,
+              "text": "_CURRENT_RUNNER.get"
+            },
+            {
+              "line": 559,
+              "text": "RuntimeError"
+            },
+            {
+              "line": 563,
+              "text": "runner._policy_auto_approves"
+            },
+            {
+              "line": 565,
+              "text": "_current_tool_id"
+            },
+            {
+              "line": 568,
+              "text": "RuntimeError"
+            },
+            {
+              "line": 575,
+              "text": "runner._status.register_pending_approval"
+            },
+            {
+              "line": 584,
+              "text": "runner._pub"
+            },
+            {
+              "line": 587,
+              "text": "ToolApprovalRequested"
+            },
+            {
+              "line": 595,
+              "text": "runner._auto_mode_context"
+            },
+            {
+              "line": 603,
+              "text": "runner._run_auto_mode_evaluator"
+            },
+            {
+              "line": 609,
+              "text": "runner._resolve_and_publish"
+            },
+            {
+              "line": 611,
+              "text": "runner._resolve_and_publish"
+            },
+            {
+              "line": 614,
+              "text": "workflow.wait_condition"
+            },
+            {
+              "line": 628,
+              "text": "runner._status.is_approval_resolved"
+            },
+            {
+              "line": 629,
+              "text": "runner._status.finalize_approval"
+            },
+            {
+              "line": 630,
+              "text": "runner._publish_approval_resolved"
+            },
+            {
+              "line": 632,
+              "text": "runner._status.finalize_approval"
+            },
+            {
+              "line": 634,
+              "text": "ToolApprovalDenied"
+            }
+          ],
+          "reads": [
+            {
+              "line": 557,
+              "text": "_CURRENT_RUNNER.get"
+            },
+            {
+              "line": 563,
+              "text": "runner._policy_auto_approves"
+            },
+            {
+              "line": 566,
+              "text": "runner.current_stream_context"
+            },
+            {
+              "line": 575,
+              "text": "runner._status.register_pending_approval"
+            },
+            {
+              "line": 575,
+              "text": "runner._status"
+            },
+            {
+              "line": 579,
+              "text": "ctx.turn_number"
+            },
+            {
+              "line": 580,
+              "text": "ctx.turn_id"
+            },
+            {
+              "line": 581,
+              "text": "ctx.message_id"
+            },
+            {
+              "line": 584,
+              "text": "runner._pub"
+            },
+            {
+              "line": 585,
+              "text": "ctx.turn_id"
+            },
+            {
+              "line": 586,
+              "text": "ctx.turn_number"
+            },
+            {
+              "line": 595,
+              "text": "runner._auto_mode_context"
+            },
+            {
+              "line": 603,
+              "text": "runner._run_auto_mode_evaluator"
+            },
+            {
+              "line": 608,
+              "text": "decision.verdict"
+            },
+            {
+              "line": 608,
+              "text": "AutoApprovalVerdict.APPROVE"
+            },
+            {
+              "line": 609,
+              "text": "runner._resolve_and_publish"
+            },
+            {
+              "line": 609,
+              "text": "decision.reason"
+            },
+            {
+              "line": 610,
+              "text": "decision.verdict"
+            },
+            {
+              "line": 610,
+              "text": "AutoApprovalVerdict.DENY"
+            },
+            {
+              "line": 611,
+              "text": "runner._resolve_and_publish"
+            },
+            {
+              "line": 611,
+              "text": "decision.reason"
+            },
+            {
+              "line": 614,
+              "text": "workflow.wait_condition"
+            },
+            {
+              "line": 628,
+              "text": "runner._status.is_approval_resolved"
+            },
+            {
+              "line": 628,
+              "text": "runner._status"
+            },
+            {
+              "line": 629,
+              "text": "runner._status.finalize_approval"
+            },
+            {
+              "line": 629,
+              "text": "runner._status"
+            },
+            {
+              "line": 629,
+              "text": "runner._closed"
+            },
+            {
+              "line": 630,
+              "text": "runner._publish_approval_resolved"
+            },
+            {
+              "line": 632,
+              "text": "runner._status.finalize_approval"
+            },
+            {
+              "line": 632,
+              "text": "runner._status"
+            },
+            {
+              "line": 632,
+              "text": "runner._closed"
+            },
+            {
+              "line": 633,
+              "text": "outcome.approved"
+            },
+            {
+              "line": 634,
+              "text": "outcome.reason"
+            }
+          ],
+          "deferred": [
+            {
+              "line": 615,
+              "text": "<lambda>"
+            }
+          ]
+        },
+        {
+          "definition": "AgentWorkflowRunner._run_auto_mode_evaluator",
+          "lines": [
+            2500,
+            2633
+          ],
+          "ast_sha256": "a9d99cae52816171c4e5272f70af94db340133802fe65073931b0397293e4993",
+          "awaits": [
+            {
+              "line": 2565,
+              "text": "workflow.wait_condition(lambda: task.done() or settled())"
+            },
+            {
+              "line": 2580,
+              "text": "_cancel_and_settle(task)"
+            },
+            {
+              "line": 2593,
+              "text": "task"
+            }
+          ],
+          "handlers": [
+            {
+              "line": 2599,
+              "text": "Exception"
+            }
+          ],
+          "guards": [
+            {
+              "line": 2543,
+              "text": "evaluator_fn is None"
+            },
+            {
+              "line": 2567,
+              "text": "settled()"
+            },
+            {
+              "line": 2573,
+              "text": "task.done() and (not task.cancelled()) and (task.exception() is None)"
+            },
+            {
+              "line": 2578,
+              "text": "isinstance(reached_decision, AutoApprovalDecision)"
+            },
+            {
+              "line": 2594,
+              "text": "not isinstance(decision, AutoApprovalDecision)"
+            },
+            {
+              "line": 2604,
+              "text": "workflow.in_workflow()"
+            }
+          ],
+          "calls": [
+            {
+              "line": 2545,
+              "text": "workflow.uuid4"
+            },
+            {
+              "line": 2546,
+              "text": "_evaluator_label"
+            },
+            {
+              "line": 2551,
+              "text": "close"
+            },
+            {
+              "line": 2552,
+              "text": "AutoApprovalEvaluationStarted"
+            },
+            {
+              "line": 2563,
+              "text": "asyncio.ensure_future"
+            },
+            {
+              "line": 2563,
+              "text": "evaluator_fn"
+            },
+            {
+              "line": 2565,
+              "text": "workflow.wait_condition"
+            },
+            {
+              "line": 2567,
+              "text": "settled"
+            },
+            {
+              "line": 2573,
+              "text": "task.done"
+            },
+            {
+              "line": 2573,
+              "text": "task.cancelled"
+            },
+            {
+              "line": 2573,
+              "text": "task.exception"
+            },
+            {
+              "line": 2577,
+              "text": "task.result"
+            },
+            {
+              "line": 2578,
+              "text": "isinstance"
+            },
+            {
+              "line": 2580,
+              "text": "_cancel_and_settle"
+            },
+            {
+              "line": 2581,
+              "text": "close"
+            },
+            {
+              "line": 2582,
+              "text": "AutoApprovalEvaluationSuperseded"
+            },
+            {
+              "line": 2594,
+              "text": "isinstance"
+            },
+            {
+              "line": 2595,
+              "text": "TypeError"
+            },
+            {
+              "line": 2597,
+              "text": "type"
+            },
+            {
+              "line": 2604,
+              "text": "workflow.in_workflow"
+            },
+            {
+              "line": 2605,
+              "text": "workflow.logger.exception"
+            },
+            {
+              "line": 2611,
+              "text": "close"
+            },
+            {
+              "line": 2612,
+              "text": "AutoApprovalEvaluationError"
+            },
+            {
+              "line": 2617,
+              "text": "_exception_text"
+            },
+            {
+              "line": 2622,
+              "text": "close"
+            },
+            {
+              "line": 2623,
+              "text": "AutoApprovalEvaluationEnded"
+            }
+          ],
+          "reads": [
+            {
+              "line": 2542,
+              "text": "self._auto_mode_evaluator"
+            },
+            {
+              "line": 2545,
+              "text": "workflow.uuid4().hex"
+            },
+            {
+              "line": 2545,
+              "text": "workflow.uuid4"
+            },
+            {
+              "line": 2554,
+              "text": "ctx.tool_name"
+            },
+            {
+              "line": 2563,
+              "text": "asyncio.ensure_future"
+            },
+            {
+              "line": 2565,
+              "text": "workflow.wait_condition"
+            },
+            {
+              "line": 2573,
+              "text": "task.done"
+            },
+            {
+              "line": 2573,
+              "text": "task.cancelled"
+            },
+            {
+              "line": 2573,
+              "text": "task.exception"
+            },
+            {
+              "line": 2577,
+              "text": "task.result"
+            },
+            {
+              "line": 2579,
+              "text": "reached_decision.verdict"
+            },
+            {
+              "line": 2584,
+              "text": "ctx.tool_name"
+            },
+            {
+              "line": 2597,
+              "text": "type(decision).__name__"
+            },
+            {
+              "line": 2604,
+              "text": "workflow.in_workflow"
+            },
+            {
+              "line": 2605,
+              "text": "workflow.logger.exception"
+            },
+            {
+              "line": 2605,
+              "text": "workflow.logger"
+            },
+            {
+              "line": 2609,
+              "text": "ctx.tool_name"
+            },
+            {
+              "line": 2614,
+              "text": "ctx.tool_name"
+            },
+            {
+              "line": 2625,
+              "text": "ctx.tool_name"
+            },
+            {
+              "line": 2628,
+              "text": "decision.verdict"
+            },
+            {
+              "line": 2629,
+              "text": "decision.reason"
+            },
+            {
+              "line": 2630,
+              "text": "decision.details"
+            }
+          ],
+          "deferred": [
+            {
+              "line": 2548,
+              "text": "close"
+            },
+            {
+              "line": 2564,
+              "text": "<lambda>"
+            },
+            {
+              "line": 2565,
+              "text": "<lambda>"
+            }
+          ]
+        },
+        {
+          "definition": "AgentWorkflowRunner._handle_tool_approval",
+          "lines": [
+            2267,
+            2302
+          ],
+          "ast_sha256": "43eac3f2d0667368bb0d370382862cf38a485ffbfc27fa44c56f8dd0c0a3f7ad",
+          "awaits": [],
+          "handlers": [],
+          "guards": [
+            {
+              "line": 2298,
+              "text": "decision.approved and decision.remember and (entry is not None)"
+            }
+          ],
+          "calls": [
+            {
+              "line": 2291,
+              "text": "self._status.approval_entry"
+            },
+            {
+              "line": 2292,
+              "text": "self._resolve_and_publish"
+            },
+            {
+              "line": 2299,
+              "text": "self._apply_policy_update"
+            },
+            {
+              "line": 2300,
+              "text": "self._status.approval_policy.with_tool_allowed"
+            },
+            {
+              "line": 2302,
+              "text": "ToolApprovalResult"
+            }
+          ],
+          "reads": [
+            {
+              "line": 2291,
+              "text": "self._status.approval_entry"
+            },
+            {
+              "line": 2291,
+              "text": "self._status"
+            },
+            {
+              "line": 2291,
+              "text": "decision.tool_id"
+            },
+            {
+              "line": 2292,
+              "text": "self._resolve_and_publish"
+            },
+            {
+              "line": 2293,
+              "text": "decision.tool_id"
+            },
+            {
+              "line": 2294,
+              "text": "decision.approved"
+            },
+            {
+              "line": 2295,
+              "text": "decision.reason"
+            },
+            {
+              "line": 2296,
+              "text": "decision.remember"
+            },
+            {
+              "line": 2298,
+              "text": "decision.approved"
+            },
+            {
+              "line": 2298,
+              "text": "decision.remember"
+            },
+            {
+              "line": 2299,
+              "text": "self._apply_policy_update"
+            },
+            {
+              "line": 2300,
+              "text": "self._status.approval_policy.with_tool_allowed"
+            },
+            {
+              "line": 2300,
+              "text": "self._status.approval_policy"
+            },
+            {
+              "line": 2300,
+              "text": "self._status"
+            },
+            {
+              "line": 2300,
+              "text": "entry.tool_name"
+            },
+            {
+              "line": 2302,
+              "text": "decision.tool_id"
+            }
+          ],
+          "deferred": []
+        },
+        {
+          "definition": "AgentWorkflowRunner._resolve_and_publish",
+          "lines": [
+            2666,
+            2682
+          ],
+          "ast_sha256": "564c8130332c1765e106cf7273f44f988166e1e01d5d08b0327f0d574ec49050",
+          "awaits": [],
+          "handlers": [],
+          "guards": [],
+          "calls": [
+            {
+              "line": 2681,
+              "text": "self._status.resolve_approval"
+            },
+            {
+              "line": 2682,
+              "text": "self._publish_approval_resolved"
+            }
+          ],
+          "reads": [
+            {
+              "line": 2681,
+              "text": "self._status.resolve_approval"
+            },
+            {
+              "line": 2681,
+              "text": "self._status"
+            },
+            {
+              "line": 2682,
+              "text": "self._publish_approval_resolved"
+            }
+          ],
+          "deferred": []
+        },
+        {
+          "definition": "activity_tool_defn.decorator.dispatch",
+          "lines": [
+            3791,
+            3828
+          ],
+          "ast_sha256": "581f9a1de9c7902310c75df1538e9dd88524fee2e6803aac9551dab151e9f42e",
+          "awaits": [
+            {
+              "line": 3795,
+              "text": "_apply_approval_policy(tool_name, model_input, inherently_safe=inherently_safe, tool_description=tool_description, auto_approval_criteria=auto_approval_criteria)"
+            },
+            {
+              "line": 3823,
+              "text": "workflow.execute_activity(tool_name, args=activity_args, result_type=sig.return_type, **config)"
+            }
+          ],
+          "handlers": [],
+          "guards": [
+            {
+              "line": 3803,
+              "text": "sig.inject_names"
+            },
+            {
+              "line": 3806,
+              "text": "sig.has_self and p.name == 'self'"
+            },
+            {
+              "line": 3808,
+              "text": "p.name in sig.inject_names"
+            },
+            {
+              "line": 3809,
+              "text": "p.name not in injections"
+            }
+          ],
+          "calls": [
+            {
+              "line": 3792,
+              "text": "sig.model_sig.bind"
+            },
+            {
+              "line": 3793,
+              "text": "bound.apply_defaults"
+            },
+            {
+              "line": 3794,
+              "text": "dict"
+            },
+            {
+              "line": 3795,
+              "text": "_apply_approval_policy"
+            },
+            {
+              "line": 3803,
+              "text": "_current_tool_injections"
+            },
+            {
+              "line": 3810,
+              "text": "ApplicationError"
+            },
+            {
+              "line": 3816,
+              "text": "activity_args.append"
+            },
+            {
+              "line": 3818,
+              "text": "activity_args.append"
+            },
+            {
+              "line": 3819,
+              "text": "activity_args.append"
+            },
+            {
+              "line": 3819,
+              "text": "AgentToolContext.for_current_tool_id"
+            },
+            {
+              "line": 3823,
+              "text": "workflow.execute_activity"
+            }
+          ],
+          "reads": [
+            {
+              "line": 3792,
+              "text": "sig.model_sig.bind"
+            },
+            {
+              "line": 3792,
+              "text": "sig.model_sig"
+            },
+            {
+              "line": 3793,
+              "text": "bound.apply_defaults"
+            },
+            {
+              "line": 3794,
+              "text": "bound.arguments"
+            },
+            {
+              "line": 3803,
+              "text": "sig.inject_names"
+            },
+            {
+              "line": 3805,
+              "text": "sig.user_params"
+            },
+            {
+              "line": 3806,
+              "text": "sig.has_self"
+            },
+            {
+              "line": 3806,
+              "text": "p.name"
+            },
+            {
+              "line": 3808,
+              "text": "p.name"
+            },
+            {
+              "line": 3808,
+              "text": "sig.inject_names"
+            },
+            {
+              "line": 3809,
+              "text": "p.name"
+            },
+            {
+              "line": 3812,
+              "text": "p.name"
+            },
+            {
+              "line": 3816,
+              "text": "activity_args.append"
+            },
+            {
+              "line": 3816,
+              "text": "p.name"
+            },
+            {
+              "line": 3818,
+              "text": "activity_args.append"
+            },
+            {
+              "line": 3818,
+              "text": "bound.arguments"
+            },
+            {
+              "line": 3818,
+              "text": "p.name"
+            },
+            {
+              "line": 3819,
+              "text": "activity_args.append"
+            },
+            {
+              "line": 3819,
+              "text": "AgentToolContext.for_current_tool_id"
+            },
+            {
+              "line": 3823,
+              "text": "workflow.execute_activity"
+            },
+            {
+              "line": 3826,
+              "text": "sig.return_type"
+            }
+          ],
+          "deferred": []
+        }
+      ]
+    },
+    {
+      "name": "corrected",
+      "source_sha256": "bf1c8b9b51661559538c15d47297fb04ec63166ec24434091f60c55ec33ff432",
+      "functions": [
+        {
+          "definition": "_cancel_and_settle",
+          "lines": [
+            282,
+            309
+          ],
+          "ast_sha256": "d758fafae4cfe98db0c69db6777b342fe49c35ad03750105cf5d0f112cdbe90c",
+          "awaits": [
+            {
+              "line": 303,
+              "text": "task"
+            }
+          ],
+          "handlers": [
+            {
+              "line": 304,
+              "text": "(Exception, asyncio.CancelledError)"
+            }
+          ],
+          "guards": [
+            {
+              "line": 308,
+              "text": "caller is not None and caller.cancelling()"
+            }
+          ],
+          "calls": [
+            {
+              "line": 300,
+              "text": "asyncio.current_task"
+            },
+            {
+              "line": 301,
+              "text": "task.cancel"
+            },
+            {
+              "line": 308,
+              "text": "caller.cancelling"
+            }
+          ],
+          "reads": [
+            {
+              "line": 300,
+              "text": "asyncio.current_task"
+            },
+            {
+              "line": 301,
+              "text": "task.cancel"
+            },
+            {
+              "line": 304,
+              "text": "asyncio.CancelledError"
+            },
+            {
+              "line": 308,
+              "text": "caller.cancelling"
+            },
+            {
+              "line": 309,
+              "text": "asyncio.CancelledError"
+            }
+          ],
+          "deferred": []
+        },
+        {
+          "definition": "AgentWorkflowRunner._run_auto_mode_evaluator",
+          "lines": [
+            2505,
+            2644
+          ],
+          "ast_sha256": "0b9ba6327d4a29475beec2c59484022bcee9aae75e8505a15911687fa6ba01a6",
+          "awaits": [
+            {
+              "line": 2570,
+              "text": "workflow.wait_condition(lambda: task.done() or settled())"
+            },
+            {
+              "line": 2593,
+              "text": "_cancel_and_settle(task)"
+            },
+            {
+              "line": 2604,
+              "text": "task"
+            }
+          ],
+          "handlers": [
+            {
+              "line": 2594,
+              "text": "asyncio.CancelledError"
+            },
+            {
+              "line": 2610,
+              "text": "Exception"
+            }
+          ],
+          "guards": [
+            {
+              "line": 2548,
+              "text": "evaluator_fn is None"
+            },
+            {
+              "line": 2572,
+              "text": "settled()"
+            },
+            {
+              "line": 2578,
+              "text": "task.done() and (not task.cancelled()) and (task.exception() is None)"
+            },
+            {
+              "line": 2583,
+              "text": "isinstance(reached_decision, AutoApprovalDecision)"
+            },
+            {
+              "line": 2597,
+              "text": "workflow.in_workflow()"
+            },
+            {
+              "line": 2605,
+              "text": "not isinstance(decision, AutoApprovalDecision)"
+            },
+            {
+              "line": 2615,
+              "text": "workflow.in_workflow()"
+            }
+          ],
+          "calls": [
+            {
+              "line": 2550,
+              "text": "workflow.uuid4"
+            },
+            {
+              "line": 2551,
+              "text": "_evaluator_label"
+            },
+            {
+              "line": 2556,
+              "text": "close"
+            },
+            {
+              "line": 2557,
+              "text": "AutoApprovalEvaluationStarted"
+            },
+            {
+              "line": 2568,
+              "text": "asyncio.ensure_future"
+            },
+            {
+              "line": 2568,
+              "text": "evaluator_fn"
+            },
+            {
+              "line": 2570,
+              "text": "workflow.wait_condition"
+            },
+            {
+              "line": 2572,
+              "text": "settled"
+            },
+            {
+              "line": 2578,
+              "text": "task.done"
+            },
+            {
+              "line": 2578,
+              "text": "task.cancelled"
+            },
+            {
+              "line": 2578,
+              "text": "task.exception"
+            },
+            {
+              "line": 2582,
+              "text": "task.result"
+            },
+            {
+              "line": 2583,
+              "text": "isinstance"
+            },
+            {
+              "line": 2585,
+              "text": "AutoApprovalEvaluationSuperseded"
+            },
+            {
+              "line": 2593,
+              "text": "_cancel_and_settle"
+            },
+            {
+              "line": 2597,
+              "text": "workflow.in_workflow"
+            },
+            {
+              "line": 2598,
+              "text": "close"
+            },
+            {
+              "line": 2600,
+              "text": "close"
+            },
+            {
+              "line": 2605,
+              "text": "isinstance"
+            },
+            {
+              "line": 2606,
+              "text": "TypeError"
+            },
+            {
+              "line": 2608,
+              "text": "type"
+            },
+            {
+              "line": 2615,
+              "text": "workflow.in_workflow"
+            },
+            {
+              "line": 2616,
+              "text": "workflow.logger.exception"
+            },
+            {
+              "line": 2622,
+              "text": "close"
+            },
+            {
+              "line": 2623,
+              "text": "AutoApprovalEvaluationError"
+            },
+            {
+              "line": 2628,
+              "text": "_exception_text"
+            },
+            {
+              "line": 2633,
+              "text": "close"
+            },
+            {
+              "line": 2634,
+              "text": "AutoApprovalEvaluationEnded"
+            }
+          ],
+          "reads": [
+            {
+              "line": 2547,
+              "text": "self._auto_mode_evaluator"
+            },
+            {
+              "line": 2550,
+              "text": "workflow.uuid4().hex"
+            },
+            {
+              "line": 2550,
+              "text": "workflow.uuid4"
+            },
+            {
+              "line": 2559,
+              "text": "ctx.tool_name"
+            },
+            {
+              "line": 2568,
+              "text": "asyncio.ensure_future"
+            },
+            {
+              "line": 2570,
+              "text": "workflow.wait_condition"
+            },
+            {
+              "line": 2578,
+              "text": "task.done"
+            },
+            {
+              "line": 2578,
+              "text": "task.cancelled"
+            },
+            {
+              "line": 2578,
+              "text": "task.exception"
+            },
+            {
+              "line": 2582,
+              "text": "task.result"
+            },
+            {
+              "line": 2584,
+              "text": "reached_decision.verdict"
+            },
+            {
+              "line": 2587,
+              "text": "ctx.tool_name"
+            },
+            {
+              "line": 2594,
+              "text": "asyncio.CancelledError"
+            },
+            {
+              "line": 2597,
+              "text": "workflow.in_workflow"
+            },
+            {
+              "line": 2608,
+              "text": "type(decision).__name__"
+            },
+            {
+              "line": 2615,
+              "text": "workflow.in_workflow"
+            },
+            {
+              "line": 2616,
+              "text": "workflow.logger.exception"
+            },
+            {
+              "line": 2616,
+              "text": "workflow.logger"
+            },
+            {
+              "line": 2620,
+              "text": "ctx.tool_name"
+            },
+            {
+              "line": 2625,
+              "text": "ctx.tool_name"
+            },
+            {
+              "line": 2636,
+              "text": "ctx.tool_name"
+            },
+            {
+              "line": 2639,
+              "text": "decision.verdict"
+            },
+            {
+              "line": 2640,
+              "text": "decision.reason"
+            },
+            {
+              "line": 2641,
+              "text": "decision.details"
+            }
+          ],
+          "deferred": [
+            {
+              "line": 2553,
+              "text": "close"
+            },
+            {
+              "line": 2569,
+              "text": "<lambda>"
+            },
+            {
+              "line": 2570,
+              "text": "<lambda>"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "versioned",
+      "source_sha256": "ffcc1c3717874430e442ff9cb71bf5d9d0a272d3edd30dc90f1595f5b3a9447d",
+      "functions": [
+        {
+          "definition": "_cancel_and_settle",
+          "lines": [
+            282,
+            311
+          ],
+          "ast_sha256": "bbb5bef98d89d76d8597eb1d3d93de2a05f9573802a62290e79b03d4fd3904b3",
+          "awaits": [
+            {
+              "line": 303,
+              "text": "task"
+            }
+          ],
+          "handlers": [
+            {
+              "line": 304,
+              "text": "(Exception, asyncio.CancelledError)"
+            }
+          ],
+          "guards": [
+            {
+              "line": 308,
+              "text": "caller is not None and caller.cancelling() and (not workflow.in_workflow() or workflow.patched('approval-caller-cancel-v1'))"
+            }
+          ],
+          "calls": [
+            {
+              "line": 300,
+              "text": "asyncio.current_task"
+            },
+            {
+              "line": 301,
+              "text": "task.cancel"
+            },
+            {
+              "line": 308,
+              "text": "caller.cancelling"
+            },
+            {
+              "line": 309,
+              "text": "workflow.in_workflow"
+            },
+            {
+              "line": 309,
+              "text": "workflow.patched"
+            }
+          ],
+          "reads": [
+            {
+              "line": 300,
+              "text": "asyncio.current_task"
+            },
+            {
+              "line": 301,
+              "text": "task.cancel"
+            },
+            {
+              "line": 304,
+              "text": "asyncio.CancelledError"
+            },
+            {
+              "line": 308,
+              "text": "caller.cancelling"
+            },
+            {
+              "line": 309,
+              "text": "workflow.in_workflow"
+            },
+            {
+              "line": 309,
+              "text": "workflow.patched"
+            },
+            {
+              "line": 311,
+              "text": "asyncio.CancelledError"
+            }
+          ],
+          "deferred": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+name: Approval verification
+
+on:
+  pull_request:
+  push:
+    branches: [main, research/approval-verification]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: approval-verification-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  documentation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check scientific documentation and evidence consistency
+        run: python research/scripts/check_documentation.py
+  model:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Check source correspondence has not drifted
+        run: python research/scripts/check_source.py
+      - name: Download pinned TLA+ tools
+        run: curl --fail --location --retry 3 --retry-all-errors --connect-timeout 20 --max-time 120 https://github.com/tlaplus/tlaplus/releases/download/v1.8.0/tla2tools.jar -o "$RUNNER_TEMP/tla2tools.jar"
+      - name: Check safety, liveness, and synthetic faults
+        run: python research/scripts/check_model.py --jar "$RUNNER_TEMP/tla2tools.jar"
+      - name: Check policy cascades, conditional progress, and synthetic faults
+        run: python research/scripts/check_cascade.py --jar "$RUNNER_TEMP/tla2tools.jar"
+      - name: Check retained cancellation observations against Cleanup
+        run: python research/scripts/check_cleanup_traces.py --jar "$RUNNER_TEMP/tla2tools.jar"
+      - name: Check durable-history boundary and retained replay evidence
+        run: python research/scripts/check_history_model.py --jar "$RUNNER_TEMP/tla2tools.jar"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: approval-model-results
+          path: |
+            research/results/latest/
+            research/results/cascade/
+            research/results/cleanup-conformance/
+            research/results/history-model/
+  implementation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          version: '0.12.23'
+          python-version: '3.12'
+      - name: Run approval integration and boundary experiments
+        run: uv run --frozen pytest tests/harness/test_tool_approvals.py tests/harness/test_auto_mode_superseded_result.py tests/research/ -q --junitxml=research/results/implementation.xml
+      - name: Check regression sensitivity to isolated implementation faults
+        run: uv run --frozen python research/scripts/check_implementation_mutations.py
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Download pinned TLA+ tools for trace correspondence
+        run: curl --fail --location --retry 3 --retry-all-errors --connect-timeout 20 --max-time 120 https://github.com/tlaplus/tlaplus/releases/download/v1.8.0/tla2tools.jar -o "$RUNNER_TEMP/tla2tools.jar"
+      - name: Check observed traces against TLA+ and reject invalid traces
+        run: uv run --frozen python research/scripts/check_traces.py --jar "$RUNNER_TEMP/tla2tools.jar"
+      - name: Check coupled policy traces and reject invalid traces
+        run: uv run --frozen python research/scripts/check_cascade_traces.py --jar "$RUNNER_TEMP/tla2tools.jar"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: approval-implementation-results
+          path: |
+            research/results/implementation.xml
+            research/results/traces/
+            research/results/conformance/
+            research/results/cascade-traces/
+            research/results/malformed-evaluator/
+            research/results/cascade-conformance/
+            research/results/implementation-mutations/*/pytest.log
+            research/results/implementation-mutations/*/results.xml
+            research/results/implementation-mutations/summary.json

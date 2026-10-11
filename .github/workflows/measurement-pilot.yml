@@ -1,0 +1,50 @@
+name: Independent recovery evaluator pilot
+on:
+  pull_request:
+    paths:
+      - 'research/scripts/audit_measurement_pilot.py'
+      - '.github/workflows/measurement-pilot.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - subject: arb
+            repository: uujjrmi/agent-reliability-benchmark
+            revision: 149723ed7dac540a437ee14a34dc5fcf17e7a5e3
+          - subject: aerb
+            repository: rithick007/agent-error-recovery-bench
+            revision: 585b34e045d7b63b501b5c86a96d14659f31cec1
+          - subject: sabot
+            repository: Jott2121/sabot
+            revision: be602555726f3592aaa6cb845685e7853f7fc47a
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ matrix.repository }}
+          ref: ${{ matrix.revision }}
+          path: subject
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run frozen evaluator audit without model calls
+        run: python research/scripts/audit_measurement_pilot.py ${{ matrix.subject }} subject research/results/measurement-pilot
+      - name: Check research documentation
+        if: always()
+        run: python research/scripts/check_documentation.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: measurement-pilot-${{ matrix.subject }}
+          path: research/results/measurement-pilot/
+          if-no-files-found: error

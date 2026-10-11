@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 710" role="img" aria-labelledby="title desc">
+<title id="title">Figure 2. Three safety properties as traces</title><desc id="desc">Valid traces preserve decisions, require approval, and publish the initiating cause first.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#516579"/></marker></defs>
+<rect width="1120" height="710" fill="white"/>
+<g font-family="DejaVu Sans,Arial,sans-serif">
+<text x="32" y="40" font-size="25" fill="#15283b" font-weight="bold">Figure 2. Three safety properties as traces</text>
+<text x="32" y="80" font-size="18" fill="#516579" font-weight="normal">Illustrative valid and faulty traces; fault traces are synthetic controls.</text>
+<text x="32" y="120" font-size="20" fill="#15283b" font-weight="bold">P1 · DecisionStable</text>
+<text x="32" y="163" font-size="15" fill="#167052" font-weight="bold">VALID</text>
+<text x="32" y="218" font-size="15" fill="#a52f38" font-weight="bold">FAULT</text>
+<rect x="180" y="134" width="235" height="44" rx="9" fill="#f5f8fc" stroke="#167052" stroke-width="2"/>
+<text x="195" y="163" font-size="17" fill="#167052" font-weight="bold">pending</text>
+<rect x="180" y="189" width="235" height="44" rx="9" fill="#f5f8fc" stroke="#a52f38" stroke-width="2"/>
+<text x="195" y="218" font-size="17" fill="#a52f38" font-weight="bold">pending</text>
+<path d="M415,156  L470,156" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M415,211  L470,211" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<rect x="470" y="134" width="235" height="44" rx="9" fill="#f5f8fc" stroke="#167052" stroke-width="2"/>
+<text x="485" y="163" font-size="17" fill="#167052" font-weight="bold">approved</text>
+<rect x="470" y="189" width="235" height="44" rx="9" fill="#f5f8fc" stroke="#a52f38" stroke-width="2"/>
+<text x="485" y="218" font-size="17" fill="#a52f38" font-weight="bold">approved</text>
+<path d="M705,156  L760,156" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M705,211  L760,211" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<rect x="760" y="134" width="235" height="44" rx="9" fill="#f5f8fc" stroke="#167052" stroke-width="2"/>
+<text x="775" y="163" font-size="17" fill="#167052" font-weight="bold">approved</text>
+<rect x="760" y="189" width="235" height="44" rx="9" fill="#f5f8fc" stroke="#a52f38" stroke-width="2"/>
+<text x="775" y="218" font-size="17" fill="#a52f38" font-weight="bold">denied</text>
+<text x="180" y="265" font-size="16" fill="#516579" font-weight="normal">Fault: a later writer replaces the first resolution.</text>
+<text x="32" y="295" font-size="20" fill="#15283b" font-weight="bold">P3 · AuthorizedDispatch</text>
+<text x="32" y="338" font-size="15" fill="#167052" font-weight="bold">VALID</text>
+<text x="32" y="393" font-size="15" fill="#a52f38" font-weight="bold">FAULT</text>
+<rect x="180" y="309" width="235" height="44" rx="9" fill="#f5f8fc" stroke="#167052" stroke-width="2"/>
+<text x="195" y="338" font-size="17" fill="#167052" font-weight="bold">pending</text>
+<rect x="180" y="364" width="235" height="44" rx="9" fill="#f5f8fc" stroke="#a52f38" stroke-width="2"/>
+<text x="195" y="393" font-size="17" fill="#a52f38" font-weight="bold">pending</text>
+<path d="M415,331  L470,331" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M415,386  L470,386" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<rect x="470" y="309" width="235" height="44" rx="9" fill="#f5f8fc" stroke="#167052" stroke-width="2"/>
+<text x="485" y="338" font-size="17" fill="#167052" font-weight="bold">approved</text>
+<rect x="470" y="364" width="235" height="44" rx="9" fill="#f5f8fc" stroke="#a52f38" stroke-width="2"/>
+<text x="485" y="393" font-size="17" fill="#a52f38" font-weight="bold">pending</text>
+<path d="M705,331  L760,331" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M705,386  L760,386" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<rect x="760" y="309" width="235" height="44" rx="9" fill="#f5f8fc" stroke="#167052" stroke-width="2"/>
+<text x="775" y="338" font-size="17" fill="#167052" font-weight="bold">dispatched</text>
+<rect x="760" y="364" width="235" height="44" rx="9" fill="#f5f8fc" stroke="#a52f38" stroke-width="2"/>
+<text x="775" y="393" font-size="17" fill="#a52f38" font-weight="bold">dispatched</text>
+<text x="180" y="440" font-size="16" fill="#516579" font-weight="normal">Fault: dispatch occurs without approval.</text>
+<text x="32" y="470" font-size="20" fill="#15283b" font-weight="bold">P7 · CauseBeforeCascade</text>
+<text x="32" y="513" font-size="15" fill="#167052" font-weight="bold">VALID</text>
+<text x="32" y="568" font-size="15" fill="#a52f38" font-weight="bold">FAULT</text>
+<rect x="180" y="484" width="235" height="44" rx="9" fill="#f5f8fc" stroke="#167052" stroke-width="2"/>
+<text x="195" y="513" font-size="17" fill="#167052" font-weight="bold">remember(b)</text>
+<rect x="180" y="539" width="235" height="44" rx="9" fill="#f5f8fc" stroke="#a52f38" stroke-width="2"/>
+<text x="195" y="568" font-size="17" fill="#a52f38" font-weight="bold">remember(b)</text>
+<path d="M415,506  L470,506" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M415,561  L470,561" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<rect x="470" y="484" width="235" height="44" rx="9" fill="#f5f8fc" stroke="#167052" stroke-width="2"/>
+<text x="485" y="513" font-size="17" fill="#167052" font-weight="bold">publish b</text>
+<rect x="470" y="539" width="235" height="44" rx="9" fill="#f5f8fc" stroke="#a52f38" stroke-width="2"/>
+<text x="485" y="568" font-size="17" fill="#a52f38" font-weight="bold">publish a</text>
+<path d="M705,506  L760,506" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M705,561  L760,561" stroke="#516579" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<rect x="760" y="484" width="235" height="44" rx="9" fill="#f5f8fc" stroke="#167052" stroke-width="2"/>
+<text x="775" y="513" font-size="17" fill="#167052" font-weight="bold">publish a</text>
+<rect x="760" y="539" width="235" height="44" rx="9" fill="#f5f8fc" stroke="#a52f38" stroke-width="2"/>
+<text x="775" y="568" font-size="17" fill="#a52f38" font-weight="bold">publish b</text>
+<text x="180" y="615" font-size="16" fill="#516579" font-weight="normal">Fault: sibling publication precedes its cause.</text>
+<text x="32" y="675" font-size="16" fill="#516579" font-weight="normal">Approval is dispatch permission; these traces do not model committed external effects.</text>
+</g>
+</svg>

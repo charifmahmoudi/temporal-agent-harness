@@ -1,0 +1,63 @@
+"""Regression for malformed evaluator output competing with accepted settlement.
+
+The scheduling shim forces task completion and settlement before the runner resumes.
+It exercises production methods without claiming to emulate Temporal scheduling.
+"""
+import asyncio
+from types import SimpleNamespace
+import uuid
+
+import pytest
+
+from temporal_agent_harness.harness import agent_workflow as impl
+from temporal_agent_harness.harness.agent import ToolApprovalPolicy
+from temporal_agent_harness.harness.agent_protocol import ToolApprovalDecision
+
+
+def runner(monkeypatch):
+    monkeypatch.setattr(impl.workflow, 'uuid4', uuid.uuid4)
+    r = object.__new__(impl.AgentWorkflowRunner)
+    r._status = impl._WorkflowStatus(agent_id='probe', approval_policy=ToolApprovalPolicy.always_require_human_approval())
+    r._closed = False
+    r._pub = lambda *args, **kwargs: None
+    r._status.register_pending_approval('call', 'probe', {}, 1, 'turn', None, inherently_safe=False)
+    return r
+
+
+@pytest.mark.parametrize('invalid', [None, {}, 'invalid'])
+@pytest.mark.parametrize('competitor', ['approve', 'deny', 'close', None])
+async def test_malformed_evaluator_preserves_settlement_or_escalates(monkeypatch, invalid, competitor):
+    """Invalid plugin output must not undo a resolution or abort gate finalization."""
+    r = runner(monkeypatch)
+    events = []
+    r._pub = lambda *args, **kwargs: events.append(args[2])
+    returned = asyncio.Event()
+
+    async def evaluator(ctx):
+        returned.set()
+        return invalid
+
+    async def controlled_wait(predicate):
+        await returned.wait()
+        await asyncio.sleep(0)  # Let the task become done before inspecting it.
+        if competitor == 'close':
+            r._handle_close()
+        elif competitor:
+            decision = ToolApprovalDecision(tool_id='call', approved=competitor == 'approve')
+            r._validate_tool_approval(decision)
+            await r._handle_tool_approval(decision)
+        assert predicate()
+
+    r._auto_mode_evaluator = evaluator
+    monkeypatch.setattr(impl.workflow, 'wait_condition', controlled_wait)
+    result = await r._run_auto_mode_evaluator(
+        SimpleNamespace(tool_name='probe'), tool_id='call',
+        stream=SimpleNamespace(turn_id='turn', turn_number=1))
+    assert result is None
+    if competitor:
+        assert type(events[-1]).__name__ == 'AutoApprovalEvaluationSuperseded'
+        assert events[-1].verdict is None
+        assert r._status.finalize_approval('call', closed=r._closed).approved is (competitor == 'approve')
+    else:
+        assert type(events[-1]).__name__ == 'AutoApprovalEvaluationError'
+        assert not r._status.is_approval_resolved('call')
